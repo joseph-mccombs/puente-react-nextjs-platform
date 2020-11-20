@@ -1,6 +1,5 @@
 import Head from 'next/head';
 import Card from 'components/Card';
-import Tabley from 'components/Tabley';
 
 export default function Home() {
   return (
@@ -53,7 +52,6 @@ export default function Home() {
             </p>
           </a>
         </div>
-        <Tabley />
       </main>
 
       <footer>
