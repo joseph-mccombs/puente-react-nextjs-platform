@@ -24,7 +24,16 @@ export default function Home() {
         </p>
 
         <div className="grid">
-          <Card title="Documentation" description="Find in-depth information about Next.js features and API." />
+          <Card 
+            title="Form Creator" 
+            description="Find in-depth information about Next.js features and API." 
+            nextLink="/forms"
+          />
+          <Card 
+            title="Data Exporter" 
+            description="Find in-depth information about Next.js features and API." 
+            nextLink="/data"
+          />
           <div href="https://nextjs.org/docs" className="card">
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>

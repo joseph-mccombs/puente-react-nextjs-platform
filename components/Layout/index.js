@@ -5,6 +5,9 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 import Toolbar from '@material-ui/core/Toolbar';
 import Typography from '@material-ui/core/Typography';
 
+import Link from 'next/link'
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -75,7 +78,9 @@ export default function SearchAppBar({ children }) {
             aria-label="open drawer"
           />
           <Typography className={classes.title} variant="h6" noWrap>
+          <a href='/'>
             Material-UI
+            </a>
           </Typography>
           <div className={classes.search}>
             <div className={classes.searchIcon} />

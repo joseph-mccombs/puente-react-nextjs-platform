@@ -1,10 +1,11 @@
 import styles from './index.module.scss';
 
-const Card = ({ title, description }) => (
-  <div href="https://nextjs.org/docs" className={styles.card}>
+const Card = ({ title, description, nextLink }) => (
+  <a href={nextLink} className={styles.card}>
     <h3>{title}</h3>
     <p>{description}</p>
-  </div>
+  </a>
+
 );
 
 export default Card;
