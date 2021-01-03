@@ -24,17 +24,17 @@ export default function Home() {
         </p>
 
         <div className="grid">
-          <Card 
-            title="Form Creator" 
-            description="Find in-depth information about Next.js features and API." 
+          <Card
+            title="Form Creator"
+            description="Find in-depth information about Next.js features and API."
             nextLink="/forms"
           />
-          <Card 
-            title="Data Exporter" 
-            description="Find in-depth information about Next.js features and API." 
+          <Card
+            title="Data Exporter"
+            description="Find in-depth information about Next.js features and API."
             nextLink="/data"
           />
-          <div href="https://nextjs.org/docs" className="card">
+          {/* <div href="https://nextjs.org/docs" className="card">
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
           </div>
@@ -60,7 +60,7 @@ export default function Home() {
             <p>
               Instantly deploy your Next.js site to a public URL with Vercel.
             </p>
-          </a>
+          </a> */}
         </div>
         <Tabley />
       </main>
