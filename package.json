@@ -15,6 +15,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "release": "standard-version",
     "lint": "./node_modules/.bin/eslint '**/*.{js,jsx}' --quiet",
     "lint-fix": "./node_modules/.bin/eslint '**/*.{js,jsx}' --fix"
   },
@@ -23,7 +24,7 @@
     "next": "10.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
-    "sass": "^1.28.0",
+    "sass": "1.28.0",
     "styled-components": "5.2.1"
   },
   "devDependencies": {
@@ -34,6 +35,7 @@
     "eslint-plugin-jsx-a11y": "6.4.1",
     "eslint-plugin-react": "7.21.5",
     "eslint-plugin-react-hooks": "4.2.0",
-    "eslint-plugin-simple-import-sort": "^7.0.0"
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "standard-version": "9.1.0"
   }
 }
