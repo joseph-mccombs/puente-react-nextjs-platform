@@ -1,6 +1,6 @@
-import Head from 'next/head';
 import Card from 'components/Card';
 import Tabley from 'components/Tabley';
+import Head from 'next/head';
 
 export default function Home() {
   return (

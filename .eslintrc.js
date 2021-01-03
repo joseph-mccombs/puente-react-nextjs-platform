@@ -16,6 +16,7 @@ module.exports = {
   },
   plugins: [
     'react',
+    'simple-import-sort',
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
@@ -27,8 +28,24 @@ module.exports = {
         aspects: ['invalidHref', 'preferButton'],
       },
     ],
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    'sort-imports': 'off',
+    'import/first': 'error',
+    'import/newline-after-import': 'error',
+    'import/no-duplicates': 'error',
   },
   globals: {
     React: 'writable',
   },
+  overrides: [
+    {
+      files: 'server/**/*.js',
+      env: { node: true },
+      rules: {
+        'simple-import-sort/imports': 'off',
+        'import/order': ['error', { 'newlines-between': 'always' }],
+      },
+    },
+  ],
 };
