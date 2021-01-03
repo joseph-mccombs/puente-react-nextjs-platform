@@ -4,30 +4,30 @@ import Tabley from 'components/Tabley';
 export default function Home() {
   return (
     <Layout>
-    <div className="container">
-      <main>
-        <h1 className="title">
-          I'm a Table
-          {' '}
-          <a href="https://nextjs.org">Next.js!</a>
-        </h1>
-        <Tabley />
-      </main>
+      <div className="container">
+        <main>
+          <h1 className="title">
+            I'm a Table
+            {' '}
+            <a href="https://nextjs.org">Next.js!</a>
+          </h1>
+          <Tabley />
+        </main>
 
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by
-          {' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
+        <footer>
+          <a
+            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Powered by
+            {' '}
+            <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
+          </a>
+        </footer>
 
-      <style jsx>
-        {`
+        <style jsx>
+          {`
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -157,9 +157,9 @@ export default function Home() {
           }
         }
       `}
-      </style>
+        </style>
 
-    </div>
+      </div>
     </Layout>
   );
 }

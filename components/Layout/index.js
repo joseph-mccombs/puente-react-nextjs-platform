@@ -8,7 +8,7 @@ import { fade, makeStyles } from '@material-ui/core/styles';
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
-    margin:0
+    margin: 0,
   },
   menuButton: {
     marginRight: theme.spacing(2),
@@ -61,7 +61,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function SearchAppBar({children}) {
+export default function SearchAppBar({ children }) {
   const classes = useStyles();
 
   return (
@@ -73,14 +73,12 @@ export default function SearchAppBar({children}) {
             className={classes.menuButton}
             color="inherit"
             aria-label="open drawer"
-          >
-          </IconButton>
+          />
           <Typography className={classes.title} variant="h6" noWrap>
             Material-UI
           </Typography>
           <div className={classes.search}>
-            <div className={classes.searchIcon}>
-            </div>
+            <div className={classes.searchIcon} />
             <InputBase
               placeholder="Search…"
               classes={{

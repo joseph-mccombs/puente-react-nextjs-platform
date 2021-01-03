@@ -1,5 +1,5 @@
-import React from 'react'
-import styled from 'styled-components'
+import React from 'react';
+import styled from 'styled-components';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -19,7 +19,9 @@ const useStyles = makeStyles({
 });
 
 function createData(name, calories, fat, carbs, protein) {
-  return { name, calories, fat, carbs, protein };
+  return {
+    name, calories, fat, carbs, protein,
+  };
 }
 const rows = [
   createData('Frozen yoghurt', 159, 6.0, 24, 4.0),
@@ -44,7 +46,7 @@ const Tabley = () => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {rows.map(row => (
+            {rows.map((row) => (
               <TableRow key={row.name}>
                 <TableCell component="th" scope="row">
                   {row.name}
@@ -59,13 +61,13 @@ const Tabley = () => {
         </Table>
       </Paper>
     </Container>
-  )
-}
+  );
+};
 const Container = styled.div`
   width: 960px;
   height: 100vh;
   margin: 2rem auto;
   padding: 2rem;
   background: #f2f2f2;
-`
-export default Tabley
+`;
+export default Tabley;
