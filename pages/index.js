@@ -1,5 +1,5 @@
 import Card from 'components/Card';
-import Tabley from 'components/Tabley';
+import SampleTable from 'components/SampleTable';
 import Head from 'next/head';
 
 export default function Home() {
@@ -62,7 +62,7 @@ export default function Home() {
             </p>
           </a> */}
         </div>
-        <Tabley />
+        <SampleTable />
       </main>
 
       <footer>

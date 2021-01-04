@@ -15,12 +15,14 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "reinstall": "rm package-lock.json && rm -rf node_modules/ && npm install",
     "release": "standard-version",
     "lint": "./node_modules/.bin/eslint '**/*.{js,jsx}' --quiet",
     "lint-fix": "./node_modules/.bin/eslint '**/*.{js,jsx}' --fix"
   },
   "dependencies": {
     "@material-ui/core": "4.5.1",
+    "@material-ui/icons": "4.9.1",
     "next": "10.0.0",
     "react": "16.13.1",
     "react-dom": "16.13.1",
