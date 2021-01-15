@@ -1,5 +1,5 @@
-import Card from 'components/Card';
-import SampleTable from 'components/SampleTable';
+import Card from 'app/components/Card';
+import SampleTable from 'app/components/SampleTable';
 import Head from 'next/head';
 
 export default function Home() {
@@ -12,26 +12,21 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to
+          Welcome to Puente
           {' '}
-          <a href="https://nextjs.org">Next.js!</a>
+          <a href="https://nextjs.org">Analytics!</a>
         </h1>
-
-        <p className="description">
-          Get started by editing
-          {' '}
-          <code>pages/index.js</code>
-        </p>
+        <h1>Quick Start Links</h1>
 
         <div className="grid">
           <Card
             title="Form Creator"
-            description="Find in-depth information about Next.js features and API."
+            description="Create and Manage Forms for Puente Collect"
             nextLink="/forms"
           />
           <Card
             title="Data Exporter"
-            description="Find in-depth information about Next.js features and API."
+            description="Download data"
             nextLink="/data"
           />
           {/* <div href="https://nextjs.org/docs" className="card">
@@ -62,7 +57,6 @@ export default function Home() {
             </p>
           </a> */}
         </div>
-        <SampleTable />
       </main>
 
       <footer>
