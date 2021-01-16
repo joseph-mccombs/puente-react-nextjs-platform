@@ -1,12 +1,11 @@
 import Card from 'app/components/Card';
-import SampleTable from 'app/components/SampleTable';
 import Head from 'next/head';
 
 export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Puente - Analytics</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
@@ -16,7 +15,7 @@ export default function Home() {
           {' '}
           <a href="https://nextjs.org">Analytics!</a>
         </h1>
-        <h1>Quick Start Links</h1>
+        <h1>Quick Start Guide</h1>
 
         <div className="grid">
           <Card

@@ -7,7 +7,6 @@ import { v4 as uuid } from 'uuid';
 import { copy, reorder } from './_utils';
 import FormBlocks from './FormBlocks';
 import FormTemplate from './FormTemplate';
-import styles from './index.module.scss';
 
 const COLLECTION = [
   { id: uuid(), label: 'Section title' },
@@ -18,7 +17,15 @@ const COLLECTION = [
 ];
 
 function FormCreator() {
-  const [shoppingBagItems, setShoppingBagItems] = React.useState([]);
+  const [formItems, setFormItems] = React.useState([]);
+
+  const setValue = (id) => {
+    const elementsIndex = formItems.findIndex((element) => element.id == id);
+    const newArray = [...formItems];
+    // console.log(newArray)
+    newArray[elementsIndex] = { ...newArray[elementsIndex], value: 'Hello' };
+    setFormItems(newArray);
+  };
   const onDragEnd = React.useCallback(
     (result) => {
       const { source, destination } = result;
@@ -29,39 +36,37 @@ function FormCreator() {
 
       switch (source.droppableId) {
         case destination.droppableId:
-          setShoppingBagItems((state) => reorder(state, source.index, destination.index));
+          setFormItems((state) => reorder(state, source.index, destination.index));
           break;
-        case 'SHOP':
-          setShoppingBagItems((state) => copy(COLLECTION, state, source, destination));
+        case 'BLOCK':
+          setFormItems((state) => copy(COLLECTION, state, source, destination));
           break;
         default:
           break;
       }
+      // console.log('Destination JSON', formItems);
     },
-    [setShoppingBagItems],
+    [setFormItems],
   );
   return (
-    <div className={styles.formCreator}>
-      <NoSSR>
-
-        <DragDropContext onDragEnd={onDragEnd}>
-          <Grid container>
-            <Grid item xs={6}>
-
-              <h2>Form Creator</h2>
-              <FormTemplate items={shoppingBagItems} />
-            </Grid>
-            <Grid item xs={6}>
-
-              <h2>Building Blocks</h2>
-              <FormBlocks items={COLLECTION} />
-            </Grid>
-
+  // <div className={styles.formCreator}>
+    <NoSSR>
+      <DragDropContext onDragEnd={onDragEnd}>
+        <Grid container>
+          <Grid item xs={9}>
+            <h2>Form Creator</h2>
+            <FormTemplate items={formItems} setValue={setValue} />
           </Grid>
-        </DragDropContext>
-      </NoSSR>
+          <Grid item xs={3}>
+            <h2>Building Blocks</h2>
+            <FormBlocks items={COLLECTION} />
+          </Grid>
 
-    </div>
+        </Grid>
+      </DragDropContext>
+    </NoSSR>
+
+  // </div>
   );
 }
 

@@ -1,12 +1,7 @@
-.formTemplate{
-  ul,li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-}
-
 .drop-area {
   padding: 10px;
   border: 1px dashed #777;
+  div {
+    margin: auto;
+  }
 }

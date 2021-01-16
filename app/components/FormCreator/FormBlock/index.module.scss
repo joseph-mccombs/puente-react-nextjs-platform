@@ -1,12 +1,4 @@
-.formBlocks{
-  ul,li {
-    margin: 0;
-    padding: 0;
-    list-style: none;
-  }
-}
-
-.copy ~ li {
+.copy ~ div {
   transform: none !important;
 }
 .dragging {
@@ -22,6 +14,7 @@
 }
 
 .block-area {
-  padding: 10px;
+  padding: 0px;
   // border: 1px solid #aaa;
+
 }
