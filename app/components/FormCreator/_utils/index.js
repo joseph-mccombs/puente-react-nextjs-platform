@@ -4,17 +4,17 @@ import { v4 as uuid } from 'uuid';
 const getRenderItem = (items, className) => (provided, snapshot, rubric) => {
   const item = items[rubric.source.index];
   return (
-    <React.Fragment>
+    <>
       <li
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
         style={provided.draggableProps.style}
-        className={snapshot.isDragging ? "dragging" : ""}
+        className={snapshot.isDragging ? 'dragging' : ''}
       >
         {item.label}
       </li>
-    </React.Fragment>
+    </>
   );
 };
 

@@ -1,24 +1,26 @@
-import React from "react";
-import { v4 as uuid } from "uuid";
-import { DragDropContext} from "react-beautiful-dnd";
-import {reorder, copy} from './_utils'
-import FormTemplate from './FormTemplate';
-import FormBlocks from './FormBlocks';
+import { Grid } from '@material-ui/core';
+import React from 'react';
+import { DragDropContext } from 'react-beautiful-dnd';
 import NoSSR from 'react-no-ssr';
+import { v4 as uuid } from 'uuid';
 
-
+import { copy, reorder } from './_utils';
+import FormBlocks from './FormBlocks';
+import FormTemplate from './FormTemplate';
 import styles from './index.module.scss';
 
 const COLLECTION = [
-  { id: uuid(), label: "Apple" },
-  { id: uuid(), label: "Banana" },
-  { id: uuid(), label: "Orange" }
+  { id: uuid(), label: 'Section title' },
+  { id: uuid(), label: 'Horizontal divider' },
+  { id: uuid(), label: 'Input' },
+  { id: uuid(), label: 'Single Choice' },
+  { id: uuid(), label: 'Multiple Choice' },
 ];
 
-function App() {
+function FormCreator() {
   const [shoppingBagItems, setShoppingBagItems] = React.useState([]);
   const onDragEnd = React.useCallback(
-    result => {
+    (result) => {
       const { source, destination } = result;
 
       if (!destination) {
@@ -27,35 +29,40 @@ function App() {
 
       switch (source.droppableId) {
         case destination.droppableId:
-          setShoppingBagItems(state =>
-            reorder(state, source.index, destination.index)
-          );
+          setShoppingBagItems((state) => reorder(state, source.index, destination.index));
           break;
-        case "SHOP":
-          setShoppingBagItems(state =>
-            copy(COLLECTION, state, source, destination)
-          );
+        case 'SHOP':
+          setShoppingBagItems((state) => copy(COLLECTION, state, source, destination));
           break;
         default:
           break;
       }
     },
-    [setShoppingBagItems]
+    [setShoppingBagItems],
   );
   return (
     <div className={styles.formCreator}>
-    <NoSSR>
+      <NoSSR>
 
-      <DragDropContext onDragEnd={onDragEnd}>
-        <h2>Shop</h2>
-        <FormBlocks items={COLLECTION} />
-        <h2>Shopping bag</h2>
-        <FormTemplate items={shoppingBagItems} />
-      </DragDropContext>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Grid container>
+            <Grid item xs={6}>
+
+              <h2>Form Creator</h2>
+              <FormTemplate items={shoppingBagItems} />
+            </Grid>
+            <Grid item xs={6}>
+
+              <h2>Building Blocks</h2>
+              <FormBlocks items={COLLECTION} />
+            </Grid>
+
+          </Grid>
+        </DragDropContext>
       </NoSSR>
 
     </div>
   );
 }
 
-export default App
+export default FormCreator;

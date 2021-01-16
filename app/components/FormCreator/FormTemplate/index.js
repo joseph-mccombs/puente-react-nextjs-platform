@@ -1,4 +1,4 @@
-import { Droppable, Draggable } from "react-beautiful-dnd";
+import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 export default function FormTemplate(props) {
   return (

@@ -1,12 +1,13 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd';
-import { getRenderItem } from '../_utils'
+
+import { getRenderItem } from '../_utils';
 
 function Copyable(props) {
   return (
     <Droppable
       renderClone={getRenderItem(props.items, props.className)}
       droppableId={props.droppableId}
-      isDropDisabled={true}
+      isDropDisabled
     >
       {(provided, snapshot) => (
         <ul ref={provided.innerRef} className={props.className}>
@@ -19,16 +20,16 @@ function Copyable(props) {
                 ) : (
                   <Draggable draggableId={item.id} index={index}>
                     {(provided, snapshot) => (
-                      <React.Fragment>
+                      <>
                         <li
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className={snapshot.isDragging ? "dragging" : ""}
+                          className={snapshot.isDragging ? 'dragging' : ''}
                         >
                           {item.label}
                         </li>
-                      </React.Fragment>
+                      </>
                     )}
                   </Draggable>
                 )}
