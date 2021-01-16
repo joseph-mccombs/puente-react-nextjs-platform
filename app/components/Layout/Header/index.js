@@ -46,25 +46,6 @@ export default function Header({ children }) {
           <HeaderItem link="/forms" text="Forms">
             <MailIcon />
           </HeaderItem>
-          {/* <Link href="/dashboard">
-            <ListItem button key="Dashboard">
-              <ListItemIcon>{1 % 2 === 0 ?  : <MailIcon />}</ListItemIcon>
-              <ListItemText primary="Dashboard" />
-            </ListItem>
-          </Link> */}
-
-          {/* <ListItem button key="Forms" href="/forms">
-            <ListItemIcon>{2 % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary="Forms" />
-          </ListItem>
-          <ListItem button key="Data">
-            <ListItemIcon>{3 % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary="Data" />
-          </ListItem>
-          <ListItem button key="Map">
-            <ListItemIcon>{4 % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary="Map" />
-          </ListItem> */}
         </List>
       </Drawer>
       <main className={classes.content}>

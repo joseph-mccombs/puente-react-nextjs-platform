@@ -4,6 +4,7 @@ import Document, {
   Head, Html, Main, NextScript,
 } from 'next/document';
 import React from 'react';
+import { resetServerContext } from 'react-beautiful-dnd';
 
 export default class MyDocument extends Document {
   render() {
@@ -52,6 +53,7 @@ MyDocument.getInitialProps = async (ctx) => {
   // 4. page.render
 
   // Render app and page and get the context of the page with collected side effects.
+  resetServerContext();
   const sheets = new ServerStyleSheets();
   const originalRenderPage = ctx.renderPage;
 

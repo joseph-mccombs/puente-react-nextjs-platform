@@ -1,3 +1,4 @@
+import FormCreator from 'app/components/FormCreator';
 import Layout from 'app/components/Layout';
 
 export default function Forms() {
@@ -10,6 +11,7 @@ export default function Forms() {
             {' '}
             <a href="https://nextjs.org">Next.js!</a>
           </h1>
+          <FormCreator />
         </main>
 
         <footer>
