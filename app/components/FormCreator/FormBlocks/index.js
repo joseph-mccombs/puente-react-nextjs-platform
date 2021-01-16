@@ -1,6 +1,7 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { getRenderItem } from '../_utils';
+import styles from './index.module.scss';
 
 function Copyable(props) {
   return (
@@ -8,6 +9,7 @@ function Copyable(props) {
       renderClone={getRenderItem(props.items, props.className)}
       droppableId={props.droppableId}
       isDropDisabled
+      className={styles.formBlocks}
     >
       {(provided, snapshot) => (
         <ul ref={provided.innerRef} className={props.className}>
@@ -16,7 +18,7 @@ function Copyable(props) {
             return (
               <React.Fragment key={item.id}>
                 {shouldRenderClone ? (
-                  <li className="react-beatiful-dnd-copy">{item.label}</li>
+                  <li className={styles.copy}>{item.label}</li>
                 ) : (
                   <Draggable draggableId={item.id} index={index}>
                     {(provided, snapshot) => (
@@ -25,7 +27,7 @@ function Copyable(props) {
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          className={snapshot.isDragging ? 'dragging' : ''}
+                          className={snapshot.isDragging ? styles.dragging : ''}
                         >
                           {item.label}
                         </li>
@@ -44,5 +46,5 @@ function Copyable(props) {
 }
 
 export default function FormBlocks(props) {
-  return <Copyable droppableId="SHOP" className="shop" items={props.items} />;
+  return <Copyable droppableId="SHOP" className={styles['block-area']} items={props.items} />;
 }

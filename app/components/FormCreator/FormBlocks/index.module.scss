@@ -1,37 +1,27 @@
-.formCreator{
-
-ul,li {
-  margin: 0;
-  padding: 0;
-  list-style: none;
+.formBlocks{
+  ul,li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
 }
 
-.react-beatiful-dnd-copy ~ li {
+.copy ~ li {
   transform: none !important;
 }
-
 .dragging {
   background: yellow;
   text-align: center;
   font-family: sans-serif;
 }
-
-.react-beatiful-dnd-copy {
+.copy {
   background: lightblue;
 }
-
-.react-beatiful-dnd-copy ~ [data-rbd-placeholder-context-id] {
+.copy ~ [data-rbd-placeholder-context-id] {
   display: none !important;
 }
 
-.shop {
+.block-area {
   padding: 10px;
-  border: 1px solid #aaa;
-}
-
-.shopping-bag {
-  padding: 10px;
-  border: 1px dashed #777;
-}
-
+  // border: 1px solid #aaa;
 }
