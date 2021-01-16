@@ -1,6 +1,6 @@
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { Droppable, Draggable } from "react-beautiful-dnd";
 
-export default function ShoppingBag(props) {
+export default function FormTemplate(props) {
   return (
     <Droppable droppableId="BAG">
       {(provided, snapshot) => (

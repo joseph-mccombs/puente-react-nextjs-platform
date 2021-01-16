@@ -1,117 +1,19 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
-import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import { DragDropContext} from "react-beautiful-dnd";
+import {reorder, copy} from './_utils'
+import FormTemplate from './FormTemplate';
+import FormBlocks from './FormBlocks';
 import NoSSR from 'react-no-ssr';
 
 
 import styles from './index.module.scss';
 
-// This method is needed for rendering clones of draggables
-const getRenderItem = (items, className) => (provided, snapshot, rubric) => {
-  const item = items[rubric.source.index];
-  return (
-    <React.Fragment>
-      <li
-        {...provided.draggableProps}
-        {...provided.dragHandleProps}
-        ref={provided.innerRef}
-        style={provided.draggableProps.style}
-        className={snapshot.isDragging ? "dragging" : ""}
-      >
-        {item.label}
-      </li>
-    </React.Fragment>
-  );
-};
-
-function Copyable(props) {
-  return (
-    <Droppable
-      renderClone={getRenderItem(props.items, props.className)}
-      droppableId={props.droppableId}
-      isDropDisabled={true}
-    >
-      {(provided, snapshot) => (
-        <ul ref={provided.innerRef} className={props.className}>
-          {props.items.map((item, index) => {
-            const shouldRenderClone = item.id === snapshot.draggingFromThisWith;
-            return (
-              <React.Fragment key={item.id}>
-                {shouldRenderClone ? (
-                  <li className="react-beatiful-dnd-copy">{item.label}</li>
-                ) : (
-                  <Draggable draggableId={item.id} index={index}>
-                    {(provided, snapshot) => (
-                      <React.Fragment>
-                        <li
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className={snapshot.isDragging ? "dragging" : ""}
-                        >
-                          {item.label}
-                        </li>
-                      </React.Fragment>
-                    )}
-                  </Draggable>
-                )}
-              </React.Fragment>
-            );
-          })}
-          {provided.placeholder}
-        </ul>
-      )}
-    </Droppable>
-  );
-}
-
-function Shop(props) {
-  return <Copyable droppableId="SHOP" className="shop" items={props.items} />;
-}
-
-function ShoppingBag(props) {
-  return (
-    <Droppable droppableId="BAG">
-      {(provided, snapshot) => (
-        <ul ref={provided.innerRef} className="shopping-bag">
-          {props.items.map((item, index) => (
-            <Draggable key={item.id} draggableId={item.id} index={index}>
-              {(provided, snapshot) => (
-                <li
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                  style={provided.draggableProps.style}
-                >
-                  {item.label}
-                </li>
-              )}
-            </Draggable>
-          ))}
-          {provided.placeholder}
-        </ul>
-      )}
-    </Droppable>
-  );
-}
-
 const COLLECTION = [
   { id: uuid(), label: "Apple" },
   { id: uuid(), label: "Banana" },
-  { id: uuid(), label: "orange" }
+  { id: uuid(), label: "Orange" }
 ];
-
-const reorder = (list, startIndex, endIndex) => {
-  const [removed] = list.splice(startIndex, 1);
-  list.splice(endIndex, 0, removed);
-  return list;
-};
-
-const copy = (source, destination, droppableSource, droppableDestination) => {
-  const item = source[droppableSource.index];
-  destination.splice(droppableDestination.index, 0, { ...item, id: uuid() });
-  return destination;
-};
 
 function App() {
   const [shoppingBagItems, setShoppingBagItems] = React.useState([]);
@@ -142,13 +44,13 @@ function App() {
   );
   return (
     <div className={styles.formCreator}>
-            <NoSSR>
+    <NoSSR>
 
       <DragDropContext onDragEnd={onDragEnd}>
         <h2>Shop</h2>
-        <Shop items={COLLECTION} />
+        <FormBlocks items={COLLECTION} />
         <h2>Shopping bag</h2>
-        <ShoppingBag items={shoppingBagItems} />
+        <FormTemplate items={shoppingBagItems} />
       </DragDropContext>
       </NoSSR>
 

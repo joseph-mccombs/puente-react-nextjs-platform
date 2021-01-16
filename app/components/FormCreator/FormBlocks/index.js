@@ -42,6 +42,6 @@ function Copyable(props) {
   );
 }
 
-export default function Shop(props) {
+export default function FormBlocks(props) {
   return <Copyable droppableId="SHOP" className="shop" items={props.items} />;
 }
