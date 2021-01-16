@@ -1,50 +1,27 @@
-import { Draggable, Droppable } from 'react-beautiful-dnd';
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
-import { getRenderItem } from '../_utils';
-
-function Copyable(props) {
+export default function ShoppingBag(props) {
   return (
-    <Droppable
-      renderClone={getRenderItem(props.items, props.className)}
-      droppableId={props.droppableId}
-      isDropDisabled
-    >
+    <Droppable droppableId="BAG">
       {(provided, snapshot) => (
-        <ul ref={provided.innerRef} className={props.className}>
-          {props.items.map((item, index) => {
-            const shouldRenderClone = item.id === snapshot.draggingFromThisWith;
-            return (
-              <React.Fragment key={item.id}>
-                {shouldRenderClone ? (
-                  <li className="react-beatiful-dnd-copy">{item.label}</li>
-                ) : (
-                  <Draggable draggableId={item.id} index={index}>
-                    {(provided, snapshot) => (
-                      <>
-                        <li
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          className={snapshot.isDragging ? 'dragging' : ''}
-                        >
-                          {item.label}
-                        </li>
-                      </>
-                    )}
-                  </Draggable>
-                )}
-              </React.Fragment>
-            );
-          })}
+        <ul ref={provided.innerRef} className="shopping-bag">
+          {props.items.map((item, index) => (
+            <Draggable key={item.id} draggableId={item.id} index={index}>
+              {(provided, snapshot) => (
+                <li
+                  ref={provided.innerRef}
+                  {...provided.draggableProps}
+                  {...provided.dragHandleProps}
+                  style={provided.draggableProps.style}
+                >
+                  {item.label}
+                </li>
+              )}
+            </Draggable>
+          ))}
           {provided.placeholder}
         </ul>
       )}
     </Droppable>
   );
 }
-
-function FormCanvas(props) {
-  return <Copyable droppableId="SHOP" className="shop" items={props.items} />;
-}
-
-export default FormCanvas;

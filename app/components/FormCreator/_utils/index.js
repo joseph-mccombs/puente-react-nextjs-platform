@@ -1,19 +1,20 @@
 import { v4 as uuid } from 'uuid';
 
+// This method is needed for rendering clones of draggables
 const getRenderItem = (items, className) => (provided, snapshot, rubric) => {
   const item = items[rubric.source.index];
   return (
-    <div>
+    <React.Fragment>
       <li
         {...provided.draggableProps}
         {...provided.dragHandleProps}
         ref={provided.innerRef}
         style={provided.draggableProps.style}
-        className={snapshot.isDragging ? 'dragging' : ''}
+        className={snapshot.isDragging ? "dragging" : ""}
       >
         {item.label}
       </li>
-    </div>
+    </React.Fragment>
   );
 };
 

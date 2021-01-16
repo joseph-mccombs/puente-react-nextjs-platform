@@ -1,6 +1,8 @@
 import React from "react";
 import { v4 as uuid } from "uuid";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import NoSSR from 'react-no-ssr';
+
 
 import styles from './index.module.scss';
 
@@ -140,12 +142,16 @@ function App() {
   );
   return (
     <div className={styles.formCreator}>
+            <NoSSR>
+
       <DragDropContext onDragEnd={onDragEnd}>
         <h2>Shop</h2>
         <Shop items={COLLECTION} />
         <h2>Shopping bag</h2>
         <ShoppingBag items={shoppingBagItems} />
       </DragDropContext>
+      </NoSSR>
+
     </div>
   );
 }
