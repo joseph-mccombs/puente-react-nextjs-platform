@@ -13,7 +13,7 @@ const getRenderItem = (items, className) => (provided, snapshot, rubric) => {
       style={provided.draggableProps.style}
       className={snapshot.isDragging ? styles.dragging : ''}
     >
-      {item.label}
+      {item.text}
     </div>
   );
 };

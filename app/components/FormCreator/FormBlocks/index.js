@@ -18,7 +18,7 @@ function Copyable(props) {
             return (
               <React.Fragment key={item.id}>
                 {shouldRenderClone ? (
-                  <div className={styles.copy}>{item.label}</div>
+                  <div className={styles.copy}>{item.text}</div>
                 ) : (
                   <Draggable draggableId={item.id} index={index}>
                     {(provided, snapshot) => (
@@ -28,7 +28,7 @@ function Copyable(props) {
                         {...provided.dragHandleProps}
                         className={snapshot.isDragging ? styles.dragging : ''}
                       >
-                        {item.label}
+                        {item.text}
                       </div>
                     )}
                   </Draggable>

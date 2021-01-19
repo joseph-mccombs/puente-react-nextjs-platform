@@ -17,8 +17,7 @@ export default function FormTemplate(props) {
                   style={provided.draggableProps.style}
                   onClick={() => props.setValue(item.id)}
                 >
-                  {item.label}
-                  {/* <input></input> */}
+                  {item.text}
                 </div>
               )}
             </Draggable>

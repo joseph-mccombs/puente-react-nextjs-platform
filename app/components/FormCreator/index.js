@@ -9,11 +9,14 @@ import FormBlocks from './FormBlocks';
 import FormTemplate from './FormTemplate';
 
 const COLLECTION = [
-  { id: uuid(), label: 'Section title' },
-  { id: uuid(), label: 'Horizontal divider' },
-  { id: uuid(), label: 'Input' },
-  { id: uuid(), label: 'Single Choice' },
-  { id: uuid(), label: 'Multiple Choice' },
+  { id: uuid(), text: 'Section title', fieldType: 'header' },
+  { id: uuid(), text: 'Input - Number', fieldType: 'numberInput' },
+  { id: uuid(), text: 'Input - Text', fieldType: 'input' },
+  { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },
+  { id: uuid(), text: 'Input - Number - Multiple in a Row', fieldType: 'multiInputRowNum' },
+  { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
+  { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
+  { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
 ];
 
 function FormCreator() {
@@ -23,7 +26,7 @@ function FormCreator() {
     const elementsIndex = formItems.findIndex((element) => element.id == id);
     const newArray = [...formItems];
     // console.log(newArray)
-    newArray[elementsIndex] = { ...newArray[elementsIndex], value: 'Hello' };
+    newArray[elementsIndex] = { ...newArray[elementsIndex], label: 'Name of Label' };
     setFormItems(newArray);
   };
   const onDragEnd = React.useCallback(
@@ -61,7 +64,6 @@ function FormCreator() {
             <h2>Building Blocks</h2>
             <FormBlocks items={COLLECTION} />
           </Grid>
-
         </Grid>
       </DragDropContext>
     </NoSSR>
