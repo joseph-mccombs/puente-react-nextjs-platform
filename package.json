@@ -8,27 +8,40 @@
     "url": "https://hopetambala.com"
   },
   "contributors": [
+    "Hope Tambala <hope@puente-dr.org>",
     "Joseph McCombs <joseph.mccombs@puente-dr.org>"
   ],
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
+    "export": "next export",
+    "reinstall": "rm package-lock.json && rm -rf node_modules/ && npm install",
+    "release": "standard-version",
     "lint": "./node_modules/.bin/eslint '**/*.{js,jsx}' --quiet",
     "lint-fix": "./node_modules/.bin/eslint '**/*.{js,jsx}' --fix"
   },
   "dependencies": {
+    "@material-ui/core": "4.5.1",
+    "@material-ui/icons": "4.9.1",
     "next": "10.0.0",
     "react": "16.13.1",
+    "react-beautiful-dnd": "^13.0.0",
     "react-dom": "16.13.1",
-    "sass": "^1.28.0"
+    "react-no-ssr": "1.1.0",
+    "sass": "1.28.0",
+    "styled-components": "5.2.1",
+    "uuid": "3.3.3"
   },
   "devDependencies": {
-    "eslint": "^7.12.1",
-    "eslint-config-airbnb": "^18.2.0",
-    "eslint-plugin-import": "^2.22.1",
-    "eslint-plugin-jsx-a11y": "^6.4.1",
-    "eslint-plugin-react": "^7.21.5",
-    "eslint-plugin-react-hooks": "^4.2.0"
+    "babel-plugin-styled-components": "1.11.1",
+    "eslint": "7.12.1",
+    "eslint-config-airbnb": "18.2.0",
+    "eslint-plugin-import": "2.22.1",
+    "eslint-plugin-jsx-a11y": "6.4.1",
+    "eslint-plugin-react": "7.21.5",
+    "eslint-plugin-react-hooks": "4.2.0",
+    "eslint-plugin-simple-import-sort": "7.0.0",
+    "standard-version": "9.1.0"
   }
 }

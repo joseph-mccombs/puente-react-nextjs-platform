@@ -1,0 +1,13 @@
+.formCreator{
+  ul,li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+}
+
+.dragging {
+  background: rgba(255, 255, 0, 0.461);
+  text-align: center;
+  font-family: sans-serif;
+}

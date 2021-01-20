@@ -1,0 +1,20 @@
+.copy ~ div {
+  transform: none !important;
+}
+.dragging {
+  background: yellow;
+  text-align: center;
+  font-family: sans-serif;
+}
+.copy {
+  background: lightblue;
+}
+.copy ~ [data-rbd-placeholder-context-id] {
+  display: none !important;
+}
+
+.block-area {
+  padding: 0px;
+  // border: 1px solid #aaa;
+
+}

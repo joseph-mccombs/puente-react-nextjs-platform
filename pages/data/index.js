@@ -1,77 +1,31 @@
-import Card from 'app/components/Card';
-import Head from 'next/head';
+import Layout from 'app/components/Layout';
 
-export default function Home() {
+export default function Forms() {
   return (
-    <div className="container">
-      <Head>
-        <title>Puente - Analytics</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <Layout>
+      <div className="container">
+        <main>
+          <h1 className="title">
+            Data Exporter
+            {' '}
+            <a href="https://nextjs.org">Next.js!</a>
+          </h1>
+        </main>
 
-      <main>
-        <h1 className="title">
-          Welcome to Puente
-          {' '}
-          <a href="https://nextjs.org">Analytics!</a>
-        </h1>
-        <h1>Quick Start Guide</h1>
-
-        <div className="grid">
-          <Card
-            title="Form Creator"
-            description="Create and Manage Forms for Puente Collect"
-            nextLink="/forms"
-          />
-          <Card
-            title="Data Exporter"
-            description="Download data"
-            nextLink="/data"
-          />
-          {/* <div href="https://nextjs.org/docs" className="card">
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </div>
-
-          <a href="https://nextjs.org/learn" className="card">
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
+        <footer>
           <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className="card"
+            href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
+            target="_blank"
+            rel="noopener noreferrer"
           >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
+            Powered by
+            {' '}
+            <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
           </a>
+        </footer>
 
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a> */}
-        </div>
-      </main>
-
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by
-          {' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-      </footer>
-
-      <style jsx>
-        {`
+        <style jsx>
+          {`
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -201,24 +155,9 @@ export default function Home() {
           }
         }
       `}
-      </style>
+        </style>
 
-      <style jsx global>
-        {`
-        html,
-        body {
-          padding: 0;
-          margin: 0;
-          font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto,
-            Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue,
-            sans-serif;
-        }
-
-        * {
-          box-sizing: border-box;
-        }
-      `}
-      </style>
-    </div>
+      </div>
+    </Layout>
   );
 }
