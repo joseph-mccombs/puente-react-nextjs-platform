@@ -20,6 +20,9 @@ module.exports = {
   ],
   rules: {
     'react/react-in-jsx-scope': 'off',
+    'react/prop-types': 'off',
+    'react/jsx-filename-extension': 'off',
+    'react/no-string-refs': 'off',
     'jsx-a11y/anchor-is-valid': [
       'error',
       {

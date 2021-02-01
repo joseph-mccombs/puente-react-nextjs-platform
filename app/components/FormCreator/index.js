@@ -9,24 +9,39 @@ import FormBlocks from './FormBlocks';
 import FormTemplate from './FormTemplate';
 
 const COLLECTION = [
-  { id: uuid(), text: 'Section title', fieldType: 'header' },
+  // { id: uuid(), text: 'Section title', fieldType: 'header' },
   { id: uuid(), text: 'Input - Number', fieldType: 'numberInput' },
   { id: uuid(), text: 'Input - Text', fieldType: 'input' },
-  { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },
-  { id: uuid(), text: 'Input - Number - Multiple in a Row', fieldType: 'multiInputRowNum' },
-  { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
-  { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
-  { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
+  // { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },
+  // { id: uuid(), text: 'Input - Number - Multiple in a Row', fieldType: 'multiInputRowNum' },
+  // { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
+  // { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
+  // { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
 ];
 
 function FormCreator() {
   const [formItems, setFormItems] = React.useState([]);
 
-  const setValue = (id) => {
+  const setValue = async (event) => {
+    const { value, id } = event.target;
+
     const elementsIndex = formItems.findIndex((element) => element.id == id);
     const newArray = [...formItems];
-    // console.log(newArray)
-    newArray[elementsIndex] = { ...newArray[elementsIndex], label: 'Name of Label' };
+    newArray[elementsIndex] = {
+      ...newArray[elementsIndex],
+      label: value,
+      formikKey: value.replace(/[^\w\s]|_/g, ''),
+    };
+    console.log(newArray);
+
+    setFormItems(newArray);
+  };
+
+  const removeValue = (id) => {
+    const elementsIndex = formItems.findIndex((element) => element.id == id);
+    const newArray = [...formItems];
+    newArray.splice(elementsIndex, 1);
+    console.log(newArray);
     setFormItems(newArray);
   };
   const onDragEnd = React.useCallback(
@@ -47,7 +62,6 @@ function FormCreator() {
         default:
           break;
       }
-      // console.log('Destination JSON', formItems);
     },
     [setFormItems],
   );
@@ -58,7 +72,11 @@ function FormCreator() {
         <Grid container>
           <Grid item xs={9}>
             <h2>Form Creator</h2>
-            <FormTemplate items={formItems} setValue={setValue} />
+            <FormTemplate
+              items={formItems}
+              setValue={setValue}
+              removeValue={removeValue}
+            />
           </Grid>
           <Grid item xs={3}>
             <h2>Building Blocks</h2>
@@ -73,3 +91,5 @@ function FormCreator() {
 }
 
 export default FormCreator;
+
+// https://github.com/atlassian/react-beautiful-dnd/issues/216
