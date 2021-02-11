@@ -30,6 +30,8 @@ const PaperInputPicker = (props) => {
       />
       <Select
         item={item}
+        formItems={formItems}
+        setFormItems={setFormItems}
         removeValue={removeValue}
         fieldType={fieldType}
       />
