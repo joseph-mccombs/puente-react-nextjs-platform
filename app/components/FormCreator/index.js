@@ -14,28 +14,13 @@ const COLLECTION = [
   { id: uuid(), text: 'Input - Text', fieldType: 'input' },
   // { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },
   // { id: uuid(), text: 'Input - Number - Multiple in a Row', fieldType: 'multiInputRowNum' },
-  // { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
+  { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
   // { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
   // { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
 ];
 
 function FormCreator() {
   const [formItems, setFormItems] = React.useState([]);
-
-  const setValue = async (event) => {
-    const { value, id } = event.target;
-
-    const elementsIndex = formItems.findIndex((element) => element.id == id);
-    const newArray = [...formItems];
-    newArray[elementsIndex] = {
-      ...newArray[elementsIndex],
-      label: value,
-      formikKey: value.replace(/[^\w\s]|_/g, ''),
-    };
-    console.log(newArray);
-
-    setFormItems(newArray);
-  };
 
   const removeValue = (id) => {
     const elementsIndex = formItems.findIndex((element) => element.id == id);
@@ -73,8 +58,8 @@ function FormCreator() {
           <Grid item xs={9}>
             <h2>Form Creator</h2>
             <FormTemplate
-              items={formItems}
-              setValue={setValue}
+              formItems={formItems}
+              setFormItems={setFormItems}
               removeValue={removeValue}
             />
           </Grid>

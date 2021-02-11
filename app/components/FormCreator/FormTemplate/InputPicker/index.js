@@ -1,11 +1,15 @@
 // import I18n from '../../../modules/i18n';
 
 import styles from './index.module.scss';
+import Input from './Input';
+import Select from './Select';
 
 const PaperInputPicker = (props) => {
   const {
     provided, innerRef,
-    item, setFormValue, removeValue,
+    item,
+    formItems, setFormItems,
+    removeValue,
   } = props;
   const {
     label, text, fieldType, id,
@@ -17,20 +21,18 @@ const PaperInputPicker = (props) => {
       {...provided.dragHandleProps}
       ref={innerRef}
     >
-      {fieldType === 'input' && (
-        <div key={item.id}>
-          <h1>Text Input</h1>
-          <input type="text" value={label || ''} id={id} onChange={setFormValue} />
-          <div onClick={() => removeValue(id)}>Remove</div>
-        </div>
-      )}
-      {fieldType === 'numberInput' && (
-        <div key={item.id}>
-          <h1>Number Input</h1>
-          <input type="text" value={label || ''} id={id} onChange={setFormValue} />
-          <div onClick={() => removeValue(id)}>Remove</div>
-        </div>
-      )}
+      <Input
+        item={item}
+        formItems={formItems}
+        setFormItems={setFormItems}
+        removeValue={removeValue}
+        fieldType={fieldType}
+      />
+      <Select
+        item={item}
+        removeValue={removeValue}
+        fieldType={fieldType}
+      />
     </div>
   );
 };
