@@ -1,5 +1,8 @@
+import { Button } from '@material-ui/core';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
+
+import styles from './index.module.scss';
 
 // Use this funciton right beforea push to Parse-Server
 function camelize(str) {
@@ -59,19 +62,24 @@ const Select = (props) => {
   };
 
   return (
-    <div>
+    <div style={{ padding: 20 }}>
       {fieldType === 'select' && (
         <div key={id}>
-          <h1>Select</h1>
-          <input type="text" value={label || ''} id={id} onChange={setValue} />
-          {options.map((item, index) => (
-            <div>
-              <input type="text" value={item.value} id={item.id} onChange={editOption} />
-              <div onClick={() => removeOption(item.id)}>Remove</div>
-            </div>
-          ))}
-          <div onClick={addOption}>Add option</div>
-          <div onClick={() => removeValue(id)}>Remove</div>
+          <h3>Multiple Choice Element</h3>
+          <input className={styles.input} type="text" value={label || ''} id={id} onChange={setValue} placeholder="Untitled Question" />
+          <div>
+            {options.map((item, index) => (
+              <div>
+                <h3>
+                  {`Option ${index + 1}`}
+                </h3>
+                <input type="text" value={item.value} id={item.id} onChange={editOption} />
+                <Button style={{ color: 'green' }} onClick={addOption}>Add option</Button>
+                <Button onClick={() => removeOption(item.id)}>Remove</Button>
+              </div>
+            ))}
+          </div>
+          <Button variant="contained" className={styles.remove} onClick={() => removeValue(id)}>Remove Question</Button>
         </div>
       )}
     </div>

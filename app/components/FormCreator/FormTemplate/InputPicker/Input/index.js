@@ -1,3 +1,5 @@
+import { Button } from '@material-ui/core';
+
 import styles from './index.module.scss';
 
 const Input = (props) => {
@@ -26,19 +28,21 @@ const Input = (props) => {
   };
 
   return (
-    <div>
+    <div className={styles.element}>
       {fieldType === 'input' && (
         <div key={item.id}>
-          <h1>Text Input</h1>
-          <input type="text" value={label || ''} id={id} onChange={setValue} />
+          <h3>Text Input Element</h3>
+          <input className={styles.input} type="text" value={label || ''} id={id} onChange={setValue} placeholder="Untitled Question" />
           <div onClick={() => removeValue(id)}>Remove</div>
+          <Button variant="contained" className={styles.remove} onClick={() => removeValue(id)}>Remove Question</Button>
+
         </div>
       )}
       {fieldType === 'numberInput' && (
         <div key={item.id}>
-          <h1>Number Input</h1>
-          <input type="text" value={label || ''} id={id} onChange={setValue} />
-          <div onClick={() => removeValue(id)}>Remove</div>
+          <h3>Number Input Element</h3>
+          <input className={styles.input} type="text" value={label || ''} id={id} onChange={setValue} placeholder="Untitled Question" />
+          <Button variant="contained" className={styles.remove} onClick={() => removeValue(id)}>Remove Question</Button>
         </div>
       )}
     </div>
