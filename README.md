@@ -19,4 +19,4 @@ Here are some quick npm commands to get started:
 
 
 ## Standards
-[![js-standard-style](https://github.com/conventional-changelog/standard-version)  
+[![js-standard-style](https://github.com/conventional-changelog/standard-version)
