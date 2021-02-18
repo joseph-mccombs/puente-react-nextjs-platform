@@ -48,6 +48,8 @@ function FormCreator() {
     formObject.name = formName;
     formObject.class = '';
     formObject.description = formDescription;
+    formObject.customForm = true;
+
 
     const postParams = {
       parseClass: 'FormSpecificationsV2',
