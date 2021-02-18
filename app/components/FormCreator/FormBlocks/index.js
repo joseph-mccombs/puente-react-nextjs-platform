@@ -10,7 +10,6 @@ const Copyable = (props) => {
       renderClone={getRenderItem(items, className)}
       droppableId={droppableId}
       isDropDisabled
-      className={styles.formBlocks}
     >
       {(provided, snapshot) => (
         <div ref={provided.innerRef} className={className}>
@@ -27,7 +26,7 @@ const Copyable = (props) => {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className={snapshot.isDragging ? styles.dragging : ''}
+                        className={snapshot.isDragging ? styles.dragging : styles.noDragging}
                       >
                         {item.text}
                       </div>

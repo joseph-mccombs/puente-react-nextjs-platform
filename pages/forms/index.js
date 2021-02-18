@@ -1,20 +1,17 @@
+import Footer from 'app/components/Footer';
 import FormCreator from 'app/components/FormCreator';
 import Layout from 'app/components/Layout';
 
 export default function Forms() {
   return (
     <Layout>
-      <div className="container">
-        <h1 className="title">
-          Form Creator
-        </h1>
-        <main>
-
-          <FormCreator />
-        </main>
+      <main className="container">
+        <FormCreator />
 
         <style jsx>
           {`
+
+        
         .container {
           min-height: 100vh;
           padding: 0 0.5rem;
@@ -77,48 +74,8 @@ export default function Forms() {
         }
       `}
         </style>
-
-      </div>
-      <footer>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by
-          {' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className="logo" />
-        </a>
-        <style jsx>
-          {`footer {
-              width: 100%;
-              height: 100px;
-              border-top: 1px solid #eaeaea;
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
-
-            footer img {
-              margin-left: 0.5rem;
-            }
-
-            footer a {
-              display: flex;
-              justify-content: center;
-              align-items: center;
-            }
-
-            a {
-              color: inherit;
-              text-decoration: none;
-            }
-
-            .logo {
-              height: 1em;
-            }`}
-        </style>
-      </footer>
+      </main>
+      <Footer />
     </Layout>
   );
 }

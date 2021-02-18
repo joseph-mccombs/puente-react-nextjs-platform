@@ -1,3 +1,5 @@
+import styles from './index.module.scss';
+
 const Input = (props) => {
   const {
     item,

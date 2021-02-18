@@ -1,5 +1,3 @@
-// import I18n from '../../../modules/i18n';
-
 import styles from './index.module.scss';
 import Input from './Input';
 import Select from './Select';
@@ -20,6 +18,7 @@ const PaperInputPicker = (props) => {
       {...provided.draggableProps}
       {...provided.dragHandleProps}
       ref={innerRef}
+      className={styles.block}
     >
       <Input
         item={item}

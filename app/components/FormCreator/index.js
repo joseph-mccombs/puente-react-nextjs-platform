@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Button, Grid } from '@material-ui/core';
 import React from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import NoSSR from 'react-no-ssr';
@@ -7,6 +7,7 @@ import { v4 as uuid } from 'uuid';
 import { copy, reorder } from './_utils';
 import FormBlocks from './FormBlocks';
 import FormTemplate from './FormTemplate';
+import styles from './index.module.scss';
 
 const COLLECTION = [
   // { id: uuid(), text: 'Section title', fieldType: 'header' },
@@ -51,27 +52,36 @@ function FormCreator() {
     [setFormItems],
   );
   return (
-  // <div className={styles.formCreator}>
-    <NoSSR>
-      <DragDropContext onDragEnd={onDragEnd}>
-        <Grid container>
-          <Grid item xs={9}>
-            <h2>Form Creator</h2>
-            <FormTemplate
-              formItems={formItems}
-              setFormItems={setFormItems}
-              removeValue={removeValue}
-            />
+    <div className={styles.formCreator}>
+      <NoSSR>
+        <DragDropContext onDragEnd={onDragEnd}>
+          <Grid container>
+            <Grid item xs={9}>
+              <div className={styles.formButtons}>
+                <h2>Form Creator</h2>
+                <Button variant="text" color="primary">Default</Button>
+                <Button variant="outlined" color="primary">
+                  Reset Form
+                </Button>
+                <Button variant="contained" color="primary">
+                  Submit
+                </Button>
+              </div>
+              <FormTemplate
+                formItems={formItems}
+                setFormItems={setFormItems}
+                removeValue={removeValue}
+              />
+            </Grid>
+            <Grid item xs={3}>
+              <h2>Building Blocks</h2>
+              <FormBlocks items={COLLECTION} />
+            </Grid>
           </Grid>
-          <Grid item xs={3}>
-            <h2>Building Blocks</h2>
-            <FormBlocks items={COLLECTION} />
-          </Grid>
-        </Grid>
-      </DragDropContext>
-    </NoSSR>
+        </DragDropContext>
+      </NoSSR>
 
-  // </div>
+    </div>
   );
 }
 

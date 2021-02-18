@@ -6,6 +6,8 @@ const useStyles = makeStyles(() => ({
   root: {
     flexGrow: 1,
     margin: 0,
+    backgroundColor: 'rgba(61,128,252,0.04)',
+
   },
 }));
 
