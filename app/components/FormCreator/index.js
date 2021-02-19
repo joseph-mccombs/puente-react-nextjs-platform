@@ -97,8 +97,7 @@ function FormCreator() {
             <Grid item xs={9}>
               <div className={styles.formButtons}>
                 <h2>Form Creator</h2>
-                <Button variant="text" color="primary">Default</Button>
-                <Button variant="outlined" color="primary">
+                <Button variant="outlined" color="primary" onClick={() => setFormItems([])}>
                   Reset Form
                 </Button>
                 <Button variant="contained" color="primary" onClick={submitCustomForm}>
