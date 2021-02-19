@@ -50,7 +50,6 @@ function FormCreator() {
     formObject.description = formDescription;
     formObject.customForm = true;
 
-
     const postParams = {
       parseClass: 'FormSpecificationsV2',
       localObject: formObject,

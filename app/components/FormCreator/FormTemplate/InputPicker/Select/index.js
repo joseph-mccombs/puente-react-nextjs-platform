@@ -38,7 +38,7 @@ const Select = (props) => {
   const addOption = () => {
     setOptions((options) => [...options, { id: uuid(), label: '', value: '' }]);
   };
-  const editOption = async (event) => {
+  const editOption = async (event, questionId) => {
     const { value, id } = event.target;
 
     const elementsIndex = options.findIndex((element) => element.id == id);
@@ -52,6 +52,15 @@ const Select = (props) => {
     // console.log(newArray);
 
     setOptions(newArray);
+    const elementsFormIndex = formItems.findIndex((element) => element.id == questionId);
+    const formArray = [...formItems];
+    formArray[elementsFormIndex] = {
+      ...formArray[elementsFormIndex],
+      options: newArray,
+    };
+
+    setFormItems(formArray);
+    console.log(formArray);
   };
   const removeOption = (id) => {
     const elementsIndex = options.findIndex((element) => element.id == id);
@@ -73,7 +82,7 @@ const Select = (props) => {
                 <h3>
                   {`Option ${index + 1}`}
                 </h3>
-                <input type="text" value={item.value} id={item.id} onChange={editOption} />
+                <input type="text" value={item.value} id={item.id} onChange={(e) => editOption(e, id)} />
                 <Button style={{ color: 'green' }} onClick={addOption}>Add option</Button>
                 <Button onClick={() => removeOption(item.id)}>Remove</Button>
               </div>
