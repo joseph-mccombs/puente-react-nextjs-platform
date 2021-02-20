@@ -20,8 +20,13 @@ export default function Home() {
         <div className="grid">
           <Card
             title="Form Creator"
-            description="Create and Manage Forms for Puente Collect"
+            description="Create Forms for Puente Collect"
             nextLink="/forms/form-creator"
+          />
+          <Card
+            title="Form Manager"
+            description="Manage Forms for Puente Collect"
+            nextLink="/forms/form-manager"
           />
           {/* <Card
             title="Data Exporter"
