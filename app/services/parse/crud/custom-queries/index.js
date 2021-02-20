@@ -37,4 +37,20 @@ function customQueryService(offset, limit, parseModel, parseColumn, parseParam) 
   });
 }
 
-export default customQueryService;
+function removeQueryService(parseModel, objectId) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const Model = Parse.Object.extend(parseModel);
+
+      const query = new Parse.Query(Model);
+
+      query.get(objectId).then((obj) => {
+        resolve(obj.destroy());
+      }, (error) => {
+        reject(error);
+      });
+    }, 1500);
+  });
+}
+
+export { customQueryService, removeQueryService };

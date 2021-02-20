@@ -12,6 +12,7 @@ import {
   getObjectsByGeolocation,
   postObjectsToClass,
   postObjectsToClassWithRelation,
+  removeQueryService,
   residentIDQuery,
   retrieveHelloFunction,
 } from './crud';
@@ -23,6 +24,7 @@ export {
   initialize,
   postObjectsToClass,
   postObjectsToClassWithRelation,
+  removeQueryService,
   residentIDQuery,
   retrieveCurrentUserAsyncFunction,
   retrieveCurrentUserFunction, retrieveDeleteUserFunction,

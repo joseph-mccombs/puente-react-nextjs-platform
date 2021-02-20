@@ -40,10 +40,10 @@ export default function Header({ children }) {
         </div>
         <Divider />
         <List>
-          <HeaderItem link="/dashboard" text="Dashboard">
+          <HeaderItem link="/forms/form-manager" text="Forms Manager">
             <InboxIcon />
           </HeaderItem>
-          <HeaderItem link="/forms" text="Forms">
+          <HeaderItem link="/forms/form-creator" text="Forms">
             <MailIcon />
           </HeaderItem>
         </List>

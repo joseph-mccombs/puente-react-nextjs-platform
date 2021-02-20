@@ -1,6 +1,6 @@
 import { Parse } from 'parse';
 
-import customQueryService from './custom-queries';
+import { customQueryService, removeQueryService } from './custom-queries';
 
 function retrieveHelloFunction() {
   Parse.Cloud.run('hello').then((result) => result);
@@ -50,6 +50,7 @@ export {
   getObjectsByGeolocation,
   postObjectsToClass,
   postObjectsToClassWithRelation,
+  removeQueryService,
   residentIDQuery,
   retrieveHelloFunction,
 };
