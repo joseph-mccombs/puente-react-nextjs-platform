@@ -15,7 +15,7 @@ Here are some quick npm commands to get started:
 
 - [React Material UI](https://material-ui.com/)
 - [Material Icons](https://materialdesignicons.com/)
-- [Next.js](https://nextjs.org/)
+- [Next.js](https://nextjs.org/) 
 
 
 ## Standards
