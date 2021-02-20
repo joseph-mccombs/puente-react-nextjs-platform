@@ -13,7 +13,7 @@ Here are some quick npm commands to get started:
 
 ## Resources
 
-- [React Material UI](https://material-ui.com/)
+- [React Material UI](https://material-ui.com/) 
 - [Material Icons](https://materialdesignicons.com/)
 - [Next.js](https://nextjs.org/)
 
