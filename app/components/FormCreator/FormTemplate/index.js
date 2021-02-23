@@ -1,24 +1,25 @@
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import styles from './index.module.scss';
+import InputPicker from './InputPicker';
 
-export default function FormTemplate(props) {
+const FormTemplate = (props) => {
+  const { formItems, setFormItems, removeValue } = props;
   return (
     <Droppable droppableId="DROP-AREA" className={styles.formTemplate}>
       {(provided, snapshot) => (
         <div ref={provided.innerRef} className={styles['drop-area']}>
-          {props.items.map((item, index) => (
+          {formItems.map((item, index) => (
             <Draggable key={item.id} draggableId={item.id} index={index}>
               {(provided, snapshot) => (
-                <div
-                  ref={provided.innerRef}
-                  {...provided.draggableProps}
-                  {...provided.dragHandleProps}
-                  style={provided.draggableProps.style}
-                  onClick={() => props.setValue(item.id)}
-                >
-                  {item.text}
-                </div>
+                <InputPicker
+                  item={item}
+                  formItems={formItems}
+                  setFormItems={setFormItems}
+                  removeValue={removeValue}
+                  provided={provided}
+                  innerRef={provided.innerRef}
+                />
               )}
             </Draggable>
           ))}
@@ -27,4 +28,6 @@ export default function FormTemplate(props) {
       )}
     </Droppable>
   );
-}
+};
+
+export default FormTemplate;

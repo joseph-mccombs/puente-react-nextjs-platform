@@ -3,20 +3,20 @@ import { Draggable, Droppable } from 'react-beautiful-dnd';
 import { getRenderItem } from '../_utils';
 import styles from './index.module.scss';
 
-function Copyable(props) {
+const Copyable = (props) => {
+  const { items, className, droppableId } = props;
   return (
     <Droppable
-      renderClone={getRenderItem(props.items, props.className)}
-      droppableId={props.droppableId}
+      renderClone={getRenderItem(items, className)}
+      droppableId={droppableId}
       isDropDisabled
-      className={styles.formBlocks}
     >
       {(provided, snapshot) => (
-        <div ref={provided.innerRef} className={props.className}>
-          {props.items.map((item, index) => {
+        <div ref={provided.innerRef} className={className}>
+          {items.map((item, index) => {
             const shouldRenderClone = item.id === snapshot.draggingFromThisWith;
             return (
-              <React.Fragment key={item.id}>
+              <div key={item.id}>
                 {shouldRenderClone ? (
                   <div className={styles.copy}>{item.text}</div>
                 ) : (
@@ -26,14 +26,14 @@ function Copyable(props) {
                         ref={provided.innerRef}
                         {...provided.draggableProps}
                         {...provided.dragHandleProps}
-                        className={snapshot.isDragging ? styles.dragging : ''}
+                        className={snapshot.isDragging ? styles.dragging : styles.noDragging}
                       >
                         {item.text}
                       </div>
                     )}
                   </Draggable>
                 )}
-              </React.Fragment>
+              </div>
             );
           })}
           {provided.placeholder}
@@ -41,8 +41,11 @@ function Copyable(props) {
       )}
     </Droppable>
   );
-}
+};
 
-export default function FormBlocks(props) {
-  return <Copyable droppableId="BLOCK" className={styles['block-area']} items={props.items} />;
-}
+const FormBlocks = (props) => {
+  const { items } = props;
+  return <Copyable droppableId="BLOCK" className={styles['block-area']} items={items} />;
+};
+
+export default FormBlocks;
