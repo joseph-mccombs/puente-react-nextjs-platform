@@ -30,8 +30,8 @@ const organizations = [
   'One World Surgery',
   'Mayanza',
   'Ayuda',
+  'Ryans Well',
   'testORG',
-  'Ryans Well'
 ];
 
 function FormCreator() {
