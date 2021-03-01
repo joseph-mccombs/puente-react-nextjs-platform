@@ -27,7 +27,10 @@ const COLLECTION = [
 const organizations = [
   'Puente',
   'WOF',
-  'OWS',
+  'One World Surgery',
+  'Mayanza',
+  'Ayuda',
+  'testORG',
 ];
 
 function FormCreator() {
