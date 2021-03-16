@@ -1,5 +1,5 @@
 import {
-  Button, Chip, Grid, Input, MenuItem, Select,
+  Grid,
 } from '@material-ui/core';
 import { customQueryService, postObjectsToClass } from 'app/services/parse';
 import React, { useEffect, useState } from 'react';
@@ -29,12 +29,6 @@ const retrieveUniqueListOfOrganizations = async () => {
     return e;
   }
 };
-
-const organizations = [
-  'Puente',
-  'WOF',
-  'OWS',
-];
 
 const FormManager = () => {
   const [organization, setOrganization] = useState('Puente');
