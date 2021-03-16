@@ -38,16 +38,6 @@ const retrieveUniqueListOfOrganizations = async () => {
   }
 };
 
-// const organizations = [
-//   'Puente',
-//   'WOF',
-//   'One World Surgery',
-//   'Mayanza',
-//   'Ayuda',
-//   'Ryans Well',
-//   'testORG',
-// ];
-
 const formTypes = [
   'Assets',
   'Custom',
