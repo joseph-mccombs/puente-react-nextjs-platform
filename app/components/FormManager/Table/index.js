@@ -9,8 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Modal from 'app/components/UI/Modal';
 import { removeQueryService } from 'app/services/parse';
-import React, { useEffect, useState } from 'react';
-import _ from 'underscore';
+import React, { useState } from 'react';
 
 const useStyles = makeStyles({
   table: {
@@ -23,9 +22,10 @@ export default function FormManagerTable({ data, retrieveCustomData, organizatio
   const [selectedForm, setSelectedForm] = useState();
   const classes = useStyles();
 
-  const handleEdit = (object) => {
-    console.log('The Values that you wish to edit ', object);
-  };
+  // const handleEdit = (object) => {
+  //   console.log('The Values that you wish to edit ', object);
+  // };
+
   const handleModal = (row) => {
     setOpen(!open);
     setSelectedForm(row);

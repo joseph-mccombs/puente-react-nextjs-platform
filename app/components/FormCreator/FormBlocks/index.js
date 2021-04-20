@@ -1,3 +1,5 @@
+/* eslint-disable react/jsx-props-no-spreading */
+
 import { Draggable, Droppable } from 'react-beautiful-dnd';
 
 import { getRenderItem } from '../_utils';
@@ -21,12 +23,12 @@ const Copyable = (props) => {
                   <div className={styles.copy}>{item.text}</div>
                 ) : (
                   <Draggable draggableId={item.id} index={index}>
-                    {(provided, snapshot) => (
+                    {(provideded, snapshoted) => (
                       <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        className={snapshot.isDragging ? styles.dragging : styles.noDragging}
+                        ref={provideded.innerRef}
+                        {...provideded.draggableProps}
+                        {...provideded.dragHandleProps}
+                        className={snapshoted.isDragging ? styles.dragging : styles.noDragging}
                       >
                         {item.text}
                       </div>
