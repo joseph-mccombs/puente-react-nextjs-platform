@@ -1,11 +1,13 @@
 import {
-  Button, Chip, Grid, Input, MenuItem, Select,
+  Button, Chip, CircularProgress,
+  Grid, Input, MenuItem, Select,
 } from '@material-ui/core';
 import useInput from 'app/modules/hooks';
-import { postObjectsToClass } from 'app/services/parse';
-import React, { useState } from 'react';
+import { customQueryService, postObjectsToClass } from 'app/services/parse';
+import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import NoSSR from 'react-no-ssr';
+import _ from 'underscore';
 import { v4 as uuid } from 'uuid';
 
 import { copy, reorder } from './_utils';
@@ -24,27 +26,51 @@ const COLLECTION = [
   // { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
 ];
 
-const organizations = [
-  'Puente',
-  'WOF',
-  'OWS',
+const retrieveUniqueListOfOrganizations = async () => {
+  try {
+    const records = await customQueryService(0, 500, 'User', 'adminVerified', true);
+    const parsedRecords = JSON.parse(JSON.stringify(records));
+    const uniqueRecords = _.uniq(parsedRecords, (x) => x.organization);
+    const pluckedRecords = _.pluck(uniqueRecords, 'organization');
+    return pluckedRecords;
+  } catch (e) {
+    return e;
+  }
+};
+
+const formTypes = [
+  'Assets',
+  'Custom',
 ];
 
 function FormCreator() {
   const [formName, setFormName] = useInput({ type: 'text', placeholder: 'Form Name' });
   const [formDescription, setFormDescription] = useInput({ type: 'text', placeholder: 'Form Description' });
-  const [organizationNames, setOrganizationNames] = React.useState([]);
+  const [formItems, setFormItems] = useState([]);
+  const [formTypeNames, setFormTypeNames] = useState([]);
+
+  const [organizationNames, setOrganizationNames] = useState([]);
+  const [organizations, setOrganizations] = useState([]);
+
+  useEffect(() => {
+    retrieveUniqueListOfOrganizations().then((results) => {
+      setOrganizations(results);
+    });
+  }, []);
 
   const handleOrganizationChange = (event) => {
     setOrganizationNames(event.target.value);
   };
 
-  const [formItems, setFormItems] = useState([]);
+  const handleFormTypesChange = (event) => {
+    setFormTypeNames(event.target.value);
+  };
 
   const submitCustomForm = () => {
     const formObject = {};
     formObject.fields = formItems;
     formObject.organizations = organizationNames;
+    formObject.typeOfForm = formTypeNames;
     formObject.name = formName;
     formObject.class = '';
     formObject.description = formDescription;
@@ -55,18 +81,19 @@ function FormCreator() {
       localObject: formObject,
     };
     postObjectsToClass(postParams).then(() => {
-      console.log(formItems);
+      console.log(postParams); //eslint-disable-line
     }).catch((err) => {
-      console.log(err);
+      console.log(err); //eslint-disable-line
     });
   };
 
   const removeValue = (id) => {
-    const elementsIndex = formItems.findIndex((element) => element.id == id);
+    const elementsIndex = formItems.findIndex((element) => element.id === id);
     const newArray = [...formItems];
     newArray.splice(elementsIndex, 1);
     setFormItems(newArray);
   };
+
   const onDragEnd = React.useCallback(
     (result) => {
       const { source, destination } = result;
@@ -103,7 +130,10 @@ function FormCreator() {
                   Submit
                 </Button>
               </div>
-              <div>
+              <div id="organization">
+                <h2>Organization(s)</h2>
+                {organizations.length < 1
+                  && <CircularProgress />}
                 <Select
                   labelId="mutiple-chip-organization"
                   id="mutiple-chip"
@@ -122,6 +152,30 @@ function FormCreator() {
                   {organizations.map((organization) => (
                     <MenuItem key={organization} value={organization}>
                       {organization}
+                    </MenuItem>
+                  ))}
+                </Select>
+              </div>
+              <div id="formType">
+                <h2>Type of Form</h2>
+                <Select
+                  labelId="mutiple-chip-organization"
+                  id="mutiple-chip"
+                  multiple
+                  value={formTypeNames}
+                  onChange={handleFormTypesChange}
+                  input={<Input id="select-multiple-chip" />}
+                  renderValue={(selected) => (
+                    <div>
+                      {selected.map((value) => (
+                        <Chip key={value} label={value} />
+                      ))}
+                    </div>
+                  )}
+                >
+                  {formTypes.map((formType) => (
+                    <MenuItem key={formType} value={formType}>
+                      {formType}
                     </MenuItem>
                   ))}
                 </Select>
