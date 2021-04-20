@@ -56,7 +56,7 @@ function FormCreator() {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
     });
-  });
+  }, []);
 
   const handleOrganizationChange = (event) => {
     setOrganizationNames(event.target.value);
@@ -81,18 +81,19 @@ function FormCreator() {
       localObject: formObject,
     };
     postObjectsToClass(postParams).then(() => {
-      console.log(formItems);
+      console.log(postParams); //eslint-disable-line
     }).catch((err) => {
-      console.log(err);
+      console.log(err); //eslint-disable-line
     });
   };
 
   const removeValue = (id) => {
-    const elementsIndex = formItems.findIndex((element) => element.id == id);
+    const elementsIndex = formItems.findIndex((element) => element.id === id);
     const newArray = [...formItems];
     newArray.splice(elementsIndex, 1);
     setFormItems(newArray);
   };
+
   const onDragEnd = React.useCallback(
     (result) => {
       const { source, destination } = result;
