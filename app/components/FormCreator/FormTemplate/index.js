@@ -7,23 +7,23 @@ const FormTemplate = (props) => {
   const { formItems, setFormItems, removeValue } = props;
   return (
     <Droppable droppableId="DROP-AREA" className={styles.formTemplate}>
-      {(provided, snapshot) => (
-        <div ref={provided.innerRef} className={styles['drop-area']}>
+      {(providedDrop) => (
+        <div ref={providedDrop.innerRef} className={styles['drop-area']}>
           {formItems.map((item, index) => (
             <Draggable key={item.id} draggableId={item.id} index={index}>
-              {(provided, snapshot) => (
+              {(providedDrag) => (
                 <InputPicker
                   item={item}
                   formItems={formItems}
                   setFormItems={setFormItems}
                   removeValue={removeValue}
-                  provided={provided}
-                  innerRef={provided.innerRef}
+                  provided={providedDrag}
+                  innerRef={providedDrag.innerRef}
                 />
               )}
             </Draggable>
           ))}
-          {provided.placeholder}
+          {providedDrop.placeholder}
         </div>
       )}
     </Droppable>
