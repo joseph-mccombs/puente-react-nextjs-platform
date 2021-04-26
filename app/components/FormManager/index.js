@@ -1,7 +1,7 @@
 import {
   Grid,
 } from '@material-ui/core';
-import { customQueryService } from 'app/services/parse';
+import { useGlobalState } from 'app/store';
 import React, { useEffect, useState } from 'react';
 
 import retrieveCustomData from './_data';
@@ -13,6 +13,8 @@ const FormManager = () => {
 
   const [tableData, setTableData] = useState([]);
 
+  const { contextManagment } = useGlobalState();
+
   useEffect(() => {
     retrieveCustomData(organization).then((records) => {
       setTableData(records);
@@ -20,8 +22,7 @@ const FormManager = () => {
   });
 
   const passDataToFormCreator = (data) => {
-    console.log(data);
-    console.log(hi);
+    contextManagment.addPropToStore('pageLevel', data); // contextManagement.removeFromGlobalStoreData(key);
   };
 
   return (
