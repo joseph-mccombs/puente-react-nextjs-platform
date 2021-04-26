@@ -29,7 +29,6 @@
     "react": "16.13.1",
     "react-beautiful-dnd": "^13.0.0",
     "react-dom": "16.13.1",
-    "react-no-ssr": "1.1.0",
     "sass": "1.28.0",
     "styled-components": "5.2.1",
     "underscore": "^1.12.0",

@@ -4,28 +4,25 @@ import {
 import { customQueryService } from 'app/services/parse';
 import React, { useEffect, useState } from 'react';
 
+import retrieveCustomData from './_data';
 import styles from './index.module.scss';
 import Table from './Table';
-
-const retrieveCustomData = async (organization) => {
-  try {
-    const records = await customQueryService(0, 5000, 'FormSpecificationsV2', 'organizations', organization);
-    const parsedRecords = JSON.parse(JSON.stringify(records));
-    return parsedRecords;
-  } catch (e) {
-    return e;
-  }
-};
 
 const FormManager = () => {
   const [organization] = useState('Puente');
 
   const [tableData, setTableData] = useState([]);
+
   useEffect(() => {
     retrieveCustomData(organization).then((records) => {
       setTableData(records);
     });
   });
+
+  const passDataToFormCreator = (data) => {
+    console.log(data);
+    console.log(hi);
+  };
 
   return (
     <div className={styles.formCreator}>
@@ -34,6 +31,7 @@ const FormManager = () => {
         <Table
           data={tableData}
           retrieveCustomData={retrieveCustomData}
+          passDataToFormCreator={passDataToFormCreator}
           organization={organization}
         />
       </Grid>
