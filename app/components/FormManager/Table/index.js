@@ -17,14 +17,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FormManagerTable({ data, retrieveCustomData, organization }) {
+const FormManagerTable = ({
+  data,
+  retrieveCustomData, passDataToFormCreator,
+  organization,
+}) => {
   const [open, setOpen] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
   const classes = useStyles();
 
-  // const handleEdit = (object) => {
-  //   console.log('The Values that you wish to edit ', object);
-  // };
+  const handleEdit = (object) => {
+    passDataToFormCreator(object);
+  };
 
   const handleModal = (row) => {
     setOpen(!open);
@@ -68,9 +72,9 @@ export default function FormManagerTable({ data, retrieveCustomData, organizatio
               <TableCell align="right">{row.createdAt}</TableCell>
               <TableCell align="right">{row.updatedAt}</TableCell>
               <TableCell align="right">
-                {/* <Button aria-label="edit" onClick={() => handleEdit(row)}>
+                <Button aria-label="edit" onClick={() => handleEdit(row)}>
                   Edit
-                </Button> */}
+                </Button>
                 <Button aria-label="edit" onClick={() => handleModal(row)}>
                   Remove
                 </Button>
@@ -81,4 +85,6 @@ export default function FormManagerTable({ data, retrieveCustomData, organizatio
       </Table>
     </TableContainer>
   );
-}
+};
+
+export default FormManagerTable;

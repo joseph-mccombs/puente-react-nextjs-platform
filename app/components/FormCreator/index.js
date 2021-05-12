@@ -1,12 +1,13 @@
 import {
   Button, Chip, CircularProgress,
-  Grid, Input, MenuItem, Select,
+  Grid, Input, MenuItem, NoSsr,
+  Select,
 } from '@material-ui/core';
 import useInput from 'app/modules/hooks';
 import { customQueryService, postObjectsToClass } from 'app/services/parse';
+import { useGlobalState } from 'app/store';
 import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import NoSSR from 'react-no-ssr';
 import _ from 'underscore';
 import { v4 as uuid } from 'uuid';
 
@@ -52,9 +53,12 @@ function FormCreator() {
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
+  const { globalStore } = useGlobalState();
+
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
+      console.log(globalStore);
     });
   }, []);
 
@@ -115,9 +119,10 @@ function FormCreator() {
     },
     [setFormItems],
   );
+
   return (
     <div className={styles.formCreator}>
-      <NoSSR>
+      <NoSsr>
         <DragDropContext onDragEnd={onDragEnd}>
           <Grid container>
             <Grid item xs={9}>
@@ -198,7 +203,7 @@ function FormCreator() {
             </Grid>
           </Grid>
         </DragDropContext>
-      </NoSSR>
+      </NoSsr>
 
     </div>
   );
