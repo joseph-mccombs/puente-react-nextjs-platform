@@ -8,7 +8,7 @@ const dataQueryer = async (grapqlquery) => {
         `,
   });
 
-  return data
+  return data;
 };
 
 export default dataQueryer;
