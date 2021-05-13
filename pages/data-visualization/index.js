@@ -1,7 +1,9 @@
+import { Button } from '@material-ui/core';
 import Footer from 'app/components/Footer';
 import Layout from 'app/components/Layout';
 import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/Viz';
 import dataQueryer from 'app/modules/apollo-grapql';
+import { useState } from 'react';
 
 const organization = 'WOF';
 
@@ -11,11 +13,17 @@ const SChart = ({ data }) => {
   const mappedVitals = [{
     id: organization,
     data: data.reduce((result, record) => {
-      const { Diastolic, Systolic } = record;
-      if (Number(Diastolic) > 0) {
+      if (Number(record.Diastolic) < 300
+          && Number(record.Systolic) < 300
+          && Number(record.Diastolic) > 0
+          && Number(record.Systolic) > 0
+      ) {
         return result.concat({
-          x: Number(Diastolic),
-          y: Number(Systolic),
+          communityname: record.communityname,
+          city: record.city,
+          educationLevel: record.educationLevel,
+          x: Number(record.Diastolic),
+          y: Number(record.Systolic),
         });
       }
       return result;
@@ -112,85 +120,41 @@ const BChart = ({ data }) => {
   );
 };
 
-const Forms = ({ vitals }) => (
-  <Layout>
-    <main className="container">
-      <div>Data Viz</div>
-      <h1>{organization}</h1>
-      <SChart data={vitals.getVitalByOrganization.slice(0, 300)} />
-      <BChart data={vitals.getVitalByOrganization.slice(0, 300)} />
-      <LChart data={vitals.getVitalByOrganization.slice(0, 300)} />
+const Forms = ({ vitals }) => {
+  const [recordNumber, setRecordNumber] = useState(250);
 
-      <style jsx>
-        {`
+  return (
+    <Layout>
+      <main className="container">
+        <div>Data Viz</div>
+        <h1>{organization}</h1>
+        <div className="buttons around">
+          <Button variant="contained" onClick={() => setRecordNumber(250)}>250 Records</Button>
+          <Button variant="contained" onClick={() => setRecordNumber(500)}>500 Records</Button>
+          <Button variant="contained" onClick={() => setRecordNumber(1000)}>1000 Records</Button>
+          <Button variant="contained" onClick={() => setRecordNumber(2000)}>2000 Records</Button>
+        </div>
 
-        
-        .container {
-          min-height: 100vh;
-          padding: 0 0.5rem;
-          flex-direction: column;
-          justify-content: center;
-          align-items: center;
-        }
+        <SChart data={vitals.getVitalByOrganization.slice(0, recordNumber)} />
+        <BChart data={vitals.getVitalByOrganization.slice(0, recordNumber)} />
+        <LChart data={vitals.getVitalByOrganization.slice(0, recordNumber)} />
 
-        main {
-          padding: 5rem 0;
-          flex: 1;
-        }
-
-        .title a {
-          color: #0070f3;
-          text-decoration: none;
-        }
-
-        .title a:hover,
-        .title a:focus,
-        .title a:active {
-          text-decoration: underline;
-        }
-
-        .title {
-          margin: 0;
-          line-height: 1.15;
-          font-size: 4rem;
-        }
-
-        .title,
-        .description {
-          text-align: center;
-        }
-
-        .description {
-          line-height: 1.5;
-          font-size: 1.5rem;
-        }
-
-        .grid {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          flex-wrap: wrap;
-
-          max-width: 800px;
-          margin-top: 3rem;
-        }
-
-        .logo {
-          height: 1em;
-        }
-
-        @media (max-width: 600px) {
-          .grid {
-            width: 100%;
-            flex-direction: column;
+        <style jsx>
+          {`
+          .buttons {
+            display: flex;
+            width:75vh
           }
-        }
-      `}
-      </style>
-    </main>
-    <Footer />
-  </Layout>
-);
+          .buttons.around {
+            justify-content: space-around;
+          }
+          `}
+        </style>
+      </main>
+      <Footer />
+    </Layout>
+  );
+};
 
 export async function getStaticProps() {
   const vitals = await dataQueryer(`

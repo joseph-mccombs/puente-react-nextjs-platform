@@ -13,10 +13,33 @@ const ScatterPlot = (
     }}
     xScale={{ type: 'linear', min: 'auto', max: 'auto' }}
     yScale={{ type: 'linear', min: 'auto', max: 'auto' }}
+    // CUSTOM PROP
     colors={(node) => (node.y < 120 && node.x < 80 ? '#A5BC39'
       : node.y < 129 && node.x < 80 ? '#FFDA46'
         : node.y < 139 || node.x < 89 ? '#F99F2C'
           : node.y > 140 || node.x > 90 ? '#ff0000' : 'black')}
+     // CUSTOM PROP
+    tooltip={({ node }) => (
+      <div
+        style={{
+          color: node.style.color,
+          background: '#333',
+          padding: '12px 16px',
+        }}
+      >
+        <strong>
+          {node.data.communityname}
+          {' '}
+          (
+          {node.data.city}
+          )
+        </strong>
+        <br />
+        {`Systolic: ${node.data.formattedX}`}
+        <br />
+        {`Diastolic: ${node.data.formattedY}`}
+      </div>
+    )}
     blendMode="multiply"
     axisTop={null}
     axisRight={null}
