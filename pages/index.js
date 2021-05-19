@@ -1,39 +1,38 @@
-import Card from 'components/Card';
-import SampleTable from 'components/SampleTable';
+import Card from 'app/components/Card';
 import Head from 'next/head';
 
 export default function Home() {
   return (
     <div className="container">
       <Head>
-        <title>Create Next App</title>
+        <title>Puente - Analytics</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
       <main>
         <h1 className="title">
-          Welcome to
+          Welcome to Puente
           {' '}
-          <a href="https://nextjs.org">Next.js!</a>
+          <a href="https://nextjs.org">Data Management!</a>
         </h1>
-
-        <p className="description">
-          Get started by editing
-          {' '}
-          <code>pages/index.js</code>
-        </p>
+        <h1>Quick Start Guide</h1>
 
         <div className="grid">
           <Card
             title="Form Creator"
-            description="Find in-depth information about Next.js features and API."
-            nextLink="/forms"
+            description="Create Forms for Puente Collect"
+            nextLink="/forms/form-creator"
           />
           <Card
-            title="Data Exporter"
-            description="Find in-depth information about Next.js features and API."
-            nextLink="/data"
+            title="Form Manager"
+            description="Manage Forms for Puente Collect"
+            nextLink="/forms/form-manager"
           />
+          {/* <Card
+            title="Data Exporter"
+            description="Download data"
+            nextLink="/data"
+          /> */}
           {/* <div href="https://nextjs.org/docs" className="card">
             <h3>Documentation &rarr;</h3>
             <p>Find in-depth information about Next.js features and API.</p>
@@ -50,19 +49,8 @@ export default function Home() {
           >
             <h3>Examples &rarr;</h3>
             <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/import?filter=next.js&utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className="card"
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
           </a> */}
         </div>
-        <SampleTable />
       </main>
 
       <footer>

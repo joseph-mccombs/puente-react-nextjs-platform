@@ -1,4 +1,4 @@
-import Layout from 'components/Layout';
+import Layout from 'app/components/Layout';
 
 export default function Forms() {
   return (
@@ -6,7 +6,7 @@ export default function Forms() {
       <div className="container">
         <main>
           <h1 className="title">
-            I'm a Data Exporter
+            Data Exporter
             {' '}
             <a href="https://nextjs.org">Next.js!</a>
           </h1>

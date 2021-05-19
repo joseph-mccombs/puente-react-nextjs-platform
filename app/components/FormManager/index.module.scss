@@ -1,0 +1,17 @@
+.formCreator{
+    h2 {
+      color: rgba(0,0,0,0.88);
+      font-size: 24px;
+      font-weight: 700;
+  }
+}
+
+.formButtons{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content:flex-start;
+  & *{
+    margin: 10;
+  }
+}

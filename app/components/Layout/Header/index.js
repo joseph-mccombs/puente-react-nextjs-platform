@@ -3,9 +3,6 @@ import Divider from '@material-ui/core/Divider';
 import Drawer from '@material-ui/core/Drawer';
 import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import MailIcon from '@material-ui/icons/Mail';
@@ -13,6 +10,7 @@ import InboxIcon from '@material-ui/icons/MoveToInbox';
 import clsx from 'clsx';
 import React from 'react';
 
+import HeaderItem from './HeaderItem';
 import useStyles from './index.style';
 
 export default function Header({ children }) {
@@ -42,22 +40,12 @@ export default function Header({ children }) {
         </div>
         <Divider />
         <List>
-          <ListItem button key="Dashboard">
-            <ListItemIcon>{1 % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary="Dashboard" />
-          </ListItem>
-          <ListItem button key="Forms">
-            <ListItemIcon>{2 % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary="Forms" />
-          </ListItem>
-          <ListItem button key="Data">
-            <ListItemIcon>{3 % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary="Data" />
-          </ListItem>
-          <ListItem button key="Map">
-            <ListItemIcon>{4 % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
-            <ListItemText primary="Map" />
-          </ListItem>
+          <HeaderItem link="/forms/form-manager" text="Forms Manager">
+            <InboxIcon />
+          </HeaderItem>
+          <HeaderItem link="/forms/form-creator" text="Forms">
+            <MailIcon />
+          </HeaderItem>
         </List>
       </Drawer>
       <main className={classes.content}>

@@ -1,6 +1,6 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
 import { ThemeProvider } from '@material-ui/core/styles';
-import theme from 'modules/theme';
+import theme from 'app/modules/theme';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
 import React from 'react';
@@ -33,5 +33,5 @@ export default function MyApp(props) {
 
 MyApp.propTypes = {
   Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.object.isRequired,
+  pageProps: PropTypes.object.isRequired, //eslint-disable-line
 };
