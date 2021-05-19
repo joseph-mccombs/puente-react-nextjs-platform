@@ -9,8 +9,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Modal from 'app/components/UI/Modal';
 import { removeQueryService } from 'app/services/parse';
-import React, { useEffect, useState } from 'react';
-import _ from 'underscore';
+import React, { useState } from 'react';
 
 const useStyles = makeStyles({
   table: {
@@ -18,14 +17,19 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FormManagerTable({ data, retrieveCustomData, organization }) {
+const FormManagerTable = ({
+  data,
+  retrieveCustomData, passDataToFormCreator,
+  organization,
+}) => {
   const [open, setOpen] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
   const classes = useStyles();
 
   const handleEdit = (object) => {
-    console.log('The Values that you wish to edit ', object);
+    passDataToFormCreator(object);
   };
+
   const handleModal = (row) => {
     setOpen(!open);
     setSelectedForm(row);
@@ -68,9 +72,9 @@ export default function FormManagerTable({ data, retrieveCustomData, organizatio
               <TableCell align="right">{row.createdAt}</TableCell>
               <TableCell align="right">{row.updatedAt}</TableCell>
               <TableCell align="right">
-                {/* <Button aria-label="edit" onClick={() => handleEdit(row)}>
+                <Button aria-label="edit" onClick={() => handleEdit(row)}>
                   Edit
-                </Button> */}
+                </Button>
                 <Button aria-label="edit" onClick={() => handleModal(row)}>
                   Remove
                 </Button>
@@ -81,4 +85,6 @@ export default function FormManagerTable({ data, retrieveCustomData, organizatio
       </Table>
     </TableContainer>
   );
-}
+};
+
+export default FormManagerTable;

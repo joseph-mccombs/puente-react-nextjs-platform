@@ -10,13 +10,11 @@ Here are some quick npm commands to get started:
 - `npm run start`: Starts a Node.js server that supports hybrid pages, serving both statically generated and server-side rendered pages
 - `npm lint-fix`: Run the ESLinter. Fixes issues that are solvable
 
-
 ## Resources
 
 - [React Material UI](https://material-ui.com/) 
 - [Material Icons](https://materialdesignicons.com/)
 - [Next.js](https://nextjs.org/) 
-
 
 ## Standards
 [![js-standard-style](https://github.com/conventional-changelog/standard-version)

@@ -1,69 +1,28 @@
 import {
-  Button, Chip, Grid, Input, MenuItem, Select,
+  Grid,
 } from '@material-ui/core';
-import { customQueryService, postObjectsToClass } from 'app/services/parse';
+import { useGlobalState } from 'app/store';
 import React, { useEffect, useState } from 'react';
-import _ from 'underscore';
 
+import retrieveCustomData from './_data';
 import styles from './index.module.scss';
 import Table from './Table';
 
-const retrieveCustomData = async (organization) => {
-  try {
-    const records = await customQueryService(0, 5000, 'FormSpecificationsV2', 'organizations', organization);
-    const parsedRecords = JSON.parse(JSON.stringify(records));
-    return parsedRecords;
-  } catch (e) {
-    return e;
-  }
-};
-
-const retrieveUniqueListOfOrganizations = async () => {
-  try {
-    const records = await customQueryService(0, 500, 'User', 'adminVerified', true);
-    const parsedRecords = JSON.parse(JSON.stringify(records));
-    const uniqueRecords = _.uniq(parsedRecords, (x) => x.organization);
-    const pluckedRecords = _.pluck(uniqueRecords, 'organization');
-    return pluckedRecords;
-  } catch (e) {
-    return e;
-  }
-};
-
-const organizations = [
-  'Puente',
-  'WOF',
-  'OWS',
-];
-
 const FormManager = () => {
-  const [organization, setOrganization] = useState('Puente');
+  const [organization] = useState('Puente');
+
   const [tableData, setTableData] = useState([]);
+
+  const { contextManagment } = useGlobalState();
+
   useEffect(() => {
-    retrieveUniqueListOfOrganizations();
     retrieveCustomData(organization).then((records) => {
       setTableData(records);
     });
   });
 
-  const submitCustomForm = () => {
-    const formObject = {};
-    formObject.fields = formItems;
-    formObject.organizations = organizationNames;
-    formObject.name = formName;
-    formObject.class = '';
-    formObject.description = formDescription;
-    formObject.customForm = true;
-
-    const postParams = {
-      parseClass: 'FormSpecificationsV2',
-      localObject: formObject,
-    };
-    postObjectsToClass(postParams).then(() => {
-      console.log(formItems);
-    }).catch((err) => {
-      console.log(err);
-    });
+  const passDataToFormCreator = (data) => {
+    contextManagment.addPropToStore('pageLevel', data); // contextManagement.removeFromGlobalStoreData(key);
   };
 
   return (
@@ -73,6 +32,7 @@ const FormManager = () => {
         <Table
           data={tableData}
           retrieveCustomData={retrieveCustomData}
+          passDataToFormCreator={passDataToFormCreator}
           organization={organization}
         />
       </Grid>

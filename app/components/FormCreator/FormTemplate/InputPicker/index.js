@@ -9,9 +9,6 @@ const PaperInputPicker = (props) => {
     formItems, setFormItems,
     removeValue,
   } = props;
-  const {
-    label, text, fieldType, id,
-  } = item;
 
   return (
     <div
@@ -25,14 +22,12 @@ const PaperInputPicker = (props) => {
         formItems={formItems}
         setFormItems={setFormItems}
         removeValue={removeValue}
-        fieldType={fieldType}
       />
       <Select
         item={item}
         formItems={formItems}
         setFormItems={setFormItems}
         removeValue={removeValue}
-        fieldType={fieldType}
       />
     </div>
   );
