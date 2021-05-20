@@ -17,7 +17,7 @@ const Input = (props) => {
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
       label: value,
-      formikKey: value.replace(/[^\w\s]|_/g, ''),
+      formikKey: value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, ''),
     };
 
     setFormItems(newArray);
