@@ -19,7 +19,7 @@ const Select = (props) => {
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
       label: value,
-      formikKey: value,
+      formikKey: value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, ''),
       options,
     };
     setFormItems(newArray);
@@ -58,7 +58,6 @@ const Select = (props) => {
     const elementsIndex = options.findIndex((element) => element.id === id);
     const newArray = [...options];
     newArray.splice(elementsIndex, 1);
-    // console.log(newArray);
     setOptions(newArray);
   };
 

@@ -58,6 +58,7 @@ function FormCreator() {
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
+      console.log(globalStore); //eslint-disable-line
     });
   }, []);
 
