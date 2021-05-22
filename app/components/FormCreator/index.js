@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import useInput from 'app/modules/hooks';
 import { customQueryService, postObjectsToClass } from 'app/services/parse';
-import { useGlobalState } from 'app/store';
+// import { useGlobalState } from 'app/store';
 import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import _ from 'underscore';
@@ -53,7 +53,7 @@ function FormCreator() {
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
-  const { globalStore } = useGlobalState();
+  // const { globalStore } = useGlobalState();
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
