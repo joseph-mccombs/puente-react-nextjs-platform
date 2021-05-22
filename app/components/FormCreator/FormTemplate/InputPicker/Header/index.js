@@ -30,7 +30,6 @@ const Header = (props) => {
           <h3>Header</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Header" />
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Header</Button>
-
         </div>
       )}
     </div>

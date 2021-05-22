@@ -30,7 +30,6 @@ const Input = (props) => {
           <h3>Text Input Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-
         </div>
       )}
       {item.fieldType === 'numberInput' && (
@@ -38,6 +37,13 @@ const Input = (props) => {
           <h3>Number Input Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <Button role="button" variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
+        </div>
+      )}
+      {item.fieldType === 'geolocation' && (
+        <div key={item.id}>
+          <h3>Geolocation</h3>
+          <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
+          <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
         </div>
       )}
     </div>
