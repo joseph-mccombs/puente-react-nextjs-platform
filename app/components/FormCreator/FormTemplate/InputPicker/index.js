@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
 import Input from './Input';
 import Select from './Select';
+import Header from './Header';
 
 const PaperInputPicker = (props) => {
   const {
@@ -24,6 +25,12 @@ const PaperInputPicker = (props) => {
         removeValue={removeValue}
       />
       <Select
+        item={item}
+        formItems={formItems}
+        setFormItems={setFormItems}
+        removeValue={removeValue}
+      />
+      <Header
         item={item}
         formItems={formItems}
         setFormItems={setFormItems}

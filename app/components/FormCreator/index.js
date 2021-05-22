@@ -24,6 +24,7 @@ const COLLECTION = [
   // { id: uuid(), text: 'Input - Number - Multiple in a Row', fieldType: 'multiInputRowNum' },
   { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
   { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
+  { id: uuid(), text: 'Header', fieldType: 'header' },
   // { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
 ];
 
@@ -53,12 +54,9 @@ function FormCreator() {
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
-  // const { globalStore } = useGlobalState();
-
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
-      console.log(globalStore); //eslint-disable-line
     });
   }, []);
 
