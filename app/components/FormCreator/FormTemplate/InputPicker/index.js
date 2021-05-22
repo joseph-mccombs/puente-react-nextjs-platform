@@ -1,6 +1,7 @@
 import styles from './index.module.scss';
 import Input from './Input';
 import Select from './Select';
+import SelectMulti from './MultiSelect';
 
 const PaperInputPicker = (props) => {
   const {
@@ -24,6 +25,12 @@ const PaperInputPicker = (props) => {
         removeValue={removeValue}
       />
       <Select
+        item={item}
+        formItems={formItems}
+        setFormItems={setFormItems}
+        removeValue={removeValue}
+      />
+      <SelectMulti
         item={item}
         formItems={formItems}
         setFormItems={setFormItems}

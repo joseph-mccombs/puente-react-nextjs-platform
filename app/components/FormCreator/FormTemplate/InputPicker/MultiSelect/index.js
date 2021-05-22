@@ -4,7 +4,7 @@ import { v4 as uuid } from 'uuid';
 
 import styles from './index.module.scss';
 
-const Select = (props) => {
+const SelectMulti = (props) => {
   const {
     item, formItems, setFormItems, removeValue,
   } = props;
@@ -63,9 +63,9 @@ const Select = (props) => {
 
   return (
     <div style={{ padding: 20 }}>
-      {item?.fieldType === 'select' && (
+      {item?.fieldType === 'selectMulti' && (
         <div key={item.id}>
-          <h3>Single Choice Element</h3>
+          <h3>Multiple Choice Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <div>
             {options.map((option, index) => (
@@ -86,4 +86,4 @@ const Select = (props) => {
   );
 };
 
-export default Select;
+export default SelectMulti;
