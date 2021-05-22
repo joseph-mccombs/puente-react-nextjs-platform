@@ -1,7 +1,7 @@
+import Header from './Header';
 import styles from './index.module.scss';
 import Input from './Input';
 import Select from './Select';
-import Header from './Header';
 
 const PaperInputPicker = (props) => {
   const {
