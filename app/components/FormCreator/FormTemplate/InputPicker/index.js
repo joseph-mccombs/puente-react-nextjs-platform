@@ -2,6 +2,7 @@ import Header from './Header';
 import styles from './index.module.scss';
 import Input from './Input';
 import Select from './Select';
+import Geolocation from './Geolocation';
 
 const PaperInputPicker = (props) => {
   const {
@@ -31,6 +32,12 @@ const PaperInputPicker = (props) => {
         removeValue={removeValue}
       />
       <Header
+        item={item}
+        formItems={formItems}
+        setFormItems={setFormItems}
+        removeValue={removeValue}
+      />
+      <Geolocation
         item={item}
         formItems={formItems}
         setFormItems={setFormItems}
