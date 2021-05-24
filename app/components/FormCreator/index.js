@@ -4,8 +4,9 @@ import {
   Select,
 } from '@material-ui/core';
 import useInput from 'app/modules/hooks';
-import { customQueryService, postObjectsToClass } from 'app/services/parse';
-// import { useGlobalState } from 'app/store';
+
+import { postObjectsToClass } from 'app/services/parse';
+import { retrieveUniqueListOfOrganizations} from 'app/modules/parse'
 import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import _ from 'underscore';
@@ -27,24 +28,12 @@ const COLLECTION = [
   // { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
 ];
 
-const retrieveUniqueListOfOrganizations = async () => {
-  try {
-    const records = await customQueryService(0, 500, 'User', 'adminVerified', true);
-    const parsedRecords = JSON.parse(JSON.stringify(records));
-    const uniqueRecords = _.uniq(parsedRecords, (x) => x.organization);
-    const pluckedRecords = _.pluck(uniqueRecords, 'organization');
-    return pluckedRecords;
-  } catch (e) {
-    return e;
-  }
-};
-
 const formTypes = [
   'Assets',
   'Custom',
 ];
 
-function FormCreator() {
+function FormCreator({context}) {
   const [formName, setFormName] = useInput({ type: 'text', placeholder: 'Form Name' });
   const [formDescription, setFormDescription] = useInput({ type: 'text', placeholder: 'Form Description' });
   const [formItems, setFormItems] = useState([]);
@@ -53,13 +42,23 @@ function FormCreator() {
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
-  // const { globalStore } = useGlobalState();
-
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
-      console.log(globalStore); //eslint-disable-line
     });
+
+    if(context.store.has("/forms/form-creator")){
+      let form = context.store.get("/forms/form-creator");
+      console.log(form)
+      const { objectId, name, description, typeOfForm, fields, organizations} = form
+      // setFormName({ type: 'text', placeholder: 'Form Name' })
+      // setFormDescription(description)
+      setFormTypeNames(typeOfForm || [])
+      setOrganizationNames(organizations || [])
+      setFormItems(fields)
+    } 
+  
+    
   }, []);
 
   const handleOrganizationChange = (event) => {
@@ -80,15 +79,19 @@ function FormCreator() {
     formObject.description = formDescription;
     formObject.customForm = true;
 
-    const postParams = {
-      parseClass: 'FormSpecificationsV2',
-      localObject: formObject,
-    };
-    postObjectsToClass(postParams).then(() => {
-      console.log(postParams); //eslint-disable-line
-    }).catch((err) => {
-      console.log(err); //eslint-disable-line
-    });
+    console.log(formItems)
+    console.log(context.store.get("/forms/form-creator"))
+
+
+    // const postParams = {
+    //   parseClass: 'FormSpecificationsV2',
+    //   localObject: formObject,
+    // };
+    // postObjectsToClass(postParams).then(() => {
+      // console.log(postParams); //eslint-disable-line
+    // }).catch((err) => {
+    //   console.log(err); //eslint-disable-line
+    // });
   };
 
   const removeValue = (id) => {
@@ -154,7 +157,7 @@ function FormCreator() {
                     </div>
                   )}
                 >
-                  {organizations.map((organization) => (
+                  {organizations.length > 1 && organizations.map((organization) => (
                     <MenuItem key={organization} value={organization}>
                       {organization}
                     </MenuItem>
@@ -210,5 +213,4 @@ function FormCreator() {
 }
 
 export default FormCreator;
-
 // https://github.com/atlassian/react-beautiful-dnd/issues/216

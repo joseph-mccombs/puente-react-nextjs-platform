@@ -22,6 +22,7 @@ export function AppWrapper({ children }) {
     contextManagment: {
       addPropToStore,
       removePropFromStore,
+      store:globalStore
     },
   };
 

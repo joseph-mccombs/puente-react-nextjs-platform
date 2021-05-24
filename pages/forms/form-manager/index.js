@@ -1,13 +1,23 @@
 import Footer from 'app/components/Footer';
 import FormManager from 'app/components/FormManager';
 import Layout from 'app/components/Layout';
+import { useRouter } from 'next/router';
+import { useGlobalState } from 'app/store';
+
+
 
 export default function Forms() {
+  const { contextManagment } = useGlobalState();
+
+  const router = useRouter();
   return (
     <Layout>
       <main className="container">
         <div>Form Manager</div>
-        <FormManager />
+        <FormManager
+          router={router}
+          context={contextManagment}
+        />
         <style jsx>
           {`
 
