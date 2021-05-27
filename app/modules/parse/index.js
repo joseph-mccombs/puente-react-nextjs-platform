@@ -1,3 +1,3 @@
-import {retrieveCustomData, retrieveUniqueListOfOrganizations } from './data-retrieval'
+import { retrieveCustomData, retrieveUniqueListOfOrganizations } from './data-retrieval';
 
-export {retrieveCustomData, retrieveUniqueListOfOrganizations }
+export { retrieveCustomData, retrieveUniqueListOfOrganizations };

@@ -3,7 +3,6 @@ import FormCreator from 'app/components/FormCreator';
 import Layout from 'app/components/Layout';
 import { useGlobalState } from 'app/store';
 
-
 export default function Forms() {
   const { contextManagment } = useGlobalState();
 

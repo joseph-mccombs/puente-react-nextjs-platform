@@ -1,10 +1,8 @@
 import Footer from 'app/components/Footer';
 import FormManager from 'app/components/FormManager';
 import Layout from 'app/components/Layout';
-import { useRouter } from 'next/router';
 import { useGlobalState } from 'app/store';
-
-
+import { useRouter } from 'next/router';
 
 export default function Forms() {
   const { contextManagment } = useGlobalState();

@@ -4,12 +4,10 @@ import {
   Select,
 } from '@material-ui/core';
 import useInput from 'app/modules/hooks';
-
+import { retrieveUniqueListOfOrganizations } from 'app/modules/parse';
 import { postObjectsToClass } from 'app/services/parse';
-import { retrieveUniqueListOfOrganizations} from 'app/modules/parse'
 import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import _ from 'underscore';
 import { v4 as uuid } from 'uuid';
 
 import { copy, reorder } from './_utils';
@@ -33,7 +31,7 @@ const formTypes = [
   'Custom',
 ];
 
-function FormCreator({context}) {
+function FormCreator({ context }) {
   const [formName, setFormName] = useInput({ type: 'text', placeholder: 'Form Name' });
   const [formDescription, setFormDescription] = useInput({ type: 'text', placeholder: 'Form Description' });
   const [formItems, setFormItems] = useState([]);
@@ -47,18 +45,22 @@ function FormCreator({context}) {
       setOrganizations(results);
     });
 
-    if(context.store.has("/forms/form-creator")){
-      let form = context.store.get("/forms/form-creator");
-      console.log(form)
-      const { objectId, name, description, typeOfForm, fields, organizations} = form
-      // setFormName({ type: 'text', placeholder: 'Form Name' })
-      // setFormDescription(description)
-      setFormTypeNames(typeOfForm || [])
-      setOrganizationNames(organizations || [])
-      setFormItems(fields)
-    } 
-  
-    
+    const action = JSON.stringify({
+      key: '/forms/form-creator',
+      action: 'duplicate',
+    });
+
+    if (context.store.has(action)) {
+      // Run duplicate logic
+      const form = context.store.get(action);
+      const {
+        typeOfForm, fields, organizations: orgs,
+      } = form;
+
+      setFormTypeNames(typeOfForm || []);
+      setOrganizationNames(orgs || []);
+      setFormItems(fields);
+    }
   }, []);
 
   const handleOrganizationChange = (event) => {
@@ -79,19 +81,15 @@ function FormCreator({context}) {
     formObject.description = formDescription;
     formObject.customForm = true;
 
-    console.log(formItems)
-    console.log(context.store.get("/forms/form-creator"))
-
-
-    // const postParams = {
-    //   parseClass: 'FormSpecificationsV2',
-    //   localObject: formObject,
-    // };
-    // postObjectsToClass(postParams).then(() => {
-      // console.log(postParams); //eslint-disable-line
-    // }).catch((err) => {
-    //   console.log(err); //eslint-disable-line
-    // });
+    const postParams = {
+      parseClass: 'FormSpecificationsV2',
+      localObject: formObject,
+    };
+    postObjectsToClass(postParams).then(() => {
+      console.log(postParams); //eslint-disable-line
+    }).catch((err) => {
+      console.log(err); //eslint-disable-line
+    });
   };
 
   const removeValue = (id) => {

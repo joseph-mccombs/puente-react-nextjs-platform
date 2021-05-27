@@ -26,7 +26,7 @@ const FormManagerTable = ({
   const [selectedForm, setSelectedForm] = useState();
   const classes = useStyles();
 
-  const handleEdit = (object) => {
+  const handleDuplicate = (object) => {
     passDataToFormCreator(object);
   };
 
@@ -72,8 +72,8 @@ const FormManagerTable = ({
               <TableCell align="right">{row.createdAt}</TableCell>
               <TableCell align="right">{row.updatedAt}</TableCell>
               <TableCell align="right">
-                <Button aria-label="edit" onClick={() => handleEdit(row)}>
-                  Edit
+                <Button aria-label="duplicate" onClick={() => handleDuplicate(row)}>
+                  Duplicate
                 </Button>
                 <Button aria-label="edit" onClick={() => handleModal(row)}>
                   Remove

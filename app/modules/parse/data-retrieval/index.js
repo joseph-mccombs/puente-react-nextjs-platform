@@ -1,4 +1,5 @@
 import { customQueryService } from 'app/services/parse';
+import _ from 'underscore';
 
 const retrieveCustomData = async (organization) => {
   try {
@@ -11,17 +12,15 @@ const retrieveCustomData = async (organization) => {
 };
 
 const retrieveUniqueListOfOrganizations = async () => {
-    try {
-      const records = await customQueryService(0, 500, 'User', 'adminVerified', true);
-      const parsedRecords = JSON.parse(JSON.stringify(records));
-      const uniqueRecords = _.uniq(parsedRecords, (x) => x.organization);
-      const pluckedRecords = _.pluck(uniqueRecords, 'organization');
-      return pluckedRecords;
-    } catch (e) {
-      return e;
-    }
-  };
+  try {
+    const records = await customQueryService(0, 500, 'User', 'adminVerified', true);
+    const parsedRecords = JSON.parse(JSON.stringify(records));
+    const uniqueRecords = _.uniq(parsedRecords, (x) => x.organization);
+    const pluckedRecords = _.pluck(uniqueRecords, 'organization');
+    return pluckedRecords;
+  } catch (e) {
+    return e;
+  }
+};
 
-
-
-export {retrieveCustomData, retrieveUniqueListOfOrganizations};
+export { retrieveCustomData, retrieveUniqueListOfOrganizations };
