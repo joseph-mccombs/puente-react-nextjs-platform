@@ -22,8 +22,9 @@ const COLLECTION = [
   // { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },
   // { id: uuid(), text: 'Input - Number - Multiple in a Row', fieldType: 'multiInputRowNum' },
   { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
-  // { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
-  // { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
+  { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
+  { id: uuid(), text: 'Header', fieldType: 'header' },
+  { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
 ];
 
 const formTypes = [
