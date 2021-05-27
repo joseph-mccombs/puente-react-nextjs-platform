@@ -65,6 +65,25 @@ const Select = (props) => {
     <div style={{ padding: 20 }}>
       {item?.fieldType === 'select' && (
         <div key={item.id}>
+          <h3>Single Choice Element</h3>
+          <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
+          <div>
+            {options.map((option, index) => (
+              <div>
+                <h3>
+                  {`Option ${index + 1}`}
+                </h3>
+                <input type="text" value={option.value} id={option.id} onChange={(e) => editOption(e, item.id)} />
+                <Button style={{ color: 'green' }} onClick={addOption}>Add option</Button>
+                <Button onClick={() => removeOption(option.id)}>Remove</Button>
+              </div>
+            ))}
+          </div>
+          <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
+        </div>
+      )}
+      {item?.fieldType === 'selectMulti' && (
+        <div key={item.id}>
           <h3>Multiple Choice Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <div>
