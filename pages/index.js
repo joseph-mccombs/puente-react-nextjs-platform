@@ -11,9 +11,9 @@ export default function Home() {
 
       <main>
         <h1 className="title">
-          Welcome to Puente
+          Welcome to Puente Manage
           {' '}
-          <a href="https://nextjs.org">Data Management!</a>
+          {/* <a href="https://nextjs.org">Manage!</a> */}
         </h1>
         <h1>Quick Start Guide</h1>
 

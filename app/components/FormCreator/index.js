@@ -4,11 +4,10 @@ import {
   Select,
 } from '@material-ui/core';
 import useInput from 'app/modules/hooks';
-import { customQueryService, postObjectsToClass } from 'app/services/parse';
-// import { useGlobalState } from 'app/store';
+import { retrieveUniqueListOfOrganizations } from 'app/modules/parse';
+import { postObjectsToClass } from 'app/services/parse';
 import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
-import _ from 'underscore';
 import { v4 as uuid } from 'uuid';
 
 import { copy, reorder } from './_utils';
@@ -28,24 +27,12 @@ const COLLECTION = [
   { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
 ];
 
-const retrieveUniqueListOfOrganizations = async () => {
-  try {
-    const records = await customQueryService(0, 500, 'User', 'adminVerified', true);
-    const parsedRecords = JSON.parse(JSON.stringify(records));
-    const uniqueRecords = _.uniq(parsedRecords, (x) => x.organization);
-    const pluckedRecords = _.pluck(uniqueRecords, 'organization');
-    return pluckedRecords;
-  } catch (e) {
-    return e;
-  }
-};
-
 const formTypes = [
   'Assets',
   'Custom',
 ];
 
-function FormCreator() {
+function FormCreator({ context }) {
   const [formName, setFormName] = useInput({ type: 'text', placeholder: 'Form Name' });
   const [formDescription, setFormDescription] = useInput({ type: 'text', placeholder: 'Form Description' });
   const [formItems, setFormItems] = useState([]);
@@ -58,6 +45,23 @@ function FormCreator() {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
     });
+
+    const action = JSON.stringify({
+      key: '/forms/form-creator',
+      action: 'duplicate',
+    });
+
+    if (context.store.has(action)) {
+      // Run duplicate logic
+      const form = context.store.get(action);
+      const {
+        typeOfForm, fields, organizations: orgs,
+      } = form;
+
+      setFormTypeNames(typeOfForm || []);
+      setOrganizationNames(orgs || []);
+      setFormItems(fields);
+    }
   }, []);
 
   const handleOrganizationChange = (event) => {
@@ -152,7 +156,7 @@ function FormCreator() {
                     </div>
                   )}
                 >
-                  {organizations.map((organization) => (
+                  {organizations.length > 1 && organizations.map((organization) => (
                     <MenuItem key={organization} value={organization}>
                       {organization}
                     </MenuItem>
@@ -208,5 +212,4 @@ function FormCreator() {
 }
 
 export default FormCreator;
-
 // https://github.com/atlassian/react-beautiful-dnd/issues/216

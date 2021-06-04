@@ -1,19 +1,16 @@
 import {
   Grid,
 } from '@material-ui/core';
-import { useGlobalState } from 'app/store';
+import { retrieveCustomData } from 'app/modules/parse';
 import React, { useEffect, useState } from 'react';
 
-import retrieveCustomData from './_data';
 import styles from './index.module.scss';
 import Table from './Table';
 
-const FormManager = () => {
+const FormManager = ({ context, router }) => {
   const [organization] = useState('Puente');
 
   const [tableData, setTableData] = useState([]);
-
-  const { contextManagment } = useGlobalState();
 
   useEffect(() => {
     retrieveCustomData(organization).then((records) => {
@@ -22,7 +19,14 @@ const FormManager = () => {
   });
 
   const passDataToFormCreator = (data) => {
-    contextManagment.addPropToStore('pageLevel', data); // contextManagement.removeFromGlobalStoreData(key);
+    const href = '/forms/form-creator';
+
+    const action = JSON.stringify({
+      key: href,
+      action: 'duplicate',
+    });
+    context.addPropToStore(action, data); // contextManagement.removeFromGlobalStoreData(key);
+    router.push(href);
   };
 
   return (

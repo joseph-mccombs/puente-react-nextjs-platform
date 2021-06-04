@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import styles from './index.module.scss';
@@ -12,6 +12,18 @@ const Select = (props) => {
   const [options, setOptions] = React.useState([{
     id: uuid(), label: '', value: '', text: false, textQuestion: '', textKey: '',
   }]);
+
+  const populatePreFilledValues = () => {
+    const { id } = item;
+    const block = formItems.find((element) => element.id === id);
+    if (block?.options) {
+      setOptions(block.options);
+    }
+  };
+
+  useEffect(() => {
+    populatePreFilledValues();
+  }, []);
 
   const setValue = async (event) => {
     const { value, id } = event.target;
