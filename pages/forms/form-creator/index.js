@@ -1,13 +1,17 @@
 import Footer from 'app/components/Footer';
 import FormCreator from 'app/components/FormCreator';
 import Layout from 'app/components/Layout';
+import { useGlobalState } from 'app/store';
 
 export default function Forms() {
+  const { contextManagment } = useGlobalState();
+
   return (
     <Layout>
       <main className="container">
-        <FormCreator />
-
+        <FormCreator
+          context={contextManagment}
+        />
         <style jsx>
           {`
 

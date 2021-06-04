@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import styles from './index.module.scss';
@@ -11,6 +11,18 @@ const Select = (props) => {
 
   const [options, setOptions] = React.useState([{ id: uuid(), label: '', value: '' }]);
 
+  const populatePreFilledValues = () => {
+    const { id } = item;
+    const block = formItems.find((element) => element.id === id);
+    if (block?.options) {
+      setOptions(block.options);
+    }
+  };
+
+  useEffect(() => {
+    populatePreFilledValues();
+  }, []);
+
   const setValue = async (event) => {
     const { value, id } = event.target;
 
@@ -19,7 +31,7 @@ const Select = (props) => {
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
       label: value,
-      formikKey: value,
+      formikKey: value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, ''),
       options,
     };
     setFormItems(newArray);
@@ -58,13 +70,31 @@ const Select = (props) => {
     const elementsIndex = options.findIndex((element) => element.id === id);
     const newArray = [...options];
     newArray.splice(elementsIndex, 1);
-    // console.log(newArray);
     setOptions(newArray);
   };
 
   return (
     <div style={{ padding: 20 }}>
       {item?.fieldType === 'select' && (
+        <div key={item.id}>
+          <h3>Single Choice Element</h3>
+          <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
+          <div>
+            {options.map((option, index) => (
+              <div>
+                <h3>
+                  {`Option ${index + 1}`}
+                </h3>
+                <input type="text" value={option.value} id={option.id} onChange={(e) => editOption(e, item.id)} />
+                <Button style={{ color: 'green' }} onClick={addOption}>Add option</Button>
+                <Button onClick={() => removeOption(option.id)}>Remove</Button>
+              </div>
+            ))}
+          </div>
+          <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
+        </div>
+      )}
+      {item?.fieldType === 'selectMulti' && (
         <div key={item.id}>
           <h3>Multiple Choice Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
