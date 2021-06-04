@@ -9,13 +9,17 @@ const Select = (props) => {
     item, formItems, setFormItems, removeValue,
   } = props;
 
-  const [options, setOptions] = React.useState([{ id: uuid(), label: '', value: '' }]);
+  const [options, setOptions] = React.useState([{ id: uuid(), label: '', value: '',text: false, textQuestion: '', textKey: '' }]);
 
   const setValue = async (event) => {
     const { value, id } = event.target;
 
     const elementsIndex = formItems.findIndex((element) => element.id === id);
     const newArray = [...formItems];
+    const newOptions = [...options];
+    newOptions.forEach((option) => {
+      option.textKey.replace(`__${/.*_/g}__`, `__${value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '')}`)
+    })
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
       label: value,
@@ -26,25 +30,36 @@ const Select = (props) => {
   };
 
   const addOption = () => {
-    setOptions([...options, { id: uuid(), label: '', value: '' }]);
+    setOptions([...options, { id: uuid(), label: '', value: '', 
+      text: false, textQuestion: '', textKey: '' }]);
   };
 
-  const editOption = async (event, questionId) => {
+  const editOption = async (event, questionId, valueToChange) => {
     const { value, id } = event.target;
 
+    const elementsFormIndex = formItems.findIndex((element) => element.id === questionId);
+    
     const elementsIndex = options.findIndex((element) => element.id === id);
 
+    // const textOption = options[elementsIndex].text
     const newArray = [...options];
-    newArray[elementsIndex] = {
-      ...newArray[elementsIndex],
-      label: value,
-      value,
-    };
+
+    if(valueToChange === 'optionValue') {
+      newArray[elementsIndex] = {
+        ...newArray[elementsIndex],
+        label: value,
+        value,
+        textKey: `__${formItems[elementsFormIndex].formikKey}__${value}`,
+      };
+    }
+    else if (valueToChange === 'textQuestion') {
+      newArray[elementsIndex] = {
+        ...newArray[elementsIndex],
+        textQuestion: value
+      };
+    }
 
     setOptions(newArray);
-
-    const elementsFormIndex = formItems.findIndex((element) => element.id === questionId);
-
     const formArray = [...formItems];
 
     formArray[elementsFormIndex] = {
@@ -61,6 +76,13 @@ const Select = (props) => {
     setOptions(newArray);
   };
 
+  const editTextOption = (optionId, val) => {
+    const elementsIndex = options.findIndex((element) => element.id === optionId);
+    const newArray = [...options];
+    newArray[elementsIndex].text = val
+    setOptions(newArray)
+  };
+
   return (
     <div style={{ padding: 20 }}>
       {item?.fieldType === 'select' && (
@@ -73,11 +95,24 @@ const Select = (props) => {
                 <h3>
                   {`Option ${index + 1}`}
                 </h3>
-                <input type="text" value={option.value} id={option.id} onChange={(e) => editOption(e, item.id)} />
+                <input type="text" value={option.value} id={option.id} onChange={(e) => editOption(e, item.id, 'optionValue')} />
                 <Button style={{ color: 'green' }} onClick={addOption}>Add option</Button>
                 <Button onClick={() => removeOption(option.id)}>Remove</Button>
+                {option.text === false && (
+                  <Button style={{color: 'blue'}} onClick={() => editTextOption(option.id, true)}>Add Text Question When Selected</Button>
+                )}
+                {option.text === true && (
+                  <div>
+                    <h4>
+                      {`Question to ask when Option ${index + 1} selected`}
+                    </h4>
+                    <input type="text" value={option.textQuestion} id={option.id} onChange={(e) => editOption(e, item.id, 'textQuestion')}/>
+                    <Button style={{color: 'red'}} onClick={() => editTextOption(option.id, false)}>Remove Text Question When Selected</Button>
+                  </div>
+                )}
               </div>
             ))}
+
           </div>
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
         </div>
@@ -92,9 +127,21 @@ const Select = (props) => {
                 <h3>
                   {`Option ${index + 1}`}
                 </h3>
-                <input type="text" value={option.value} id={option.id} onChange={(e) => editOption(e, item.id)} />
+                <input type="text" value={option.value} id={option.id} onChange={(e) => editOption(e, item.id, 'optionValue')} />
                 <Button style={{ color: 'green' }} onClick={addOption}>Add option</Button>
                 <Button onClick={() => removeOption(option.id)}>Remove</Button>
+                {option.text === false && (
+                  <Button style={{color: 'blue'}} onClick={() => editTextOption(option.id, true)}>Add Text Question When Selected</Button>
+                )}
+                {option.text === true && (
+                  <div>
+                    <h4>
+                      {`Question to ask when Option ${index + 1} selected`}
+                    </h4>
+                    <input type="text" value={option.textQuestion} id={option.id} onChange={(e) => editOption(e, item.id, 'textQuestion')}/>
+                    <Button style={{color: 'red'}} onClick={() => editTextOption(option.id, false)}>Remove Text Question When Selected</Button>
+                  </div>
+                )}
               </div>
             ))}
           </div>
