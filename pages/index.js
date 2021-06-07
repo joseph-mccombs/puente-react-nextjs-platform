@@ -29,6 +29,11 @@ export default function Home() {
             nextLink="/forms/form-manager"
           />
           <Card
+            title="Form Marketplace"
+            description="Manage Marketplace"
+            nextLink="/forms/form-marketplace"
+          />
+          <Card
             title="Data Visualization"
             description="Visualize Data from Puente Collect"
             nextLink="/data-visualization"

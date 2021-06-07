@@ -5,8 +5,10 @@ import IconButton from '@material-ui/core/IconButton';
 import List from '@material-ui/core/List';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
-import MailIcon from '@material-ui/icons/Mail';
-import InboxIcon from '@material-ui/icons/MoveToInbox';
+import CreateIcon from '@material-ui/icons/Create';
+import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import PieChartIcon from '@material-ui/icons/PieChart';
+import StoreIcon from '@material-ui/icons/Store';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -40,11 +42,20 @@ export default function Header({ children }) {
         </div>
         <Divider />
         <List>
-          <HeaderItem link="/forms/form-manager" text="Forms Manager">
-            <InboxIcon />
+          <HeaderItem link="/forms/form-marketplace" text="Marketplace">
+            <StoreIcon />
           </HeaderItem>
-          <HeaderItem link="/forms/form-creator" text="Forms">
-            <MailIcon />
+          <HeaderItem link="/forms/form-manager" text="Manager">
+            <FormatListBulletedIcon />
+          </HeaderItem>
+          <HeaderItem link="/forms/form-creator" text="Creator">
+            <CreateIcon />
+          </HeaderItem>
+        </List>
+        <Divider />
+        <List>
+          <HeaderItem link="/data-visualization" text="Visualization">
+            <PieChartIcon />
           </HeaderItem>
         </List>
       </Drawer>
