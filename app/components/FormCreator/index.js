@@ -199,7 +199,7 @@ function FormCreator({ context }) {
                 removeValue={removeValue}
               />
             </Grid>
-            <Grid item xs={3}>
+            <Grid item xs={3} className={styles.formBlock}>
               <h2>Building Blocks</h2>
               <FormBlocks items={COLLECTION} />
             </Grid>

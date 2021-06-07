@@ -1,12 +1,16 @@
 .formCreator{
     h2{
     color: rgba(0,0,0,0.88);
-    // font-family: "Roboto";
     font-size: 24px;
     font-weight: 700;
-    // letter-spacing: 0.34px;
-    // line-height: 40px;
   }
+}
+
+.formBlock{
+  position: fixed;
+  top: 0;
+  right: 0vw;
+  // width: 100% !important;
 }
 
 .formButtons{

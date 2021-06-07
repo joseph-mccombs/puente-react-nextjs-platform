@@ -1,11 +1,10 @@
 import {
   Grid,
 } from '@material-ui/core';
-//   import { retrieveCustomData } from 'app/modules/parse';
+import { retrieveCustomData } from 'app/modules/parse';
 import React, { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
-//   import Table from './Table';
 
 const FormManager = ({ context, router }) => {
   const [organization] = useState('Puente');
@@ -23,9 +22,8 @@ const FormManager = ({ context, router }) => {
 
   return (
     <div className={styles.formMarketplace}>
-      <Grid container>
-        <h1>Form Marketplace</h1>
-      </Grid>
+      <h1>Form Marketplace</h1>
+      <Grid container />
     </div>
   );
 };
