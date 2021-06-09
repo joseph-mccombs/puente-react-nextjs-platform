@@ -1,4 +1,4 @@
-import Card from 'app/components/Card';
+import Card from 'app/components/UI/Card';
 import Head from 'next/head';
 
 export default function Home() {
@@ -27,6 +27,11 @@ export default function Home() {
             title="Form Manager"
             description="Manage Forms for Puente Collect"
             nextLink="/forms/form-manager"
+          />
+          <Card
+            title="Form Marketplace"
+            description="Manage Marketplace"
+            nextLink="/forms/form-marketplace"
           />
           <Card
             title="Data Visualization"
