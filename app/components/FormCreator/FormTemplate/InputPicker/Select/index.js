@@ -74,7 +74,7 @@ const Select = (props) => {
       newArray[elementsIndex] = {
         ...newArray[elementsIndex],
         textQuestion: value,
-        textKey: value
+        textKey: value,
       };
     }
 
