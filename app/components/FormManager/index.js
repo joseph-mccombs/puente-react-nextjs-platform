@@ -21,7 +21,7 @@ const FormManager = ({ context, router }) => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizationList(results);
     });
-  });
+  },[organization]);
 
   const handleOrganization = (event) => {
     setOrganization(event.target.value);
@@ -53,7 +53,7 @@ const FormManager = ({ context, router }) => {
           >
             {organizationList.length < 1
                   && <CircularProgress />}
-            {organizationList.map((value) => <MenuItem value={value}>{value}</MenuItem>)}
+            {organization.length > 1 && organizationList.map((value) => <MenuItem value={value}>{value}</MenuItem>)}
           </Select>
         </Grid>
         <Grid>
