@@ -1,12 +1,14 @@
 import {
   Button,
   Grid,
-  Modal
+  Modal,
+  CircularProgress, MenuItem,
+  Select,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import AppsIcon from '@material-ui/icons/Apps';
-import { retrieveCustomData } from 'app/modules/parse';
+import { retrieveCustomData, retrieveUniqueListOfOrganizations } from 'app/modules/parse';
 import React, { useEffect, useState } from 'react';
 import { isArray } from 'underscore';
 
@@ -15,7 +17,8 @@ import Table from './Table';
 import GridTable from './Grid';
 
 const FormManager = ({ context, router }) => {
-  const [organization] = useState('Test');
+  const [organization, setOrganization] = useState('Puente');
+  const [organizationList, setOrganizationList] = useState([]);
 
   const [workflowData, setWorkflowData] = useState({})
   const [puenteData, setPuenteData] = useState([])
@@ -54,7 +57,14 @@ const FormManager = ({ context, router }) => {
       delete tableDataByCategory['No Workflow Assigned'];
       setWorkflowData(tableDataByCategory)
     });
-  }, []);
+    retrieveUniqueListOfOrganizations().then((results) => {
+      setOrganizationList(results);
+    });
+  },[organization]);
+
+  const handleOrganization = (event) => {
+    setOrganization(event.target.value);
+  };
 
   const passDataToFormCreator = (data) => {
     const href = '/forms/form-creator';
@@ -110,6 +120,18 @@ const FormManager = ({ context, router }) => {
             </IconButton>
           </div>
         )}
+        <Grid item xs={12}>
+          <Select
+            labelId="demo-simple-select-label"
+            id="demo-simple-select"
+            value={organization}
+            onChange={handleOrganization}
+          >
+            {organizationList.length < 1
+                  && <CircularProgress />}
+            {organization.length > 1 && organizationList.map((value) => <MenuItem value={value}>{value}</MenuItem>)}
+          </Select>
+        </Grid>
         {listView === true ? (
           <Table
             data={puenteData}
