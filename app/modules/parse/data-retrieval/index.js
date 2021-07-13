@@ -4,6 +4,7 @@ import _ from 'underscore';
 const retrieveCustomData = async (organization) => {
   try {
     const records = await customQueryService(0, 5000, 'FormSpecificationsV2', 'organizations', organization);
+    console.log("funciton",records)
     const parsedRecords = JSON.parse(JSON.stringify(records));
     return parsedRecords;
   } catch (e) {

@@ -40,6 +40,9 @@ function FormCreator({ context }) {
 
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
+  
+  const [workflowTypes, setWorkflowTypes] = useState(['Puente','Assets'])
+  const [workflowNames, setWorkflowNames] = useState([])
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
@@ -72,11 +75,16 @@ function FormCreator({ context }) {
     setFormTypeNames(event.target.value);
   };
 
+  const handleWorkflowChange = (event) => {
+    setWorkflowNames(event.target.value);
+  };
+
   const submitCustomForm = () => {
     const formObject = {};
     formObject.fields = formItems;
     formObject.organizations = organizationNames;
     formObject.typeOfForm = formTypeNames;
+    formObject.workflows = workflowNames;
     formObject.name = formName;
     formObject.class = '';
     formObject.description = formDescription;
@@ -187,6 +195,41 @@ function FormCreator({ context }) {
                   ))}
                 </Select>
               </div>
+              <div id="workflow">
+                <h2>Workflow</h2>
+                <div style={{flexDirection: 'row'}}>
+                  <div style={{flexDirection: 'column'}}>
+                    <Select
+                      labelId="mutiple-chip-organization"
+                      id="mutiple-chip"
+                      multiple
+                      value={workflowNames}
+                      onChange={handleWorkflowChange}
+                      input={<Input id="select-multiple-chip" />}
+                      renderValue={(selected) => (
+                        <div>
+                          {selected.map((value) => (
+                            <Chip key={value} label={value} />
+                          ))}
+                        </div>
+                      )}
+                    >
+                      {workflowTypes.map((workflowType) => (
+                        <MenuItem key={workflowType} value={workflowType}>
+                          {workflowType}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </div>
+                  <div style={{flexDirection: 'column'}}>
+                    <h3>Add new wrkflow</h3>
+                  </div>
+                </div>
+              </div>
+              <div styles={{flexDirection:'column', flex: 1}}>
+                <div styles={{flexDirection: 'column', flex: 1}}><h1>Hi</h1></div>
+                <div styles={{flexDirection: 'column', flex: 1}}><h1>There</h1></div>
+              </div>
               <div>
                 {setFormName}
               </div>
@@ -206,7 +249,19 @@ function FormCreator({ context }) {
           </Grid>
         </DragDropContext>
       </NoSsr>
+      <style jsx>
+        {`
+        .conatiner {
+          flexDirection: 'row'
+        }
 
+        .contentSplit {
+          flexDirection: 'column'
+        }
+        
+        `}
+
+      </style>
     </div>
   );
 }
