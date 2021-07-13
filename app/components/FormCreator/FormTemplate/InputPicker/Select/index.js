@@ -30,10 +30,10 @@ const Select = (props) => {
 
     const elementsIndex = formItems.findIndex((element) => element.id === id);
     const newArray = [...formItems];
-    const newOptions = [...options];
-    newOptions.forEach((option) => {
-      option.textKey.replace(`__${/.*_/g}__`, `__${value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '')}`);
-    });
+    // const newOptions = [...options];
+    // newOptions.forEach((option) => {
+    //   option.textKey.replace(`__${/.*_/g}__`, `__${value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '')}`);
+    // });
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
       label: value,
@@ -69,12 +69,12 @@ const Select = (props) => {
         ...newArray[elementsIndex],
         label: value,
         value,
-        textKey: `__${formItems[elementsFormIndex].formikKey}__${value}`,
       };
     } else if (valueToChange === 'textQuestion') {
       newArray[elementsIndex] = {
         ...newArray[elementsIndex],
         textQuestion: value,
+        textKey: value,
       };
     }
 
