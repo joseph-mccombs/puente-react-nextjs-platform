@@ -21,18 +21,15 @@ const useStyles = makeStyles({
 const FormManagerGrid = ({
   data,
   retrieveCustomData, passDataToFormCreator,
-  organization,
+  organization, workflows
 }) => {
 
     return (
         <div style={{ 
             display: 'flex',
             flexDirection: 'row',
-            // alignItems: 'center',
-            // justifyContent: 'center',
             flexWrap: 'wrap',
-  
-            // maxWidth: '800px',
+            flex: 4,
             marginTop: '3rem'
             
             }}>
@@ -40,6 +37,11 @@ const FormManagerGrid = ({
             <Card
                 title={row.name}
                 description={row.description}
+                row={row}
+                retrieveCustomData={retrieveCustomData}
+                passDataToFormCreator={passDataToFormCreator}
+                organization={organization}
+                workflows={workflows}
             />
         ))}
         </div>

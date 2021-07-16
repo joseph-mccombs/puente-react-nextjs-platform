@@ -17,7 +17,7 @@ import Table from './Table';
 import GridTable from './Grid';
 
 const FormManager = ({ context, router }) => {
-  const [organization, setOrganization] = useState('Puente');
+  const [organization, setOrganization] = useState('Test');
   const [organizationList, setOrganizationList] = useState([]);
 
   const [workflowData, setWorkflowData] = useState({})
@@ -25,6 +25,7 @@ const FormManager = ({ context, router }) => {
   const [noWorkflowData, setNoWorkflowData] = useState([])
   const [workflowModal, setWorkflowModal] = useState(false);
   const [listView, setListView] = useState(true);
+  const [workflows, setWorkflows] = useState(null)
   
 
   useEffect(() => {
@@ -53,8 +54,9 @@ const FormManager = ({ context, router }) => {
       })
       setPuenteData(tableDataByCategory['Puente']);
       setNoWorkflowData(tableDataByCategory['No Workflow Assigned']);
-      delete tableDataByCategory['Puente'];
       delete tableDataByCategory['No Workflow Assigned'];
+      setWorkflows(Object.keys(tableDataByCategory))
+      delete tableDataByCategory['Puente'];
       setWorkflowData(tableDataByCategory)
     });
     retrieveUniqueListOfOrganizations().then((results) => {
@@ -142,14 +144,14 @@ const FormManager = ({ context, router }) => {
         ) : (
           <GridTable
             data={puenteData}
+            retrieveCustomData={retrieveCustomData}
+            passDataToFormCreator={passDataToFormCreator}
+            organization={organization}
+            workflows={workflows}
           />
         )}
       </Grid>
-      <GridTable
-            data={puenteData}
-          />
       <h2>Custom Forms</h2>
-      <Button aria-label="add workflow" onClick={openWorkflowModal}>Add Workflow</Button>
       {/* {workflowModal && ( */}
         <Modal
           open={workflowModal}
@@ -165,25 +167,45 @@ const FormManager = ({ context, router }) => {
       {/* )} */}
       {
         Object.keys(workflowData).map((key, index) => ( 
-          <Grid container>
+          <Grid>
             <h3>{key}</h3>
-            <Table
-            data={workflowData[key]}
-            retrieveCustomData={retrieveCustomData}
-            passDataToFormCreator={passDataToFormCreator}
-            organization={organization}
-            />
+            {listView === true ? (
+              <Table
+              data={workflowData[key]}
+              retrieveCustomData={retrieveCustomData}
+              passDataToFormCreator={passDataToFormCreator}
+              organization={organization}
+              />
+            ) : (
+              <GridTable
+                data={workflowData[key]}
+                retrieveCustomData={retrieveCustomData}
+                passDataToFormCreator={passDataToFormCreator}
+                organization={organization}
+                workflows={workflows}
+              />
+            )}
           </Grid>
         ))
       }
-      <Grid container>
+      <Grid>
         <h3>No Workflow Assigned</h3>
-        <Table
-          data={noWorkflowData}
-          retrieveCustomData={retrieveCustomData}
-          passDataToFormCreator={passDataToFormCreator}
-          organization={organization}
-        />
+        {listView === true ? (
+          <Table
+            data={noWorkflowData}
+            retrieveCustomData={retrieveCustomData}
+            passDataToFormCreator={passDataToFormCreator}
+            organization={organization}
+          />
+        ) : (
+          <GridTable
+            data={noWorkflowData}
+            retrieveCustomData={retrieveCustomData}
+            passDataToFormCreator={passDataToFormCreator}
+            organization={organization}
+            workflows={workflows}
+          />
+        )}
       </Grid>
     </div>
   );

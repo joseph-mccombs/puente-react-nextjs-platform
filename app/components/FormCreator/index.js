@@ -1,7 +1,7 @@
 import {
   Button, Chip, CircularProgress,
   Grid, Input, MenuItem, NoSsr,
-  Select,
+  Select, TextField,
 } from '@material-ui/core';
 import useInput from 'app/modules/hooks';
 import { retrieveUniqueListOfOrganizations } from 'app/modules/parse';
@@ -43,6 +43,7 @@ function FormCreator({ context }) {
   
   const [workflowTypes, setWorkflowTypes] = useState(['Puente','Assets'])
   const [workflowNames, setWorkflowNames] = useState([])
+  const [newWorkflowValue, setNewWorkflowValue] = useState('')
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
@@ -79,12 +80,23 @@ function FormCreator({ context }) {
     setWorkflowNames(event.target.value);
   };
 
+  const handleTextChange = (event) => {
+    setNewWorkflowValue(event.target.value)
+};
+
   const submitCustomForm = () => {
     const formObject = {};
     formObject.fields = formItems;
     formObject.organizations = organizationNames;
     formObject.typeOfForm = formTypeNames;
-    formObject.workflows = workflowNames;
+    let newWorkflowsToAdd
+    if (newWorkflowValue !== '') {
+      newWorkflowsToAdd = workflowNames.concat([newWorkflowValue]);
+    }
+    else {
+      newWorkflowsToAdd = workflowNames;
+    }
+    formObject.workflows = newWorkflowsToAdd;
     formObject.name = formName;
     formObject.class = '';
     formObject.description = formDescription;
@@ -222,13 +234,10 @@ function FormCreator({ context }) {
                     </Select>
                   </div>
                   <div style={{flexDirection: 'column'}}>
-                    <h3>Add new wrkflow</h3>
+                    <h3>Add New Workflow</h3>
+                    <TextField id="new-workflow" label="New Workflow" onChange={(event) => handleTextChange(event)}/>
                   </div>
                 </div>
-              </div>
-              <div styles={{flexDirection:'column', flex: 1}}>
-                <div styles={{flexDirection: 'column', flex: 1}}><h1>Hi</h1></div>
-                <div styles={{flexDirection: 'column', flex: 1}}><h1>There</h1></div>
               </div>
               <div>
                 {setFormName}
