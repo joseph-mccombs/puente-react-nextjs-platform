@@ -40,10 +40,10 @@ function FormCreator({ context }) {
 
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
-  
-  const [workflowTypes, setWorkflowTypes] = useState(['Puente','Assets'])
-  const [workflowNames, setWorkflowNames] = useState([])
-  const [newWorkflowValue, setNewWorkflowValue] = useState('')
+
+  const [workflowTypes] = useState(['Puente', 'Assets']);
+  const [workflowNames, setWorkflowNames] = useState([]);
+  const [newWorkflowValue, setNewWorkflowValue] = useState('');
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
@@ -81,19 +81,18 @@ function FormCreator({ context }) {
   };
 
   const handleTextChange = (event) => {
-    setNewWorkflowValue(event.target.value)
-};
+    setNewWorkflowValue(event.target.value);
+  };
 
   const submitCustomForm = () => {
     const formObject = {};
     formObject.fields = formItems;
     formObject.organizations = organizationNames;
     formObject.typeOfForm = formTypeNames;
-    let newWorkflowsToAdd
+    let newWorkflowsToAdd;
     if (newWorkflowValue !== '') {
       newWorkflowsToAdd = workflowNames.concat([newWorkflowValue]);
-    }
-    else {
+    } else {
       newWorkflowsToAdd = workflowNames;
     }
     formObject.workflows = newWorkflowsToAdd;
@@ -209,8 +208,8 @@ function FormCreator({ context }) {
               </div>
               <div id="workflow">
                 <h2>Workflow</h2>
-                <div style={{flexDirection: 'row'}}>
-                  <div style={{flexDirection: 'column'}}>
+                <div style={{ flexDirection: 'row' }}>
+                  <div style={{ flexDirection: 'column' }}>
                     <Select
                       labelId="mutiple-chip-organization"
                       id="mutiple-chip"
@@ -233,9 +232,9 @@ function FormCreator({ context }) {
                       ))}
                     </Select>
                   </div>
-                  <div style={{flexDirection: 'column'}}>
+                  <div style={{ flexDirection: 'column' }}>
                     <h3>Add New Workflow</h3>
-                    <TextField id="new-workflow" label="New Workflow" onChange={(event) => handleTextChange(event)}/>
+                    <TextField id="new-workflow" label="New Workflow" onChange={(event) => handleTextChange(event)} />
                   </div>
                 </div>
               </div>

@@ -1,16 +1,16 @@
-import { makeStyles } from '@material-ui/core/styles';
 import {
-    Button,
-    FormControl,
-    Modal,
-    FormLabel,
-    FormControlLabel,
-    FormGroup,
-    Checkbox,
-    TextField
-  } from '@material-ui/core';
-import React from 'react';
+  Button,
+  Checkbox,
+  FormControl,
+  FormControlLabel,
+  FormGroup,
+  FormLabel,
+  Modal,
+  TextField,
+} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
 import { updateObject } from 'app/services/parse';
+import React from 'react';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -39,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Modl = ({
-  open, handleClose, handleWorkflow, row, workflows
+  open, handleClose, row, workflows,
 }) => {
   const classes = useStyles();
   // getModalStyle is not a pure function, we roll the style only on the first render
@@ -49,58 +49,56 @@ const Modl = ({
   const [availableWorkflows, setAvailableWorkflows] = React.useState([]);
   const [newWorksflowsAssigned, setNewWorkflowsAssigned] = React.useState([]);
 
-// function to filter available workflows to add to form
+  // function to filter available workflows to add to form
   React.useEffect(() => {
-      let availWorkflows = workflows;
-      if (row.workflows !== undefined && row.workflows.length !== 0) {
-        row.workflows.forEach((element) => {
-            availWorkflows = availWorkflows.filter((val) => val !== element);
-        });
-      }
-      setAvailableWorkflows(availWorkflows)
-  }, [])
+    let availWorkflows = workflows;
+    if (row.workflows !== undefined && row.workflows.length !== 0) {
+      row.workflows.forEach((element) => {
+        availWorkflows = availWorkflows.filter((val) => val !== element);
+      });
+    }
+    setAvailableWorkflows(availWorkflows);
+  }, []);
 
-//   function to handle chekcboxes for adding workflow
+  //   function to handle chekcboxes for adding workflow
   const handleChange = (event) => {
     if (newWorksflowsAssigned.includes(event.target.value)) {
-        setNewWorkflowsAssigned(newWorksflowsAssigned.filter((val) => val !== event.target.value))
+      setNewWorkflowsAssigned(newWorksflowsAssigned.filter((val) => val !== event.target.value));
+    } else {
+      setNewWorkflowsAssigned(newWorksflowsAssigned.concat([event.target.value]));
     }
-    else {
-        setNewWorkflowsAssigned(newWorksflowsAssigned.concat([event.target.value]))
-    }
-  }
+  };
 
   const handleNewWorkflow = () => {
-      setNewWorkflow(!newWorkflow)
-  }
+    setNewWorkflow(!newWorkflow);
+  };
 
   const handleTextChange = (event) => {
-      setNewWorkflowValue(event.target.value)
+    setNewWorkflowValue(event.target.value);
   };
 
   const submit = () => {
-      let workflowsToAdd;
-      if (newWorkflowValue !== '') {
-         workflowsToAdd = newWorksflowsAssigned.concat([newWorkflowValue])
-      }
-      else {
-          workflowsToAdd = newWorksflowsAssigned
-      }
-
-      if (row.workflows !== undefined && row.workflows.length !== 0) {
-          workflowsToAdd = workflowsToAdd.concat(row.workflows)
-      }
-      const params = {
-        parseClass: 'FormSpecificationsV2',
-        parseClassID: row.objectId,
-        localObject: {
-            workflows: workflowsToAdd
-        }
+    let workflowsToAdd;
+    if (newWorkflowValue !== '') {
+      workflowsToAdd = newWorksflowsAssigned.concat([newWorkflowValue]);
+    } else {
+      workflowsToAdd = newWorksflowsAssigned;
     }
 
-    updateObject(params)
-    handleClose()
-  }
+    if (row.workflows !== undefined && row.workflows.length !== 0) {
+      workflowsToAdd = workflowsToAdd.concat(row.workflows);
+    }
+    const params = {
+      parseClass: 'FormSpecificationsV2',
+      parseClassID: row.objectId,
+      localObject: {
+        workflows: workflowsToAdd,
+      },
+    };
+
+    updateObject(params);
+    handleClose();
+  };
   return (
     <Modal
       open={open}
@@ -113,26 +111,30 @@ const Modl = ({
           Current Workflows Assigned:
         </h3>
         {row.workflows !== undefined && row.workflows.length !== 0 ? (
-        <div>
+          <div>
             {row.workflows.map((workflow) => (
-                <p>{workflow}</p>
+              <p>{workflow}</p>
             ))}
-        </div>
+          </div>
         ) : (
-            <p>No workflow assigned to form</p>
+          <p>No workflow assigned to form</p>
         )}
         <FormControl component="fieldset">
-        <FormLabel component="legend">New Workflow(s) to Assign</FormLabel>
-        <FormGroup>
+          <FormLabel component="legend">New Workflow(s) to Assign</FormLabel>
+          <FormGroup>
             {availableWorkflows.map((workflow) => (
-                <FormControlLabel value={workflow} control={<Checkbox onChange={(event) => handleChange(event)} />} label={workflow} />    
+              <FormControlLabel
+                value={workflow}
+                control={<Checkbox onChange={(event) => handleChange(event)} />}
+                label={workflow}
+              />
             ))}
             <FormControlLabel value="newWorkflow" control={<Checkbox onChange={handleNewWorkflow} />} label="New Workflow" />
             {newWorkflow === true && (
-                <TextField id="new-workflow" label="New Workflow" onChange={(event) => handleTextChange(event)}/>
+            <TextField id="new-workflow" label="New Workflow" onChange={(event) => handleTextChange(event)} />
             )}
-            <Button variant="contained" color="primary" style={{ marginRight: 'auto', marginTop: 10}} onClick={submit}>Submit</Button>
-        </FormGroup>
+            <Button variant="contained" color="primary" style={{ marginRight: 'auto', marginTop: 10 }} onClick={submit}>Submit</Button>
+          </FormGroup>
         </FormControl>
       </div>
     </Modal>

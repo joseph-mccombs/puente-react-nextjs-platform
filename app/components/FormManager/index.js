@@ -1,32 +1,30 @@
 import {
-  Button,
-  Grid,
+  CircularProgress, Grid,
+  MenuItem,
   Modal,
-  CircularProgress, MenuItem,
   Select,
 } from '@material-ui/core';
 import IconButton from '@material-ui/core/IconButton';
-import MenuIcon from '@material-ui/icons/Menu';
 import AppsIcon from '@material-ui/icons/Apps';
+import MenuIcon from '@material-ui/icons/Menu';
 import { retrieveCustomData, retrieveUniqueListOfOrganizations } from 'app/modules/parse';
 import React, { useEffect, useState } from 'react';
 import { isArray } from 'underscore';
 
+import GridTable from './Grid';
 import styles from './index.module.scss';
 import Table from './Table';
-import GridTable from './Grid';
 
 const FormManager = ({ context, router }) => {
   const [organization, setOrganization] = useState('Test');
   const [organizationList, setOrganizationList] = useState([]);
 
-  const [workflowData, setWorkflowData] = useState({})
-  const [puenteData, setPuenteData] = useState([])
-  const [noWorkflowData, setNoWorkflowData] = useState([])
+  const [workflowData, setWorkflowData] = useState({});
+  const [puenteData, setPuenteData] = useState([]);
+  const [noWorkflowData, setNoWorkflowData] = useState([]);
   const [workflowModal, setWorkflowModal] = useState(false);
   const [listView, setListView] = useState(true);
-  const [workflows, setWorkflows] = useState(null)
-  
+  const [workflows, setWorkflows] = useState(null);
 
   useEffect(() => {
     retrieveCustomData(organization).then((records) => {
@@ -35,34 +33,30 @@ const FormManager = ({ context, router }) => {
         if (!isArray(record.workflows) || record.workflows.length < 1) {
           if ('No Workflow Assigned' in tableDataByCategory) {
             tableDataByCategory['No Workflow Assigned'] = tableDataByCategory['No Workflow Assigned'].concat([record]);
+          } else {
+            tableDataByCategory['No Workflow Assigned'] = [record];
           }
-          else {
-            tableDataByCategory['No Workflow Assigned'] = [record]
-          }
-        }
-        else if (isArray(record.workflows)) {
+        } else if (isArray(record.workflows)) {
           record.workflows.forEach((workflow) => {
             if (workflow in tableDataByCategory) {
-              console.log(tableDataByCategory[workflow])
-              tableDataByCategory[workflow] = tableDataByCategory[workflow].concat([record])
+              tableDataByCategory[workflow] = tableDataByCategory[workflow].concat([record]);
+            } else {
+              tableDataByCategory[workflow] = [record];
             }
-            else {
-              tableDataByCategory[workflow] = [record]
-            }
-          })
+          });
         }
-      })
-      setPuenteData(tableDataByCategory['Puente']);
+      });
+      setPuenteData(tableDataByCategory.Puente);
       setNoWorkflowData(tableDataByCategory['No Workflow Assigned']);
       delete tableDataByCategory['No Workflow Assigned'];
-      setWorkflows(Object.keys(tableDataByCategory))
-      delete tableDataByCategory['Puente'];
-      setWorkflowData(tableDataByCategory)
+      setWorkflows(Object.keys(tableDataByCategory));
+      delete tableDataByCategory.Puente;
+      setWorkflowData(tableDataByCategory);
     });
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizationList(results);
     });
-  },[organization]);
+  }, [organization]);
 
   const handleOrganization = (event) => {
     setOrganization(event.target.value);
@@ -79,13 +73,9 @@ const FormManager = ({ context, router }) => {
     router.push(href);
   };
 
-  const openWorkflowModal = () => {
-    setWorkflowModal(true);
-  }
-
   const closeWorkflowModal = () => {
     setWorkflowModal(false);
-  }
+  };
 
   return (
     <div className={styles.formCreator}>
@@ -93,32 +83,34 @@ const FormManager = ({ context, router }) => {
         <h2>Puente Forms</h2>
         {listView === true ? (
           <div>
-            <IconButton 
+            <IconButton
               onClick={() => setListView(true)}
-              style={{backgroundColor: 'lightBlue', color: 'blue', marginTop: 'auto', marginBottom: 'auto'}}
+              style={{
+                backgroundColor: 'lightBlue', color: 'blue', marginTop: 'auto', marginBottom: 'auto',
+              }}
             >
-              <MenuIcon/>
+              <MenuIcon />
             </IconButton>
-            <IconButton 
+            <IconButton
               onClick={() => setListView(false)}
-              style={{ color: 'grey'}}
+              style={{ color: 'grey' }}
             >
-              <AppsIcon/>
+              <AppsIcon />
             </IconButton>
           </div>
         ) : (
           <div>
-            <IconButton 
+            <IconButton
               onClick={() => setListView(true)}
-              style={{ color: 'grey'}}
+              style={{ color: 'grey' }}
             >
-              <MenuIcon/>
+              <MenuIcon />
             </IconButton>
-            <IconButton 
+            <IconButton
               onClick={() => setListView(false)}
-              style={{backgroundColor: 'lightBlue', color: 'blue'}}
+              style={{ backgroundColor: 'lightBlue', color: 'blue' }}
             >
-              <AppsIcon/>
+              <AppsIcon />
             </IconButton>
           </div>
         )}
@@ -131,7 +123,8 @@ const FormManager = ({ context, router }) => {
           >
             {organizationList.length < 1
                   && <CircularProgress />}
-            {organization.length > 1 && organizationList.map((value) => <MenuItem value={value}>{value}</MenuItem>)}
+            {organization.length > 1
+            && organizationList.map((value) => <MenuItem value={value}>{value}</MenuItem>)}
           </Select>
         </Grid>
         {listView === true ? (
@@ -153,28 +146,28 @@ const FormManager = ({ context, router }) => {
       </Grid>
       <h2>Custom Forms</h2>
       {/* {workflowModal && ( */}
-        <Modal
-          open={workflowModal}
-          onClose={closeWorkflowModal}
-          aria-labelledby="simple-modal-title"
-          aria-describedby="simple-modal-description"
-        >
-          <div style={styles.modalContainer}>
-            <h2 id="simple-modal-title">Hi</h2>
-            <p id="simple-modal-description">you</p>
-          </div>
-        </Modal>
+      <Modal
+        open={workflowModal}
+        onClose={closeWorkflowModal}
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+      >
+        <div style={styles.modalContainer}>
+          <h2 id="simple-modal-title">Hi</h2>
+          <p id="simple-modal-description">you</p>
+        </div>
+      </Modal>
       {/* )} */}
       {
-        Object.keys(workflowData).map((key, index) => ( 
+        Object.keys(workflowData).map((key) => (
           <Grid>
             <h3>{key}</h3>
             {listView === true ? (
               <Table
-              data={workflowData[key]}
-              retrieveCustomData={retrieveCustomData}
-              passDataToFormCreator={passDataToFormCreator}
-              organization={organization}
+                data={workflowData[key]}
+                retrieveCustomData={retrieveCustomData}
+                passDataToFormCreator={passDataToFormCreator}
+                organization={organization}
               />
             ) : (
               <GridTable
