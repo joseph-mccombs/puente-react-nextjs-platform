@@ -45,6 +45,8 @@ function FormCreator({ context }) {
   const [workflowNames, setWorkflowNames] = useState([]);
   const [newWorkflowValue, setNewWorkflowValue] = useState('');
 
+  const [disabledTotal, setDisabledTotal] = useState(0)
+
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
@@ -248,6 +250,8 @@ function FormCreator({ context }) {
                 formItems={formItems}
                 setFormItems={setFormItems}
                 removeValue={removeValue}
+                disabledTotal={disabledTotal}
+                setDisabledTotal={setDisabledTotal}
               />
             </Grid>
             <Grid item xs={3} className={styles.formBlock}>
