@@ -45,7 +45,7 @@ function FormCreator({ context }) {
   const [workflowNames, setWorkflowNames] = useState([]);
   const [newWorkflowValue, setNewWorkflowValue] = useState('');
 
-  const [disabledTotal, setDisabledTotal] = useState(0)
+  const [disabledTotal, setDisabledTotal] = useState(0);
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {

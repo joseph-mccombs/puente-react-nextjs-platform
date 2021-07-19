@@ -1,14 +1,14 @@
 import { Button } from '@material-ui/core';
 import { useEffect, useState } from 'react';
-import { ActiveInput } from '../Utils'
 
+import { ActiveInput } from '../Utils';
 import styles from './index.module.scss';
 
 const Input = (props) => {
   const {
     item,
     formItems, setFormItems,
-    removeValue, disabledTotal, 
+    removeValue, disabledTotal,
     setDisabledTotal,
   } = props;
 
@@ -29,7 +29,6 @@ const Input = (props) => {
   useEffect(() => {
     const geolocationFields = formItems.filter((element) => element.fieldType === 'geolocation');
     setGeolocationCount(geolocationFields.length);
-    console.log(formItems)
   }, [formItems]);
 
   return (

@@ -1,13 +1,14 @@
 import { Button } from '@material-ui/core';
-import { ActiveInput } from '../Utils'
 import { useEffect, useState } from 'react';
+
+import { ActiveInput } from '../Utils';
 import styles from './index.module.scss';
 
 const Input = (props) => {
   const {
     item,
     formItems, setFormItems,
-    removeValue, disabledTotal, 
+    removeValue, disabledTotal,
     setDisabledTotal,
   } = props;
   const [activeInput, setActiveInput] = useState(true);

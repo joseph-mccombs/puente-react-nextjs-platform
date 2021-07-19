@@ -1,8 +1,8 @@
 import { Button } from '@material-ui/core';
-import { ActiveInput } from '../Utils'
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
+import { ActiveInput } from '../Utils';
 import styles from './index.module.scss';
 
 const Select = (props) => {
@@ -47,7 +47,8 @@ const Select = (props) => {
     const newArray = [...formItems];
     // const newOptions = [...options];
     // newOptions.forEach((option) => {
-    //   option.textKey.replace(`__${/.*_/g}__`, `__${value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '')}`);
+    //   option.textKey.replace(`__${/.*_/g}__`,
+    //  `__${value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '')}`);
     // });
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
