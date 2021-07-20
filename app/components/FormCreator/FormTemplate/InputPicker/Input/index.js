@@ -45,7 +45,7 @@ const Input = (props) => {
           <h3>Text Input Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-           {/* Active/Disabled component, remove false when needed again
+          {/* Active/Disabled component, remove false when needed again
           Currently not in use. Left in to avoid removing other pieces for linting */}
           {false && (
             <ActiveInput
@@ -62,7 +62,7 @@ const Input = (props) => {
           <h3>Number Input Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <Button role="button" variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-           {/* Active/Disabled component, remove false when needed again
+          {/* Active/Disabled component, remove false when needed again
           Currently not in use. Left in to avoid removing other pieces for linting */}
           {false && (
             <ActiveInput
