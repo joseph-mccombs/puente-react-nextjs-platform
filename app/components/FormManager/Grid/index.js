@@ -5,6 +5,8 @@ const FormManagerGrid = ({
   retrieveCustomData, passDataToFormCreator,
   organization, workflows,
 }) => (
+    <div>
+        {data !== undefined && data.length > 0 ? (
   <div style={{
     display: 'flex',
     flexDirection: 'row',
@@ -26,6 +28,10 @@ const FormManagerGrid = ({
       />
     ))}
   </div>
+      ) : (
+        <h3>No Data Available</h3>
+    )}
+    </div>
 );
 
 export default FormManagerGrid;

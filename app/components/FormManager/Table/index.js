@@ -49,6 +49,7 @@ const FormManagerTable = ({
         action={handleRemove}
         actionText="Remove"
       />
+    { data !== undefined ? (
       <Table className={classes.table} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -62,27 +63,31 @@ const FormManagerTable = ({
             <TableCell align="right">Actions</TableCell>
           </TableRow>
         </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.createdAt}</TableCell>
-              <TableCell align="right">{row.updatedAt}</TableCell>
-              <TableCell align="right">
-                <Button aria-label="duplicate" onClick={() => handleDuplicate(row)}>
-                  Duplicate
-                </Button>
-                <Button aria-label="edit" onClick={() => handleModal(row)}>
-                  Remove
-                </Button>
-              </TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
+        
+          <TableBody>
+            {data.map((row) => (
+              <TableRow key={row.name}>
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="right">{row.description}</TableCell>
+                <TableCell align="right">{row.createdAt}</TableCell>
+                <TableCell align="right">{row.updatedAt}</TableCell>
+                <TableCell align="right">
+                  <Button aria-label="duplicate" onClick={() => handleDuplicate(row)}>
+                    Duplicate
+                  </Button>
+                  <Button aria-label="edit" onClick={() => handleModal(row)}>
+                    Remove
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
       </Table>
+             ) : (
+              <h3>No Data Available</h3>
+            )}
     </TableContainer>
   );
 };
