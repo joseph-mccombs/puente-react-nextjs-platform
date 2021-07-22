@@ -49,21 +49,21 @@ const FormManagerTable = ({
         action={handleRemove}
         actionText="Remove"
       />
-    { data !== undefined ? (
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            {/* {data && headings.map((heading,index)=>(
+      { data !== undefined ? (
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              {/* {data && headings.map((heading,index)=>(
               <TableCell key={index}>{heading}</TableCell>
             ))} */}
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Description</TableCell>
-            <TableCell align="right">Creation Date</TableCell>
-            <TableCell align="right">Updated Date</TableCell>
-            <TableCell align="right">Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        
+              <TableCell>Name</TableCell>
+              <TableCell align="right">Description</TableCell>
+              <TableCell align="right">Creation Date</TableCell>
+              <TableCell align="right">Updated Date</TableCell>
+              <TableCell align="right">Actions</TableCell>
+            </TableRow>
+          </TableHead>
+
           <TableBody>
             {data.map((row) => (
               <TableRow key={row.name}>
@@ -84,10 +84,10 @@ const FormManagerTable = ({
               </TableRow>
             ))}
           </TableBody>
-      </Table>
-             ) : (
-              <h3>No Data Available</h3>
-            )}
+        </Table>
+      ) : (
+        <h3>No Data Available</h3>
+      )}
     </TableContainer>
   );
 };
