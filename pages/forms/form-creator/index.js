@@ -1,13 +1,12 @@
-import Footer from 'app/components/Footer';
-import FormCreator from 'app/components/FormCreator';
-import Layout from 'app/components/Layout';
+import FormCreator from 'app/components/organisms/FormCreator';
+import Page from 'app/components/templates/page-layout';
 import { useGlobalState } from 'app/store';
 
 export default function Forms() {
   const { contextManagment } = useGlobalState();
 
   return (
-    <Layout>
+    <Page>
       <main className="container">
         <FormCreator
           context={contextManagment}
@@ -79,7 +78,6 @@ export default function Forms() {
       `}
         </style>
       </main>
-      <Footer />
-    </Layout>
+    </Page>
   );
 }
