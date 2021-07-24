@@ -1,6 +1,5 @@
-import Footer from 'app/components/Footer';
-import FormMarketplace from 'app/components/FormMarketplace';
-import Layout from 'app/components/Layout';
+import FormMarketplace from 'app/components/organisms/FormMarketplace';
+import Layout from 'app/components/templates/page-layout';
 import { useGlobalState } from 'app/store';
 
 export default function Forms() {
@@ -77,7 +76,6 @@ export default function Forms() {
       `}
         </style>
       </main>
-      <Footer />
     </Layout>
   );
 }

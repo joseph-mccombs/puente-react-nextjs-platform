@@ -1,5 +1,6 @@
 import {
-  Grid,
+  Box,
+  Grid, Paper,
 } from '@material-ui/core';
 import { retrieveCustomData } from 'app/modules/parse';
 import React, { useEffect, useState } from 'react';
@@ -23,7 +24,30 @@ const FormManager = ({ context, router }) => {
   return (
     <div className={styles.formMarketplace}>
       <h1>Form Marketplace</h1>
-      <Grid container />
+      <Box
+        display="flex"
+        flexWrap="wrap"
+        justifyContent="center"
+      >
+        <Box p={20} bgcolor="grey.300">
+          Item 1
+        </Box>
+        <Box p={20} bgcolor="grey.300">
+          Item 2
+        </Box>
+        <Box p={20} bgcolor="grey.300">
+          Item 3
+        </Box>
+        <Box p={20} bgcolor="grey.300">
+          Item 4
+        </Box>
+        <Box p={20} bgcolor="grey.300">
+          Item 5
+        </Box>
+        <Box p={20} bgcolor="grey.300">
+          Item 6
+        </Box>
+      </Box>
     </div>
   );
 };

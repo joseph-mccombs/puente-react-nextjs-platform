@@ -1,6 +1,5 @@
-import Footer from 'app/components/Footer';
-import FormManager from 'app/components/FormManager';
-import Layout from 'app/components/Layout';
+import FormManager from 'app/components/organisms/FormManager';
+import Page from 'app/components/templates/page-layout';
 import { useGlobalState } from 'app/store';
 import { useRouter } from 'next/router';
 
@@ -9,7 +8,7 @@ export default function Forms() {
 
   const router = useRouter();
   return (
-    <Layout>
+    <Page>
       <main className="container">
         <div>Form Manager</div>
         <FormManager
@@ -83,7 +82,6 @@ export default function Forms() {
       `}
         </style>
       </main>
-      <Footer />
-    </Layout>
+    </Page>
   );
 }

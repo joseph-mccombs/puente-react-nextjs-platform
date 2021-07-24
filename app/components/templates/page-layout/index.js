@@ -2,6 +2,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import { initialize } from 'app/services/parse';
 
 import Header from './Header';
+import Footer from './Footer';
 
 const useStyles = makeStyles(() => ({
   root: {
@@ -12,7 +13,7 @@ const useStyles = makeStyles(() => ({
   },
 }));
 
-export default function Layout({ children }) {
+export default function Page({ children }) {
   const classes = useStyles();
 
   React.useEffect(() => {
@@ -24,6 +25,7 @@ export default function Layout({ children }) {
       <Header>
         {children}
       </Header>
+      <Footer />
     </div>
   );
 }

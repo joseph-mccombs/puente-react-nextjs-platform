@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
 import Footer from 'app/components/Footer';
-import Layout from 'app/components/Layout';
+import Page from 'app/components/templates/page-layout';
 import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/Viz';
 import dataQueryer from 'app/modules/apollo-grapql';
 import { useState } from 'react';
@@ -124,7 +124,7 @@ const Forms = ({ vitals }) => {
   const [recordNumber, setRecordNumber] = useState(250);
 
   return (
-    <Layout>
+    <Page>
       <main className="container">
         <div>Data Viz</div>
         <h1>{organization}</h1>
@@ -152,7 +152,7 @@ const Forms = ({ vitals }) => {
         </style>
       </main>
       <Footer />
-    </Layout>
+    </Page>
   );
 };
 
