@@ -1,8 +1,8 @@
 import { makeStyles } from '@material-ui/core/styles';
 import { initialize } from 'app/services/parse';
 
-import Header from './Header';
 import Footer from './Footer';
+import Header from './Header';
 
 const useStyles = makeStyles(() => ({
   root: {
