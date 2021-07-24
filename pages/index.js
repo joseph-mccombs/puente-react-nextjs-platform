@@ -1,4 +1,4 @@
-import Card from 'app/components/molecules/card';
+import Card from 'app/components/molecules';
 import Head from 'next/head';
 
 export default function Home() {

@@ -1,5 +1,4 @@
 import { Button } from '@material-ui/core';
-import Footer from 'app/components/Footer';
 import Page from 'app/components/templates/page-layout';
 import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/Viz';
 import dataQueryer from 'app/modules/apollo-grapql';
@@ -151,7 +150,6 @@ const Forms = ({ vitals }) => {
           `}
         </style>
       </main>
-      <Footer />
     </Page>
   );
 };

@@ -1,12 +1,12 @@
 import FormMarketplace from 'app/components/organisms/FormMarketplace';
-import Layout from 'app/components/templates/page-layout';
+import Page from 'app/components/templates/page-layout';
 import { useGlobalState } from 'app/store';
 
 export default function Forms() {
   const { contextManagment } = useGlobalState();
 
   return (
-    <Layout>
+    <Page>
       <main className="container">
         <FormMarketplace />
         <style jsx>
@@ -76,6 +76,6 @@ export default function Forms() {
       `}
         </style>
       </main>
-    </Layout>
+    </Page>
   );
 }
