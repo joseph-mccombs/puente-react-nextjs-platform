@@ -2,14 +2,13 @@ import {
   Box,
   Grid, Paper,
 } from '@material-ui/core';
+import { Carousel } from 'app/components/molecules';
 import { retrieveCustomData } from 'app/modules/parse';
 import React, { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
 
-const FormManager = ({ context, router }) => {
-  const [organization] = useState('Puente');
-
+const FormMarketplace = ({ context, router }) => {
   const passDataToFormCreator = (data) => {
     const href = '/forms/form-creator';
 
@@ -24,7 +23,8 @@ const FormManager = ({ context, router }) => {
   return (
     <div className={styles.formMarketplace}>
       <h1>Form Marketplace</h1>
-      <Box
+      <Carousel />
+      {/* <Box
         display="flex"
         flexWrap="wrap"
         justifyContent="center"
@@ -47,9 +47,9 @@ const FormManager = ({ context, router }) => {
         <Box p={20} bgcolor="grey.300">
           Item 6
         </Box>
-      </Box>
+      </Box> */}
     </div>
   );
 };
 
-export default FormManager;
+export default FormMarketplace;
