@@ -21,7 +21,7 @@ const FormManager = ({ context, router }) => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizationList(results);
     });
-  },[organization]);
+  }, [organization]);
 
   const handleOrganization = (event) => {
     setOrganization(event.target.value);
