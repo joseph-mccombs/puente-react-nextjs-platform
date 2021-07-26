@@ -1,32 +1,46 @@
-import Card from 'app/components/molecules/card';
+import { FixedSizeList as List } from 'react-window';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemText from '@material-ui/core/ListItemText';
 
 import styles from './index.module.scss';
 
-const movies = [
-  '/breaking-bad.webp',
-  '/the-leftovers.jpg',
-  '/game-of-thrones.jpg',
-  '/true-detective.jpg',
-  '/walking-dead.jpg',
-  '/breaking-bad.webp',
-  '/the-leftovers.jpg',
-  '/game-of-thrones.jpg',
-  '/true-detective.jpg',
-  '/walking-dead.jpg',
-];
+function renderRow(props) {
+  const { index, style, data } = props;
 
-const Carousel = () => (
+  return (
+    // <div>
+    // {data[index]?.type === 'card' &&
+    //   <Card 
+    //   title={data[index].primaryText}
+    //   description={data[index].primaryText}
+    //   />
+    // }
+    // {!data[index]?.type &&
+      <ListItem button style={style} key={index}>
+        <ListItemText primary={`Item ${data[index].primaryText}`} />
+      </ListItem>
+    // }
+    // </div>
+  );
+}
+
+
+const Carousel = ({ items }) =>{
+  return (
   <div className={styles.carousel}>
-    <div className={styles.container}>
-      {movies.map((src) => (
-        <Card
-          title="src"
-          description={src}
-        />
-
-      ))}
-    </div>
+    <List
+      className="List"
+      height={400}
+      itemCount={items.length}
+      itemSize={400}
+      itemData={items}
+      layout="horizontal"
+      width={1000}
+    >
+      {renderRow}
+    </List>
   </div>
-);
+  )
+};
 
 export default Carousel;

@@ -23,7 +23,7 @@ const FormMarketplace = ({ context, router }) => {
   return (
     <div className={styles.formMarketplace}>
       <h1>Form Marketplace</h1>
-      <Carousel />
+      <Carousel items={[{primaryText:"hi",type:'card'}]} />
       {/* <Box
         display="flex"
         flexWrap="wrap"
