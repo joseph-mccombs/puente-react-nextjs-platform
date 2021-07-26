@@ -1,6 +1,11 @@
 .formMarketplace{
-  // width: 100%;
   h1 {
     text-align: center;
+  }
+
+  .searchbar {
+    align-items: center;
+    display: flex;
+    justify-content: center;
   }
 }

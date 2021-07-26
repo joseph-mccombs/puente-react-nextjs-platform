@@ -1,11 +1,8 @@
-import {
-  Box,
-  Grid, Paper,
-} from '@material-ui/core';
-import { Carousel, SearchBar } from 'app/components/molecules';
-import { retrieveCustomData } from 'app/modules/parse';
+import { SearchBar } from 'app/components/molecules';
 import React, { useEffect, useState } from 'react';
 
+import retrieveAllFormSpecs from './_data';
+import Carousel from './Carousel';
 import styles from './index.module.scss';
 
 const FormMarketplace = ({ context, router }) => {
@@ -20,13 +17,23 @@ const FormMarketplace = ({ context, router }) => {
     router.push(href);
   };
 
+  const [formSpecs, setFormSpecs] = useState([]);
+
+  useEffect(() => {
+    retrieveAllFormSpecs({
+      typeOfForm: 'Marketplace',
+    }).then((records) => {
+      setFormSpecs(records);
+    });
+  });
+
   return (
     <div className={styles.formMarketplace}>
       <h1>Form Marketplace</h1>
       <h2>Most Popular</h2>
-      <Carousel items={[{primaryText:"hi",type:'card'}]} />
-      <div>
-      <SearchBar />
+      <Carousel items={formSpecs} />
+      <div className={styles.searchbar}>
+        <SearchBar />
       </div>
     </div>
   );
