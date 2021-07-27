@@ -15,15 +15,15 @@
   line-height: 40px;
 }
 
-.dragging {
-  background: yellow;
-  text-align: center;
-  font-family: sans-serif;
-}
-.copy {
-  background: lightblue;
-}
-.copy ~ [data-rbd-placeholder-context-id] {
-  display: none !important;
-}
+// .dragging {
+//   background: yellow;
+//   text-align: center;
+//   font-family: sans-serif;
+// }
+// .copy {
+//   background: lightblue;
+// }
+// .copy ~ [data-rbd-placeholder-context-id] {
+//   display: none !important;
+// }
 

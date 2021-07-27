@@ -129,7 +129,7 @@ function FormCreator({ context }) {
           <Grid container>
             <Grid item xs={9}>
               <div className={styles.formButtons}>
-                <h2>Form Creator</h2>
+                <h1>Form Creator</h1>
                 <Button variant="outlined" color="primary" onClick={() => setFormItems([])}>
                   Reset Form
                 </Button>
