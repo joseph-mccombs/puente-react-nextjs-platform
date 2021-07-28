@@ -27,17 +27,23 @@ const Select = (props) => {
 
   const setValue = async (event) => {
     const { value, id } = event.target;
+    const formikKey = value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '');
 
     const elementsIndex = formItems.findIndex((element) => element.id === id);
     const newArray = [...formItems];
-    // const newOptions = [...options];
-    // newOptions.forEach((option) => {
-    //   option.textKey.replace(`__${/.*_/g}__`, `__${value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '')}`);
-    // });
+    const newOptions = [...options];
+
+    // handle change to textKey from formikKey perspective
+    newOptions.forEach((option) => {
+      const splitTextKey = option.textKey.split('__')
+      if(splitTextKey.length === 3) {
+        option.textKey = `__${formikKey}__${splitTextKey[2]}`
+      }
+    });
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
       label: value,
-      formikKey: value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, ''),
+      formikKey: formikKey,
       options,
     };
     setFormItems(newArray);
@@ -63,23 +69,23 @@ const Select = (props) => {
 
     // const textOption = options[elementsIndex].text
     const newArray = [...options];
-
+    const formArray = [...formItems];
+    // handle textKey change from option value perspective
     if (valueToChange === 'optionValue') {
       newArray[elementsIndex] = {
         ...newArray[elementsIndex],
         label: value,
         value,
+        textKey: `__${formArray[elementsFormIndex]['formikKey']}__${value}`,
       };
     } else if (valueToChange === 'textQuestion') {
       newArray[elementsIndex] = {
         ...newArray[elementsIndex],
         textQuestion: value,
-        textKey: value,
       };
     }
 
     setOptions(newArray);
-    const formArray = [...formItems];
 
     formArray[elementsFormIndex] = {
       ...formArray[elementsFormIndex],
