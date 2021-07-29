@@ -25,10 +25,6 @@ const Select = (props) => {
     populatePreFilledValues();
   }, []);
 
-  useEffect(() => {
-    console.log("Form items:", formItems, "\nOptions:",options)
-  }, [options, formItems])
-
   const setValue = async (event) => {
     const { value, id } = event.target;
     const formikKey = value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '');
