@@ -25,6 +25,10 @@ const Select = (props) => {
     populatePreFilledValues();
   }, []);
 
+  useEffect(() => {
+    console.log("Form items:", formItems, "\nOptions:",options)
+  }, [options, formItems])
+
   const setValue = async (event) => {
     const { value, id } = event.target;
     const formikKey = value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '');
@@ -32,19 +36,23 @@ const Select = (props) => {
     const elementsIndex = formItems.findIndex((element) => element.id === id);
     const newArray = [...formItems];
     const newOptions = [...options];
+    let updatedOptions = [];
 
     // handle change to textKey from formikKey perspective
     newOptions.forEach((option) => {
-      const splitTextKey = option.textKey.split('__')
-      if(splitTextKey.length === 3) {
-        option.textKey = `__${formikKey}__${splitTextKey[2]}`
+      const newOption = option;
+      const splitTextKey = option.textKey.split('__');
+      if (splitTextKey.length === 3) {
+        newOption.textKey = `__${formikKey}__${splitTextKey[2]}`;
       }
+      updatedOptions = updatedOptions.concat(newOption);
     });
+
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
       label: value,
-      formikKey: formikKey,
-      options,
+      formikKey,
+      options: updatedOptions,
     };
     setFormItems(newArray);
   };
@@ -62,6 +70,7 @@ const Select = (props) => {
 
   const editOption = async (event, questionId, valueToChange) => {
     const { value, id } = event.target;
+    const textKeyValue = value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '');
 
     const elementsFormIndex = formItems.findIndex((element) => element.id === questionId);
 
@@ -76,7 +85,7 @@ const Select = (props) => {
         ...newArray[elementsIndex],
         label: value,
         value,
-        textKey: `__${formArray[elementsFormIndex]['formikKey']}__${value}`,
+        textKey: `__${formArray[elementsFormIndex].formikKey}__${textKeyValue}`,
       };
     } else if (valueToChange === 'textQuestion') {
       newArray[elementsIndex] = {
