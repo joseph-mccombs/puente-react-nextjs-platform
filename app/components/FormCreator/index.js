@@ -41,7 +41,7 @@ function FormCreator({ context }) {
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
-  const [workflowTypes] = useState(['Puente', 'Assets']);
+  const [workflowTypes] = useState(['Puente', 'Assets', 'Marketplace']);
   const [workflowNames, setWorkflowNames] = useState([]);
   const [newWorkflowValue, setNewWorkflowValue] = useState('');
 
