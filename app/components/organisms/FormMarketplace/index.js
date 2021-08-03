@@ -1,4 +1,4 @@
-import { SearchBar } from 'app/components/molecules';
+import { Card, SearchBar } from 'app/components/molecules';
 import React, { useEffect, useState } from 'react';
 
 import retrieveAllFormSpecs from './_data';
@@ -20,11 +20,13 @@ const FormMarketplace = ({ context, router }) => {
   const [formSpecs, setFormSpecs] = useState([]);
 
   useEffect(() => {
-    retrieveAllFormSpecs({
-      typeOfForm: 'Marketplace',
-    }).then((records) => {
-      setFormSpecs(records);
-    });
+    refreshMarketplace();
+  }, []);
+
+  const refreshMarketplace = () => retrieveAllFormSpecs({
+    typeOfForm: 'Marketplace',
+  }).then((records) => {
+    setFormSpecs(records);
   });
 
   return (
@@ -34,6 +36,16 @@ const FormMarketplace = ({ context, router }) => {
       <Carousel items={formSpecs} />
       <div className={styles.searchbar}>
         <SearchBar />
+      </div>
+      <div className={styles.cards}>
+        {formSpecs.map((form) => (
+          <Card
+            key={form.objectId}
+            title={form.name}
+            description={form.description}
+            action={() => passDataToFormCreator(form)}
+          />
+        ))}
       </div>
     </div>
   );
