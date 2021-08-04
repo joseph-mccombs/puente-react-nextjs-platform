@@ -41,7 +41,7 @@ const FormMarketplace = ({ context, router }) => {
         {formSpecs.map((form) => (
           <Card
             key={form.objectId}
-            title={form.name || ''}
+            title={form.name}
             description={form.description}
             action={() => passDataToFormCreator(form)}
           />

@@ -35,7 +35,7 @@ export default function SearchBar() {
         id="tags-outlined"
         options={top100Films}
         getOptionLabel={(option) => option.title}
-        defaultValue={[top100Films[13]]}
+        defaultValue={[top100Films[1]]}
         filterSelectedOptions
         renderInput={(params) => (
           <TextField
@@ -50,5 +50,3 @@ export default function SearchBar() {
     </div>
   );
 }
-
-
