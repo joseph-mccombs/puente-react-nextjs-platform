@@ -1,11 +1,8 @@
-import {
-  Box,
-  Grid, Paper,
-} from '@material-ui/core';
-import { Carousel } from 'app/components/molecules';
-import { retrieveCustomData } from 'app/modules/parse';
+import { Card, SearchBar } from 'app/components/molecules';
 import React, { useEffect, useState } from 'react';
 
+import retrieveAllFormSpecs from './_data';
+import Carousel from './Carousel';
 import styles from './index.module.scss';
 
 const FormMarketplace = ({ context, router }) => {
@@ -20,34 +17,36 @@ const FormMarketplace = ({ context, router }) => {
     router.push(href);
   };
 
+  const [formSpecs, setFormSpecs] = useState([]);
+
+  useEffect(() => {
+    refreshMarketplace();
+  }, []);
+
+  const refreshMarketplace = () => retrieveAllFormSpecs({
+    typeOfForm: 'Marketplace',
+  }).then((records) => {
+    setFormSpecs(records);
+  });
+
   return (
     <div className={styles.formMarketplace}>
       <h1>Form Marketplace</h1>
-      <Carousel />
-      {/* <Box
-        display="flex"
-        flexWrap="wrap"
-        justifyContent="center"
-      >
-        <Box p={20} bgcolor="grey.300">
-          Item 1
-        </Box>
-        <Box p={20} bgcolor="grey.300">
-          Item 2
-        </Box>
-        <Box p={20} bgcolor="grey.300">
-          Item 3
-        </Box>
-        <Box p={20} bgcolor="grey.300">
-          Item 4
-        </Box>
-        <Box p={20} bgcolor="grey.300">
-          Item 5
-        </Box>
-        <Box p={20} bgcolor="grey.300">
-          Item 6
-        </Box>
-      </Box> */}
+      <h2>Most Popular</h2>
+      <Carousel items={formSpecs} />
+      <div className={styles.searchbar}>
+        <SearchBar />
+      </div>
+      <div className={styles.cards}>
+        {formSpecs.map((form) => (
+          <Card
+            key={form.objectId}
+            title={form.name}
+            description={form.description}
+            action={() => passDataToFormCreator(form)}
+          />
+        ))}
+      </div>
     </div>
   );
 };
