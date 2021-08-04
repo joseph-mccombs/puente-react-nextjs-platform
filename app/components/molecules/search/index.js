@@ -12,7 +12,6 @@ const top100Films = [
   { title: "Schindler's List", year: 1993 },
   { title: 'Pulp Fiction', year: 1994 },
   { title: 'The Lord of the Rings: The Return of the King', year: 2003 },
-  { title: 'The Good, the Bad and the Ugly', year: 1966 },
   { title: 'Fight Club', year: 1999 },
   { title: 'The Lord of the Rings: The Fellowship of the Ring', year: 2001 },
 ];
