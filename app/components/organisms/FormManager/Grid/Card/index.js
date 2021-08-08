@@ -4,7 +4,7 @@ import {
   MenuItem,
 } from '@material-ui/core';
 import FolderOpenOutlinedIcon from '@material-ui/icons/FolderOpenOutlined';
-import Modal from 'app/components/UI/Modal';
+import {Modal} from 'app/components/molecules';
 import { removeQueryService } from 'app/services/parse';
 import { useState } from 'react';
 
