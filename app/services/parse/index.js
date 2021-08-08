@@ -8,6 +8,7 @@ import {
 } from './auth';
 import countService from './calculate';
 import {
+  customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
   postObjectsToClass,
@@ -20,6 +21,7 @@ import {
 
 export {
   countService,
+  customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
   initialize,

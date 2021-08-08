@@ -16,7 +16,6 @@ import FormTemplate from './FormTemplate';
 import styles from './index.module.scss';
 
 const COLLECTION = [
-  // { id: uuid(), text: 'Section title', fieldType: 'header' },
   { id: uuid(), text: 'Input - Number', fieldType: 'numberInput' },
   { id: uuid(), text: 'Input - Text', fieldType: 'input' },
   // { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },
@@ -150,7 +149,7 @@ function FormCreator({ context }) {
           <Grid container>
             <Grid item xs={9}>
               <div className={styles.formButtons}>
-                <h2>Form Creator</h2>
+                <h1>Form Creator</h1>
                 <Button variant="outlined" color="primary" onClick={() => setFormItems([])}>
                   Reset Form
                 </Button>
