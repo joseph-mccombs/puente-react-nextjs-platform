@@ -16,7 +16,6 @@ import FormTemplate from './FormTemplate';
 import styles from './index.module.scss';
 
 const COLLECTION = [
-  // { id: uuid(), text: 'Section title', fieldType: 'header' },
   { id: uuid(), text: 'Input - Number', fieldType: 'numberInput' },
   { id: uuid(), text: 'Input - Text', fieldType: 'input' },
   // { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },

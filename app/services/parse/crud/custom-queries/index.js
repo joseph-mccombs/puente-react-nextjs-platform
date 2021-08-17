@@ -4,6 +4,46 @@ import { Parse } from 'parse';
   * Performs a query based on the parameter defined in a column
   *
   * @example
+  * customMultiParamQueryService(1000,SurveyData,{
+        typeOfForm: 'Custom',
+        organizations: surveyingOrganization
+    })
+  *
+  * @param {number} limit Max limit of results
+  * @param {string} parseModel Name of Backend Model
+  * @param {object} parseParams object of key-value pairs of params
+  * @returns Results of Query
+  */
+function customMultiParamQueryService(limit = 5000, parseModel, parseParams) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const Model = Parse.Object.extend(parseModel);
+
+      const query = new Parse.Query(Model);
+
+      query.limit(limit);
+
+      query.descending('createdAt');
+
+      // for (const property in parseParams) {
+      //   query.equalTo(property, parseParams[property]);
+      // }
+
+      Object.entries(parseParams).forEach((e) => query.equalTo(e[0], e[1]));
+
+      query.find().then((records) => {
+        resolve(records);
+      }, (error) => {
+        reject(error);
+      });
+    }, 1500);
+  });
+}
+
+/**
+  * Performs a query based on the parameter defined in a column
+  *
+  * @example
   * customQueryService(0,1000,SurveyData,organization,Puente)
   *
   * @param {number} offset First number
@@ -53,4 +93,4 @@ function removeQueryService(parseModel, objectId) {
   });
 }
 
-export { customQueryService, removeQueryService };
+export { customMultiParamQueryService, customQueryService, removeQueryService };

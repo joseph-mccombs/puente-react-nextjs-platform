@@ -1,3 +1,19 @@
 .formMarketplace{
-  // width: 100%;
+  h1 {
+    text-align: center;
+  }
+
+  .searchbar {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+
+  .cards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+      margin-top: 3rem;
+  }
 }

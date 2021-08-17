@@ -3,10 +3,10 @@ import Page from 'app/components/templates/page-layout';
 import { useGlobalState } from 'app/store';
 import { useRouter } from 'next/router';
 
-export default function Forms() {
+export default function Manager() {
   const { contextManagment } = useGlobalState();
-
   const router = useRouter();
+
   return (
     <Page>
       <main className="container">
