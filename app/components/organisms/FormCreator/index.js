@@ -24,6 +24,7 @@ const COLLECTION = [
   { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
   { id: uuid(), text: 'Header', fieldType: 'header' },
   { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
+  { id: uuid(), text: 'Loop', fieldType: 'loop'},
 ];
 
 const formTypes = [
