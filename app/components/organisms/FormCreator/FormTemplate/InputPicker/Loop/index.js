@@ -11,7 +11,10 @@ const Loop = (props) => {
     removeValue,
   } = props;
 
-  const [questionsToRepeat, setQuestionsToRepeat] = useState(null);
+  const [numberQuestionsToRepeat, setNumberQuestionsToRepeat] = useState(null);
+  const [repeatQuestionsExceeded, setRepeatQuestionsExcceeded] = useState(false);
+  const [questionsToRepeat, setQuestionsToRepeat] = useState([])
+  const [doubleLoop, setDoubleLoop] = useState(false)
 
   const setValue = async (event) => {
     const { value, id } = event.target;
@@ -28,10 +31,42 @@ const Loop = (props) => {
   };
 
   const setQuestionsToRepeatValue = async (event) => {
+    setRepeatQuestionsExcceeded(false)
+    setDoubleLoop(false)
     const { value, id } = event.target;
     
     console.log(Number(value))
-    setQuestionsToRepeat(Number(value));
+    setNumberQuestionsToRepeat(Number(value));
+
+    let copiedFormItems = JSON.parse(JSON.stringify(formItems));
+    copiedFormItems.forEach((item, index) => {
+      console.log(item, index)
+      if(item.id === id) {
+        let repeatItems = [];
+        for(let i = index - value; i < index; i=i+1){
+          if (i >= 0) {
+            // geolocation is only feildtype that does not have a label
+            if(copiedFormItems[i]['fieldType'] !== 'geolocation'){
+              if (copiedFormItems[i]['fieldType'] === 'loop') {
+                setDoubleLoop(true)
+              }
+              repeatItems = repeatItems.concat(copiedFormItems[i]['label'])
+            } else if(copiedFormItems[i]['fieldType'] !== 'geolocation') {
+              repeatItems = repeatItems.concat('geolocation')
+            } else {
+              // loop
+              setDoubleLoop(true)
+            }
+          }
+          else {
+            setRepeatQuestionsExcceeded(true)
+          }
+        }
+        console.log("Repeat Items", repeatItems)
+        setQuestionsToRepeat(repeatItems)
+      }
+    });
+
     if (Number(value) != NaN) {
         const elementsIndex = formItems.findIndex((element) => element.id === id);
         console.log(elementsIndex)
@@ -50,16 +85,34 @@ const Loop = (props) => {
     <div className={styles.element}>
       {item.fieldType === 'loop' && (
         <div key={item.id}>
-          <h3>Loop Element</h3>
+          <h3>Repeat Group Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Loop" />
-          <h4>Number of Previous Questions to Repeat in Loop</h4>
+          <h4>Number of Previous Questions to Repeat in Group</h4>
           <input className={styles.input} type="text" value={item.numberQuestionsToRepeat || ''} id={item.id} onChange={setQuestionsToRepeatValue} placeholder="eg. 3" />
-          <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-          {questionsToRepeat === NaN && (
-            <h5>
-              Number of Previous Questions to repeat must be a number!
+          {doubleLoop === true && (
+            <h5 className={styles.error}>
+              ERROR! You're repeat group contains another repeat group, your form will break!
             </h5>
           )}
+          {numberQuestionsToRepeat !== numberQuestionsToRepeat && (
+            <h5 className={styles.error}>
+              ERROR! Number of Previous Questions to Repeat must be a Number!
+            </h5>
+          )}
+          {repeatQuestionsExceeded === true && (
+            <h5 className={styles.error}>
+              ERROR! You have repeated more questions than exist prior to the loop! Change value now!
+            </h5>
+          )}
+          {questionsToRepeat.length > 0 && (
+          <div>
+            <h4>Questions in Repeat Group (Values only reflect questions created prior to entering value. Re-enter number to see updated group)</h4>
+            {questionsToRepeat.map((question) => (
+              <h5>{question}</h5>
+            ))}
+          </div>
+          )}
+          <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
         </div>
       )}
     </div>
