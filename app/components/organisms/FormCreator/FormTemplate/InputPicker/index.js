@@ -2,8 +2,8 @@ import Geolocation from './Geolocation';
 import Header from './Header';
 import styles from './index.module.scss';
 import Input from './Input';
-import Select from './Select';
 import Loop from './Loop';
+import Select from './Select';
 
 const PaperInputPicker = (props) => {
   const {

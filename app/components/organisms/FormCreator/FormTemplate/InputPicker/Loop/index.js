@@ -1,6 +1,5 @@
 import { Button } from '@material-ui/core';
 import { useState } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import styles from './index.module.scss';
 
@@ -13,8 +12,8 @@ const Loop = (props) => {
 
   const [numberQuestionsToRepeat, setNumberQuestionsToRepeat] = useState(null);
   const [repeatQuestionsExceeded, setRepeatQuestionsExcceeded] = useState(false);
-  const [questionsToRepeat, setQuestionsToRepeat] = useState([])
-  const [doubleLoop, setDoubleLoop] = useState(false)
+  const [questionsToRepeat, setQuestionsToRepeat] = useState([]);
+  const [doubleLoop, setDoubleLoop] = useState(false);
 
   const setValue = async (event) => {
     const { value, id } = event.target;
@@ -31,53 +30,47 @@ const Loop = (props) => {
   };
 
   const setQuestionsToRepeatValue = async (event) => {
-    setRepeatQuestionsExcceeded(false)
-    setDoubleLoop(false)
+    setRepeatQuestionsExcceeded(false);
+    setDoubleLoop(false);
     const { value, id } = event.target;
-    
-    console.log(Number(value))
+
     setNumberQuestionsToRepeat(Number(value));
 
-    let copiedFormItems = JSON.parse(JSON.stringify(formItems));
-    copiedFormItems.forEach((item, index) => {
-      console.log(item, index)
-      if(item.id === id) {
+    const copiedFormItems = JSON.parse(JSON.stringify(formItems));
+    copiedFormItems.forEach((formItem, index) => {
+      if (formItem.id === id) {
         let repeatItems = [];
-        for(let i = index - value; i < index; i=i+1){
+        for (let i = index - value; i < index; i += 1) {
           if (i >= 0) {
             // geolocation is only feildtype that does not have a label
-            if(copiedFormItems[i]['fieldType'] !== 'geolocation'){
-              if (copiedFormItems[i]['fieldType'] === 'loop') {
-                setDoubleLoop(true)
+            if (copiedFormItems[i].fieldType !== 'geolocation') {
+              if (copiedFormItems[i].fieldType === 'loop') {
+                setDoubleLoop(true);
               }
-              repeatItems = repeatItems.concat(copiedFormItems[i]['label'])
-            } else if(copiedFormItems[i]['fieldType'] !== 'geolocation') {
-              repeatItems = repeatItems.concat('geolocation')
+              repeatItems = repeatItems.concat(copiedFormItems[i].label);
+            } else if (copiedFormItems[i].fieldType !== 'geolocation') {
+              repeatItems = repeatItems.concat('geolocation');
             } else {
               // loop
-              setDoubleLoop(true)
+              setDoubleLoop(true);
             }
-          }
-          else {
-            setRepeatQuestionsExcceeded(true)
+          } else {
+            setRepeatQuestionsExcceeded(true);
           }
         }
-        console.log("Repeat Items", repeatItems)
-        setQuestionsToRepeat(repeatItems)
+        setQuestionsToRepeat(repeatItems);
       }
     });
 
-    if (Number(value) != NaN) {
-        const elementsIndex = formItems.findIndex((element) => element.id === id);
-        console.log(elementsIndex)
-        const newArray = [...formItems];
-        newArray[elementsIndex] = {
+    if (!Number.isNaN(Number(value))) {
+      const elementsIndex = formItems.findIndex((element) => element.id === id);
+      const newArray = [...formItems];
+      newArray[elementsIndex] = {
         ...newArray[elementsIndex],
         numberQuestionsToRepeat: value,
-        };
-        console.log(newArray)
+      };
 
-        setFormItems(newArray);
+      setFormItems(newArray);
     }
   };
 
@@ -91,22 +84,26 @@ const Loop = (props) => {
           <input className={styles.input} type="text" value={item.numberQuestionsToRepeat || ''} id={item.id} onChange={setQuestionsToRepeatValue} placeholder="eg. 3" />
           {doubleLoop === true && (
             <h5 className={styles.error}>
-              ERROR! You're repeat group contains another repeat group, your form will break!
+              ERROR! Your repeat group contains another repeat group, your form will break!
             </h5>
           )}
-          {numberQuestionsToRepeat !== numberQuestionsToRepeat && (
+          {Number.isNaN(numberQuestionsToRepeat) && (
             <h5 className={styles.error}>
               ERROR! Number of Previous Questions to Repeat must be a Number!
             </h5>
           )}
           {repeatQuestionsExceeded === true && (
             <h5 className={styles.error}>
-              ERROR! You have repeated more questions than exist prior to the loop! Change value now!
+              ERROR! You have repeated more questions than exist prior to
+              the loop! Change value now!
             </h5>
           )}
           {questionsToRepeat.length > 0 && (
           <div>
-            <h4>Questions in Repeat Group (Values only reflect questions created prior to entering value. Re-enter number to see updated group)</h4>
+            <h4>
+              Questions in Repeat Group (Values only reflect questions created
+              prior to entering value. Re-enter number to see updated group)
+            </h4>
             {questionsToRepeat.map((question) => (
               <h5>{question}</h5>
             ))}
