@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';
 
@@ -14,6 +14,12 @@ const Loop = (props) => {
   const [repeatQuestionsExceeded, setRepeatQuestionsExcceeded] = useState(false);
   const [questionsToRepeat, setQuestionsToRepeat] = useState([]);
   const [doubleLoop, setDoubleLoop] = useState(false);
+  const [loopCount, setLoopCount] = useState(0);
+
+  useEffect(() => {
+    const loopFields = formItems.filter((element) => element.fieldType === 'loop');
+    setLoopCount(loopFields.length);
+  }, [formItems]);
 
   const setValue = async (event) => {
     const { value, id } = event.target;
@@ -98,6 +104,12 @@ const Loop = (props) => {
               the loop! Change value now!
             </h5>
           )}
+          {loopCount > 1 && (
+            <h5 className={styles.error}>
+              ERROR! There should be only one geolocation field per form.
+              Remove one before submission.
+            </h5>
+          )}
           {questionsToRepeat.length > 0 && (
           <div>
             <h4>
@@ -109,7 +121,6 @@ const Loop = (props) => {
             ))}
           </div>
           )}
-          <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
         </div>
       )}
     </div>
