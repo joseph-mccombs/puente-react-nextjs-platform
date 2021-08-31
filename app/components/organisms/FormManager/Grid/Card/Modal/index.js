@@ -8,49 +8,21 @@ import {
   Modal,
   TextField,
 } from '@material-ui/core';
-import { makeStyles } from '@material-ui/core/styles';
 import { updateObject } from 'app/services/parse';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  paper: {
-    position: 'absolute',
-    width: 400,
-    backgroundColor: theme.palette.background.paper,
-    border: '2px solid #000',
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
+import styles from './index.module.scss';
 
 const Modl = ({
   open, handleClose, row, workflows,
 }) => {
-  const classes = useStyles();
-  // getModalStyle is not a pure function, we roll the style only on the first render
-  const [modalStyle] = React.useState(getModalStyle);
-  const [newWorkflow, setNewWorkflow] = React.useState(false);
-  const [newWorkflowValue, setNewWorkflowValue] = React.useState('');
-  const [availableWorkflows, setAvailableWorkflows] = React.useState([]);
-  const [newWorksflowsAssigned, setNewWorkflowsAssigned] = React.useState([]);
+  const [newWorkflow, setNewWorkflow] = useState(false);
+  const [newWorkflowValue, setNewWorkflowValue] = useState('');
+  const [availableWorkflows, setAvailableWorkflows] = useState([]);
+  const [newWorksflowsAssigned, setNewWorkflowsAssigned] = useState([]);
 
   // function to filter available workflows to add to form
-  React.useEffect(() => {
+  useEffect(() => {
     let availWorkflows = workflows;
     if (row.workflows !== undefined && row.workflows.length !== 0) {
       row.workflows.forEach((element) => {
@@ -106,7 +78,7 @@ const Modl = ({
       aria-labelledby="simple-modal-title"
       aria-describedby="simple-modal-description"
     >
-      <div style={modalStyle} className={classes.paper}>
+      <div className={styles.paper}>
         <h3 id="simple-modal-description">
           Current Workflows Assigned:
         </h3>
@@ -122,7 +94,7 @@ const Modl = ({
         <FormControl component="fieldset">
           <FormLabel component="legend">New Workflow(s) to Assign</FormLabel>
           <FormGroup>
-            {availableWorkflows.map((workflow) => (
+            {availableWorkflows?.map((workflow) => (
               <FormControlLabel
                 value={workflow}
                 control={<Checkbox onChange={(event) => handleChange(event)} />}
