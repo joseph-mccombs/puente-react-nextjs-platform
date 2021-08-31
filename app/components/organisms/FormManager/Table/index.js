@@ -49,40 +49,45 @@ const FormManagerTable = ({
         action={handleRemove}
         actionText="Remove"
       />
-      <Table className={classes.table} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            {/* {data && headings.map((heading,index)=>(
+      { data !== undefined ? (
+        <Table className={classes.table} aria-label="simple table">
+          <TableHead>
+            <TableRow>
+              {/* {data && headings.map((heading,index)=>(
               <TableCell key={index}>{heading}</TableCell>
             ))} */}
-            <TableCell>Name</TableCell>
-            <TableCell align="right">Description</TableCell>
-            <TableCell align="right">Creation Date</TableCell>
-            <TableCell align="right">Updated Date</TableCell>
-            <TableCell align="right">Actions</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {data.map((row) => (
-            <TableRow key={row.name}>
-              <TableCell component="th" scope="row">
-                {row.name}
-              </TableCell>
-              <TableCell align="right">{row.description}</TableCell>
-              <TableCell align="right">{row.createdAt}</TableCell>
-              <TableCell align="right">{row.updatedAt}</TableCell>
-              <TableCell align="right">
-                <Button aria-label="duplicate" onClick={() => handleDuplicate(row)}>
-                  Duplicate
-                </Button>
-                <Button aria-label="edit" onClick={() => handleModal(row)}>
-                  Remove
-                </Button>
-              </TableCell>
+              <TableCell>Name</TableCell>
+              <TableCell align="right">Description</TableCell>
+              <TableCell align="right">Creation Date</TableCell>
+              <TableCell align="right">Updated Date</TableCell>
+              <TableCell align="right">Actions</TableCell>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          </TableHead>
+
+          <TableBody>
+            {data.map((row) => (
+              <TableRow key={row.name}>
+                <TableCell component="th" scope="row">
+                  {row.name}
+                </TableCell>
+                <TableCell align="right">{row.description}</TableCell>
+                <TableCell align="right">{row.createdAt}</TableCell>
+                <TableCell align="right">{row.updatedAt}</TableCell>
+                <TableCell align="right">
+                  <Button aria-label="duplicate" onClick={() => handleDuplicate(row)}>
+                    Duplicate
+                  </Button>
+                  <Button aria-label="edit" onClick={() => handleModal(row)}>
+                    Remove
+                  </Button>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      ) : (
+        <h3>No Data Available</h3>
+      )}
     </TableContainer>
   );
 };
