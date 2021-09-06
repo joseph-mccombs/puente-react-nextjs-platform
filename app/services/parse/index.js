@@ -16,7 +16,6 @@ import {
   removeQueryService,
   residentIDQuery,
   retrieveHelloFunction,
-  updateObject,
 } from './crud';
 
 export {
@@ -35,5 +34,4 @@ export {
   retrieveHelloFunction,
   retrieveSignInFunction, retrieveSignOutFunction,
   retrieveSignUpFunction,
-  updateObject,
 };

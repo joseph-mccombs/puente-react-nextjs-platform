@@ -1,32 +1,17 @@
 import { Button } from '@material-ui/core';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { ActiveInput } from '../Utils';
 import styles from './index.module.scss';
 
 const Select = (props) => {
   const {
     item, formItems, setFormItems, removeValue,
-    disabledTotal, setDisabledTotal,
   } = props;
 
   const [options, setOptions] = React.useState([{
     id: uuid(), label: '', value: '', text: false, textQuestion: '', textKey: '',
   }]);
-
-  const [activeInput, setActiveInput] = useState(true);
-
-  useEffect(() => {
-    const elementsIndex = formItems.findIndex((element) => element.id === item.id);
-    const newArray = [...formItems];
-    newArray[elementsIndex] = {
-      ...newArray[elementsIndex],
-      // formikKey: `geolocation_${item.id.slice(0, 4)}`,
-      active: activeInput,
-    };
-    setFormItems(newArray);
-  }, [activeInput]);
 
   const populatePreFilledValues = () => {
     const { id } = item;
@@ -42,29 +27,18 @@ const Select = (props) => {
 
   const setValue = async (event) => {
     const { value, id } = event.target;
-    const formikKey = value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '');
 
     const elementsIndex = formItems.findIndex((element) => element.id === id);
     const newArray = [...formItems];
-
-    const newOptions = [...options];
-    let updatedOptions = [];
-
-    // handle change to textKey from formikKey perspective
-    newOptions.forEach((option) => {
-      const newOption = option;
-      const splitTextKey = option.textKey.split('__');
-      if (splitTextKey.length === 3) {
-        newOption.textKey = `__${formikKey}__${splitTextKey[2]}`;
-      }
-      updatedOptions = updatedOptions.concat(newOption);
-    });
-
+    // const newOptions = [...options];
+    // newOptions.forEach((option) => {
+    //   option.textKey.replace(`__${/.*_/g}__`, `__${value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '')}`);
+    // });
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
       label: value,
-      formikKey,
-      options: updatedOptions,
+      formikKey: value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, ''),
+      options,
     };
     setFormItems(newArray);
   };
@@ -82,7 +56,6 @@ const Select = (props) => {
 
   const editOption = async (event, questionId, valueToChange) => {
     const { value, id } = event.target;
-    const textKeyValue = value.replace(/[`~!@#$%^&*()+=|}[{'";:?.>,<\\|\]/]+|_/g, '');
 
     const elementsFormIndex = formItems.findIndex((element) => element.id === questionId);
 
@@ -90,23 +63,23 @@ const Select = (props) => {
 
     // const textOption = options[elementsIndex].text
     const newArray = [...options];
-    const formArray = [...formItems];
-    // handle textKey change from option value perspective
+
     if (valueToChange === 'optionValue') {
       newArray[elementsIndex] = {
         ...newArray[elementsIndex],
         label: value,
         value,
-        textKey: `__${formArray[elementsFormIndex].formikKey}__${textKeyValue}`,
       };
     } else if (valueToChange === 'textQuestion') {
       newArray[elementsIndex] = {
         ...newArray[elementsIndex],
         textQuestion: value,
+        textKey: value,
       };
     }
 
     setOptions(newArray);
+    const formArray = [...formItems];
 
     formArray[elementsFormIndex] = {
       ...formArray[elementsFormIndex],
@@ -161,16 +134,6 @@ const Select = (props) => {
 
           </div>
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-          {/* Active/Disabled component, remove false when needed again
-          Currently not in use. Left in to avoid removing other pieces for linting */}
-          {false && (
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-              disabledTotal={disabledTotal}
-              setDisabledTotal={setDisabledTotal}
-            />
-          )}
         </div>
       )}
       {item?.fieldType === 'selectMulti' && (
@@ -202,16 +165,6 @@ const Select = (props) => {
             ))}
           </div>
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-          {/* Active/Disabled component, remove false when needed again
-          Currently not in use. Left in to avoid removing other pieces for linting */}
-          {false && (
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-              disabledTotal={disabledTotal}
-              setDisabledTotal={setDisabledTotal}
-            />
-          )}
         </div>
       )}
     </div>
