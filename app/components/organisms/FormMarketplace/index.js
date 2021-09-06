@@ -32,8 +32,8 @@ const FormMarketplace = ({ context, router }) => {
   return (
     <div className={styles.formMarketplace}>
       <h1>Form Marketplace</h1>
-      <h2>Most Popular</h2>
-      <div className={styles.carousel}>
+      <h2>Most Popular Forms</h2>
+      {/* <div className={styles.carousel}>
         <div className={styles.box}>
           {formSpecs.map((form) => (
             <Card
@@ -47,7 +47,7 @@ const FormMarketplace = ({ context, router }) => {
       </div>
       <div className={styles.searchbar}>
         <SearchBar />
-      </div>
+      </div> */}
       <div className={styles.cards}>
         {formSpecs.map((form) => (
           <Card
