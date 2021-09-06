@@ -2,7 +2,6 @@ import { Card, SearchBar } from 'app/components/molecules';
 import React, { useEffect, useState } from 'react';
 
 import retrieveAllFormSpecs from './_data';
-import Carousel from './Carousel';
 import styles from './index.module.scss';
 
 const FormMarketplace = ({ context, router }) => {
@@ -33,7 +32,18 @@ const FormMarketplace = ({ context, router }) => {
     <div className={styles.formMarketplace}>
       <h1>Form Marketplace</h1>
       <h2>Most Popular</h2>
-      <Carousel items={formSpecs} />
+      <div className={styles.carousel}>
+        <div className={styles.box}>
+          {formSpecs.map((form) => (
+            <Card
+              key={form.objectId}
+              title={form.name}
+              description={form.description}
+              actions={[{ text: 'Duplicate', action: () => passDataToFormCreator(form) }]}
+            />
+          ))}
+        </div>
+      </div>
       <div className={styles.searchbar}>
         <SearchBar />
       </div>
@@ -43,7 +53,7 @@ const FormMarketplace = ({ context, router }) => {
             key={form.objectId}
             title={form.name}
             description={form.description}
-            action={() => passDataToFormCreator(form)}
+            actions={[{ text: 'Duplicate', action: () => passDataToFormCreator(form) }]}
           />
         ))}
       </div>
