@@ -1,7 +1,7 @@
 import {
   Button, Chip, CircularProgress,
   Grid, Input, MenuItem, NoSsr,
-  Select,
+  Select, TextField,
 } from '@material-ui/core';
 import useInput from 'app/modules/hooks';
 import { retrieveUniqueListOfOrganizations } from 'app/modules/parse';
@@ -40,6 +40,12 @@ function FormCreator({ context }) {
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
 
+  const [workflowTypes] = useState(['Puente', 'Assets', 'Marketplace']);
+  const [workflowNames, setWorkflowNames] = useState([]);
+  const [newWorkflowValue, setNewWorkflowValue] = useState('');
+
+  const [disabledTotal, setDisabledTotal] = useState(0);
+
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
@@ -71,11 +77,26 @@ function FormCreator({ context }) {
     setFormTypeNames(event.target.value);
   };
 
+  const handleWorkflowChange = (event) => {
+    setWorkflowNames(event.target.value);
+  };
+
+  const handleTextChange = (event) => {
+    setNewWorkflowValue(event.target.value);
+  };
+
   const submitCustomForm = () => {
     const formObject = {};
     formObject.fields = formItems;
     formObject.organizations = organizationNames;
     formObject.typeOfForm = formTypeNames;
+    let newWorkflowsToAdd;
+    if (newWorkflowValue !== '') {
+      newWorkflowsToAdd = workflowNames.concat([newWorkflowValue]);
+    } else {
+      newWorkflowsToAdd = workflowNames;
+    }
+    formObject.workflows = newWorkflowsToAdd;
     formObject.name = formName;
     formObject.class = '';
     formObject.description = formDescription;
@@ -186,6 +207,38 @@ function FormCreator({ context }) {
                   ))}
                 </Select>
               </div>
+              <div id="workflow">
+                <h2>Workflow</h2>
+                <div style={{ flexDirection: 'row' }}>
+                  <div style={{ flexDirection: 'column' }}>
+                    <Select
+                      labelId="mutiple-chip-organization"
+                      id="mutiple-chip"
+                      multiple
+                      value={workflowNames}
+                      onChange={handleWorkflowChange}
+                      input={<Input id="select-multiple-chip" />}
+                      renderValue={(selected) => (
+                        <div>
+                          {selected.map((value) => (
+                            <Chip key={value} label={value} />
+                          ))}
+                        </div>
+                      )}
+                    >
+                      {workflowTypes.map((workflowType) => (
+                        <MenuItem key={workflowType} value={workflowType}>
+                          {workflowType}
+                        </MenuItem>
+                      ))}
+                    </Select>
+                  </div>
+                  <div style={{ flexDirection: 'column' }}>
+                    <h3>Add New Workflow</h3>
+                    <TextField id="new-workflow" label="New Workflow" onChange={(event) => handleTextChange(event)} />
+                  </div>
+                </div>
+              </div>
               <div>
                 {setFormName}
               </div>
@@ -196,6 +249,8 @@ function FormCreator({ context }) {
                 formItems={formItems}
                 setFormItems={setFormItems}
                 removeValue={removeValue}
+                disabledTotal={disabledTotal}
+                setDisabledTotal={setDisabledTotal}
               />
             </Grid>
             <Grid item xs={3} className={styles.formBlock}>
@@ -205,7 +260,19 @@ function FormCreator({ context }) {
           </Grid>
         </DragDropContext>
       </NoSsr>
+      <style jsx>
+        {`
+        .conatiner {
+          flexDirection: 'row'
+        }
 
+        .contentSplit {
+          flexDirection: 'column'
+        }
+        
+        `}
+
+      </style>
     </div>
   );
 }

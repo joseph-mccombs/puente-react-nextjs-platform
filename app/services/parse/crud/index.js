@@ -45,6 +45,16 @@ function getObjectsByGeolocation(params) {
   });
 }
 
+function updateObject(params) {
+  return new Promise((resolve, reject) => {
+    Parse.Cloud.run('updateObject', params).then((result) => {
+      resolve(result);
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
 export {
   customMultiParamQueryService,
   customQueryService,
@@ -54,4 +64,5 @@ export {
   removeQueryService,
   residentIDQuery,
   retrieveHelloFunction,
+  updateObject,
 };
