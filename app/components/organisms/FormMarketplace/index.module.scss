@@ -3,6 +3,16 @@
     text-align: center;
   }
 
+  .carousel {
+    flex: 1;
+    display: flex;
+    overflow: auto;
+    .box {
+      display: flex;
+      min-height: min-content; /* needs vendor prefixes */
+    }
+  }
+
   .searchbar {
     align-items: center;
     display: flex;
