@@ -88,6 +88,7 @@ const Loop = (props) => {
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Loop" />
           <h4>Number of Previous Questions to Repeat in Group</h4>
           <input className={styles.input} type="text" value={item.numberQuestionsToRepeat || ''} id={item.id} onChange={setQuestionsToRepeatValue} placeholder="eg. 3" />
+          <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
           {doubleLoop === true && (
             <h5 className={styles.error}>
               ERROR! Your repeat group contains another repeat group, your form will break!
