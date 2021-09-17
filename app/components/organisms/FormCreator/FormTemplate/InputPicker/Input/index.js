@@ -82,7 +82,7 @@ const Input = (props) => {
       )}
       {item.fieldType === 'inputSideLabel' && (
         <div key={item.id}>
-          <h3>Number Input Element</h3>
+          <h3>Input (Side Label) Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <input className={styles.input} type="text" value={item.sideLabel || ''} id={item.id} onChange={(e) => setValue(e, 'sideLabel')} placeholder="Side Label" />
           <Button role="button" variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
