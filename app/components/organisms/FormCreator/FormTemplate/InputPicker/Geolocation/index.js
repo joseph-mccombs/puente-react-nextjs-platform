@@ -21,7 +21,7 @@ const Input = (props) => {
     newArray[elementsIndex] = {
       ...newArray[elementsIndex],
       active: activeInput,
-      formikKey: `geolocation_${item?.id?.slice(0, 4)}`
+      formikKey: `geolocation_${item?.id?.slice(0, 4)}`,
     };
     setFormItems(newArray);
   }, [activeInput]);
