@@ -18,12 +18,14 @@ import styles from './index.module.scss';
 const COLLECTION = [
   { id: uuid(), text: 'Input - Number', fieldType: 'numberInput' },
   { id: uuid(), text: 'Input - Text', fieldType: 'input' },
+  { id: uuid(), text: 'Input - Side Label', fieldType: 'inputSideLabel' },
   // { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },
   // { id: uuid(), text: 'Input - Number - Multiple in a Row', fieldType: 'multiInputRowNum' },
   { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
   { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
   { id: uuid(), text: 'Header', fieldType: 'header' },
   { id: uuid(), text: 'Geolocation', fieldType: 'geolocation' },
+  { id: uuid(), text: 'Repeat Group', fieldType: 'loop' },
 ];
 
 const formTypes = [

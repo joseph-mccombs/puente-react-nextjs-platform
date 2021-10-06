@@ -2,6 +2,7 @@ import Geolocation from './Geolocation';
 import Header from './Header';
 import styles from './index.module.scss';
 import Input from './Input';
+import Loop from './Loop';
 import Select from './Select';
 
 const PaperInputPicker = (props) => {
@@ -51,6 +52,12 @@ const PaperInputPicker = (props) => {
         removeValue={removeValue}
         disabledTotal={disabledTotal}
         setDisabledTotal={setDisabledTotal}
+      />
+      <Loop
+        item={item}
+        formItems={formItems}
+        setFormItems={setFormItems}
+        removeValue={removeValue}
       />
     </div>
   );
