@@ -30,6 +30,7 @@ const FormManager = ({ context, router }) => {
     retrieveCustomData(organization).then((records) => {
       const tableDataByCategory = {};
       records.forEach((record) => {
+        if (record.active !== 'false') {
         if (!isArray(record.workflows) || record.workflows.length < 1) {
           if ('No Workflow Assigned' in tableDataByCategory) {
             tableDataByCategory['No Workflow Assigned'] = tableDataByCategory['No Workflow Assigned'].concat([record]);
@@ -45,6 +46,7 @@ const FormManager = ({ context, router }) => {
             }
           });
         }
+      }
       });
       setPuenteData(tableDataByCategory.Puente);
       setNoWorkflowData(tableDataByCategory['No Workflow Assigned']);
