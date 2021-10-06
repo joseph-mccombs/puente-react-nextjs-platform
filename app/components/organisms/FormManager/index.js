@@ -31,22 +31,22 @@ const FormManager = ({ context, router }) => {
       const tableDataByCategory = {};
       records.forEach((record) => {
         if (record.active !== 'false') {
-        if (!isArray(record.workflows) || record.workflows.length < 1) {
-          if ('No Workflow Assigned' in tableDataByCategory) {
-            tableDataByCategory['No Workflow Assigned'] = tableDataByCategory['No Workflow Assigned'].concat([record]);
-          } else {
-            tableDataByCategory['No Workflow Assigned'] = [record];
-          }
-        } else if (isArray(record.workflows)) {
-          record.workflows.forEach((workflow) => {
-            if (workflow in tableDataByCategory) {
-              tableDataByCategory[workflow] = tableDataByCategory[workflow].concat([record]);
+          if (!isArray(record.workflows) || record.workflows.length < 1) {
+            if ('No Workflow Assigned' in tableDataByCategory) {
+              tableDataByCategory['No Workflow Assigned'] = tableDataByCategory['No Workflow Assigned'].concat([record]);
             } else {
-              tableDataByCategory[workflow] = [record];
+              tableDataByCategory['No Workflow Assigned'] = [record];
             }
-          });
+          } else if (isArray(record.workflows)) {
+            record.workflows.forEach((workflow) => {
+              if (workflow in tableDataByCategory) {
+                tableDataByCategory[workflow] = tableDataByCategory[workflow].concat([record]);
+              } else {
+                tableDataByCategory[workflow] = [record];
+              }
+            });
+          }
         }
-      }
       });
       setPuenteData(tableDataByCategory.Puente);
       setNoWorkflowData(tableDataByCategory['No Workflow Assigned']);
