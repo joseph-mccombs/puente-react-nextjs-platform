@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Modal from 'app/components/molecules/modal';
-import { removeQueryService } from 'app/services/parse';
+import { updateObject } from 'app/services/parse';
 import React, { useState } from 'react';
 
 const useStyles = makeStyles({
@@ -35,7 +35,15 @@ const FormManagerTable = ({
     setSelectedForm(row);
   };
   const handleRemove = () => {
-    removeQueryService('FormSpecificationsV2', selectedForm.objectId);
+    const params = {
+      parseClass: 'FormSpecificationsV2',
+      parseClassID: selectedForm.objectId,
+      localObject: {
+        active: 'false',
+      },
+    };
+
+    updateObject(params);
     retrieveCustomData(organization);
     setOpen(!open);
   };

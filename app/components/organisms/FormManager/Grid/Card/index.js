@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import FolderOpenOutlinedIcon from '@material-ui/icons/FolderOpenOutlined';
 import { Modal } from 'app/components/molecules';
-import { removeQueryService } from 'app/services/parse';
+import { updateObject } from 'app/services/parse';
 import { useState } from 'react';
 
 import styles from './index.module.scss';
@@ -38,7 +38,15 @@ const Card = ({
   };
 
   const handleRemove = () => {
-    removeQueryService('FormSpecificationsV2', selectedForm.objectId);
+    const params = {
+      parseClass: 'FormSpecificationsV2',
+      parseClassID: selectedForm.objectId,
+      localObject: {
+        active: 'false',
+      },
+    };
+
+    updateObject(params);
     retrieveCustomData(organization);
     setOpen(!open);
   };
