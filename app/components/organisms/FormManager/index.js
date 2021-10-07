@@ -64,14 +64,15 @@ const FormManager = ({ context, router }) => {
     setOrganization(event.target.value);
   };
 
-  const passDataToFormCreator = (data) => {
+  const passDataToFormCreator = (action, data) => {
     const href = '/forms/form-creator';
 
-    const action = JSON.stringify({
-      key: href,
-      action: 'duplicate',
-    });
-    context.addPropToStore(action, data); // contextManagement.removeFromGlobalStoreData(key);
+    const storedData = {
+      action,
+      data,
+    };
+
+    context.addPropToStore(href, storedData); // contextManagement.removeFromGlobalStoreData(key);
     router.push(href);
   };
 

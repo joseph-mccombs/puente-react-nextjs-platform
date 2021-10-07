@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import useInput from 'app/modules/hooks';
 import { retrieveUniqueListOfOrganizations } from 'app/modules/parse';
-import { postObjectsToClass } from 'app/services/parse';
+import { postObjectsToClass, updateObject } from 'app/services/parse';
 import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
@@ -34,10 +34,11 @@ const formTypes = [
 ];
 
 function FormCreator({ context }) {
-  const [formName, setFormName] = useInput({ type: 'text', placeholder: 'Form Name' });
-  const [formDescription, setFormDescription] = useInput({ type: 'text', placeholder: 'Form Description' });
+  const [formName, setFormName] = useState('')
+  const [formDescription, setFormDescription] = useState('');
   const [formItems, setFormItems] = useState([]);
   const [formTypeNames, setFormTypeNames] = useState([]);
+  const [formId, setFormId] = useState();
 
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
@@ -47,24 +48,25 @@ function FormCreator({ context }) {
   const [newWorkflowValue, setNewWorkflowValue] = useState('');
 
   const [disabledTotal, setDisabledTotal] = useState(0);
+  const [submissionType, setSubmissionType] = useState('');
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
     });
 
-    const action = JSON.stringify({
-      key: '/forms/form-creator',
-      action: 'duplicate',
-    });
+    if (context.store['/forms/form-creator']) {
+      const { data, action } = context.store['/forms/form-creator'];
 
-    if (context.store.has(action)) {
-      // Run duplicate logic
-      const form = context.store.get(action);
+      setSubmissionType(action);
+
       const {
-        typeOfForm, fields, organizations: orgs,
-      } = form;
+        typeOfForm, fields, organizations: orgs, objectId, name, description
+      } = data;
 
+      setFormId(objectId)
+      setFormName(name)
+      setFormDescription(description)
       setFormTypeNames(typeOfForm || []);
       setOrganizationNames(orgs || []);
       setFormItems(fields);
@@ -104,15 +106,27 @@ function FormCreator({ context }) {
     formObject.description = formDescription;
     formObject.customForm = true;
 
+    console.log(formObject);
+
     const postParams = {
       parseClass: 'FormSpecificationsV2',
       localObject: formObject,
     };
-    postObjectsToClass(postParams).then(() => {
-      console.log(postParams); //eslint-disable-line
-    }).catch((err) => {
-      console.log(err); //eslint-disable-line
-    });
+
+    if (submissionType === 'edit') {
+      postParams.parseClassID = formId;
+      updateObject(postParams).then((response) => {
+        console.log(response); //eslint-disable-line
+      }).catch((err) => {
+        console.log(err); //eslint-disable-line
+      });
+    } else {
+      postObjectsToClass(postParams).then(() => {
+        console.log(postParams); //eslint-disable-line
+      }).catch((err) => {
+        console.log(err); //eslint-disable-line
+      });
+    }
   };
 
   const removeValue = (id) => {
@@ -158,6 +172,9 @@ function FormCreator({ context }) {
                 <Button variant="contained" color="primary" onClick={submitCustomForm}>
                   Submit
                 </Button>
+              </div>
+              <div>
+                <p className={styles.formBlob}>{submissionType}</p>
               </div>
               <div id="organization">
                 <h2>Organization(s)</h2>
@@ -242,10 +259,20 @@ function FormCreator({ context }) {
                 </div>
               </div>
               <div>
-                {setFormName}
+                <input
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
+                  type='text'
+                  placeholder='Form Name'
+                />
               </div>
               <div>
-                {setFormDescription}
+                <input
+                  value={formDescription}
+                  onChange={(e) => setFormDescription(e.target.value)}
+                  type='text'
+                  placeholder='Form Description'
+                />
               </div>
               <FormTemplate
                 formItems={formItems}

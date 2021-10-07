@@ -21,7 +21,7 @@ const Card = ({
   const [selectedForm, setSelectedForm] = useState();
 
   const handleDuplicate = (object) => {
-    passDataToFormCreator(object);
+    passDataToFormCreator('duplicate', object);
   };
 
   const handleClick = (event) => {
