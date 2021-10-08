@@ -3,7 +3,6 @@ import {
   Grid, Input, MenuItem, NoSsr,
   Select, TextField,
 } from '@material-ui/core';
-import useInput from 'app/modules/hooks';
 import { retrieveUniqueListOfOrganizations } from 'app/modules/parse';
 import { postObjectsToClass, updateObject } from 'app/services/parse';
 import { useEffect, useState } from 'react';
@@ -89,6 +88,15 @@ function FormCreator({ context }) {
     setNewWorkflowValue(event.target.value);
   };
 
+  const clearForm = () =>{
+    setFormId('')
+    setFormName('')
+    setFormDescription('')
+    setFormTypeNames([]);
+    setOrganizationNames([]);
+    setFormItems([]);
+  }
+
   const submitCustomForm = () => {
     const formObject = {};
     formObject.fields = formItems;
@@ -166,7 +174,7 @@ function FormCreator({ context }) {
             <Grid item xs={9}>
               <div className={styles.formButtons}>
                 <h1>Form Creator</h1>
-                <Button variant="outlined" color="primary" onClick={() => setFormItems([])}>
+                <Button variant="outlined" color="primary" onClick={() => clearForm()}>
                   Reset Form
                 </Button>
                 <Button variant="contained" color="primary" onClick={submitCustomForm}>
