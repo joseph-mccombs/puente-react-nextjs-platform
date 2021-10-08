@@ -70,7 +70,7 @@ const Card = ({
       <FolderOpenOutlinedIcon
         fontSize="large"
       />
-      <Button style={{ marginLeft: 'auto' }} onClick={handleClick}>
+      <Button style={{ marginBottom:'20px'}} onClick={handleClick}>
         Options
       </Button>
       <Menu
