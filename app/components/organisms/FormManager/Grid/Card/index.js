@@ -50,7 +50,7 @@ const Card = ({
   const handleWorkflowModal = () => {
     setWorkflowModalOpen(!open);
   };
-  
+
   return (
     <div className={styles.card}>
       <Modal
@@ -70,7 +70,7 @@ const Card = ({
       <FolderOpenOutlinedIcon
         fontSize="large"
       />
-      <Button style={{ marginBottom:'20px'}} onClick={handleClick}>
+      <Button style={{ marginBottom: '20px' }} onClick={handleClick}>
         Options
       </Button>
       <Menu
