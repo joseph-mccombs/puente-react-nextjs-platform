@@ -1,8 +1,10 @@
 import {
   Button, Chip, CircularProgress,
   Grid, Input, MenuItem, NoSsr,
-  Select, TextField,
+  Select, Snackbar,
+  TextField,
 } from '@material-ui/core';
+import { Alert } from '@material-ui/lab';
 import { retrieveUniqueListOfOrganizations } from 'app/modules/parse';
 import { postObjectsToClass, updateObject } from 'app/services/parse';
 import { useEffect, useState } from 'react';
@@ -18,8 +20,6 @@ const COLLECTION = [
   { id: uuid(), text: 'Input - Number', fieldType: 'numberInput' },
   { id: uuid(), text: 'Input - Text', fieldType: 'input' },
   { id: uuid(), text: 'Input - Side Label', fieldType: 'inputSideLabel' },
-  // { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },
-  // { id: uuid(), text: 'Input - Number - Multiple in a Row', fieldType: 'multiInputRowNum' },
   { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
   { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
   { id: uuid(), text: 'Header', fieldType: 'header' },
@@ -33,7 +33,7 @@ const formTypes = [
 ];
 
 function FormCreator({ context }) {
-  const [formName, setFormName] = useState('')
+  const [formName, setFormName] = useState('');
   const [formDescription, setFormDescription] = useState('');
   const [formItems, setFormItems] = useState([]);
   const [formTypeNames, setFormTypeNames] = useState([]);
@@ -48,6 +48,7 @@ function FormCreator({ context }) {
 
   const [disabledTotal, setDisabledTotal] = useState(0);
   const [submissionType, setSubmissionType] = useState('');
+  const [submission, setSubmission] = useState(false);
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
@@ -60,12 +61,12 @@ function FormCreator({ context }) {
       setSubmissionType(action);
 
       const {
-        typeOfForm, fields, organizations: orgs, objectId, name, description
+        typeOfForm, fields, organizations: orgs, objectId, name, description,
       } = data;
 
-      setFormId(objectId)
-      setFormName(name)
-      setFormDescription(description)
+      setFormId(objectId);
+      setFormName(name);
+      setFormDescription(description);
       setFormTypeNames(typeOfForm || []);
       setOrganizationNames(orgs || []);
       setFormItems(fields);
@@ -88,14 +89,14 @@ function FormCreator({ context }) {
     setNewWorkflowValue(event.target.value);
   };
 
-  const clearForm = () =>{
-    setFormId('')
-    setFormName('')
-    setFormDescription('')
+  const clearForm = () => {
+    setFormId('');
+    setFormName('');
+    setFormDescription('');
     setFormTypeNames([]);
     setOrganizationNames([]);
     setFormItems([]);
-  }
+  };
 
   const submitCustomForm = () => {
     const formObject = {};
@@ -114,8 +115,6 @@ function FormCreator({ context }) {
     formObject.description = formDescription;
     formObject.customForm = true;
 
-    console.log(formObject);
-
     const postParams = {
       parseClass: 'FormSpecificationsV2',
       localObject: formObject,
@@ -125,11 +124,15 @@ function FormCreator({ context }) {
       postParams.parseClassID = formId;
       updateObject(postParams).then((response) => {
         console.log(response); //eslint-disable-line
+        setSubmission(true);
+        setTimeout(() => setSubmission(false), 3000);
       }).catch((err) => {
         console.log(err); //eslint-disable-line
       });
     } else {
       postObjectsToClass(postParams).then(() => {
+        setSubmission(true);
+        setTimeout(() => setSubmission(false), 3000);
         console.log(postParams); //eslint-disable-line
       }).catch((err) => {
         console.log(err); //eslint-disable-line
@@ -169,6 +172,11 @@ function FormCreator({ context }) {
   return (
     <div className={styles.formCreator}>
       <NoSsr>
+        <Snackbar open={submission} autoHideDuration={6000}>
+          <Alert variant="filled" severity="success">
+            Success!
+          </Alert>
+        </Snackbar>
         <DragDropContext onDragEnd={onDragEnd}>
           <Grid container>
             <Grid item xs={9}>
@@ -270,16 +278,16 @@ function FormCreator({ context }) {
                 <input
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
-                  type='text'
-                  placeholder='Form Name'
+                  type="text"
+                  placeholder="Form Name"
                 />
               </div>
               <div>
                 <input
                   value={formDescription}
                   onChange={(e) => setFormDescription(e.target.value)}
-                  type='text'
-                  placeholder='Form Description'
+                  type="text"
+                  placeholder="Form Description"
                 />
               </div>
               <FormTemplate
