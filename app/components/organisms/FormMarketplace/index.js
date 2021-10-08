@@ -5,22 +5,23 @@ import retrieveAllFormSpecs from './_data';
 import styles from './index.module.scss';
 
 const FormMarketplace = ({ context, router }) => {
-  const passDataToFormCreator = (action, data) => {
-    const href = '/forms/form-creator';
-
-    const prop = JSON.stringify({
-      key: href,
-      action,
-    });
-    context.addPropToStore(prop, data); // contextManagement.removeFromGlobalStoreData(key);
-    router.push(href);
-  };
-
   const [formSpecs, setFormSpecs] = useState([]);
 
   useEffect(() => {
     refreshMarketplace();
   }, []);
+
+  const passDataToFormCreator = (action, data) => {
+    const href = '/forms/form-creator';
+
+    const storedData = {
+      action,
+      data,
+    };
+
+    context.addPropToStore(href, storedData); // contextManagement.removeFromGlobalStoreData(key);
+    router.push(href);
+  };
 
   const refreshMarketplace = () => retrieveAllFormSpecs({
     typeOfForm: 'Marketplace',
