@@ -27,7 +27,11 @@ const FormManagerTable = ({
   const classes = useStyles();
 
   const handleDuplicate = (object) => {
-    passDataToFormCreator(object);
+    passDataToFormCreator('duplicate', object);
+  };
+
+  const handleEdit = (object) => {
+    passDataToFormCreator('edit', object);
   };
 
   const handleModal = (row) => {
@@ -85,7 +89,10 @@ const FormManagerTable = ({
                   <Button aria-label="duplicate" onClick={() => handleDuplicate(row)}>
                     Duplicate
                   </Button>
-                  <Button aria-label="edit" onClick={() => handleModal(row)}>
+                  <Button aria-label="edit" onClick={() => handleEdit(row)}>
+                    Edit
+                  </Button>
+                  <Button aria-label="remove" onClick={() => handleModal(row)}>
                     Remove
                   </Button>
                 </TableCell>

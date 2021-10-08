@@ -20,10 +20,6 @@ const Card = ({
   const [workflowModalOpen, setWorkflowModalOpen] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
 
-  const handleDuplicate = (object) => {
-    passDataToFormCreator(object);
-  };
-
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
@@ -54,6 +50,7 @@ const Card = ({
   const handleWorkflowModal = () => {
     setWorkflowModalOpen(!open);
   };
+  
   return (
     <div className={styles.card}>
       <Modal
@@ -73,7 +70,7 @@ const Card = ({
       <FolderOpenOutlinedIcon
         fontSize="large"
       />
-      <Button style={{ marginLeft: 'auto' }} onClick={handleClick}>
+      <Button style={{ marginBottom:'20px'}} onClick={handleClick}>
         Options
       </Button>
       <Menu
@@ -83,7 +80,8 @@ const Card = ({
         open={Boolean(anchorEl)}
         onClose={(handleClose)}
       >
-        <MenuItem onClick={() => handleDuplicate(row)}>Duplicate</MenuItem>
+        <MenuItem onClick={() => passDataToFormCreator('duplicate', row)}>Duplicate</MenuItem>
+        <MenuItem onClick={() => passDataToFormCreator('edit', row)}>Edit</MenuItem>
         <MenuItem onClick={() => handleModal(row)}>Remove</MenuItem>
         <MenuItem onClick={() => handleWorkflowModal()}>Add Workflow</MenuItem>
       </Menu>
