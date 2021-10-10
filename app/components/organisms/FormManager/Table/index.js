@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Modal from 'app/components/molecules/modal';
-import { removeQueryService } from 'app/services/parse';
+import { updateObject } from 'app/services/parse';
 import React, { useState } from 'react';
 
 const useStyles = makeStyles({
@@ -27,7 +27,11 @@ const FormManagerTable = ({
   const classes = useStyles();
 
   const handleDuplicate = (object) => {
-    passDataToFormCreator(object);
+    passDataToFormCreator('duplicate', object);
+  };
+
+  const handleEdit = (object) => {
+    passDataToFormCreator('edit', object);
   };
 
   const handleModal = (row) => {
@@ -35,7 +39,15 @@ const FormManagerTable = ({
     setSelectedForm(row);
   };
   const handleRemove = () => {
-    removeQueryService('FormSpecificationsV2', selectedForm.objectId);
+    const params = {
+      parseClass: 'FormSpecificationsV2',
+      parseClassID: selectedForm.objectId,
+      localObject: {
+        active: 'false',
+      },
+    };
+
+    updateObject(params);
     retrieveCustomData(organization);
     setOpen(!open);
   };
@@ -77,7 +89,10 @@ const FormManagerTable = ({
                   <Button aria-label="duplicate" onClick={() => handleDuplicate(row)}>
                     Duplicate
                   </Button>
-                  <Button aria-label="edit" onClick={() => handleModal(row)}>
+                  <Button aria-label="edit" onClick={() => handleEdit(row)}>
+                    Edit
+                  </Button>
+                  <Button aria-label="remove" onClick={() => handleModal(row)}>
                     Remove
                   </Button>
                 </TableCell>
