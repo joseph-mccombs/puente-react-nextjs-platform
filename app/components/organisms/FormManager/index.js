@@ -29,7 +29,9 @@ const FormManager = ({ context, router }) => {
   useEffect(() => {
     retrieveCustomData(organization).then((records) => {
       const tableDataByCategory = {};
+      console.log(records)
       records.forEach((record) => {
+        
         if (!isArray(record.workflows) || record.workflows.length < 1) {
           if ('No Workflow Assigned' in tableDataByCategory) {
             tableDataByCategory['No Workflow Assigned'] = tableDataByCategory['No Workflow Assigned'].concat([record]);
