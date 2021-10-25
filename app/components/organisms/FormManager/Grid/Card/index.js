@@ -5,7 +5,7 @@ import {
 } from '@material-ui/core';
 import FolderOpenOutlinedIcon from '@material-ui/icons/FolderOpenOutlined';
 import { Modal } from 'app/components/molecules';
-import { removeQueryService } from 'app/services/parse';
+import { updateObject } from 'app/services/parse';
 import { useState } from 'react';
 
 import styles from './index.module.scss';
@@ -19,10 +19,6 @@ const Card = ({
   const [open, setOpen] = useState(false);
   const [workflowModalOpen, setWorkflowModalOpen] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
-
-  const handleDuplicate = (object) => {
-    passDataToFormCreator(object);
-  };
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -38,7 +34,15 @@ const Card = ({
   };
 
   const handleRemove = () => {
-    removeQueryService('FormSpecificationsV2', selectedForm.objectId);
+    const params = {
+      parseClass: 'FormSpecificationsV2',
+      parseClassID: selectedForm.objectId,
+      localObject: {
+        active: 'false',
+      },
+    };
+
+    updateObject(params);
     retrieveCustomData(organization);
     setOpen(!open);
   };
@@ -46,6 +50,7 @@ const Card = ({
   const handleWorkflowModal = () => {
     setWorkflowModalOpen(!open);
   };
+
   return (
     <div className={styles.card}>
       <Modal
@@ -65,7 +70,7 @@ const Card = ({
       <FolderOpenOutlinedIcon
         fontSize="large"
       />
-      <Button style={{ marginLeft: 'auto' }} onClick={handleClick}>
+      <Button style={{ marginBottom: '20px' }} onClick={handleClick}>
         Options
       </Button>
       <Menu
@@ -75,7 +80,8 @@ const Card = ({
         open={Boolean(anchorEl)}
         onClose={(handleClose)}
       >
-        <MenuItem onClick={() => handleDuplicate(row)}>Duplicate</MenuItem>
+        <MenuItem onClick={() => passDataToFormCreator('duplicate', row)}>Duplicate</MenuItem>
+        <MenuItem onClick={() => passDataToFormCreator('edit', row)}>Edit</MenuItem>
         <MenuItem onClick={() => handleModal(row)}>Remove</MenuItem>
         <MenuItem onClick={() => handleWorkflowModal()}>Add Workflow</MenuItem>
       </Menu>

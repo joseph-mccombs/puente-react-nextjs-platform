@@ -1,11 +1,12 @@
 import {
   Button, Chip, CircularProgress,
   Grid, Input, MenuItem, NoSsr,
-  Select, TextField,
+  Select, Snackbar,
+  TextField,
 } from '@material-ui/core';
-import useInput from 'app/modules/hooks';
+import { Alert } from '@material-ui/lab';
 import { retrieveUniqueListOfOrganizations } from 'app/modules/parse';
-import { postObjectsToClass } from 'app/services/parse';
+import { postObjectsToClass, updateObject } from 'app/services/parse';
 import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
@@ -19,8 +20,6 @@ const COLLECTION = [
   { id: uuid(), text: 'Input - Number', fieldType: 'numberInput' },
   { id: uuid(), text: 'Input - Text', fieldType: 'input' },
   { id: uuid(), text: 'Input - Side Label', fieldType: 'inputSideLabel' },
-  // { id: uuid(), text: 'Input - Multiple in a Row', fieldType: 'multiInputRow' },
-  // { id: uuid(), text: 'Input - Number - Multiple in a Row', fieldType: 'multiInputRowNum' },
   { id: uuid(), text: 'Select - Single Choice', fieldType: 'select' },
   { id: uuid(), text: 'Select - Multiple Choice', fieldType: 'selectMulti' },
   { id: uuid(), text: 'Header', fieldType: 'header' },
@@ -34,10 +33,11 @@ const formTypes = [
 ];
 
 function FormCreator({ context }) {
-  const [formName, setFormName] = useInput({ type: 'text', placeholder: 'Form Name' });
-  const [formDescription, setFormDescription] = useInput({ type: 'text', placeholder: 'Form Description' });
+  const [formName, setFormName] = useState('');
+  const [formDescription, setFormDescription] = useState('');
   const [formItems, setFormItems] = useState([]);
   const [formTypeNames, setFormTypeNames] = useState([]);
+  const [formId, setFormId] = useState();
 
   const [organizationNames, setOrganizationNames] = useState([]);
   const [organizations, setOrganizations] = useState([]);
@@ -47,6 +47,8 @@ function FormCreator({ context }) {
   const [newWorkflowValue, setNewWorkflowValue] = useState('');
 
   const [disabledTotal, setDisabledTotal] = useState(0);
+  const [submissionType, setSubmissionType] = useState('');
+  const [submission, setSubmission] = useState(false);
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
@@ -54,18 +56,18 @@ function FormCreator({ context }) {
       setOrganizations(results);
     });
 
-    const action = JSON.stringify({
-      key: '/forms/form-creator',
-      action: 'duplicate',
-    });
+    if (context.store['/forms/form-creator']) {
+      const { data, action } = context.store['/forms/form-creator'];
 
-    if (context.store.has(action)) {
-      // Run duplicate logic
-      const form = context.store.get(action);
+      setSubmissionType(action);
+
       const {
-        typeOfForm, fields, organizations: orgs,
-      } = form;
+        typeOfForm, fields, organizations: orgs, objectId, name, description,
+      } = data;
 
+      setFormId(objectId);
+      setFormName(name);
+      setFormDescription(description);
       setFormTypeNames(typeOfForm || []);
       setOrganizationNames(orgs || []);
       setFormItems(fields);
@@ -86,6 +88,15 @@ function FormCreator({ context }) {
 
   const handleTextChange = (event) => {
     setNewWorkflowValue(event.target.value);
+  };
+
+  const clearForm = () => {
+    setFormId('');
+    setFormName('');
+    setFormDescription('');
+    setFormTypeNames([]);
+    setOrganizationNames([]);
+    setFormItems([]);
   };
 
   const submitCustomForm = () => {
@@ -109,11 +120,25 @@ function FormCreator({ context }) {
       parseClass: 'FormSpecificationsV2',
       localObject: formObject,
     };
-    postObjectsToClass(postParams).then(() => {
-      console.log(postParams); //eslint-disable-line
-    }).catch((err) => {
-      console.log(err); //eslint-disable-line
-    });
+
+    if (submissionType === 'edit') {
+      postParams.parseClassID = formId;
+      updateObject(postParams).then((response) => {
+        console.log(response); //eslint-disable-line
+        setSubmission(true);
+        setTimeout(() => setSubmission(false), 3000);
+      }).catch((err) => {
+        console.log(err); //eslint-disable-line
+      });
+    } else {
+      postObjectsToClass(postParams).then(() => {
+        setSubmission(true);
+        setTimeout(() => setSubmission(false), 3000);
+        console.log(postParams); //eslint-disable-line
+      }).catch((err) => {
+        console.log(err); //eslint-disable-line
+      });
+    }
   };
 
   const removeValue = (id) => {
@@ -148,17 +173,25 @@ function FormCreator({ context }) {
   return (
     <div className={styles.formCreator}>
       <NoSsr>
+        <Snackbar open={submission} autoHideDuration={6000}>
+          <Alert variant="filled" severity="success">
+            Success!
+          </Alert>
+        </Snackbar>
         <DragDropContext onDragEnd={onDragEnd}>
           <Grid container>
             <Grid item xs={9}>
               <div className={styles.formButtons}>
                 <h1>Form Creator</h1>
-                <Button variant="outlined" color="primary" onClick={() => setFormItems([])}>
+                <Button variant="outlined" color="primary" onClick={() => clearForm()}>
                   Reset Form
                 </Button>
                 <Button variant="contained" color="primary" onClick={submitCustomForm}>
                   Submit
                 </Button>
+              </div>
+              <div>
+                <p className={styles.formBlob}>{submissionType}</p>
               </div>
               <div id="organization">
                 <h2>Organization(s)</h2>
@@ -243,10 +276,20 @@ function FormCreator({ context }) {
                 </div>
               </div>
               <div>
-                {setFormName}
+                <input
+                  value={formName}
+                  onChange={(e) => setFormName(e.target.value)}
+                  type="text"
+                  placeholder="Form Name"
+                />
               </div>
               <div>
-                {setFormDescription}
+                <input
+                  value={formDescription}
+                  onChange={(e) => setFormDescription(e.target.value)}
+                  type="text"
+                  placeholder="Form Description"
+                />
               </div>
               <FormTemplate
                 formItems={formItems}

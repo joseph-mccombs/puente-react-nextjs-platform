@@ -31,21 +31,22 @@ const FormManager = ({ context, router }) => {
       const tableDataByCategory = {};
       console.log(records)
       records.forEach((record) => {
-        
-        if (!isArray(record.workflows) || record.workflows.length < 1) {
-          if ('No Workflow Assigned' in tableDataByCategory) {
-            tableDataByCategory['No Workflow Assigned'] = tableDataByCategory['No Workflow Assigned'].concat([record]);
-          } else {
-            tableDataByCategory['No Workflow Assigned'] = [record];
-          }
-        } else if (isArray(record.workflows)) {
-          record.workflows.forEach((workflow) => {
-            if (workflow in tableDataByCategory) {
-              tableDataByCategory[workflow] = tableDataByCategory[workflow].concat([record]);
+        if (record.active !== 'false') {
+          if (!isArray(record.workflows) || record.workflows.length < 1) {
+            if ('No Workflow Assigned' in tableDataByCategory) {
+              tableDataByCategory['No Workflow Assigned'] = tableDataByCategory['No Workflow Assigned'].concat([record]);
             } else {
-              tableDataByCategory[workflow] = [record];
+              tableDataByCategory['No Workflow Assigned'] = [record];
             }
-          });
+          } else if (isArray(record.workflows)) {
+            record.workflows.forEach((workflow) => {
+              if (workflow in tableDataByCategory) {
+                tableDataByCategory[workflow] = tableDataByCategory[workflow].concat([record]);
+              } else {
+                tableDataByCategory[workflow] = [record];
+              }
+            });
+          }
         }
       });
       setPuenteData(tableDataByCategory.Puente);
@@ -64,14 +65,15 @@ const FormManager = ({ context, router }) => {
     setOrganization(event.target.value);
   };
 
-  const passDataToFormCreator = (data) => {
+  const passDataToFormCreator = (action, data) => {
     const href = '/forms/form-creator';
 
-    const action = JSON.stringify({
-      key: href,
-      action: 'duplicate',
-    });
-    context.addPropToStore(action, data); // contextManagement.removeFromGlobalStoreData(key);
+    const storedData = {
+      action,
+      data,
+    };
+
+    context.addPropToStore(href, storedData); // contextManagement.removeFromGlobalStoreData(key);
     router.push(href);
   };
 
