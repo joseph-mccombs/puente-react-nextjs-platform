@@ -3,10 +3,13 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import theme from 'app/modules/theme';
 import { AppWrapper } from 'app/store'; // import based on where you put it
 import Head from 'next/head';
+import { appWithTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
 
-export default function MyApp(props) {
+import nextI18NextConfig from '../next-i18next.config.js';
+
+const App = (props) => {
   const { Component, pageProps } = props;
 
   React.useEffect(() => {
@@ -33,9 +36,11 @@ export default function MyApp(props) {
 
     </>
   );
-}
+};
 
-MyApp.propTypes = {
+export default appWithTranslation(App, nextI18NextConfig);
+
+App.propTypes = {
   Component: PropTypes.elementType.isRequired,
   pageProps: PropTypes.object.isRequired, //eslint-disable-line
 };

@@ -1,4 +1,4 @@
-import Page from 'app/components/templates/page-layout';
+import Page from 'app/components/templates/dashboard-layout';
 
 export default function Forms() {
   return (

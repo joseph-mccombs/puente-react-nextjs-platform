@@ -1,5 +1,5 @@
 import { Button } from '@material-ui/core';
-import Page from 'app/components/templates/page-layout';
+import Page from 'app/components/templates/dashboard-layout';
 import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/Viz';
 import dataQueryer from 'app/modules/apollo-grapql';
 import { useState } from 'react';

@@ -1,32 +1,27 @@
-import { Button as MaterialButton } from '@material-ui/core/Button';
-import { makeStyles } from '@material-ui/core/styles';
+import * as MaterialButton from '@material-ui/core/Button';
 import React from 'react';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-}));
-
-export default function Button({
-  variant,
-  color,
-  disabled,
-  text,
-}) {
-  const classes = useStyles();
+const Button = (props) => {
+  const {
+    variant,
+    color,
+    disabled,
+    text,
+    ...rest
+  } = props;
 
   return (
-    <div className={classes.root}>
-      <MaterialButton
+    <div>
+      <MaterialButton.default
+        {...rest}
         variant={variant || ''}
         color={color || ''}
         disabled={disabled || ''}
       >
         {text || ''}
-      </MaterialButton>
+      </MaterialButton.default>
     </div>
   );
-}
+};
+
+export default Button;

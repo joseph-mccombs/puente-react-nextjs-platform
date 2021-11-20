@@ -1,5 +1,5 @@
 import FormCreator from 'app/components/organisms/FormCreator';
-import Page from 'app/components/templates/page-layout';
+import Page from 'app/components/templates/dashboard-layout';
 import { useGlobalState } from 'app/store';
 
 import styles from './index.module.scss';

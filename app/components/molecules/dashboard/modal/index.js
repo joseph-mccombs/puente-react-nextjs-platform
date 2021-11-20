@@ -1,6 +1,6 @@
-import Button from '@material-ui/core/Button';
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
+import { Button } from 'app/components/atoms';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;
@@ -45,7 +45,7 @@ const Modl = ({
         <p id="simple-modal-description">
           {text}
         </p>
-        <Button variant="contained" onClick={action}>{actionText}</Button>
+        <Button variant="contained" onClick={action} text={actionText} />
       </div>
     </Modal>
   );

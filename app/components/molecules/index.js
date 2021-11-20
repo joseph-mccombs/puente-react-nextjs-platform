@@ -1,6 +1,4 @@
-import Card from './card';
-import Modal from './modal';
-import SearchBar from './search';
+import { Card, Modal, SearchBar } from './dashboard';
 
 export {
   Card,
