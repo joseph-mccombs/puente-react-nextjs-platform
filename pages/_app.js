@@ -6,6 +6,14 @@ import Head from 'next/head';
 import { appWithTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import React from 'react';
+/* import css vendors */
+import 'styles/landing-page/hamburger-menu.css';
+import '../node_modules/animate.css/animate.css';
+import 'styles/landing-page/animate-extends.css';
+import 'styles/landing-page/top-loading-bar.css';
+import 'styles/landing-page/page-transition.css';
+import 'styles/landing-page/slick/slick.css';
+import 'styles/landing-page/slick/slick-theme.css';
 
 import nextI18NextConfig from '../next-i18next.config.js';
 
