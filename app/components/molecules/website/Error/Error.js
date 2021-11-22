@@ -4,16 +4,18 @@ import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
+import routerLink from 'public/text/link';
 import React from 'react';
 
 import useStyles from './error-style';
 
 function Error(props) {
   const classes = useStyles();
-  const { errCode, text, t } = props;
+  const { errCode, text } = props;
+  const { t } = useTranslation('common');
   return (
     <div className={classes.errorWrap}>
-      <Container maxWidth="md">
+      <Container maxWidth="lg">
         <Grid container>
           <Grid item md={5} xs={12}>
             <div className={classes.flex}>
@@ -30,7 +32,7 @@ function Error(props) {
               <Typography>
                 {t('common:404_subtitle')}
               </Typography>
-              <Button variant="outlined" color="primary" href="/" size="large" className={classes.button}>
+              <Button variant="contained" color="secondary" href={routerLink.saas.home} className={classes.button}>
                 {t('common:back')}
               </Button>
             </div>
@@ -52,4 +54,4 @@ Error.defaultProps = {
   text: '',
 };
 
-export default withTranslation(['common'])(Error);
+export default Error;

@@ -1,7 +1,9 @@
 const link = {
-  agency: {
+  saas: {
     home: '/',
     contact: '/contact',
+    login: '/login',
+    register: '/register',
   },
 };
 

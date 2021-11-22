@@ -1,23 +1,24 @@
-import { useMediaQuery } from '@material-ui/core';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import Hidden from '@material-ui/core/Hidden';
-import { makeStyles, useTheme } from '@material-ui/core/styles';
+import { makeStyles } from '@material-ui/core/styles';
 import {
-  About,
-  CallAction,
-  CaseStudies,
-  Expertise,
-  Footer,
+  Banner,
+  CompanyLogo,
+  Counter,
+  Faq,
+  Feature,
+  FooterWithDeco,
   Header,
-  MapAddress,
+  NewsEvent,
   Notification,
   PageNav,
-  Services,
-  SquareParallax,
+  PricingPlan,
   Testimonials,
 } from 'app/components/molecules/website';
-// import { useTranslation } from 'next-i18next';
+import clsx from 'clsx';
+import Head from 'next/head';
 import PropTypes from 'prop-types';
+import brand from 'public/text/brand';
 import React from 'react';
 
 const sectionMargin = (margin) => (margin * 20);
@@ -27,36 +28,32 @@ const useStyles = makeStyles((theme) => ({
     width: '100%',
     overflow: 'hidden',
     background: theme.palette.type === 'dark' ? theme.palette.background.default : theme.palette.background.paper,
-    color: theme.palette.text.primary,
   },
   spaceBottom: {
     marginBottom: sectionMargin(theme.spacing()),
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       marginBottom: sectionMargin(6),
     },
-    [theme.breakpoints.down('xs')]: {
-      marginBottom: sectionMargin(theme.spacing() / 2),
-    },
   },
-  spaceTop: {
-    marginTop: sectionMargin(theme.spacing()),
-    [theme.breakpoints.down('md')]: {
-      marginTop: sectionMargin(6),
-    },
-    [theme.breakpoints.down('xs')]: {
-      marginTop: sectionMargin(theme.spacing() / 2),
+  spaceBottomTesti: {
+    [theme.breakpoints.up('md')]: {
+      marginBottom: sectionMargin(theme.spacing()),
     },
   },
   spaceBottomShort: {
     marginBottom: sectionMargin(theme.spacing() / 2),
   },
+  spaceTop: {
+    marginTop: sectionMargin(theme.spacing()),
+    [theme.breakpoints.down('sm')]: {
+      marginTop: sectionMargin(6),
+    },
+  },
   spaceTopShort: {
     marginTop: sectionMargin(theme.spacing() / 2),
   },
   containerWrap: {
-    [theme.breakpoints.up('md')]: {
-      marginTop: theme.spacing(10),
-    },
+    marginTop: -40,
     '& > section': {
       position: 'relative',
     },
@@ -65,51 +62,56 @@ const useStyles = makeStyles((theme) => ({
 
 function Landing(props) {
   const classes = useStyles();
-  const theme = useTheme();
-  const isTablet = useMediaQuery(theme.breakpoints.down('md'));
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const { onToggleDark, onToggleDir } = props;
-
   return (
     <>
+      <Head>
+        <title>
+          { brand.saas.name }
+          &nbsp; - Home Page
+        </title>
+      </Head>
       <CssBaseline />
+      <section id="home" />
       <div className={classes.mainWrap}>
         <Header
           onToggleDark={onToggleDark}
           onToggleDir={onToggleDir}
         />
         <main className={classes.containerWrap}>
-          {/* <SquareParallax /> */}
-          <section className={isTablet ? classes.spaceTopShort : classes.spaceTop} id="about">
-            <About />
+          <section id="home">
+            <Banner />
           </section>
-          <section className={classes.spaceTop} id="services">
-            <Services />
+          <section>
+            <CompanyLogo />
           </section>
-          <section className={isTablet ? classes.spaceTopShort : classes.spaceTop} id="our-expertise">
-            <Expertise />
+          <section>
+            <Counter />
           </section>
-          <section className={isMobile ? classes.spaceTopShort : classes.spaceTop} id="testimonials">
+          <section id="feature" className={classes.spaceTop}>
+            <Feature />
+          </section>
+          <section id="testimonials" className={classes.spaceBottomTesti}>
             <Testimonials />
           </section>
-          {/* <section id="case-studies">
-            <CaseStudies />
-          </section> */}
-          <section className={classes.spaceTopShort} id="call-to-action">
-            <CallAction />
+          <section id="pricing" className={classes.spaceTop}>
+            <PricingPlan />
           </section>
-          <section className={classes.spaceTopShort} id="address">
-            <MapAddress />
+          <section id="faq" className={classes.spaceTopShort}>
+            <Faq />
           </section>
+          <div className={clsx(classes.spaceTopShort, classes.spaceBottomShort)}>
+            <NewsEvent />
+          </div>
         </main>
-        <Hidden mdDown>
-          <PageNav />
-        </Hidden>
-        <section className={classes.spaceTopShort}>
-          <Footer toggleDir={onToggleDir} />
+        <section id="footer">
+          <FooterWithDeco toggleDir={onToggleDir} />
         </section>
         <Hidden mdDown>
           <Notification />
+        </Hidden>
+        <Hidden mdDown>
+          <PageNav />
         </Hidden>
       </div>
     </>
@@ -117,7 +119,7 @@ function Landing(props) {
 }
 
 Landing.getInitialProps = async () => ({
-  namespacesRequired: ['common', 'landing'],
+  namespacesRequired: ['common', 'saas-landing'],
 });
 
 Landing.propTypes = {

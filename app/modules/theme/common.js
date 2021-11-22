@@ -2,37 +2,37 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useTextAlign = makeStyles({
   textCenter: {
-    textAlign: 'center',
+    textAlign: 'center'
   },
   textLeft: {
-    textAlign: 'left',
+    textAlign: 'left'
   },
   textRight: {
-    textAlign: 'right',
-  },
+    textAlign: 'right'
+  }
 });
 
 export const useFloat = makeStyles({
   floatLeft: {
-    float: 'left',
+    float: 'left'
   },
   floatRight: {
-    float: 'right',
+    float: 'right'
   },
 });
 
-export const useText = makeStyles((theme) => ({
+export const useText = makeStyles(theme => ({
   title: {
     fontWeight: theme.typography.fontWeightBold,
     fontSize: 48,
     lineHeight: '72px',
     [theme.breakpoints.down('md')]: {
       fontSize: 38,
-      lineHeight: '60px',
+      lineHeight: '60px'
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: 28,
-      lineHeight: '44px',
+      lineHeight: '44px'
     },
   },
   title2: {
@@ -41,12 +41,12 @@ export const useText = makeStyles((theme) => ({
     fontWeight: theme.typography.fontWeightBold,
     [theme.breakpoints.down('md')]: {
       fontSize: 32,
-      lineHeight: '48px',
+      lineHeight: '48px'
     },
     [theme.breakpoints.down('xs')]: {
       fontSize: 24,
       lineHeight: '36px',
-    },
+    }
   },
   subtitle: {
     fontWeight: theme.typography.fontWeightMedium,
@@ -77,7 +77,7 @@ export const useText = makeStyles((theme) => ({
   paragraph: {
     fontWeight: theme.typography.fontWeightRegular,
     fontSize: 16,
-    lineHeight: '24px',
+    lineHeight: '24px'
   },
   caption: {
     fontWeight: theme.typography.fontWeightRegular,
@@ -87,43 +87,43 @@ export const useText = makeStyles((theme) => ({
       fontSize: 14,
       lineHeight: '22px',
     },
-  },
+  }
 }));
 
-export const useHidden = makeStyles((theme) => ({
+export const useHidden = makeStyles(theme => ({
   lgDown: {
     [theme.breakpoints.down('lg')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   mdDown: {
     [theme.breakpoints.down('md')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   smDown: {
     [theme.breakpoints.down('sm')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   xsDown: {
     [theme.breakpoints.down('xs')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   lgUp: {
     [theme.breakpoints.up('lg')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   mdUp: {
     [theme.breakpoints.up('md')]: {
-      display: 'none',
-    },
+      display: 'none'
+    }
   },
   smUp: {
     [theme.breakpoints.up('sm')]: {
-      display: 'none',
-    },
-  },
+      display: 'none'
+    }
+  }
 }));

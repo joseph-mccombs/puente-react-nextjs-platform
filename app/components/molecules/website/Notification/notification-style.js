@@ -8,8 +8,8 @@ const notificationStyles = makeStyles((theme) => ({
     },
     '& > div': {
       width: '100%',
-      color: theme.palette.common.white,
-      background: theme.palette.primary.dark,
+      color: theme.palette.primary.dark,
+      background: theme.palette.primary.light,
       [theme.breakpoints.up('sm')]: {
         padding: theme.spacing(1, 4),
       },
@@ -25,8 +25,6 @@ const notificationStyles = makeStyles((theme) => ({
     },
   },
   button: {
-    background: theme.palette.common.white,
-    color: theme.palette.primary.dark,
     width: '100%',
     [theme.breakpoints.up('sm')]: {
       width: 150,

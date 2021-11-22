@@ -1,5 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
-// import flag from 'public/images/flag-logo.png';
+import { darken } from '@material-ui/core/styles/colorManipulator';
+import flag from 'public/images/flag-logo.png';
 
 const flagIcon = {
   width: 16,
@@ -9,7 +10,7 @@ const flagIcon = {
   position: 'relative',
   marginRight: 5,
   top: 1,
-  // background: `url(${flag}) no-repeat transparent`,
+  background: `url(${flag}) no-repeat transparent`,
   backgroundSize: '16px auto',
   '&[class="ara"]': {
     backgroundPosition: '0 3px',
@@ -42,70 +43,102 @@ const headerStyles = makeStyles((theme) => ({
       transform: 'none',
     },
   },
-  fixed: {},
-  openDrawer: {},
-  header: {
+  invert: {
     color: theme.palette.text.primary,
+    '& $mobileMenu': {
+      '& $bar': {
+        backgroundColor: theme.palette.text.secondary,
+        '&:after, &:before': {
+          backgroundColor: theme.palette.text.secondary,
+        },
+      },
+    },
+    '& svg': {
+      fill: theme.palette.text.primary,
+    },
+  },
+  fixed: {},
+  textBtn: {},
+  header: {
+    position: 'fixed',
+    color: theme.palette.common.white,
     background: 'none',
     boxShadow: 'none',
     transition: 'all 0.5s ease-out',
-    position: 'fixed',
     '& > *': {
       [theme.breakpoints.down('md')]: {
-        padding: 0,
+        paddingLeft: 0,
       },
-    },
-    '& nav': {
-      transition: 'all 0.5s ease-out',
     },
     '&$fixed': {
-      position: 'fixed',
-      top: 0,
-      boxShadow: theme.shadows[4],
-      background: theme.palette.background.paper,
-      zIndex: 1000,
+      background: darken(theme.palette.primary.dark, 0.3),
       '& $logo': {
         '& a': {
-          color: theme.palette.text.primary,
+          color: 'transparent',
+          fontSize: 0,
         },
         '& img': {
-          height: 32,
-          width: 32,
-        },
-      },
-      '& $bar': {
-        [theme.breakpoints.down('sm')]: {
-          backgroundColor: theme.palette.text.secondary,
-          '&:after, &:before': {
-            backgroundColor: theme.palette.text.secondary,
-          },
+          height: 48,
+          width: 48,
+          marginBottom: 0,
         },
       },
       '& nav': {
         padding: theme.spacing(1, 0),
-        '& ul': {
-          '& li': {
-            '& a': {
-              color: theme.palette.text.primary,
-            },
+        '& $button': {
+          padding: theme.spacing(0.5, 2),
+        },
+      },
+      '& $textBtn': {
+        color: theme.palette.common.white,
+      },
+      '& ul': {
+        '& li': {
+          '& a': {
+            color: theme.palette.common.white,
           },
         },
       },
-      '& $vDivider': {
-        minHeight: theme.spacing(3),
+      '& $setting': {
+        '& $icon': {
+          '& svg': {
+            fill: theme.palette.common.white,
+          },
+        },
       },
-      '& $icon': {
-        '& svg': {
-          fill: theme.palette.text.secondary,
+      '& $mobileMenu': {
+        '& $bar': {
+          backgroundColor: theme.palette.common.white,
+          '&:after, &:before': {
+            backgroundColor: theme.palette.common.white,
+          },
         },
       },
     },
     '&$openDrawer': {
       zIndex: 1600,
-      boxShadow: 'none',
+    },
+    '&$invert': {
       '& $logo': {
         '& a': {
           color: theme.palette.text.primary,
+        },
+      },
+      '& $textBtn': {
+        color: theme.palette.text.primary,
+      },
+      '& ul': {
+        '& li': {
+          '& a': {
+            color: theme.palette.text.primary,
+          },
+        },
+      },
+      '& $setting': {
+        '& $icon': {
+          '& svg': {
+            fill: theme.palette.text.primary,
+          },
         },
       },
     },
@@ -117,118 +150,94 @@ const headerStyles = makeStyles((theme) => ({
     '& nav': {
       alignItems: 'center',
       padding: theme.spacing(2),
-      display: 'flex',
       [theme.breakpoints.down('md')]: {
         padding: theme.spacing(2, 0),
       },
+      display: 'flex',
     },
   },
   logo: {
     '& a': {
       textDecoration: 'none',
-      display: 'flex',
-      fontSize: 22,
-      color: theme.palette.text.primary,
+      display: 'block',
+      fontSize: 16,
+      color: theme.palette.common.white,
       alignItems: 'center',
-      fontWeight: 500,
-      [theme.breakpoints.down('sm')]: {
-        color: theme.palette.common.white,
-      },
+      transition: 'color 0.5s ease-out',
+      fontWeight: theme.typography.fontWeightMedium,
+      textAlign: 'center',
     },
     '& img': {
+      display: 'block',
+      margin: '0 auto',
       transition: 'all 0.3s ease-out',
-      width: 48,
-      height: 48,
-      marginRight: theme.spacing(),
-      [theme.breakpoints.only('md')]: {
-        marginLeft: theme.spacing(2),
+      marginBottom: theme.spacing(),
+      width: 64,
+      height: 64,
+      [theme.breakpoints.down('xs')]: {
+        height: 48,
+        width: 48,
       },
     },
   },
   active: {},
-  invert: {},
-  navLogo: {
-    '&$invert': {
-      '& $logo': {
-        '& a': {
-          color: theme.palette.text.primary,
-        },
-      },
-      '& $mobileMenu': {
-        '& $bar': {
-          [theme.breakpoints.down('sm')]: {
-            backgroundColor: theme.palette.text.secondary,
-            '&:after, &:before': {
-              backgroundColor: theme.palette.text.secondary,
-            },
-          },
-        },
-      },
-    },
+  button: {
+    width: theme.spacing(20),
   },
   navMenu: {
-    '& > *': {
-      margin: 0,
-      [theme.breakpoints.up('lg')]: {
+    [theme.breakpoints.up('lg')]: {
+      '& > *': {
         margin: theme.spacing(0, 1),
       },
     },
-    '&$invert': {
-      '& ul': {
-        '& li': {
-          '& a': {
-            transition: 'all 0.3s ease-out',
-            color: theme.palette.text.primary,
-          },
-        },
-      },
+    '& a': {
+      color: theme.palette.common.white,
+      marginTop: theme.spacing(0.5),
+      fontSize: 16,
+      fontWeight: theme.typography.fontWeightMedium,
+      boxShadow: 'none',
+      position: 'relative',
+      margin: theme.spacing(0, 1),
     },
     '& ul': {
       listStyle: 'none',
+      marginLeft: 0,
+      paddingLeft: 0,
       '& li': {
-        [theme.breakpoints.up('lg')]: {
-          margin: theme.spacing(0, 2),
-        },
+        margin: theme.spacing(0, 1),
         listStyle: 'none',
         position: 'relative',
         display: 'inline-block',
         '& a': {
-          color: theme.palette.common.white,
-          marginTop: theme.spacing(0.5),
           textTransform: 'capitalize',
-          fontSize: 18,
-          fontWeight: theme.typography.fontWeightMedium,
-          background: 'none !important',
-          boxShadow: 'none',
-          position: 'relative',
-          padding: '6px',
-          margin: theme.spacing(0, 1),
           minWidth: 0,
+          padding: '6px',
+          background: 'none !important',
           '&:after': {
             content: '""',
-            borderBottom: '3px solid #fff',
-            width: '0%',
+            height: 5,
             position: 'absolute',
-            bottom: 0,
-            left: '50%',
+            borderRadius: 5,
+            width: '0%',
+            margin: '0 auto',
+            bottom: -5,
             transition: 'all 0.2s cubic-bezier(0.42, 0.16, 0.21, 0.93)',
           },
           '&:hover': {
             transition: 'all 0.3s ease-out',
+            opacity: 0.5,
             '&:after': {
-              width: '60%',
-              left: 8,
-              borderBottomColor: theme.palette.primary.light,
+              width: 20,
+              background: theme.palette.common.white,
             },
           },
         },
         '&[class="active"]': {
           '& a': {
-            color: theme.palette.primary.light,
+            color: theme.palette.secondary.light,
             '&:after': {
-              borderBottomColor: theme.palette.primary.light,
-              width: '60%',
-              left: 8,
+              background: theme.palette.common.white,
+              width: 20,
             },
           },
         },
@@ -241,38 +250,25 @@ const headerStyles = makeStyles((theme) => ({
       ...flagIcon,
     },
   },
-  modeMenu: {
-    textTransform: 'capitalize',
-  },
-  vDivider: {
-    margin: theme.spacing(0, 1),
-    borderLeft: `1px solid ${theme.palette.divider}`,
-    height: '100%',
-    transition: 'all 0.5s ease-out',
-    minHeight: theme.spacing(6),
-  },
   icon: {},
   setting: {
     '& $icon': {
-      fontSize: 32,
       transition: 'all 0.3s ease',
       color: theme.palette.common.white,
-      '&$invert': {
-        color: theme.palette.text.primary,
-      },
     },
     '& $active': {
       transform: 'rotate(30deg)',
     },
   },
-  titleMenu: {
+  modeMenu: {
     textTransform: 'capitalize',
   },
   bar: {},
   menu: {},
-  menuOpen: {},
+  openDrawer: {},
   paperNav: {
     width: '100%',
+    background: theme.palette.type === 'dark' ? darken(theme.palette.primary.dark, 0.5) : theme.palette.primary.dark,
     [theme.breakpoints.up(680)]: {
       width: 300,
     },
@@ -287,22 +283,23 @@ const headerStyles = makeStyles((theme) => ({
     },
     '&[class*="is-active"]': {
       '& $bar': {
-        backgroundColor: theme.palette.text.secondary,
+        backgroundColor: `${theme.palette.common.white} !important`,
         '&:after, &:before': {
-          backgroundColor: theme.palette.text.secondary,
+          backgroundColor: `${theme.palette.common.white} !important`,
         },
       },
     },
   },
   mobileNav: {
-    background: theme.palette.background.paper,
+    background: darken(theme.palette.primary.dark, 0.3),
+    height: '100%',
     '& $menu': {
-      padding: theme.spacing(0, 2),
+      padding: theme.spacing(0, 5),
       overflow: 'auto',
-      top: theme.spacing(15),
+      top: 90,
       width: '100%',
       position: 'absolute',
-      height: 'calc(100% - 80px)',
+      height: 'calc(100% - 90px)',
       '& a': {
         animationName: '$slideRight',
         animationTimingFunction: 'ease',
@@ -311,9 +308,14 @@ const headerStyles = makeStyles((theme) => ({
   },
   menuList: {
     textTransform: 'capitalize',
+    color: theme.palette.common.white,
     '& span': {
       fontSize: 24,
     },
+  },
+  dividerSidebar: {
+    background: 'rgba(255, 255, 255, 0.2)',
+    margin: theme.spacing(3, 0),
   },
 }));
 

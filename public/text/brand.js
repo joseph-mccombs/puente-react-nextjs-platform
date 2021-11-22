@@ -1,13 +1,13 @@
 module.exports = {
-  agency: {
-    name: 'Puente',
-    desc: 'Puente - International Development Data Collection and Management',
-    prefix: 'puente',
-    footerText: 'Puente - All Rights Reserved 2021',
-    logoText: 'Puente',
-    projectName: 'Puente Tech',
-    url: 'luxireact.ux-maestro.com/agency',
-    img: '/static/images/agency-logo.png',
+  saas: {
+    name: 'Software',
+    desc: 'Luxiren Saas - React Single Landing Page Template',
+    prefix: 'luxiren',
+    footerText: 'Luxiren Theme 2021',
+    logoText: 'Luxiren Software',
+    projectName: 'Software',
+    url: 'luxireact.ux-maestro.com/saas',
+    img: '/static/images/saas-logo.png',
     notifMsg: 'Donec sit amet nulla sed arcu pulvinar ultricies commodo id ligula.',
   },
 };

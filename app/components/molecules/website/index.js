@@ -1,33 +1,28 @@
-import About from './About';
-import CallAction from './CallAction';
-import CaseStudies from './CaseStudies';
-import Expertise from './Expertise';
-import Footer from './Footer';
+import Banner from './Banner';
+import CompanyLogo from './CompanyLogo';
+import Counter from './Counter';
+import Faq from './Faq';
+import Feature from './Feature';
+import { Footer, FooterWithDeco } from './Footer';
 import Header from './Header';
-import MapAddress from './MapAddress';
+import NewsEvent from './NewsEvent';
 import Notification from './Notification';
 import PageNav from './PageNav';
-import {
-  Dots,
-  SingleSquare,
-  Square,
-} from './Parallax';
-import Services from './Services';
+import PricingPlan from './PricingPlan';
 import Testimonials from './Testimonials';
 
 export {
-  About,
-  CallAction,
-  CaseStudies,
-  Dots,
-  Expertise,
+  Banner,
+  CompanyLogo,
+  Counter,
+  Faq,
+  Feature,
   Footer,
+  FooterWithDeco,
   Header,
-  MapAddress,
+  NewsEvent,
   Notification,
   PageNav,
-  Services,
-  SingleSquare,
-  Square,
+  PricingPlan,
   Testimonials,
 };

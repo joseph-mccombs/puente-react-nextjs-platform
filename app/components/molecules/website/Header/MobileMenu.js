@@ -1,3 +1,4 @@
+import Divider from '@material-ui/core/Divider';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -15,8 +16,7 @@ function MobileMenu(props) {
   const classes = useStyles();
   const { toggleDrawer, open } = props;
 
-  const { t } = useTranslation('landing');
-
+  const { t } = useTranslation('saas-landing');
   const SideList = () => (
     <div
       className={classes.mobileNav}
@@ -34,17 +34,29 @@ function MobileMenu(props) {
               key={index.toString()}
               style={{ animationDuration: `${index * 0.15}s` }}
             >
-              <ListItemText primary={t(`common:landing.header_${item}`)} className={classes.menuList} />
+              <ListItemText primary={t(`common:saas-landing.header_${item}`)} className={classes.menuList} />
             </ListItem>
           ))}
           <ListItem
             button
             component="a"
-            href={routeLink.agency.contact}
+            href={routeLink.saas.contact}
             style={{ animationDuration: `${navMenu.length * 0.15}s` }}
           >
-            <ListItemText primary={t('common:landing.header_contact')} className={classes.menuList} />
+            <ListItemText primary={t('common:saas-landing.header_contact')} className={classes.menuList} />
           </ListItem>
+          <Divider className={classes.dividerSidebar} />
+          {['login', 'register'].map((item, index) => (
+            <ListItem
+              button
+              component="a"
+              href={routeLink.saas[item]}
+              key={index.toString()}
+              style={{ animationDuration: `${navMenu.length * 0.15}s` }}
+            >
+              <ListItemText primary={t(`common:saas-landing.header_${item}`)} className={classes.menuList} />
+            </ListItem>
+          ))}
         </List>
       </div>
     </div>

@@ -1,5 +1,4 @@
 import palette from './palette';
-
 const appTheme = (color, mode) => ({
   palette: {
     type: mode,
@@ -7,15 +6,17 @@ const appTheme = (color, mode) => ({
     secondary: palette[color].palette.secondary,
     action: {
       hover: mode === 'dark' ? 'rgba(128,128,128, 0.9)' : 'rgba(128,128,128, 0.05)',
-      hoverOpacity: 0.05,
-    },
+      hoverOpacity: 0.05
+    }
   },
   typography: {
     fontFamily: [
-      'Roboto',
-      'Roboto Condensed',
+      'Open Sans',
       'sans-serif',
     ].join(','),
+    fontWeightRegular: 400,
+    fontWeightMedium: 600,
+    fontWeightBold: 700,
   },
   shade: {
     light: '0 10px 15px -5px rgba(62, 57, 107, .07)',
@@ -23,7 +24,7 @@ const appTheme = (color, mode) => ({
   rounded: {
     small: '8px',
     medium: '12px',
-    big: '20px',
+    big: '20px'
   },
   shadows: mode === 'dark'
     ? [
@@ -81,55 +82,80 @@ const appTheme = (color, mode) => ({
       '0px 11px 15px -7px rgba(128,128,128, 0.2),0px 24px 38px 3px rgba(128,128,128, 0.14),0px 9px 46px 8px rgba(128,128,128, 0.12)',
     ],
   overrides: {
+    PrivateTabIndicator: {
+      root: {
+        borderRadius: '4px 4px 0 0',
+        height: 5,
+      },
+      colorPrimary: {
+        backgroundColor: mode === 'dark' ? palette[color].palette.primary.light : palette[color].palette.primary.main
+      }
+    },
     MuiPaper: {
       rounded: {
-        borderRadius: 12,
+        borderRadius: 12
       },
       elevation1: {
-        boxShadow: mode === 'dark' ? '0px 1px 3px 0px rgba(64, 64, 64, 1), 0px 1px 1px 0px rgba(42, 42, 42, 1), 0px 2px 1px -1px rgba(20, 20, 20, 1)' : '0 1.5px 12px 2px rgba(0, 0, 0, 0.06)',
+        boxShadow: mode === 'dark' ? '0px 1px 3px 0px rgba(64, 64, 64, 1), 0px 1px 1px 0px rgba(42, 42, 42, 1), 0px 2px 1px -1px rgba(20, 20, 20, 1)' : '0 1.5px 12px 2px rgba(0, 0, 0, 0.06)'
       },
       elevation4: {
-        boxShadow: mode === 'dark' ? '0px 2px 4px -1px rgba(64, 64, 64, 0.46), 0px 4px 5px 0px rgba(42, 42, 42, 0.32), 0px 1px 10px 0px rgba(20, 20, 20, 0.12)' : '0 1.5px 12px 4px rgba(0, 0, 0, 0.12)',
-      },
+        boxShadow: mode === 'dark' ? '0px 2px 4px -1px rgba(64, 64, 64, 0.46), 0px 4px 5px 0px rgba(42, 42, 42, 0.32), 0px 1px 10px 0px rgba(20, 20, 20, 0.12)' : '0 1.5px 12px 4px rgba(0, 0, 0, 0.12)'
+      }
     },
     MuiButton: {
       containedSecondary: {
         color: '#FFFFFF',
       },
+      contained: {
+        boxShadow: 'none',
+      },
       root: {
+        borderRadius: 36,
         fontWeight: 600,
-        boxShadow: '0 1.5px 12px 4px rgba(0, 0, 0, 0.06)',
+        padding: '8px 24px'
       },
       sizeSmall: {
-        padding: '7px 12px',
+        padding: '7px 12px'
       },
-      outlinedPrimary: {
-        borderColor: mode === 'dark' ? palette[color].palette.primary.light : palette[color].palette.primary.main,
-        color: mode === 'dark' ? palette[color].palette.primary.light : palette[color].palette.primary.dark,
-      },
-      outlinedSecondary: {
-        borderColor: mode === 'dark' ? palette[color].palette.secondary.light : palette[color].palette.secondary.main,
-        color: mode === 'dark' ? palette[color].palette.secondary.light : palette[color].palette.secondary.main,
-      },
-    },
-    MuiFormLabel: {
-      root: {
-        '&$focused': {
-          color: palette[color].palette.primary.main,
-        },
-      },
-    },
-    MuiInput: {
-      underline: {
-        '&:after': {
-          borderBottomColor: palette[color].palette.primary.main,
-        },
-      },
+      sizeLarge: {
+        padding: '7px 36px'
+      }
     },
     MuiTypography: {
       button: {
-        fontWeight: 600,
+        fontWeight: 600
+      }
+    },
+    MuiInputLabel: {
+      root: {
+        '&$focused': {
+          color: palette[color].palette.secondary.main
+        }
       },
+      filled: {
+        top: -2,
+        '&$shrink': {
+          color: palette[color].palette.secondary.main
+        }
+      }
+    },
+    MuiFilledInput: {
+      root: {
+        borderRadius: '12px !important',
+        background: 'none',
+        '&:before': {
+          display: 'none'
+        },
+        '&:after': {
+          display: 'none'
+        },
+        '&$focused': {
+          borderColor: palette[color].palette.secondary.main
+        }
+      },
+      input: {
+        padding: '23px 12px 6px'
+      }
     },
   },
 });

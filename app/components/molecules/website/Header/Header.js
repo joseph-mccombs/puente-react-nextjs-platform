@@ -1,6 +1,7 @@
 import AppBar from '@material-ui/core/AppBar';
 import Button from '@material-ui/core/Button';
 import Container from '@material-ui/core/Container';
+import Hidden from '@material-ui/core/Hidden';
 import IconButton from '@material-ui/core/IconButton';
 import { useTheme } from '@material-ui/core/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
@@ -8,9 +9,9 @@ import clsx from 'clsx';
 import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
-// import logo from 'public/images/agency-logo.svg';
+import logo from 'public/images/saas-logo.svg';
 import brand from 'public/text/brand';
-import routeLink from 'public/text/link';
+import link from 'public/text/link';
 import React, { Fragment, useEffect, useState } from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Scrollspy from 'react-scrollspy';
@@ -36,17 +37,12 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 });
 
 function Header(props) {
-  // Theme breakpoints
-  const theme = useTheme();
-  const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
-
   const [fixed, setFixed] = useState(false);
   let flagFixed = false;
   const handleScroll = () => {
     const doc = document.documentElement;
     const scroll = (window.pageYOffset || doc.scrollTop) - (doc.clientTop || 0);
-    const newFlagFixed = (scroll > 80);
+    const newFlagFixed = (scroll > 100);
     if (flagFixed !== newFlagFixed) {
       setFixed(newFlagFixed);
       flagFixed = newFlagFixed;
@@ -54,19 +50,25 @@ function Header(props) {
   };
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    console.log();
   }, []);
   const classes = useStyles();
+  const theme = useTheme();
   const {
     onToggleDark,
     onToggleDir,
     invert,
   } = props;
-  const { t } = useTranslation('landing');
+
+  const { t } = useTranslation('saas-landing');
+
+  const isDesktop = useMediaQuery(theme.breakpoints.up('lg'));
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
   const [menuList] = useState([
-    createData(navMenu[0], `#${navMenu[0]}`, 200),
-    createData(navMenu[1], `#${navMenu[1]}`, 200),
-    createData(navMenu[2], `#${navMenu[2]}`, 200),
-    createData(navMenu[3], `#${navMenu[3]}`, 200),
+    createData(navMenu[0], `#${navMenu[0]}`),
+    createData(navMenu[1], `#${navMenu[1]}`),
+    createData(navMenu[2], `#${navMenu[2]}`),
+    createData(navMenu[3], `#${navMenu[3]}`, -40),
   ]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {
@@ -76,18 +78,19 @@ function Header(props) {
     <>
       { isMobile && (<MobileMenu open={openDrawer} toggleDrawer={handleOpenDrawer} />) }
       <AppBar
-        component="div"
+        component="header"
         position="relative"
         id="header"
         className={clsx(
           classes.header,
           fixed && classes.fixed,
+          invert && classes.invert,
           openDrawer && classes.openDrawer,
         )}
       >
         <Container fixed={isDesktop}>
           <div className={classes.headerContent}>
-            <nav className={clsx(classes.navLogo, invert && classes.invert)}>
+            <nav className={classes.navMenu}>
               { isMobile && (
                 <IconButton
                   onClick={handleOpenDrawer}
@@ -98,23 +101,21 @@ function Header(props) {
                   </span>
                 </IconButton>
               )}
-              {/* <div className={classes.logo}>
+              <div className={classes.logo}>
                 {invert ? (
-                  <Link href={routeLink.agency.home}>
+                  <Link href={link.saas.home}>
                     <a>
                       <img src={logo} alt="logo" />
-                      {brand.agency.name}
+                      {!isMobile && brand.saas.name}
                     </a>
                   </Link>
                 ) : (
                   <AnchorLink href="#home">
                     <img src={logo} alt="logo" />
-                    {brand.agency.name}
+                    {!isMobile && brand.saas.name}
                   </AnchorLink>
                 )}
-              </div> */}
-            </nav>
-            <nav className={clsx(classes.navMenu, invert && classes.invert)}>
+              </div>
               {isDesktop && (
                 <Scrollspy
                   items={navMenu}
@@ -124,24 +125,33 @@ function Header(props) {
                     <li key={item.id.toString()}>
                       {invert ? (
                         // eslint-disable-next-line
-                        <Button href={'/' + item.url}>
-                          {t(`common:landing.header_${item.name}`)}
+                        <Button offset={item.offset || 0} href={'/' + item.url}>
+                          {t(`common:saas-landing.header_${item.name}`)}
                         </Button>
                       ) : (
-                        // eslint-disable-next-line
                         <Button component={AnchorLink} offset={item.offset || 0} href={item.url}>
-                          {t(`common:landing.header_${item.name}`)}
+                          {t(`common:saas-landing.header_${item.name}`)}
                         </Button>
                       )}
                     </li>
                   ))}
                   <li>
-                    <Button href={routeLink.agency.contact}>
-                      {t('common:landing.header_contact')}
+                    <Button href={link.saas.contact}>
+                      {t('common:saas-landing.header_contact')}
                     </Button>
                   </li>
                 </Scrollspy>
               )}
+            </nav>
+            <nav className={classes.navMenu}>
+              <Hidden xsDown>
+                <Button href={link.saas.login} className={classes.textBtn}>
+                  {t('common:saas-landing.header_login')}
+                </Button>
+                <Button href={link.saas.register} variant="contained" color="secondary" className={classes.button}>
+                  {t('common:saas-landing.header_register')}
+                </Button>
+              </Hidden>
               <Settings toggleDark={onToggleDark} toggleDir={onToggleDir} invert={invert} />
             </nav>
           </div>
@@ -159,6 +169,7 @@ Header.propTypes = {
 };
 
 Header.defaultProps = {
+  sticky: false,
   invert: false,
 };
 

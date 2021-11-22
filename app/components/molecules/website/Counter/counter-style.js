@@ -2,13 +2,25 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const counterStyles = makeStyles((theme) => ({
   counterWrap: {
-    margin: theme.spacing(3, 0),
+    position: 'relative',
   },
   text: {},
   counterItem: {
     '& p': {
-      fontSize: 22,
-      textTransform: 'capitalize',
+      display: 'flex',
+      color: theme.palette.text.secondary,
+      alignItems: 'center',
+      justifyContent: 'center',
+      '& svg': {
+        width: 40,
+        height: 40,
+        marginRight: theme.spacing(2),
+        [theme.breakpoints.down('xs')]: {
+          width: 24,
+          height: 24,
+          marginRight: theme.spacing(),
+        },
+      },
     },
     [theme.breakpoints.up('md')]: {
       display: 'flex',
@@ -19,19 +31,30 @@ const counterStyles = makeStyles((theme) => ({
       textAlign: 'center',
       '& h3': {
         position: 'relative',
-        fontWeight: 'bold',
+        color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
         paddingBottom: theme.spacing(2),
-        marginBottom: theme.spacing(4),
-        '&:after': {
-          content: '""',
-          width: 50,
-          height: 8,
-          borderRadius: 5,
-          background: theme.palette.primary.main,
-          position: 'absolute',
-          bottom: theme.spacing(-2),
-          left: 'calc(50% - 25px)',
+      },
+    },
+  },
+  counterInner: {
+    '& > div': {
+      position: 'relative',
+      '&:after': {
+        content: '""',
+        borderLeft: `2px solid ${theme.palette.primary.dark}`,
+        opacity: 0.2,
+        height: 90,
+        position: 'absolute',
+        right: 0,
+        top: 30,
+        [theme.breakpoints.down('xs')]: {
+          display: 'none',
         },
+      },
+    },
+    '& > div:last-child': {
+      '&:after': {
+        display: 'none',
       },
     },
   },

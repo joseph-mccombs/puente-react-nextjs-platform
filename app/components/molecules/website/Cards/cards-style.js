@@ -1,218 +1,157 @@
 import { makeStyles } from '@material-ui/core/styles';
-// import frameDeco from 'public/images/decoration/frame-deco.png';
+import { fade } from '@material-ui/core/styles/colorManipulator';
 
-const useStyles = makeStyles((theme) => ({
-  text: {},
-  title: {},
-  /* Default Card */
-  defaultCard: {
-    direction: 'ltr',
-    borderRadius: 12,
-    width: 240,
-    height: 350,
-    padding: theme.spacing(3, 2),
-    margin: theme.spacing(3, 1),
-    '& figure': {
-      borderRadius: 12,
-      boxShadow: '0 1.5px 12px 6px rgba(0, 0, 0, 0.12)',
-      overflow: 'hidden',
-      height: 125,
-      margin: theme.spacing(-5, 0, 2),
-      '& img': {
-        height: '100%',
-        minWidth: '100%',
-      },
-    },
-    '& h6': {
-      marginBottom: theme.spacing(2),
-    },
-    '& p': {
-      height: 90,
-      overflow: 'hidden',
-      marginBottom: theme.spacing(3),
-    },
-  },
-  button: {
-    boxShadow: 'none',
-  },
-  /* Testimonial Card */
-  testiCard: {
-    direction: 'ltr',
+const cardsStyles = makeStyles((theme) => ({
+  pricing: {
     position: 'relative',
-  },
-  paper: {
-    padding: theme.spacing(3),
-    width: 240,
-    height: 240,
-    borderRadius: '50px 50px 50px 0',
-    '& p': {
-      height: 130,
-      overflow: 'hidden',
-    },
-  },
-  rating: {
-    marginTop: theme.spacing(4),
-  },
-  starIcon: {
-    color: '#FFC107',
-  },
-  starIconDisable: {
-    color: theme.palette.divider,
-  },
-  avatar: {
-    border: '4px solid #FFF',
-    boxShadow: theme.shadows[1],
-  },
-  person: {
-    display: 'flex',
-    marginTop: theme.spacing(3),
-    '& $avatar': {
-      width: 55,
-      height: 55,
-    },
-    '& $title': {
-      fontStyle: 'italic',
-      fontWeight: 300,
-    },
-  },
-  name: {
-    marginLeft: theme.spacing(2),
-  },
-  /* Case Studies Card */
-  logo: {},
-  small: {},
-  big: {},
-  fullHide: {},
-  figure: {},
-  caseCard: {
-    maxHeight: 360,
-    borderRadius: 24,
-    marginBottom: theme.spacing(3),
+    borderRadius: 40,
     overflow: 'hidden',
-    position: 'relative',
-    background: theme.palette.secondary.light,
-    [theme.breakpoints.up('lg')]: {
-      minHeight: 170,
-    },
-    '& $figure': {
-      margin: 0,
-      display: 'block',
-      '& img': {
-        width: '100%',
-      },
-    },
-    '& $title': {
-      lineHeight: '22px',
-      marginBottom: theme.spacing(2),
-      fontSize: '1.25rem',
-      fontWeight: '500',
-    },
-    '& $logo': {
-      display: 'block',
-      position: 'relative',
-      '& img': {
-        width: '100%',
-      },
-    },
-    '&$small': {
-      '& $title': {
-        display: 'block',
-      },
-      '& $logo': {
-        margin: '0 auto 16px',
-      },
-      '& $property': {
+    textAlign: 'center',
+    zIndex: 2,
+    border: '1px solid transparent',
+    maxWidth: 300,
+    marginBottom: theme.spacing(3),
+    '& ul': {
+      padding: theme.spacing(0, 2),
+      marginBottom: theme.spacing(3),
+      listStyle: 'none',
+      '& li': {
+        listStyle: 'none',
+        fontSize: 16,
         textAlign: 'center',
-        bottom: 0,
-      },
-      '& $figure': {
-        [theme.breakpoints.down('xs')]: {
-          width: '100%',
-        },
-      },
-    },
-    '&$big': {
-      '& $property': {
-        [theme.breakpoints.down('md')]: {
-          textAlign: 'center',
-          bottom: 0,
+        padding: theme.spacing(),
+        borderBottom: `2px dashed ${theme.palette.divider}`,
+        '&:last-child': {
+          borderBottom: 'none',
         },
       },
     },
     '&:hover': {
-      [theme.breakpoints.up('lg')]: {
-        '& $property': {
-          background: theme.palette.primary.main,
-          height: '100%',
-          bottom: 0,
-          opacity: 1,
-          '& p': {
-            opacity: 1,
-            bottom: 0,
-          },
+      boxShadow: `0 0 20px 5px ${theme.palette.type === 'dark' ? theme.palette.background.default : theme.palette.primary.light}`,
+      border: `1px solid ${theme.palette.primary.main}`,
+    },
+  },
+  title: {
+    padding: theme.spacing(5, 0, 2),
+    textTransform: 'uppercase',
+    fontSize: 24,
+    position: 'relative',
+    color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.dark,
+    '& p': {
+      fontWeight: theme.typography.fontWeightMedium,
+    },
+    '& h4': {
+      color: theme.palette.text.secondary,
+      fontWeight: theme.typography.fontWeightBold,
+      textTransform: 'none',
+      marginTop: theme.spacing(2),
+    },
+  },
+  button: {},
+  btnArea: {
+    color: theme.palette.text.secondary,
+    padding: theme.spacing(2),
+    background: fade(theme.palette.divider, 0.04),
+    '& $button': {
+      marginTop: theme.spacing(2),
+    },
+    '& $desc': {
+      fontSize: 14,
+    },
+  },
+  basic: {
+    '& $title': {
+      color: theme.palette.type === 'dark' ? theme.palette.secondary.light : theme.palette.secondary.dark,
+    },
+    '& $btnArea': {
+      background: fade(theme.palette.secondary.main, 0.3),
+    },
+    '&:hover': {
+      borderColor: theme.palette.secondary.main,
+    },
+  },
+  value: {
+    zIndex: 20,
+    border: `1px solid ${theme.palette.primary.main}`,
+    '& $title': {
+      paddingBottom: 0,
+      marginBottom: theme.spacing(8),
+      color: theme.palette.common.white,
+      height: 90,
+      paddingTop: 40,
+      '& h4': {
+        position: 'relative',
+        color: theme.palette.common.white,
+      },
+      '& p': {
+        position: 'relative',
+      },
+      '&:before': {
+        content: '""',
+        width: '160%',
+        position: 'absolute',
+        borderRadius: '50%',
+        bottom: -60,
+        height: 400,
+        left: '-30%',
+        background: `linear-gradient(-185deg, ${theme.palette.primary.main} 60%, ${theme.palette.primary.dark} 100%)`,
+      },
+    },
+    '& ul': {
+      paddingTop: theme.spacing(2),
+    },
+    '&:hover': {
+      boxShadow: `0 0 20px 5px ${theme.palette.type === 'dark' ? theme.palette.background.default : theme.palette.primary.light}`,
+    },
+  },
+  news: {
+    display: 'flex',
+    direction: 'ltr',
+    [theme.breakpoints.down('xs')]: {
+      flexDirection: 'column',
+    },
+    '& figure': {
+      overflow: 'hidden',
+      // borderRadius: theme.rounded.small,
+      margin: 0,
+      marginRight: theme.spacing(2),
+      width: 120,
+      height: 140,
+      [theme.breakpoints.down('xs')]: {
+        width: 'auto',
+        height: 'auto',
+        maxHeight: 200,
+        margin: theme.spacing(2, 1),
+      },
+      '& img': {
+        maxHeight: '100%',
+        marginLeft: '50%',
+        transform: 'translateX(-50%)',
+        [theme.breakpoints.down('xs')]: {
+          width: '100%',
+          height: 'auto',
         },
       },
     },
   },
-  desc: {},
-  property: {
-    transition: 'all 0.3s ease-out',
-    position: 'absolute',
-    width: '100%',
-    height: '110%',
-    padding: theme.spacing(3),
-    textAlign: 'left',
-    display: 'flex',
-    flexDirection: 'column',
-    justifyContent: 'flex-end',
-    bottom: -60,
-    left: 0,
-    color: theme.palette.common.white,
-    background: 'linear-gradient(to bottom, rgba(238, 238, 238, 0) 20%, #000 90%)',
-    [theme.breakpoints.down('md')]: {
-      padding: theme.spacing(1),
-      textAlign: 'center',
-      bottom: 0,
-      '& $desc': {
-        display: 'none',
-      },
-    },
-    '& $title': {
-      [theme.breakpoints.up('lg')]: {
-        display: 'flex',
-      },
-    },
-    '& $logo': {
-      width: 64,
-      height: 64,
-      // background: `url(${frameDeco}) no-repeat`,
-      padding: theme.spacing(2),
-      textAlign: 'center',
-      marginRight: theme.spacing(2),
-      backgroundSize: '100%',
-      [theme.breakpoints.down('md')]: {
-        display: 'none',
-      },
-      '& img': {
-        display: 'block',
-      },
-    },
-    '& h6': {
-      color: theme.palette.common.white,
-      marginBottom: theme.spacing(2),
-      lineHeight: '22px',
-    },
-    '&$fullHide': {
-      background: 'none',
-      opacity: 0,
-    },
-    '& p': {
-      opacity: 0,
-      transition: 'bottom 0.5s ease-out',
-      position: 'relative',
-      bottom: -20,
-    },
+  desc: {
+    flex: 1,
+    '& p': {},
+  },
+  text: {
+    padding: theme.spacing(0, 1.5),
+    maxWidth: 400,
+  },
+  type: {
+    fontWeight: theme.typography.fontWeightBold,
+    textTransform: 'uppercase',
+    color: theme.palette.text.secondary,
+  },
+  btn: {
+    marginTop: theme.spacing(2),
+    marginLeft: theme.spacing(1),
+    color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
   },
 }));
 
-export default useStyles;
+export default cardsStyles;

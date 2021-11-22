@@ -24,7 +24,7 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
 });
 
 function PageNav(props) {
-  const { t } = useTranslation('landing');
+  const { t } = useTranslation('saas-landing');
   const [show, setShow] = useState(false);
   let flagShow = false;
 
@@ -39,6 +39,7 @@ function PageNav(props) {
   };
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
+    console.log();
   }, []);
   const classes = useStyles();
   const [menuList] = useState([
@@ -49,6 +50,30 @@ function PageNav(props) {
   ]);
   return (
     <div className={clsx(classes.pageNav, show && classes.show)}>
+      <nav className={classes.sectionNav}>
+        <Scrollspy
+          items={navMenu}
+          currentClassName="active"
+        >
+          { menuList.map((item) => (
+            <li
+              key={item.id.toString()}
+              style={{ top: 30 * (navMenu.length - item.id) }}
+              data-id={item.id}
+            >
+              <Tooltip
+                title={t(`common:saas-landing.header_${item.name}`)}
+                placement="left"
+                classes={{
+                  tooltip: classes.tooltip,
+                }}
+              >
+                <AnchorLink href={item.url} />
+              </Tooltip>
+            </li>
+          )) }
+        </Scrollspy>
+      </nav>
       <Tooltip
         title="To Top"
         placement="left"
@@ -66,30 +91,6 @@ function PageNav(props) {
           <ArrowIcon />
         </Fab>
       </Tooltip>
-      <nav className={classes.sectionNav}>
-        <Scrollspy
-          items={navMenu}
-          currentClassName="active"
-        >
-          { menuList.map((item) => (
-            <li
-              key={item.id.toString()}
-              style={{ top: 30 * (navMenu.length - item.id) }}
-              data-id={item.id}
-            >
-              <Tooltip
-                title={t(`common:landing.header_${item.name}`)}
-                placement="left"
-                classes={{
-                  tooltip: classes.tooltip,
-                }}
-              >
-                <AnchorLink href={item.url} />
-              </Tooltip>
-            </li>
-          )) }
-        </Scrollspy>
-      </nav>
     </div>
   );
 }

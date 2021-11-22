@@ -1,3 +1,4 @@
+import Container from '@material-ui/core/Container';
 import React from 'react';
 
 import useStyles from './logo-style';
@@ -14,13 +15,13 @@ const logos = [
 function CompanyLogo() {
   const classes = useStyles();
   return (
-    <div className={classes.root}>
-      <div className={classes.logo}>
+    <Container fixed>
+      <div className={classes.root}>
         {logos.map((logo, index) => (
           <img src={logo} alt={`logo${index.toString()}`} key={index.toString()} />
         ))}
       </div>
-    </div>
+    </Container>
   );
 }
 

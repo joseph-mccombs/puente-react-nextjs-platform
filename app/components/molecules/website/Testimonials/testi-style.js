@@ -1,76 +1,144 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { darken, lighten } from '@material-ui/core/styles/colorManipulator';
 
 const testiStyles = makeStyles((theme) => ({
   root: {
-    width: '100%',
-    background: theme.palette.type === 'dark' ? darken(theme.palette.primary.light, 0.8) : lighten(theme.palette.primary.light, 0.8),
     position: 'relative',
-    padding: theme.spacing(10, 0),
+    [theme.breakpoints.up('sm')]: {
+      paddingBottom: theme.spacing(8),
+    },
+    [theme.breakpoints.down('sm')]: {
+      background: `linear-gradient(-45deg, ${theme.palette.primary.main} 20%, ${theme.palette.primary.dark} 70%)`,
+    },
+    [theme.breakpoints.down('xs')]: {
+      paddingBottom: theme.spacing(10),
+    },
+  },
+  decoration: {
+    position: 'absolute',
+    top: 0,
+    width: 830,
+    height: 600,
+    left: -200,
     [theme.breakpoints.down('md')]: {
-      paddingTop: theme.spacing(15),
+      left: -360,
+    },
+    '& svg': {
+      fill: theme.palette.primary.main,
+      transform: 'scale(1.2)',
+      width: '100%',
+      height: '100%',
+    },
+  },
+  title: {
+    position: 'relative',
+    margin: theme.spacing(0, 3, 8),
+    paddingTop: theme.spacing(7),
+    color: theme.palette.common.white,
+    '& strong': {
+      fontWeight: theme.typography.fontWeightBold,
+    },
+  },
+  sliderWrap: {
+    position: 'relative',
+  },
+  icon: {
+    fontSize: 140,
+    position: 'absolute',
+    color: theme.palette.common.white,
+    opacity: 0.15,
+    top: theme.spacing(25),
+    [theme.breakpoints.up('sm')]: {
+      left: theme.spacing(30),
     },
   },
   carousel: {
-    position: 'relative',
-    zIndex: 3,
-    [theme.breakpoints.up('sm')]: {
-      marginLeft: theme.spacing(-10),
+    [theme.breakpoints.up('lg')]: {
+      margin: theme.spacing(0, 2),
     },
-    '& ul[class*="slick-dots"]': {
-      bottom: theme.spacing(-8),
-      '& li': {
-        width: 10,
-        height: 10,
-        transition: 'width 0.3s ease',
-        background: theme.palette.secondary.light,
-        borderRadius: 15,
-        margin: theme.spacing(0, 0.5),
-        '&[class="slick-active"]': {
-          width: 35,
-        },
-        '& button': {
-          opacity: 0,
-        },
+    '& div[class*="slick-active"]': {
+      '& p': {
+        opacity: 1,
+        transition: 'all 0.5s cubic-bezier(0.45, 0.05, 0.55, 0.95)',
+        transform: 'translate3d(0, 0, 0)',
       },
     },
   },
   item: {
-    padding: theme.spacing(2),
-    '&:focus': {
-      outline: 'none',
-    },
+    position: 'relative',
   },
-  title: {},
-  floatingTitle: {
-    position: 'absolute',
-    width: '100%',
-    left: 0,
-    top: theme.spacing(5),
-    [theme.breakpoints.up('lg')]: {
-      left: theme.spacing(3),
-      top: theme.spacing(-10),
+  inner: {
+    color: theme.palette.common.white,
+    [theme.breakpoints.up('sm')]: {
+      display: 'flex',
     },
-    [theme.breakpoints.up(1400)]: {
-      left: theme.spacing(10),
-    },
-    '& $title': {
-      [theme.breakpoints.up('md')]: {
-        marginRight: theme.spacing(5),
-      },
+    '& p': {
+      opacity: 0,
+      transform: 'translate3d(-10%, 0, 0)',
+      marginTop: theme.spacing(5),
       [theme.breakpoints.up('lg')]: {
-        float: 'right',
+        marginTop: theme.spacing(10),
       },
-      [theme.breakpoints.up(1400)]: {
-        marginRight: theme.spacing(-5),
+      [theme.breakpoints.up('sm')]: {
+        width: '60%',
+      },
+      [theme.breakpoints.down('xs')]: {
+        textAlign: 'center',
+        '-webkit-line-clamp': 3,
+        '-webkit-box-orient': 'vertical',
+        height: 75,
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
       },
     },
   },
-  itemPropsFirst: {
-    width: theme.direction === 'rtl' ? 450 : 160,
+  profile: {
+    textAlign: 'center',
+    padding: theme.spacing(3),
+    [theme.breakpoints.up('lg')]: {
+      padding: theme.spacing(4, 6),
+    },
   },
-  itemPropsLast: {
-    width: theme.direction === 'rtl' ? 160 : 350,
+  avatar: {
+    width: 85,
+    height: 85,
+    margin: '0 auto',
+    marginBottom: theme.spacing(3),
+  },
+  name: {
+    fontSize: 18,
+    fontWeight: theme.typography.fontWeightMedium,
+    '& span': {
+      marginTop: theme.spacing(0.5),
+      fontSize: 14,
+      display: 'block',
+    },
+  },
+  logoWrap: {
+    position: 'relative',
+  },
+  active: {},
+  figureBtn: {
+    display: 'inline-block',
+    padding: theme.spacing(3),
+    lineHeight: '150px',
+    textAlign: 'center',
+    verticalAlign: 'middle',
+    width: '30%',
+    height: 150,
+    [theme.breakpoints.down('md')]: {
+      padding: theme.spacing(2),
+    },
+    '& img': {
+      transition: 'all 0.3s ease-out',
+      display: 'block',
+      width: '100%',
+      filter: 'grayscale(1) contrast(0.5) brightness(1.5)',
+    },
+    '& $active, &:hover': {
+      '& img': {
+        filter: 'none',
+      },
+    },
   },
 }));
 

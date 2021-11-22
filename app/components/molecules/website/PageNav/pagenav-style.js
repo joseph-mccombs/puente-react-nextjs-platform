@@ -1,5 +1,4 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { fade } from '@material-ui/core/styles/colorManipulator';
 
 const pagenav = makeStyles((theme) => ({
   show: {},
@@ -7,9 +6,6 @@ const pagenav = makeStyles((theme) => ({
     transform: 'scale(0.5)',
     transition: 'all 0.5s ease',
     opacity: 0,
-    position: 'absolute',
-    bottom: 0,
-    right: 0,
     background: theme.palette.primary.light,
     fontWeight: theme.typography.fontWeightBold,
     '& svg': {
@@ -32,7 +28,6 @@ const pagenav = makeStyles((theme) => ({
       transition: 'height 0.5s ease',
       transitionDelay: '0.5s',
       height: 0,
-      padding: theme.spacing(1, 1, 7),
       overflow: 'hidden',
     },
     '&$show': {
@@ -42,7 +37,7 @@ const pagenav = makeStyles((theme) => ({
       },
     },
     '& ul': {
-      margin: '0 14px 16px 0',
+      margin: '0 0 16px 22px',
       padding: 0,
       position: 'relative',
     },
@@ -56,12 +51,11 @@ const pagenav = makeStyles((theme) => ({
         width: 12,
         height: 12,
         boxShadow: theme.shadows[1],
-        background: fade(theme.palette.common.white, 0.3),
+        background: theme.palette.background.paper,
         border: `1px solid ${theme.palette.primary.dark}`,
         display: 'block',
         transition: 'all 0.4s ease',
-        borderRadius: 3,
-        transform: 'rotate(45deg)',
+        borderRadius: '50%',
       },
       '&[class="active"] a': {
         background: theme.palette.primary.dark,

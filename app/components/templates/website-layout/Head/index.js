@@ -9,7 +9,7 @@ const HeadComponent = () => (
     {/* Use minimum-scale=1 to enable GPU rasterization */}
     <meta
       name="description"
-      content={brand.agency.desc}
+      content={brand.saas.desc}
     />
     {/* Favicon */}
     <link rel="shortcut icon" href="/favicons/favicon.ico" />
@@ -48,17 +48,17 @@ const HeadComponent = () => (
     <meta property="twitter:domain" content="luxi.ux-maestro.com" />
     <meta property="twitter:creator" content="luxi" />
     <meta property="twitter:card" content="summary" />
-    <meta property="twitter:image:src" content="/images/agency-logo.png" />
-    <meta property="og:url" content={brand.agency.url} />
-    <meta property="og:title" content={brand.agency.desc} />
+    <meta property="twitter:image:src" content="/images/saas-logo.png" />
+    <meta property="og:url" content={brand.saas.url} />
+    <meta property="og:title" content={brand.saas.desc} />
     <meta
       property="og:description"
-      content={brand.agency.desc}
+      content={brand.saas.desc}
     />
-    <meta name="twitter:site" content={brand.agency.url} />
+    <meta name="twitter:site" content={brand.saas.url} />
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:image" content={brand.agency.img} />
-    <meta property="og:image" content={brand.agency.img} />
+    <meta name="twitter:image" content={brand.saas.img} />
+    <meta property="og:image" content={brand.saas.img} />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
   </Head>

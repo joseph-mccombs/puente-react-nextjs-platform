@@ -27,8 +27,10 @@ if (typeof Storage !== 'undefined') {
 function Settings(props) {
   const [ctn, setCtn] = useState(null);
   const classes = useStyles();
+  const { t } = useTranslation(['common', 'saas-landing']);
   const [anchorEl, setAnchorEl] = useState(null);
   const [isDark, setDark] = useState(themeType === 'dark');
+
   function handleClick(event) {
     setAnchorEl(event.currentTarget);
   }
@@ -60,8 +62,6 @@ function Settings(props) {
   const open = Boolean(anchorEl);
   const id = open ? 'simple-popover' : undefined;
   const { invert } = props;
-  const { t } = useTranslation('landing');
-
   return (
     <div className={classes.setting}>
       <IconButton
@@ -95,11 +95,11 @@ function Settings(props) {
       >
         <List
           component="nav"
-          className={classes.titleMenu}
+          className={classes.modeMenu}
           aria-label="Mode-menu"
           subheader={(
             <ListSubheader component="div">
-              {t('common:landing.header_theme')}
+              {t('common:saas-landing.header_theme')}
             </ListSubheader>
           )}
         >
@@ -107,7 +107,7 @@ function Settings(props) {
             <Typography component="div">
               <Grid component="label" container alignItems="center" spacing={1}>
                 <Grid item>
-                  {t('common:landing.header_light')}
+                  {t('common:saas-landing.header_light')}
                 </Grid>
                 <Grid item>
                   <Switch
@@ -118,7 +118,7 @@ function Settings(props) {
                   />
                 </Grid>
                 <Grid item>
-                  {t('common:landing.header_dark')}
+                  {t('common:saas-landing.header_dark')}
                 </Grid>
               </Grid>
             </Typography>
@@ -127,11 +127,11 @@ function Settings(props) {
         <Divider />
         <List
           component="nav"
-          className={clsx(classes.titleMenu, classes.langMenu)}
+          className={classes.langMenu}
           aria-label="Language-menu"
           subheader={(
             <ListSubheader component="div">
-              {t('common:landing.header_language')}
+              {t('common:saas-landing.header_language')}
             </ListSubheader>
           )}
         >

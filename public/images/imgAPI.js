@@ -10,7 +10,7 @@ const imgAPI = {
     '/images/avatars/pp_boy2.svg',
     '/images/avatars/pp_boy3.svg',
     '/images/avatars/pp_boy4.svg',
-    '/images/avatars/pp_boy5.svg',
+    '/images/avatars/pp_boy5.svg'
   ],
   photo: [
     'https://via.placeholder.com/675x900/e1ad92/fff',
@@ -28,18 +28,16 @@ const imgAPI = {
     'https://via.placeholder.com/1280x851/c4ffd7/757575',
     'https://via.placeholder.com/640x425/c4cdff/757575',
   ],
-  agency: [
-    'https://via.placeholder.com/964x723/1071ef/FFFFFF',
-    'https://via.placeholder.com/1280x825/99d8ff/FFFFFF',
-    'https://via.placeholder.com/490x327/ffc999/FFFFFF',
-    'https://via.placeholder.com/490x327/ffc999/FFFFFF',
-    'https://via.placeholder.com/490x327/ffc999/FFFFFF',
-    'https://via.placeholder.com/331x690/fdcc0c/FFFFFF',
-    'https://via.placeholder.com/521x309/4a0cfd/FFFFFF',
-    'https://via.placeholder.com/521x309/ffe55b/FFFFFF',
-    'https://via.placeholder.com/713x309/79c0ff/FFFFFF',
-    'https://via.placeholder.com/711x693/52596b/FFFFFF',
-  ],
+  saas: [
+    'https://via.placeholder.com/1000x625/f2c9ff/757575',
+    'https://via.placeholder.com/1472x637/5abce4/FFFFFF',
+    'https://via.placeholder.com/1000x625/e6f8ff/757575',
+    '/images/saas/app-counter.png',
+    'https://via.placeholder.com/1000x680/b44fd4/FFFFFF',
+    'https://via.placeholder.com/1000x680/00a7e8/FFFFFF',
+    'https://via.placeholder.com/1000x680/e91e63/FFFFFF',
+    '/images/saas/desktop_illustration.png'
+  ]
 };
 
 export default imgAPI;

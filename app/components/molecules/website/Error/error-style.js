@@ -1,12 +1,13 @@
 import { makeStyles } from '@material-ui/core/styles';
+import errorDeco from 'public/images/saas/error-deco.png';
 
 const useStyles = makeStyles((theme) => ({
   errorWrap: {
     width: '100%',
-    minHeight: '90vh',
+    minHeight: 640,
     display: 'flex',
     alignItems: 'center',
-    padding: theme.spacing(20, 0, 10),
+    marginBottom: theme.spacing(-15),
   },
   flex: {
     display: 'flex',
@@ -14,12 +15,11 @@ const useStyles = makeStyles((theme) => ({
   },
   deco: {
     position: 'relative',
-    [theme.breakpoints.down('md')]: {
-      height: 320,
+    [theme.breakpoints.down('sm')]: {
+      margin: theme.spacing(25, 0, 10),
     },
     '& h3': {
-      fontFamily: 'Roboto Condensed',
-      color: theme.palette.common.white,
+      color: theme.palette.primary.dark,
       fontSize: 106,
       textTransform: 'capitalize',
       fontWeight: 700,
@@ -30,31 +30,32 @@ const useStyles = makeStyles((theme) => ({
     },
     '&:before': {
       content: '""',
-      width: 210,
-      height: 220,
-      background: theme.palette.primary.main,
-      borderRadius: 24,
-      transform: 'rotate(45deg)',
+      width: 320,
+      height: 230,
+      background: `url(${errorDeco}) no-repeat`,
       position: 'absolute',
-      top: theme.spacing(-1),
-      left: 0,
+      top: theme.spacing(-3),
+      left: theme.spacing(-5),
+      [theme.breakpoints.down('xs')]: {
+        transform: 'scale(0.9)',
+        left: theme.spacing(-6),
+      },
     },
   },
   text: {
+    color: theme.palette.common.white,
     [theme.breakpoints.up('md')]: {
-      borderLeft: `1px solid ${theme.palette.divider}`,
       paddingLeft: theme.spacing(5),
+      borderLeft: `1px solid ${theme.palette.divider}`,
     },
-    [theme.breakpoints.down('md')]: {
+    [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
+      margin: theme.spacing(5, 0, 20),
     },
     '& h4': {
+      color: theme.palette.common.white,
       fontWeight: theme.typography.fontWeightBold,
       marginBottom: theme.spacing(4),
-    },
-    '& p': {
-      fontSize: 22,
-      color: theme.palette.text.secondary,
     },
   },
   button: {

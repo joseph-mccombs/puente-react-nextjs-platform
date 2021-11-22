@@ -7,7 +7,7 @@ const Page = ({ children }) => (
   <div className={styles.page}>
     <Head>
       <title>
-        { brand.agency.name }
+        { brand.saas.name }
           &nbsp; - Home Page
       </title>
     </Head>

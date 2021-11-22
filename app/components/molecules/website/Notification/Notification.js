@@ -13,7 +13,7 @@ function TransitionUp(props) {
   return <Slide {...props} direction="up" />;
 }
 
-function Notification(props) {
+function Notification() {
   const { t } = useTranslation('common');
   const classes = useStyles();
   const [open, setOpen] = useState(true);
@@ -39,7 +39,7 @@ function Notification(props) {
           action: classes.action,
         }}
         action={(
-          <Button key="undo" variant="contained" className={classes.button} onClick={handleClose}>
+          <Button color="secondary" variant="contained" className={classes.button} onClick={handleClose}>
             {t('common:accept')}
           </Button>
         )}
