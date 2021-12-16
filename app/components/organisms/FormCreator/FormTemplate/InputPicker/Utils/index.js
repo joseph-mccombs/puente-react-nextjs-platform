@@ -1,5 +1,3 @@
 import ActiveInput from './ActiveInput';
 
-export {
-  ActiveInput,
-};
+export default ActiveInput;

@@ -79,7 +79,6 @@ function MobileMenu(props) {
 MobileMenu.propTypes = {
   toggleDrawer: PropTypes.func.isRequired,
   open: PropTypes.bool.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 export default MobileMenu;

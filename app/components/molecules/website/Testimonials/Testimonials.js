@@ -10,7 +10,6 @@ import QuoteIcon from '@material-ui/icons/FormatQuote';
 import { useHidden, useText } from 'app/modules/theme/common';
 import clsx from 'clsx';
 import { useTranslation } from 'next-i18next';
-import PropTypes from 'prop-types';
 import imgAPI from 'public/images/imgAPI';
 import React, { useRef, useState } from 'react';
 import Carousel from 'react-slick';
@@ -83,7 +82,7 @@ const testiContent = [
   },
 ];
 
-function Testimonials(props) {
+function Testimonials() {
   const slider = useRef(null);
   const classes = useStyle();
   const hide = useHidden();
@@ -179,9 +178,5 @@ function Testimonials(props) {
     </div>
   );
 }
-
-Testimonials.propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 export default Testimonials;

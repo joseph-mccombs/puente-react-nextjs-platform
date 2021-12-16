@@ -10,7 +10,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useText, useTextAlign } from 'app/modules/theme/common';
 import clsx from 'clsx';
 import { useTranslation } from 'next-i18next';
-import PropTypes from 'prop-types';
 import imgAPI from 'public/images/imgAPI';
 import React, { Fragment, useState } from 'react';
 import { Parallax, ParallaxProvider } from 'react-scroll-parallax';
@@ -218,9 +217,5 @@ function Feature() {
     </div>
   );
 }
-
-Feature.propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 export default Feature;

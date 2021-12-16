@@ -12,14 +12,14 @@ const Button = (props) => {
 
   return (
     <div>
-      <MaterialButton.default
+      <MaterialButton
         {...rest}
         variant={variant || ''}
         color={color || ''}
         disabled={disabled || ''}
       >
         {text || ''}
-      </MaterialButton.default>
+      </MaterialButton>
     </div>
   );
 };

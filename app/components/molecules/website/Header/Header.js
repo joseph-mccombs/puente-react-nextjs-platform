@@ -50,7 +50,6 @@ function Header(props) {
   };
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    console.log();
   }, []);
   const classes = useStyles();
   const theme = useTheme();
@@ -165,7 +164,7 @@ Header.propTypes = {
   onToggleDark: PropTypes.func.isRequired,
   onToggleDir: PropTypes.func.isRequired,
   invert: PropTypes.bool,
-  t: PropTypes.func.isRequired,
+  sticky: PropTypes.bool,
 };
 
 Header.defaultProps = {

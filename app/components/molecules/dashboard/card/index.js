@@ -30,7 +30,7 @@ const Card = ({
     {actions
     && (
     <div>
-      {actions.map((action) => <button onClick={action.action}>{action.text}</button>)}
+      {actions.map((action) => <button type="button" onClick={action.action}>{action.text}</button>)}
     </div>
     )}
   </a>

@@ -38,7 +38,6 @@ function FooterWithDeco(props) {
 }
 
 FooterWithDeco.propTypes = {
-  t: PropTypes.func.isRequired,
   toggleDir: PropTypes.func.isRequired,
 };
 

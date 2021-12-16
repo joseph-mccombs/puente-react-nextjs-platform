@@ -4,112 +4,112 @@ module.exports = {
       primary: {
         light: '#BBDEFB',
         main: '#2196F3',
-        dark: '#0D47A1'
+        dark: '#0D47A1',
       },
       secondary: {
         light: '#B2EBF2',
         main: '#00BCD4',
-        dark: '#006064'
-      }
-    }
+        dark: '#006064',
+      },
+    },
   },
   greenLeaf: {
     palette: {
       primary: {
         light: '#C8E6C9',
         main: '#4CAF50',
-        dark: '#1B5E20'
+        dark: '#1B5E20',
       },
       secondary: {
         light: '#CFD8DC',
         main: '#607D8B',
-        dark: '#37474F'
-      }
-    }
+        dark: '#37474F',
+      },
+    },
   },
   money: {
     palette: {
       primary: {
         light: '#C8E6C9',
         main: '#4CAF50',
-        dark: '#2E7D32'
+        dark: '#2E7D32',
       },
       secondary: {
         light: '#FFECB3',
         main: '#FFA000',
-        dark: '#FF6F00'
-      }
-    }
+        dark: '#FF6F00',
+      },
+    },
   },
   grayscale: {
     palette: {
       primary: {
         light: '#CFD8DC',
         main: '#546E7A',
-        dark: '#263238'
+        dark: '#263238',
       },
       secondary: {
         light: '#D7CCC8',
         main: '#6D4C41',
-        dark: '#3E2723'
-      }
-    }
+        dark: '#3E2723',
+      },
+    },
   },
   cloud: {
     palette: {
       primary: {
         light: '#B3E5FC',
         main: '#03A9F4',
-        dark: '#01579B'
+        dark: '#01579B',
       },
       secondary: {
         light: '#FFE0B2',
         main: '#FF9800',
-        dark: '#E65100'
-      }
-    }
+        dark: '#E65100',
+      },
+    },
   },
   joker: {
     palette: {
       primary: {
         light: '#D1C4E9',
         main: '#673AB7',
-        dark: '#311B92'
+        dark: '#311B92',
       },
       secondary: {
         light: '#B2EBF2',
         main: '#00BCD4',
-        dark: '#006064'
-      }
-    }
+        dark: '#006064',
+      },
+    },
   },
   violet: {
     palette: {
       primary: {
         light: '#F8BBD0',
         main: '#EC407A',
-        dark: '#880E4F'
+        dark: '#880E4F',
       },
       secondary: {
         light: '#D1C4E9',
         main: '#673AB7',
-        dark: '#311B92'
-      }
-    }
+        dark: '#311B92',
+      },
+    },
   },
   violeta: {
     palette: {
       primary: {
         light: '#E1BEE7',
         main: '#9C27B0',
-        dark: '#6A1B9A'
+        dark: '#6A1B9A',
       },
       secondary: {
         light: '#DCEDC8',
         main: '#8BC34A',
-        dark: '#558B2F'
-      }
-    }
+        dark: '#558B2F',
+      },
+    },
   },
   roseGold: {
     palette: {
@@ -318,5 +318,5 @@ module.exports = {
         contrastText: '#fff',
       },
     },
-  }
+  },
 };

@@ -12,7 +12,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useText } from 'app/modules/theme/common';
 import clsx from 'clsx';
 import { useTranslation } from 'next-i18next';
-import PropTypes from 'prop-types';
 import logo from 'public/images/saas-logo.svg';
 import brand from 'public/text/brand';
 import routeLink from 'public/text/link';
@@ -22,7 +21,7 @@ import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
 import Checkbox from './Checkbox';
 import useStyles from './form-style';
 
-function Contact(props) {
+function Contact() {
   const classes = useStyles();
   const text = useText();
   const { t } = useTranslation('common');
@@ -116,7 +115,7 @@ function Contact(props) {
             <div className={classes.form}>
               <ValidatorForm
                 onSubmit={handleSubmit}
-                onError={(errors) => console.log(errors)}
+                onError={(errors) => console.log(errors)} //eslint-disable-line
               >
                 <Grid container spacing={6}>
                   <Grid item md={6} xs={12}>
@@ -192,7 +191,7 @@ function Contact(props) {
                       <span>
                         {t('common:form_terms')}
                         <br />
-                        <a href="#">
+                        <a href="#/">
                           {t('common:form_privacy')}
                         </a>
                       </span>
@@ -210,9 +209,5 @@ function Contact(props) {
     </div>
   );
 }
-
-Contact.propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 export default Contact;

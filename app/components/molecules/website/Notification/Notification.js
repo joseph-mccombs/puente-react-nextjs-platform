@@ -4,7 +4,6 @@ import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
 import Typography from '@material-ui/core/Typography';
 import { useTranslation } from 'next-i18next';
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 import useStyles from './notification-style';
@@ -47,9 +46,5 @@ function Notification() {
     </Snackbar>
   );
 }
-
-Notification.propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 export default Notification;

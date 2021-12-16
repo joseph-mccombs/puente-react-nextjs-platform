@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core/styles';
 
-const featureStyles = makeStyles(theme => ({
+const featureStyles = makeStyles((theme) => ({
   root: {
     position: 'relative',
   },
@@ -20,13 +20,13 @@ const featureStyles = makeStyles(theme => ({
         transform: 'scale(2.5, 1)',
       },
       [theme.breakpoints.up('xl')]: {
-        display: 'none'
+        display: 'none',
       },
       [theme.breakpoints.down('xs')]: {
         transform: 'scale(0.5)',
-        transformOrigin: 'center left'
-      }
-    }
+        transformOrigin: 'center left',
+      },
+    },
   },
   btn: {},
   figure: {},
@@ -36,10 +36,10 @@ const featureStyles = makeStyles(theme => ({
     minHeight: 320,
     marginBottom: theme.spacing(20),
     '&$last': {
-      marginBottom: theme.spacing(10)
+      marginBottom: theme.spacing(10),
     },
     [theme.breakpoints.down('md')]: {
-      marginBottom: theme.spacing(15)
+      marginBottom: theme.spacing(15),
     },
     [theme.breakpoints.down('sm')]: {
       textAlign: 'center',
@@ -52,11 +52,11 @@ const featureStyles = makeStyles(theme => ({
         position: 'absolute',
       },
       [theme.breakpoints.down('sm')]: {
-        margin: theme.spacing(3, 0)
+        margin: theme.spacing(3, 0),
       },
       '& > div': {
-        perspective: 1000
-      }
+        perspective: 1000,
+      },
     },
     '& $figure': {
       transformStyle: 'preserve-3d',
@@ -70,21 +70,21 @@ const featureStyles = makeStyles(theme => ({
       '& img': {
         width: '100%',
       },
-    }
+    },
   },
   screen: {
     position: 'relative',
     '& img': {
       width: '90%',
-      display: 'block'
-    }
+      display: 'block',
+    },
   },
   graphic: {
     position: 'relative',
     '& img': {
       width: '90%',
-      display: 'block'
-    }
+      display: 'block',
+    },
   },
   tabContent: {
     position: 'relative',
@@ -92,35 +92,35 @@ const featureStyles = makeStyles(theme => ({
       padding: theme.spacing(8, 4, 0),
     },
     '& section': {
-      position: 'relative'
-    }
+      position: 'relative',
+    },
   },
   selected: {},
   tabLabel: {
     fontSize: 18,
     borderBottom: `1px solid ${theme.palette.text.disabled}`,
     [theme.breakpoints.down('xs')]: {
-      fontSize: 14
+      fontSize: 14,
     },
     '&$selected': {
-      color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.main
-    }
+      color: theme.palette.type === 'dark' ? theme.palette.primary.light : theme.palette.primary.main,
+    },
   },
   illustrationLeft: {
     position: 'relative',
     '& $screen': {
       [theme.breakpoints.up('md')]: {
         marginTop: -50,
-        transform: 'rotateY( 30deg )'
-      }
+        transform: 'rotateY( 30deg )',
+      },
     },
     '& $graphic': {
       top: 100,
       left: 70,
       width: 360,
       [theme.breakpoints.up('md')]: {
-        transform: 'rotateY( 30deg ) rotateX(-5deg) rotateZ(-2deg)'
-      }
+        transform: 'rotateY( 30deg ) rotateX(-5deg) rotateZ(-2deg)',
+      },
     },
   },
   illustrationRight: {
@@ -130,7 +130,7 @@ const featureStyles = makeStyles(theme => ({
         left: 20,
         top: -40,
         transform: 'rotateY( -30deg )',
-      }
+      },
     },
     '& $graphic': {
       right: -60,
@@ -139,7 +139,7 @@ const featureStyles = makeStyles(theme => ({
       [theme.breakpoints.up('md')]: {
         transformStyle: 'preserve-3d',
         transform: 'rotateY( -30deg ) rotateX(-4deg) rotateZ(0deg)',
-      }
+      },
     },
   },
   illustrationCenter: {
@@ -152,8 +152,8 @@ const featureStyles = makeStyles(theme => ({
       transform: 'rotateY( 0 ) rotateX(35deg) rotateZ(0deg)',
       '& img': {
         margin: '0 auto',
-        width: '100%'
-      }
+        width: '100%',
+      },
     },
   },
 }));

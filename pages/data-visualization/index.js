@@ -1,126 +1,128 @@
 import { Button } from '@material-ui/core';
 import Page from 'app/components/templates/dashboard-layout';
-import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/Viz';
+// import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/Viz';
 import dataQueryer from 'app/modules/apollo-grapql';
 import { useState } from 'react';
 
 const organization = 'WOF';
 
-const SChart = ({ data }) => {
-  const legend = { left: 'Systolic', bottom: 'Diastolic' };
+// const SChart = ({ data }) => {
+//   const legend = { left: 'Systolic', bottom: 'Diastolic' };
 
-  const mappedVitals = [{
-    id: organization,
-    data: data.reduce((result, record) => {
-      if (Number(record.Diastolic) < 300
-          && Number(record.Systolic) < 300
-          && Number(record.Diastolic) > 0
-          && Number(record.Systolic) > 0
-      ) {
-        return result.concat({
-          communityname: record.communityname,
-          city: record.city,
-          educationLevel: record.educationLevel,
-          x: Number(record.Diastolic),
-          y: Number(record.Systolic),
-        });
-      }
-      return result;
-    }, []),
-  }];
+//   const mappedVitals = [{
+//     id: organization,
+//     data: data.reduce((result, record) => {
+//       if (Number(record.Diastolic) < 300
+//           && Number(record.Systolic) < 300
+//           && Number(record.Diastolic) > 0
+//           && Number(record.Systolic) > 0
+//       ) {
+//         return result.concat({
+//           communityname: record.communityname,
+//           city: record.city,
+//           educationLevel: record.educationLevel,
+//           x: Number(record.Diastolic),
+//           y: Number(record.Systolic),
+//         });
+//       }
+//       return result;
+//     }, []),
+//   }];
 
-  return (
-    <div style={{ height: '400px' }}>
-      <ResponsiveScatterPlot
-        data={mappedVitals}
-        legend={legend}
-      />
-    </div>
-  );
-};
+//   return (
+//     <div style={{ height: '400px' }}>
+//       <ResponsiveScatterPlot
+//         data={mappedVitals}
+//         legend={legend}
+//       />
+//     </div>
+//   );
+// };
 
-const LChart = ({ data }) => {
-  const legend = { left: 'Systolic', bottom: 'Diastolic' };
+// const LChart = ({ data }) => {
+//   const legend = { left: 'Systolic', bottom: 'Diastolic' };
 
-  const countedData = [];
-  const groupBy = (keys) => (array) => array.reduce((objectsByKeyValue, obj) => {
-    const value = keys.map((key) => obj[key]).join('-');
-    objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
-    return objectsByKeyValue;
-  }, {});
+//   const countedData = [];
+//   const groupBy = (keys) => (array) => array.reduce((objectsByKeyValue, obj) => {
+//     const value = keys.map((key) => obj[key]).join('-');
+//     objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
+//     return objectsByKeyValue;
+//   }, {});
 
-  const groupByCommunityName = groupBy(['communityname']);
+//   const groupByCommunityName = groupBy(['communityname']);
 
-  for (const [groupName, values] of Object.entries(groupByCommunityName(data))) {
-    console.log(`${groupName}: ${values.length}`);
-    countedData.push({
-      x: groupName,
-      y: values.length,
-    });
-  }
+//   for (const [groupName, values] of Object.entries(groupByCommunityName(data))) {
+//     console.log(`${groupName}: ${values.length}`);
+//     countedData.push({
+//       x: groupName,
+//       y: values.length,
+//     });
+//   }
 
-  const mappedVitals = [{
-    id: organization,
-    data: countedData,
-  }];
+//   const mappedVitals = [{
+//     id: organization,
+//     data: countedData,
+//   }];
 
-  // console.log(mappedVitals)
+//   // console.log(mappedVitals)
 
-  return (
-    <div style={{ height: '400px' }}>
-      <LineChart
-        data={mappedVitals}
-        legend={legend}
-      />
-      <h1>hello</h1>
-    </div>
-  );
-};
+//   return (
+//     <div style={{ height: '400px' }}>
+//       <LineChart
+//         data={mappedVitals}
+//         legend={legend}
+//       />
+//       <h1>hello</h1>
+//     </div>
+//   );
+// };
 
-const BChart = ({ data }) => {
-  const legend = { left: 'Blood Pressure', middle: 'Community' };
+// const BChart = ({ data }) => {
+//   const legend = { left: 'Blood Pressure', middle: 'Community' };
 
-  const parsedData = data.map((result) => ({
-    ...result,
-    Diastolic: Number(result.Diastolic),
-    Systolic: Number(result.Systolic),
-  }));
+//   const parsedData = data.map((result) => ({
+//     ...result,
+//     Diastolic: Number(result.Diastolic),
+//     Systolic: Number(result.Systolic),
+//   }));
 
-  const reduced = parsedData.reduce((m, d) => {
-    if (!m[d.communityname]) {
-      m[d.communityname] = { ...d, count: 1 };
-      return m;
-    }
-    m[d.communityname].Systolic += d.Systolic;
-    m[d.communityname].Diastolic += d.Diastolic;
-    m[d.communityname].count += 1;
-    return m;
-  }, {});
+//   const reduced = parsedData.reduce((m, d) => {
+//     if (!m[d.communityname]) {
+//       m[d.communityname] = { ...d, count: 1 };
+//       return m;
+//     }
+//     m[d.communityname].Systolic += d.Systolic;
+//     m[d.communityname].Diastolic += d.Diastolic;
+//     m[d.communityname].count += 1;
+//     return m;
+//   }, {});
 
-  const result = Object.keys(reduced).map((k) => {
-    const item = reduced[k];
-    return {
-      communityname: item.communityname,
-      Systolic: Math.round(item.Systolic / item.count),
-      Diastolic: Math.round(item.Diastolic / item.count),
-      Count: item.count,
-    };
-  });
+//   const result = Object.keys(reduced).map((k) => {
+//     const item = reduced[k];
+//     return {
+//       communityname: item.communityname,
+//       Systolic: Math.round(item.Systolic / item.count),
+//       Diastolic: Math.round(item.Diastolic / item.count),
+//       Count: item.count,
+//     };
+//   });
 
-  return (
-    <div style={{ height: '500px' }}>
-      <GroupedBarChart
-        data={result}
-        keys={['Systolic', 'Diastolic']}
-        indexBy="communityname"
-        legend={legend}
-      />
-    </div>
-  );
-};
+//   return (
+//     <div style={{ height: '500px' }}>
+//       <GroupedBarChart
+//         data={result}
+//         keys={['Systolic', 'Diastolic']}
+//         indexBy="communityname"
+//         legend={legend}
+//       />
+//     </div>
+//   );
+// };
 
 const Forms = ({ vitals }) => {
   const [recordNumber, setRecordNumber] = useState(250);
+  console.log(vitals) //eslint-disable-line
+  console.log(recordNumber) //eslint-disable-line
 
   return (
     <Page>
@@ -134,9 +136,9 @@ const Forms = ({ vitals }) => {
           <Button variant="contained" onClick={() => setRecordNumber(2000)}>2000 Records</Button>
         </div>
 
-        <SChart data={vitals.getVitalByOrganization.slice(0, recordNumber)} />
+        {/* <SChart data={vitals.getVitalByOrganization.slice(0, recordNumber)} />
         <BChart data={vitals.getVitalByOrganization.slice(0, recordNumber)} />
-        <LChart data={vitals.getVitalByOrganization.slice(0, recordNumber)} />
+        <LChart data={vitals.getVitalByOrganization.slice(0, recordNumber)} /> */}
 
         <style jsx>
           {`

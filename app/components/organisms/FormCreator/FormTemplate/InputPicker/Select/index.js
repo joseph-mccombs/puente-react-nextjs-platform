@@ -2,7 +2,7 @@ import { Button } from '@material-ui/core';
 import React, { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
-import { ActiveInput } from '../Utils';
+import ActiveInput from '../Utils';
 import styles from './index.module.scss';
 
 const Select = (props) => {

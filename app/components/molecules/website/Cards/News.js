@@ -39,7 +39,6 @@ News.propTypes = {
   text: PropTypes.string.isRequired,
   img: PropTypes.string.isRequired,
   type: PropTypes.string.isRequired,
-  t: PropTypes.func.isRequired,
 };
 
 export default News;

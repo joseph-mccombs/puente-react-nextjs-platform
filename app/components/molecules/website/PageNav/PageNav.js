@@ -3,7 +3,6 @@ import Tooltip from '@material-ui/core/Tooltip';
 import ArrowIcon from '@material-ui/icons/ArrowUpward';
 import clsx from 'clsx';
 import { useTranslation } from 'next-i18next';
-import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Scrollspy from 'react-scrollspy';
@@ -23,7 +22,7 @@ const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disabl
   return <AnchorLink to={props.to} {...props} />; // eslint-disable-line
 });
 
-function PageNav(props) {
+function PageNav() {
   const { t } = useTranslation('saas-landing');
   const [show, setShow] = useState(false);
   let flagShow = false;
@@ -94,9 +93,5 @@ function PageNav(props) {
     </div>
   );
 }
-
-PageNav.propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 export default PageNav;

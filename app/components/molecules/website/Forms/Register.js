@@ -8,7 +8,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useText } from 'app/modules/theme/common';
 import clsx from 'clsx';
 import { useTranslation } from 'next-i18next';
-import PropTypes from 'prop-types';
 import routeLink from 'public/text/link';
 import React, { useEffect, useState } from 'react';
 import { TextValidator, ValidatorForm } from 'react-material-ui-form-validator';
@@ -19,7 +18,7 @@ import Checkbox from './Checkbox';
 import useStyles from './form-style';
 import SocialAuth from './SocialAuth';
 
-function Register(props) {
+function Register() {
   const classes = useStyles();
   const text = useText();
   const theme = useTheme();
@@ -54,7 +53,7 @@ function Register(props) {
   };
 
   const handleSubmit = () => {
-    console.log('data submited');
+    console.log('data submitted'); // eslint-disable-line
   };
 
   return (
@@ -72,7 +71,7 @@ function Register(props) {
           <Typography>{t('common:register_or')}</Typography>
         </div>
         <ValidatorForm
-          onError={(errors) => console.log(errors)}
+          onError={(errors) => console.log(errors)} // eslint-disable-line
           onSubmit={handleSubmit}
         >
           <Grid container spacing={3}>
@@ -143,7 +142,7 @@ function Register(props) {
                 <span className={text.caption}>
                   {t('common:form_terms')}
                   &nbsp;
-                  <a href="#">
+                  <a href="/#">
                     {t('common:form_privacy')}
                   </a>
                 </span>
@@ -158,9 +157,5 @@ function Register(props) {
     </AuthFrame>
   );
 }
-
-Register.propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 export default Register;

@@ -5,7 +5,6 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { useText } from 'app/modules/theme/common';
 import clsx from 'clsx';
 import { useTranslation } from 'next-i18next';
-import PropTypes from 'prop-types';
 import React from 'react';
 import ReactWOW from 'react-wow';
 
@@ -42,7 +41,7 @@ const feature = {
   ],
 };
 
-function PricingPlan(props) {
+function PricingPlan() {
   const classes = useStyles();
   const text = useText();
   const theme = useTheme();
@@ -117,9 +116,5 @@ function PricingPlan(props) {
     </div>
   );
 }
-
-PricingPlan.propTypes = {
-  t: PropTypes.func.isRequired,
-};
 
 export default PricingPlan;

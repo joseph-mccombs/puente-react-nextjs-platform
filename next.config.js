@@ -1,6 +1,6 @@
 const path = require('path');
-const { i18n } = require('./next-i18next.config.js');
 const withImages = require('next-images');
+const { i18n } = require('./next-i18next.config.js');
 
 module.exports = withImages({
   sassOptions: {

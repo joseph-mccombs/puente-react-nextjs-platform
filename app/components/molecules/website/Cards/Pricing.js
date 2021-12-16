@@ -58,7 +58,7 @@ export default function Pricing(props) {
 Pricing.propTypes = {
   title: PropTypes.string.isRequired,
   price: PropTypes.number.isRequired,
-  featureList: PropTypes.array.isRequired,
+  featureList: PropTypes.arrayOf(PropTypes.oneOfType([PropTypes.string])).isRequired,
   desc: PropTypes.string.isRequired,
   type: PropTypes.string,
 };

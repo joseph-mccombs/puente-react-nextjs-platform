@@ -163,7 +163,6 @@ function Settings(props) {
 Settings.propTypes = {
   toggleDark: PropTypes.func.isRequired,
   toggleDir: PropTypes.func.isRequired,
-  t: PropTypes.func.isRequired,
   invert: PropTypes.bool,
 };
 

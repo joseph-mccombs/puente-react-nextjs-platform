@@ -7,6 +7,12 @@ import styles from './index.module.scss';
 const FormMarketplace = ({ context, router }) => {
   const [formSpecs, setFormSpecs] = useState([]);
 
+  const refreshMarketplace = () => retrieveAllFormSpecs({
+    typeOfForm: 'Marketplace',
+  }).then((records) => {
+    setFormSpecs(records);
+  });
+
   useEffect(() => {
     refreshMarketplace();
   }, []);
@@ -22,12 +28,6 @@ const FormMarketplace = ({ context, router }) => {
     context.addPropToStore(href, storedData); // contextManagement.removeFromGlobalStoreData(key);
     router.push(href);
   };
-
-  const refreshMarketplace = () => retrieveAllFormSpecs({
-    typeOfForm: 'Marketplace',
-  }).then((records) => {
-    setFormSpecs(records);
-  });
 
   return (
     <div className={styles.formMarketplace}>

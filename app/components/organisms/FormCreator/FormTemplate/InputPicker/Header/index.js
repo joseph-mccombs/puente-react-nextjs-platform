@@ -1,7 +1,7 @@
 import { Button } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 
-import { ActiveInput } from '../Utils';
+import ActiveInput from '../Utils';
 import styles from './index.module.scss';
 
 const Header = (props) => {

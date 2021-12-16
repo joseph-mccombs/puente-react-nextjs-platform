@@ -1,4 +1,3 @@
 module.exports = {
-    use: true
-  };
-  
+  use: true,
+};
