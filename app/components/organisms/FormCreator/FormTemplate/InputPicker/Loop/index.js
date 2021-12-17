@@ -82,7 +82,7 @@ const Loop = (props) => {
 
   return (
     <div className={styles.element}>
-      {item.fieldType === 'loop' && (
+      {item.fieldType === 'loop'  || item.fieldType == 'loopSameForm' && (
         <div key={item.id}>
           <h3>Repeat Group Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Loop" />
