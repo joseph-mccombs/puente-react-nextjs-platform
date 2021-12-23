@@ -1,3 +1,18 @@
+import TableHead from "@material-ui/core/TableHead";
+import PropTypes from "prop-types";
+import clsx from "clsx";
+import { lighten, makeStyles } from "@material-ui/core/styles";
+import TableSortLabel from "@material-ui/core/TableSortLabel";
+import Toolbar from "@material-ui/core/Toolbar";
+import Typography from "@material-ui/core/Typography";
+import IconButton from "@material-ui/core/IconButton";
+import Tooltip from "@material-ui/core/Tooltip";
+import DeleteIcon from "@material-ui/icons/Delete";
+import FilterListIcon from "@material-ui/icons/FilterList";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import Checkbox from "@material-ui/core/Checkbox";
+
 function createData(fname, lname, surveyingOrganization) {
     return { fname, lname, surveyingOrganization };
   }
@@ -42,7 +57,9 @@ function createData(fname, lname, surveyingOrganization) {
       disablePadding: true,
       label: "First Name"
     },
-    { id: "lname", numeric: false, disablePadding: true, label: "Last Name" },
+    { id: "lname", numeric: false, 
+      disablePadding: true, 
+      label: "Last Name" },
     { id: "surveyingOrganization", numeric: false, disablePadding: false, label: "Surveying Organization" }
   ];
   
@@ -54,12 +71,13 @@ function createData(fname, lname, surveyingOrganization) {
       orderBy,
       numSelected,
       rowCount,
-      onRequestSort
+      onRequestSort,
+      cellLabels
     } = props;
     const createSortHandler = (property) => (event) => {
       onRequestSort(event, property);
     };
-  
+
     return (
       <TableHead>
         <TableRow>
@@ -71,20 +89,20 @@ function createData(fname, lname, surveyingOrganization) {
               inputProps={{ "aria-label": "select all desserts" }}
             />
           </TableCell>
-          {headCells.map((headCell) => (
+          {cellLabels !== undefined && cellLabels.map((headCell) => (
             <TableCell
-              key={headCell.id}
-              align={headCell.numeric ? "right" : "left"}
-              padding={headCell.disablePadding ? "none" : "normal"}
-              sortDirection={orderBy === headCell.id ? order : false}
+              key={headCell}
+              align={"left"}
+              padding={"none"}
+              sortDirection={orderBy === headCell ? order : false}
             >
               <TableSortLabel
-                active={orderBy === headCell.id}
-                direction={orderBy === headCell.id ? order : "asc"}
-                onClick={createSortHandler(headCell.id)}
+                active={orderBy === headCell}
+                direction={orderBy === headCell ? order : "asc"}
+                onClick={createSortHandler(headCell)}
               >
-                {headCell.label}
-                {orderBy === headCell.id ? (
+                {headCell}
+                {orderBy === headCell ? (
                   <span className={classes.visuallyHidden}>
                     {order === "desc" ? "sorted descending" : "sorted ascending"}
                   </span>
@@ -202,4 +220,4 @@ function createData(fname, lname, surveyingOrganization) {
     }
   }));
 
-  export {createData, rows , getComparator, stableSort}
+  export {createData, rows , getComparator, stableSort, useStyles, EnhancedTableToolbar, EnhancedTableHead }
