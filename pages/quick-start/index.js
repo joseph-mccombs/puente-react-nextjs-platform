@@ -1,16 +1,10 @@
-import { Card } from 'app/components/molecules';
-import { Head } from 'next/head';
+import { Card } from 'app/components/molecules/dashboard';
 
 import styles from './index.module.scss';
 
-export default function Home() {
+export default function QuickStart() {
   return (
     <div className={styles.index}>
-      <Head>
-        <title>Puente - Manage</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
       <main>
         <h1 className={styles.title}>
           Welcome to Puente Manage

@@ -5,7 +5,7 @@ import {
   retrieveForgotPasswordFunction,
   retrieveSignInFunction, retrieveSignOutFunction,
   retrieveSignUpFunction,
-} from './auth';
+} from './authentication';
 import countService from './calculate';
 import {
   customMultiParamQueryService,
