@@ -24,9 +24,9 @@ const DataExporter = () => {
   const [cellLabels, setCellLabels] = React.useState([]);
   const [formType, setFormType] = React.useState('SurveyData')
   const [formValue, setFormValue] = React.useState('Survey Data')
-  const [params, setParams] = React.useState({surveyingOrganization: 'Puente'})
+  const [params, setParams] = React.useState({surveyingOrganization: '12'})
 
-  const refreshDataExporter = () => retrieveAllFormResults('test',{ surveyingOrganiztion: 'Puente'}).then(records =>  {
+  const refreshDataExporter = () => retrieveAllFormResults(formType, params).then(records =>  {
     console.log(records)
     if (records.length < 1){
       console.log(formType)

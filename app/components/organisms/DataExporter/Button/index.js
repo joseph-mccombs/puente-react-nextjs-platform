@@ -1,12 +1,3 @@
-/*NEXT_PUBLIC_parseAppId=myAppId
-NEXT_PUBLIC_parseJavascriptKey=''
-NEXT_PUBLIC_parseServerUrl=http://localhost:1337/parse
-parseAppId=myAppId
-parseJavascriptKey=''
-parseServerUrl=http://localhost:1337/parse
-parseMasterKey=''
-taskyUrlApi=https://puente-tasky-dev.herokuapp.com/*/
-
 import React, { useEffect } from "react";
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
@@ -34,7 +25,7 @@ const PositionedMenu = ({setFormType, formType, formValue, setFormValue, setPara
   }
 
   const getCustomFormTypes = () => retrieveAllFormResults('FormSpecificationsV2', {
-    organizations: "Puente"
+    organizations: "12"
   }).then(records =>  {
     console.log(records)
     getCustomFormNames(records);
