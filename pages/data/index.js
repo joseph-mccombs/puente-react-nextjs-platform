@@ -1,5 +1,5 @@
 import Page from 'app/components/templates/page-layout';
-
+import DataExporter from 'app/components/organisms/DataExporter';
 export default function Forms() {
   return (
     <Page>
@@ -8,7 +8,7 @@ export default function Forms() {
           <h1 className="title">
             Data Exporter
             {' '}
-            <a href="https://nextjs.org">Next.js!</a>
+            <DataExporter />
           </h1>
         </main>
 

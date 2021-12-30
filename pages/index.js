@@ -40,11 +40,11 @@ export default function Home() {
             description="Visualize Data from Puente Collect"
             nextLink="/data-visualization"
           />
-          {/* <Card
+          <Card
             title="Data Exporter"
             description="Download data"
             nextLink="/data"
-          /> */}
+          />
         </div>
       </main>
       <style jsx global>

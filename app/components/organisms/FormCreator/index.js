@@ -52,6 +52,7 @@ function FormCreator({ context }) {
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
+      console.log(results);
       setOrganizations(results);
     });
 
