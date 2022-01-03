@@ -1,3 +1,5 @@
+/* eslint-disable */
+
 import { ResponsiveScatterPlot } from '@nivo/scatterplot';
 
 const ScatterPlot = (
