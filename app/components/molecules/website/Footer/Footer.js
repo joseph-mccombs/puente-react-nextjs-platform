@@ -4,16 +4,16 @@ import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import Grid from '@material-ui/core/Grid';
 import IconButton from '@material-ui/core/IconButton';
-import InputAdornment from '@material-ui/core/InputAdornment';
+// import InputAdornment from '@material-ui/core/InputAdornment';
 import Link from '@material-ui/core/Link';
-import MenuItem from '@material-ui/core/MenuItem';
-import OutlinedInput from '@material-ui/core/OutlinedInput';
-import Select from '@material-ui/core/Select';
+// import MenuItem from '@material-ui/core/MenuItem';
+// import OutlinedInput from '@material-ui/core/OutlinedInput';
+// import Select from '@material-ui/core/Select';
 import { useTheme } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import LangIcon from '@material-ui/icons/Language';
+// import LangIcon from '@material-ui/icons/Language';
 import clsx from 'clsx';
 import { i18n } from 'next-i18next';
 import PropTypes from 'prop-types';
@@ -51,13 +51,13 @@ const footers = [
 ];
 
 function Footer(props) {
-  const [ctn, setCtn] = useState(null);
+  const [, setCtn] = useState(null);
   const classes = useStyles();
   const { invert } = props;
   const theme = useTheme();
   const isDesktop = useMediaQuery(theme.breakpoints.up('md'));
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-  const [values, setValues] = useState({
+  const [, setValues] = useState({
     lang: 'eng',
   });
 
@@ -66,19 +66,19 @@ function Footer(props) {
     setCtn(document.getElementById('main-wrap'));
   }, []);
 
-  function handleChange(event) {
-    setValues((oldValues) => ({
-      ...oldValues,
-      [event.target.name]: event.target.value,
-    }));
-    if (event.target.value === 'ara') {
-      i18n.changeLanguage('ara');
-      props.toggleDir('rtl');
-    } else {
-      i18n.changeLanguage(event.target.value);
-      props.toggleDir('ltr');
-    }
-  }
+  // function handleChange(event) {
+  //   setValues((oldValues) => ({
+  //     ...oldValues,
+  //     [event.target.name]: event.target.value,
+  //   }));
+  //   if (event.target.value === 'ara') {
+  //     i18n.changeLanguage('ara');
+  //     props.toggleDir('rtl');
+  //   } else {
+  //     i18n.changeLanguage(event.target.value);
+  //     props.toggleDir('ltr');
+  //   }
+  // }
 
   return (
     <Container
@@ -157,9 +157,9 @@ function Footer(props) {
             <IconButton aria-label="FB" className={classes.margin} size="small">
               <i className="ion-logo-facebook" />
             </IconButton>
-            <IconButton aria-label="TW" className={classes.margin} size="small">
+            {/* <IconButton aria-label="TW" className={classes.margin} size="small">
               <i className="ion-logo-twitter" />
-            </IconButton>
+            </IconButton> */}
             <IconButton aria-label="IG" className={classes.margin} size="small">
               <i className="ion-logo-instagram" />
             </IconButton>
@@ -167,7 +167,7 @@ function Footer(props) {
               <i className="ion-logo-linkedin" />
             </IconButton>
           </div>
-          <Select
+          {/* <Select
             value={values.lang}
             onChange={handleChange}
             MenuProps={{
@@ -187,7 +187,7 @@ function Footer(props) {
             <MenuItem value="ind">Bahasa Indonesia</MenuItem>
             <MenuItem value="prt">Português</MenuItem>
             <MenuItem value="zho">简体中文</MenuItem>
-          </Select>
+          </Select> */}
         </Grid>
       </Grid>
     </Container>
@@ -196,12 +196,12 @@ function Footer(props) {
 
 Footer.propTypes = {
   invert: PropTypes.bool,
-  toggleDir: PropTypes.func,
+  // toggleDir: PropTypes.func,
 };
 
 Footer.defaultProps = {
   invert: false,
-  toggleDir: () => {},
+  // toggleDir: () => {},
 };
 
 export default Footer;

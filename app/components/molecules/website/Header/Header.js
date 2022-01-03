@@ -19,7 +19,6 @@ import Scrollspy from 'react-scrollspy';
 import useStyles from './header-style';
 import navMenu from './menu';
 import MobileMenu from './MobileMenu';
-import Settings from './Settings';
 
 let counter = 0;
 function createData(name, url, offset) {
@@ -31,10 +30,6 @@ function createData(name, url, offset) {
     offset,
   };
 }
-
-const LinkBtn = React.forwardRef(function LinkBtn(props, ref) { // eslint-disable-line
-  return <AnchorLink to={props.to} {...props} innerRef={ref} />; // eslint-disable-line
-});
 
 function Header(props) {
   const [fixed, setFixed] = useState(false);
@@ -54,8 +49,6 @@ function Header(props) {
   const classes = useStyles();
   const theme = useTheme();
   const {
-    onToggleDark,
-    onToggleDir,
     invert,
   } = props;
 
@@ -151,7 +144,6 @@ function Header(props) {
                   {t('common:saas-landing.header_register')}
                 </Button>
               </Hidden>
-              <Settings toggleDark={onToggleDark} toggleDir={onToggleDir} invert={invert} />
             </nav>
           </div>
         </Container>
@@ -161,14 +153,10 @@ function Header(props) {
 }
 
 Header.propTypes = {
-  onToggleDark: PropTypes.func.isRequired,
-  onToggleDir: PropTypes.func.isRequired,
   invert: PropTypes.bool,
-  sticky: PropTypes.bool,
 };
 
 Header.defaultProps = {
-  sticky: false,
   invert: false,
 };
 

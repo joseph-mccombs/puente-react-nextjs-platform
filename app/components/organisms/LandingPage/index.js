@@ -17,7 +17,6 @@ import {
 } from 'app/components/molecules/website';
 import clsx from 'clsx';
 import Head from 'next/head';
-import PropTypes from 'prop-types';
 import brand from 'public/text/brand';
 import React from 'react';
 
@@ -60,9 +59,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-function Landing(props) {
+function Landing() {
   const classes = useStyles();
-  const { onToggleDark, onToggleDir } = props;
   return (
     <>
       <Head>
@@ -74,10 +72,7 @@ function Landing(props) {
       <CssBaseline />
       <section id="home" />
       <div className={classes.mainWrap}>
-        <Header
-          onToggleDark={onToggleDark}
-          onToggleDir={onToggleDir}
-        />
+        <Header />
         <main className={classes.containerWrap}>
           <section id="home">
             <Banner />
@@ -105,7 +100,7 @@ function Landing(props) {
           </div>
         </main>
         <section id="footer">
-          <FooterWithDeco toggleDir={onToggleDir} />
+          <FooterWithDeco />
         </section>
         <Hidden mdDown>
           <Notification />
@@ -121,10 +116,5 @@ function Landing(props) {
 Landing.getInitialProps = async () => ({
   namespacesRequired: ['common', 'saas-landing'],
 });
-
-Landing.propTypes = {
-  onToggleDark: PropTypes.func.isRequired,
-  onToggleDir: PropTypes.func.isRequired,
-};
 
 export default Landing;

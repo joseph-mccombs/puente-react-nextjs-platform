@@ -38,7 +38,6 @@ function PageNav() {
   };
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
-    console.log();
   }, []);
   const classes = useStyles();
   const [menuList] = useState([
