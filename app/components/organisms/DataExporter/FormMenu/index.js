@@ -1,31 +1,36 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import retrieveAllFormResults from '../_data';
 
-const PositionedMenu = ({setFormType, formType, formValue, setFormValue, setParams}) => {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+const FormMenu = ({
+  setFormType, formType, formValue, setFormValue, setParams, organization
+}) => {
+  
+  const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [menuItems, setMenuItems] = React.useState([
+  const [menuItems, setMenuItems] = useState([
       {key: 'SurveyData', value:'Survey Data', isCustomForm: false}, 
       {key:'Vitals', value: 'Vitals', isCustomForm: false}, 
       {key: 'Assets', value: 'Assets', isCustomForm: false}, 
       {key:'EvaluationMedical', value: 'Medical Evaluation', isCustomForm: false}, 
-      {key:'HistoryEnvironmentalHealth', value: 'History Environmental Health', isCustomForm: false}
+      {key:'HistoryEnvironmentalHealth', value: 'History Environmental Health', isCustomForm: false},
     ]);
 
   const getCustomFormNames = (records) => {
-      for (let i = 0; i < records.length; i++){
+      records.forEach((record) => {
+        console.log("record:", record)
         let customForm = {}
-        customForm = {key: records[i].objectId.toString(), value: records[i].name.toString(), isCustomForm: true};
-       // console.log(customForm);
-        menuItems.push(customForm);
-      }
+        let tempMenuItems = menuItems
+        customForm = {key: record.objectId.toString(), value: record.name.toString(), isCustomForm: true};
+        tempMenuItems.push(customForm)
+        setMenuItems(tempMenuItems)
+      })
   }
 
   const getCustomFormTypes = () => retrieveAllFormResults('FormSpecificationsV2', {
-    organizations: "12"
+    organizations: organization
   }).then(records =>  {
     console.log(records)
     getCustomFormNames(records);
@@ -36,21 +41,22 @@ const PositionedMenu = ({setFormType, formType, formValue, setFormValue, setPara
 
   useEffect(() => {
     getCustomFormTypes();
-  }, []);
+  }, [organization]);
   
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   };
+
   const handleClose = (menuItem) => {
     if (menuItem.isCustomForm == true){
       setFormType('FormResults')
-      setParams({ objectId: menuItem.objectId})
-      setFormValue(menuItem.name)
+      setFormValue(menuItem.value)
+      setParams({ formSpecificationsId: menuItem.key, surveyingOrganization: organization})
     }
     else if (menuItem.isCustomForm == false){
       setFormType(menuItem.key);
       setFormValue(menuItem.value);
-      setParams({ surveyingOrganization: 'Puente'})
+      setParams({ surveyingOrganization: organization})
     }
     setAnchorEl(null);
   };
@@ -80,18 +86,18 @@ const PositionedMenu = ({setFormType, formType, formValue, setFormValue, setPara
           vertical: 'top',
           horizontal: 'left',
         }}
-      >{
-          menuItems.map((item)=>(
+      >
+        {menuItems.length > 0 && menuItems.map((item)=> (
             
-            <MenuItem onClick={(event) => handleClose(item)}>
+            <MenuItem 
+              onClick={(event) => handleClose(item)}
+              key={item.key}
+              >
                {item && (<div>{item.value}</div>)} 
             </MenuItem>
-          )
-          )}
-        
-
+        ))}
       </Menu>
     </div>
   );
 }
-export default PositionedMenu;
+export default FormMenu;

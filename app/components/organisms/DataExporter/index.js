@@ -1,11 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
-import DataExporterTableRow from "./TableRow";
+import DataExporterTableRow from "./DataExporterTableRow";
 import TableContainer from "@material-ui/core/TableContainer";
 import TablePagination from "@material-ui/core/TablePagination";
 import Paper from "@material-ui/core/Paper";
-import PositionedMenu from "./Button";
+import FormMenu from "./FormMenu";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Switch from "@material-ui/core/Switch";
 import retrieveAllFormResults from './_data';
@@ -14,23 +14,24 @@ import SubmitButton from "./SubmitButton";
 
 const DataExporter = () => {
   const classes = useStyles();
-  const [order, setOrder] = React.useState("asc");
-  const [orderBy, setOrderBy] = React.useState("surveyingOrganization");
-  const [selected, setSelected] = React.useState([]);
-  const [page, setPage] = React.useState(0);
-  const [dense, setDense] = React.useState(false);
-  const [rowsPerPage, setRowsPerPage] = React.useState(5);
-  const [rows, setRows] = React.useState([]);
-  const [cellLabels, setCellLabels] = React.useState([]);
-  const [formType, setFormType] = React.useState('SurveyData')
-  const [formValue, setFormValue] = React.useState('Survey Data')
-  const [params, setParams] = React.useState({surveyingOrganization: '12'})
+  const [order, setOrder] = useState("asc");
+  const [orderBy, setOrderBy] = useState("surveyingOrganization");
+  const [selected, setSelected] = useState([]);
+  const [page, setPage] = useState(0);
+  const [dense, setDense] = useState(false);
+  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [rows, setRows] = useState([]);
+  const [cellLabels, setCellLabels] = useState([]);
+  const [formType, setFormType] = useState('SurveyData')
+  const [formValue, setFormValue] = useState('Survey Data')
+  const [organization, setOrganization] = useState('Test')
+  const [params, setParams] = useState({ surveyingOrganization: organization })
 
   const refreshDataExporter = () => retrieveAllFormResults(formType, params).then(records =>  {
     console.log(records)
     if (records.length < 1){
-      console.log(formType)
-      console.log(params)
+      setCellLabels([])
+      setRows([])
     }
     else {
       setCellLabels(Object.keys(records[0]))
@@ -102,16 +103,13 @@ const DataExporter = () => {
 
   return (
     <div className={classes.root}>
-      {/* <div>
-        {rows.map()}
-      </div> */}
-
-      <PositionedMenu 
+      <FormMenu 
         setFormType={setFormType}
         formType={formType}
         setFormValue={setFormValue}
         formValue={formValue}
         setParams={setParams}
+        organization={organization}
       />
       <SubmitButton
         handleSubmit={handleSubmit}
@@ -119,6 +117,7 @@ const DataExporter = () => {
       <Paper className={classes.paper}>
         <EnhancedTableToolbar 
           numSelected={selected.length}
+          formValue={formValue}
          />
         <TableContainer>
           <Table
@@ -141,7 +140,7 @@ const DataExporter = () => {
               {
               // stableSort(rows, getComparator(order, orderBy))
               //   .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                rows.map((row, index) => (
+                rows.length > 0  && rows.map((row, index) => (
                   <DataExporterTableRow
                     row={row}
                     index={index}
@@ -156,6 +155,10 @@ const DataExporter = () => {
                   <TableCell colSpan={6} />
                 </TableRow>
               )} */}
+              {rows.length === 0 && (
+                <h5>You have no data for {formValue} form in the {organization} organization. If you believe this is an error,
+                please contact your point of contact.</h5>
+              )}
             </TableBody>
           </Table>
         </TableContainer>

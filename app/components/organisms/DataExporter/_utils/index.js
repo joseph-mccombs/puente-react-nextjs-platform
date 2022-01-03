@@ -147,7 +147,7 @@ function createData(fname, lname, surveyingOrganization) {
   
   const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected } = props;
+    const { numSelected, formValue } = props;
   
     return (
       <Toolbar
@@ -171,7 +171,7 @@ function createData(fname, lname, surveyingOrganization) {
             id="tableTitle"
             component="div"
           >
-            Nutrition
+            {formValue}
           </Typography>
         )}
   

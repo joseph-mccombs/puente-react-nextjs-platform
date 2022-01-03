@@ -4,8 +4,10 @@ import TableCell from "@material-ui/core/TableCell";
 import { useEffect } from "react";
 
 
-const DataExporterTableRow = 
-    ({row, index, cellLabels, handleClick, selected}) => {
+const DataExporterTableRow = ({
+    row, index, cellLabels, handleClick, selected
+}) => {
+
     const isSelected = (name) => {
         if (selected !== undefined){
             selected.indexOf(name) !== -1;
@@ -15,16 +17,14 @@ const DataExporterTableRow =
     const isItemSelected = isSelected(row);
     const labelId = `enhanced-table-checkbox-${index}`;
 
-
-    return(
-        
+    return( 
         <TableRow
             hover
             onClick={(event) => handleClick(event, row)}
             role="checkbox"
             aria-checked={isItemSelected}
             tabIndex={-1}
-            key={row}
+            key={row.objectId}
             selected={isItemSelected}
         >
             <TableCell padding="checkbox">
