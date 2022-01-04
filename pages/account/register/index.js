@@ -1,4 +1,4 @@
-import { yupResolver } from '@hookform/resolvers/yup';
+import { yupResolver } from '@hookform/resolvers';
 import { Link } from 'app/components/elements';
 import Page from 'app/components/templates/dashboard-layout';
 // import { useRouter } from 'next/router';
