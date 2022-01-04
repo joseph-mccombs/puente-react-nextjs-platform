@@ -2,16 +2,14 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import { useText } from 'app/modules/theme/common';
 import { useTranslation } from 'next-i18next';
-import PropTypes from 'prop-types';
 import React from 'react';
 
 import Footer from './Footer';
 import useStyles from './footer-style';
 
-function FooterWithDeco(props) {
+function FooterWithDeco() {
   const classes = useStyles();
   const text = useText();
-  const { toggleDir } = props;
 
   const { t } = useTranslation('saas-landing');
   return (
@@ -32,13 +30,9 @@ function FooterWithDeco(props) {
           {t('common:saas-landing.getstarted')}
         </Button>
       </div>
-      <Footer toggleDir={toggleDir} />
+      <Footer />
     </div>
   );
 }
-
-FooterWithDeco.propTypes = {
-  toggleDir: PropTypes.func.isRequired,
-};
 
 export default FooterWithDeco;
