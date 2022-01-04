@@ -8,7 +8,10 @@ export default function Forms() {
   const { contextManagment } = useGlobalState();
 
   return (
-    <Page>
+    <Page
+      header
+      footer
+    >
       <main className={styles.formCreator}>
         <div className={styles.container}>
           <FormCreator

@@ -8,7 +8,10 @@ export default function Manager() {
   const router = useRouter();
 
   return (
-    <Page>
+    <Page
+      header
+      footer
+    >
       <main className="container">
         <div>Form Manager</div>
         <FormManager

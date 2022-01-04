@@ -2,7 +2,10 @@ import Page from 'app/components/templates/dashboard-layout';
 
 export default function Forms() {
   return (
-    <Page>
+    <Page
+      header
+      footer
+    >
       <div className="container">
         <main>
           <h1 className="title">

@@ -126,7 +126,10 @@ const Forms = ({ vitals }) => {
   const [recordNumber, setRecordNumber] = useState(250);
 
   return (
-    <Page>
+    <Page
+      header
+      footer
+    >
       <main className="container">
         <div>Data Viz</div>
         <h1>{organization}</h1>

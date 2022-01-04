@@ -10,7 +10,10 @@ export default function Marketplace() {
   const router = useRouter();
 
   return (
-    <Page>
+    <Page
+      header
+      footer
+    >
       <main className={styles.formMarketplace}>
         <div className={styles.container}>
           <FormMarketplace
