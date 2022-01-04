@@ -15,7 +15,7 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "export": "next export",
+    "export": "next build && next export",
     "reinstall": "rm package-lock.json && rm -rf node_modules/ && npm install",
     "release": "standard-version",
     "lint": "./node_modules/.bin/eslint '**/*.{js,jsx}' --quiet",
