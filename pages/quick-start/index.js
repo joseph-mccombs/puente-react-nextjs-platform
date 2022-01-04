@@ -8,8 +8,6 @@ export default function QuickStart() {
       <main>
         <h1 className={styles.title}>
           Welcome to Puente Manage
-          {' '}
-          {/* <a href="https://nextjs.org">Manage!</a> */}
         </h1>
         <h1>Quick Start Guide</h1>
 
