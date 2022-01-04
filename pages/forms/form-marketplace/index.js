@@ -1,4 +1,4 @@
-import FormMarketplace from 'app/components/organisms/FormMarketplace';
+import FormMarketplace from 'app/components/epics/FormMarketplace';
 import Page from 'app/components/templates/dashboard-layout';
 import { useGlobalState } from 'app/store';
 import { useRouter } from 'next/router';

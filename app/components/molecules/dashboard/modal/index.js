@@ -1,6 +1,8 @@
 import Modal from '@material-ui/core/Modal';
 import { makeStyles } from '@material-ui/core/styles';
-import { Button } from 'app/components/atoms';
+import {
+  Button
+} from '@material-ui/core';
 
 function rand() {
   return Math.round(Math.random() * 20) - 10;

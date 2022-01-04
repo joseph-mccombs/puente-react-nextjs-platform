@@ -1,4 +1,4 @@
-import LandingPage from 'app/components/organisms/LandingPage';
+import LandingPage from 'app/components/epics/LandingPage';
 import Page from 'app/components/templates/website-layout';
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 

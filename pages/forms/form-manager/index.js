@@ -1,4 +1,4 @@
-import FormManager from 'app/components/organisms/FormManager';
+import FormManager from 'app/components/epics/FormManager';
 import Page from 'app/components/templates/dashboard-layout';
 import { useGlobalState } from 'app/store';
 import { useRouter } from 'next/router';

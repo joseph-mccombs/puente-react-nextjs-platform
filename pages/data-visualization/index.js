@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
+import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/charts';
 import Page from 'app/components/templates/dashboard-layout';
-import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/Viz';
 import dataQueryer from 'app/modules/apollo-grapql';
 import { useState } from 'react';
 

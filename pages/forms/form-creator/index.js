@@ -1,4 +1,4 @@
-import FormCreator from 'app/components/organisms/FormCreator';
+import FormCreator from 'app/components/epics/FormCreator';
 import Page from 'app/components/templates/dashboard-layout';
 import { useGlobalState } from 'app/store';
 
