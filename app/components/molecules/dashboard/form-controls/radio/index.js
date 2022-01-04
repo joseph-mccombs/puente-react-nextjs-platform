@@ -1,10 +1,10 @@
-import React from "react";
-import { useFormContext, Controller } from "react-hook-form";
-import Radio from "@material-ui/core/Radio";
-import RadioGroup from "@material-ui/core/RadioGroup";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import FormControl from "@material-ui/core/FormControl";
-import FormLabel from "@material-ui/core/FormLabel";
+import FormControl from '@material-ui/core/FormControl';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import FormLabel from '@material-ui/core/FormLabel';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const MuiRadio = (props) => {
   const { label, name, options } = props;
@@ -29,7 +29,7 @@ function FormRadio(props) {
   const { control } = useFormContext();
   const { name, label } = props;
   return (
-    <React.Fragment>
+    <>
       <Controller
         as={MuiRadio}
         name={name}
@@ -38,7 +38,7 @@ function FormRadio(props) {
         label={label}
         {...props}
       />
-    </React.Fragment>
+    </>
   );
 }
 

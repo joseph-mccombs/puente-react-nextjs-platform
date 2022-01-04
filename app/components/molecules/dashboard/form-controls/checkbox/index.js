@@ -1,7 +1,7 @@
-import React from "react";
-import { useFormContext, Controller } from "react-hook-form";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import Checkbox from '@material-ui/core/Checkbox';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const MuiCheckbox = (props) => {
   const { label, name } = props;
@@ -17,7 +17,7 @@ function FormCheckBox(props) {
   const { control } = useFormContext();
   const { name, label } = props;
   return (
-    <React.Fragment>
+    <>
       <Controller
         as={MuiCheckbox}
         name={name}
@@ -26,7 +26,7 @@ function FormCheckBox(props) {
         label={label}
         {...props}
       />
-    </React.Fragment>
+    </>
   );
 }
 

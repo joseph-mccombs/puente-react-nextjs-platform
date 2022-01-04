@@ -1,31 +1,30 @@
-import React from "react";
-import { useFormContext, Controller } from "react-hook-form";
-import MomentUtils from "@date-io/moment";
-import { MuiPickersUtilsProvider } from "@material-ui/pickers";
-import { KeyboardDatePicker } from "@material-ui/pickers";
+import MomentUtils from '@date-io/moment';
+import { KeyboardDatePicker, MuiPickersUtilsProvider } from '@material-ui/pickers';
+import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
 
 const MuiDatePicker = (props) => {
   const { name, required, errorobj } = props;
   let isError = false;
-  let errorMessage = "";
+  let errorMessage = '';
   if (errorobj && errorobj.hasOwnProperty(name)) {
     isError = true;
     errorMessage = errorobj[name].message;
   }
   return (
-    <React.Fragment>
+    <>
       <KeyboardDatePicker
         format="DD-MM-YYYY"
-        fullWidth={true}
+        fullWidth
         InputLabelProps={{
-          className: required ? "required-label" : "",
+          className: required ? 'required-label' : '',
           required: required || false,
         }}
         error={isError}
         helperText={errorMessage}
         {...props}
       />
-    </React.Fragment>
+    </>
   );
 };
 
@@ -34,7 +33,7 @@ function FormDatePicker(props) {
   const { name, label } = props;
 
   return (
-    <React.Fragment>
+    <>
       <MuiPickersUtilsProvider utils={MomentUtils}>
         <Controller
           as={MuiDatePicker}
@@ -45,7 +44,7 @@ function FormDatePicker(props) {
           {...props}
         />
       </MuiPickersUtilsProvider>
-    </React.Fragment>
+    </>
   );
 }
 

@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import { useFormContext, Controller } from "react-hook-form";
-import Select, { createFilter } from "react-select";
-import { StyledFormControl, StyledAutoSelectInputLabel } from "../_styles";
-import FormHelperText from "@material-ui/core/FormHelperText";
+import FormHelperText from '@material-ui/core/FormHelperText';
+import React, { useEffect, useState } from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+import Select, { createFilter } from 'react-select';
+
+import { StyledAutoSelectInputLabel, StyledFormControl } from '../_styles';
 import styles from './index.module.scss';
 
 const stylesReactSelect = {
   clearIndicator: (provided, state) => ({
     ...provided,
-    cursor: "pointer",
+    cursor: 'pointer',
   }),
   indicatorSeparator: (provided, state) => ({
     ...provided,
@@ -16,24 +17,24 @@ const stylesReactSelect = {
   }),
   dropdownIndicator: (provided, state) => ({
     ...provided,
-    cursor: "pointer",
+    cursor: 'pointer',
   }),
   placeholder: (provided, state) => ({
     ...provided,
-    fontFamily: "Roboto, Helvetica, Arial, sans-serif",
-    color: state.selectProps.error ? "#f44336" : "rgba(0, 0, 0, 0.54)",
+    fontFamily: 'Roboto, Helvetica, Arial, sans-serif',
+    color: state.selectProps.error ? '#f44336' : 'rgba(0, 0, 0, 0.54)',
   }),
   control: (provided, state) => ({
     ...provided,
     borderRadius: 0,
     border: 0,
     borderBottom: state.selectProps.error
-      ? "1px solid #f44336"
-      : "1px solid rgba(0,0,0,0.87)",
-    boxShadow: "none",
-    ":hover": {
-      borderColor: state.selectProps.error ? "1px solid #f44336" : "inherit",
-      boxShadow: state.selectProps.error ? "1px solid #f44336" : "none",
+      ? '1px solid #f44336'
+      : '1px solid rgba(0,0,0,0.87)',
+    boxShadow: 'none',
+    ':hover': {
+      borderColor: state.selectProps.error ? '1px solid #f44336' : 'inherit',
+      boxShadow: state.selectProps.error ? '1px solid #f44336' : 'none',
     },
   }),
   valueContainer: (provided, state) => ({
@@ -56,19 +57,23 @@ function Option(props) {
 }
 
 const ReactSelect = (props) => {
-  const { label, options, required, errorobj, name } = props;
+  const {
+    label, options, required, errorobj, name,
+  } = props;
   let isError = false;
-  let errorMessage = "";
+  let errorMessage = '';
   if (errorobj && errorobj.hasOwnProperty(name)) {
     isError = true;
     errorMessage = errorobj[name].message;
   }
   return (
-    <React.Fragment>
+    <>
       <StyledFormControl>
         <StyledAutoSelectInputLabel>
-          <span className={isError ? "req-label" : ""}>
-            {label} {required ? <span className="req-label">*</span> : null}
+          <span className={isError ? 'req-label' : ''}>
+            {label}
+            {' '}
+            {required ? <span className="req-label">*</span> : null}
           </span>
         </StyledAutoSelectInputLabel>
         <Select
@@ -76,9 +81,9 @@ const ReactSelect = (props) => {
           placeholder="Please Select"
           valueKey="id"
           components={components}
-          isClearable={true}
+          isClearable
           styles={stylesReactSelect}
-          isSearchable={true}
+          isSearchable
           filterOption={createFilter({ ignoreAccents: false })}
           error={isError}
           {...props}
@@ -87,7 +92,7 @@ const ReactSelect = (props) => {
           <FormHelperText error={isError}>{errorMessage}</FormHelperText>
         )}
       </StyledFormControl>
-    </React.Fragment>
+    </>
   );
 };
 
@@ -106,7 +111,7 @@ function FormSelectAutoComplete(props) {
   }, [options]);
 
   return (
-    <React.Fragment>
+    <>
       <Controller
         as={ReactSelect}
         name={name}
@@ -116,7 +121,7 @@ function FormSelectAutoComplete(props) {
         {...props}
         options={newData}
       />
-    </React.Fragment>
+    </>
   );
 }
 

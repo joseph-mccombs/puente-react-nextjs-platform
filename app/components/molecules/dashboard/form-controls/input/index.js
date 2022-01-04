@@ -1,14 +1,17 @@
-import React from "react";
-import { useFormContext, Controller } from "react-hook-form";
-import TextField from "@material-ui/core/TextField";
+import TextField from '@material-ui/core/TextField';
+import React from 'react';
+import { Controller, useFormContext } from 'react-hook-form';
+
 import styles from './index.module.scss';
 // import "./index.scss";
 
 function FormInput(props) {
   const { control } = useFormContext();
-  const { name, label, required, errorobj } = props;
+  const {
+    name, label, required, errorobj,
+  } = props;
   let isError = false;
-  let errorMessage = "";
+  let errorMessage = '';
   if (errorobj && errorobj.hasOwnProperty(name)) {
     isError = true;
     errorMessage = errorobj[name].message;
@@ -21,9 +24,9 @@ function FormInput(props) {
       control={control}
       defaultValue=""
       label={label}
-      fullWidth={true}
+      fullWidth
       InputLabelProps={{
-        className: required ? "required-label" : "",
+        className: required ? 'required-label' : '',
         required: required || false,
       }}
       error={isError}
