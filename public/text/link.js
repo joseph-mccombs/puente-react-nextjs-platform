@@ -2,8 +2,10 @@ const link = {
   saas: {
     home: '/',
     contact: '/contact',
-    login: '/login',
-    register: '/quick-start',
+    login: '/account/login',
+    register: '/account/register',
+    quickstart: '/quick-start',
+
   },
 };
 
