@@ -5,17 +5,17 @@ import MenuItem from '@material-ui/core/MenuItem';
 import retrieveAllFormResults from '../_data';
 
 const FormMenu = ({
-  setFormType, formType, formValue, setFormValue, setParams, organization
+  setFormType, formType, formValue, setFormValue, setParams, organization, setCsvData
 }) => {
   
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const [menuItems, setMenuItems] = useState([
-      {key: 'SurveyData', value:'Survey Data', isCustomForm: false}, 
-      {key:'Vitals', value: 'Vitals', isCustomForm: false}, 
-      {key: 'Assets', value: 'Assets', isCustomForm: false}, 
-      {key:'EvaluationMedical', value: 'Medical Evaluation', isCustomForm: false}, 
-      {key:'HistoryEnvironmentalHealth', value: 'History Environmental Health', isCustomForm: false},
+      {key: 'SurveyData', value:'Survey Data', isCustomForm: false, isAssetForm: false}, 
+      {key:'Vitals', value: 'Vitals', isCustomForm: false, isAssetForm: false}, 
+      {key: 'Assets', value: 'Assets', isCustomForm: false, isAssetForm: false}, 
+      {key:'EvaluationMedical', value: 'Medical Evaluation', isCustomForm: false, isAssetForm: false}, 
+      {key:'HistoryEnvironmentalHealth', value: 'History Environmental Health', isCustomForm: false, isAssetForm: false},
     ]);
 
   const getCustomFormNames = (records) => {
@@ -23,7 +23,12 @@ const FormMenu = ({
         console.log("record:", record)
         let customForm = {}
         let tempMenuItems = menuItems
-        customForm = {key: record.objectId.toString(), value: record.name.toString(), isCustomForm: true};
+        console.log(record.typeOfForm)
+        if (record.typeOfForm.includes("Assets")){
+          customForm = {key: record.objectId.toString(), value: record.name.toString() + ' - Asset', isCustomForm: true, isAssetForm: true};
+        } else {
+          customForm = {key: record.objectId.toString(), value: record.name.toString() + ' - Custom', isCustomForm: true, isAssetForm: false};
+        }
         tempMenuItems.push(customForm)
         setMenuItems(tempMenuItems)
       })
@@ -48,16 +53,21 @@ const FormMenu = ({
   };
 
   const handleClose = (menuItem) => {
-    if (menuItem.isCustomForm == true){
-      setFormType('FormResults')
+    if (menuItem.isCustomForm === true){
+      if (menuItem.isAssetForm === true) {
+        setFormType('FormAssetResults')
+      } else {
+        setFormType('FormResults')
+      }
       setFormValue(menuItem.value)
       setParams({ formSpecificationsId: menuItem.key, surveyingOrganization: organization})
     }
-    else if (menuItem.isCustomForm == false){
+    else if (menuItem.isCustomForm === false){
       setFormType(menuItem.key);
       setFormValue(menuItem.value);
       setParams({ surveyingOrganization: organization})
     }
+    setCsvData([])
     setAnchorEl(null);
   };
 

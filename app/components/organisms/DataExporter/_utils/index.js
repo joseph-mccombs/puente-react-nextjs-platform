@@ -5,24 +5,11 @@ import { lighten, makeStyles } from "@material-ui/core/styles";
 import TableSortLabel from "@material-ui/core/TableSortLabel";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
-import IconButton from "@material-ui/core/IconButton";
 import Tooltip from "@material-ui/core/Tooltip";
-import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
-import Checkbox from "@material-ui/core/Checkbox";
-
-function createData(fname, lname, surveyingOrganization) {
-    return { fname, lname, surveyingOrganization };
-  }
-  
-  const rows = [
-    createData("Jake", "Paul", "Puente"),
-    createData("Raul", "Jimenez", "OWF"),
-    createData("Maria", "Jimenez", "OWF"),
-    createData("Zoey", "Spears", "Puente")
-  ];
+import Button from "@material-ui/core/Button"
+import { useEffect } from "react";
   
   function descendingComparator(a, b, orderBy) {
     if (b[orderBy] < a[orderBy]) {
@@ -50,19 +37,6 @@ function createData(fname, lname, surveyingOrganization) {
     return stabilizedThis.map((el) => el[0]);
   }
   
-  const headCells = [
-    {
-      id: "fname",
-      numeric: false,
-      disablePadding: true,
-      label: "First Name"
-    },
-    { id: "lname", numeric: false, 
-      disablePadding: true, 
-      label: "Last Name" },
-    { id: "surveyingOrganization", numeric: false, disablePadding: false, label: "Surveying Organization" }
-  ];
-  
   function EnhancedTableHead(props) {
     const {
       classes,
@@ -72,8 +46,10 @@ function createData(fname, lname, surveyingOrganization) {
       numSelected,
       rowCount,
       onRequestSort,
+      selectedCellLabels,
       cellLabels
     } = props;
+
     const createSortHandler = (property) => (event) => {
       onRequestSort(event, property);
     };
@@ -81,15 +57,7 @@ function createData(fname, lname, surveyingOrganization) {
     return (
       <TableHead>
         <TableRow>
-          <TableCell padding="checkbox">
-            <Checkbox
-              indeterminate={numSelected > 0 && numSelected < rowCount}
-              checked={rowCount > 0 && numSelected === rowCount}
-              onChange={onSelectAllClick}
-              inputProps={{ "aria-label": "select all desserts" }}
-            />
-          </TableCell>
-          {cellLabels !== undefined && cellLabels.map((headCell) => (
+          {selectedCellLabels !== undefined && selectedCellLabels.map((headCell) => (
             <TableCell
               key={headCell}
               align={"left"}
@@ -101,7 +69,15 @@ function createData(fname, lname, surveyingOrganization) {
                 direction={orderBy === headCell ? order : "asc"}
                 onClick={createSortHandler(headCell)}
               >
-                {headCell}
+                {headCell.length > 10 ? (
+                  <Tooltip title={headCell} placement="top">
+                    <TableCell>
+                      {headCell.slice(0, 10)+ "..."}
+                    </TableCell>
+                  </Tooltip>
+                ) : (
+                  headCell
+                )}
                 {orderBy === headCell ? (
                   <span className={classes.visuallyHidden}>
                     {order === "desc" ? "sorted descending" : "sorted ascending"}
@@ -147,7 +123,29 @@ function createData(fname, lname, surveyingOrganization) {
   
   const EnhancedTableToolbar = (props) => {
     const classes = useToolbarStyles();
-    const { numSelected, formValue } = props;
+    const { numSelected, formValue,
+      cellLabels,
+      setSelectedCellLabels,
+      cellLabelMax,
+      setCellLabelMax } = props;
+
+      const changeCellLabels = (leftRight) => {
+        if (leftRight === 'left') {
+          if (cellLabelMax !== 10) {
+            setSelectedCellLabels(cellLabels.slice(cellLabelMax - 20, cellLabelMax - 10))
+            setCellLabelMax(cellLabelMax - 10)
+          }
+        } else {
+          if (cellLabelMax < cellLabels.length) {
+            if (cellLabelMax + 10 > cellLabels.length) {
+              setSelectedCellLabels(cellLabels.slice(cellLabelMax, cellLabels.length))
+            } else {
+              setSelectedCellLabels(cellLabels.slice(cellLabelMax, cellLabelMax + 10))
+            }
+            setCellLabelMax(cellLabelMax + 10)
+          }
+        }
+      }
   
     return (
       <Toolbar
@@ -155,39 +153,49 @@ function createData(fname, lname, surveyingOrganization) {
           [classes.highlight]: numSelected > 0
         })}
       >
-        {numSelected > 0 ? (
-          <Typography
-            className={classes.title}
-            color="inherit"
-            variant="subtitle1"
-            component="div"
+        <Tooltip title="See previous 10 fields in form" placement="top">
+          {cellLabelMax === 10 ? (
+            <Button
+              disabled={true}
+            >
+              {'<'}
+            </Button>
+          ) : (
+            <Button
+            onClick={() => changeCellLabels('left')}
           >
-            {numSelected} selected
-          </Typography>
-        ) : (
-          <Typography
-            className={classes.title}
-            variant="h6"
-            id="tableTitle"
-            component="div"
-          >
-            {formValue}
-          </Typography>
-        )}
-  
-        {numSelected > 0 ? (
-          <Tooltip title="Delete">
-            <IconButton aria-label="delete">
-              <DeleteIcon />
-            </IconButton>
-          </Tooltip>
-        ) : (
-          <Tooltip title="Filter list">
-            <IconButton aria-label="filter list">
-              <FilterListIcon />
-            </IconButton>
-          </Tooltip>
-        )}
+            {'<'}
+          </Button>
+          )}
+        </Tooltip>
+        <Tooltip title="See next 10 fields in form" placement="top">
+          {cellLabelMax >= cellLabels.length ? (
+            <Button
+              disabled={true}
+            >
+              {'>'}
+            </Button>
+          ) : (
+            <Button
+              onClick={() => changeCellLabels('right')}
+            >
+              {'>'}
+            </Button>
+          )}
+        </Tooltip>
+
+        <Typography
+          className={classes.title}
+          variant="h6"
+          id="tableTitle"
+          component="div"
+          sx={{
+            left: 10000
+          }}
+
+        >
+          {formValue}
+        </Typography>
       </Toolbar>
     );
   };
@@ -220,4 +228,4 @@ function createData(fname, lname, surveyingOrganization) {
     }
   }));
 
-  export {createData, rows , getComparator, stableSort, useStyles, EnhancedTableToolbar, EnhancedTableHead }
+  export { getComparator, stableSort, useStyles, EnhancedTableToolbar, EnhancedTableHead }
