@@ -1,6 +1,6 @@
 import { Button } from '@material-ui/core';
-import Page from 'app/components/templates/page-layout';
-import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/Viz';
+import { GroupedBarChart, LineChart, ResponsiveScatterPlot } from 'app/components/charts';
+import Page from 'app/components/templates/dashboard-layout';
 import dataQueryer from 'app/modules/apollo-grapql';
 import { useState } from 'react';
 
@@ -44,15 +44,16 @@ const LChart = ({ data }) => {
 
   const countedData = [];
   const groupBy = (keys) => (array) => array.reduce((objectsByKeyValue, obj) => {
+    const modifiedObjs = objectsByKeyValue;
     const value = keys.map((key) => obj[key]).join('-');
-    objectsByKeyValue[value] = (objectsByKeyValue[value] || []).concat(obj);
-    return objectsByKeyValue;
+    modifiedObjs[value] = (modifiedObjs[value] || []).concat(obj);
+    return modifiedObjs;
   }, {});
 
   const groupByCommunityName = groupBy(['communityname']);
 
-  for (const [groupName, values] of Object.entries(groupByCommunityName(data))) {
-    console.log(`${groupName}: ${values.length}`);
+  for (const [groupName, values] of Object.entries(groupByCommunityName(data))) { //eslint-disable-line
+    // console.log(`${groupName}: ${values.length}`);
     countedData.push({
       x: groupName,
       y: values.length,
@@ -86,7 +87,9 @@ const BChart = ({ data }) => {
     Systolic: Number(result.Systolic),
   }));
 
-  const reduced = parsedData.reduce((m, d) => {
+  const reduced = parsedData.reduce((paramM, paramD) => {
+    const m = paramM;
+    const d = paramD;
     if (!m[d.communityname]) {
       m[d.communityname] = { ...d, count: 1 };
       return m;
@@ -123,7 +126,10 @@ const Forms = ({ vitals }) => {
   const [recordNumber, setRecordNumber] = useState(250);
 
   return (
-    <Page>
+    <Page
+      header
+      footer
+    >
       <main className="container">
         <div>Data Viz</div>
         <h1>{organization}</h1>

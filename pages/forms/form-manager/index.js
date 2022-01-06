@@ -1,5 +1,5 @@
-import FormManager from 'app/components/organisms/FormManager';
-import Page from 'app/components/templates/page-layout';
+import FormManager from 'app/components/epics/FormManager';
+import Page from 'app/components/templates/dashboard-layout';
 import { useGlobalState } from 'app/store';
 import { useRouter } from 'next/router';
 
@@ -8,7 +8,10 @@ export default function Manager() {
   const router = useRouter();
 
   return (
-    <Page>
+    <Page
+      header
+      footer
+    >
       <main className="container">
         <div>Form Manager</div>
         <FormManager
