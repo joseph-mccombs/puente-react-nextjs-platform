@@ -1,6 +1,6 @@
 import { Parse } from 'parse';
 
-import { customQueryService, removeQueryService } from './custom-queries';
+import { customMultiParamQueryService, customQueryService, removeQueryService } from './custom-queries';
 
 function retrieveHelloFunction() {
   Parse.Cloud.run('hello').then((result) => result);
@@ -45,7 +45,18 @@ function getObjectsByGeolocation(params) {
   });
 }
 
+function updateObject(params) {
+  return new Promise((resolve, reject) => {
+    Parse.Cloud.run('updateObject', params).then((result) => {
+      resolve(result);
+    }, (error) => {
+      reject(error);
+    });
+  });
+}
+
 export {
+  customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
   postObjectsToClass,
@@ -53,4 +64,5 @@ export {
   removeQueryService,
   residentIDQuery,
   retrieveHelloFunction,
+  updateObject,
 };

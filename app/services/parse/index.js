@@ -5,9 +5,10 @@ import {
   retrieveForgotPasswordFunction,
   retrieveSignInFunction, retrieveSignOutFunction,
   retrieveSignUpFunction,
-} from './auth';
+} from './authentication';
 import countService from './calculate';
 import {
+  customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
   postObjectsToClass,
@@ -15,10 +16,12 @@ import {
   removeQueryService,
   residentIDQuery,
   retrieveHelloFunction,
+  updateObject,
 } from './crud';
 
 export {
   countService,
+  customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
   initialize,
@@ -32,4 +35,5 @@ export {
   retrieveHelloFunction,
   retrieveSignInFunction, retrieveSignOutFunction,
   retrieveSignUpFunction,
+  updateObject,
 };

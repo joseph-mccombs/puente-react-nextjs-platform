@@ -3,17 +3,17 @@ import { createContext, useContext, useState } from 'react';
 const AppContext = createContext();
 
 export function AppWrapper({ children }) {
-  const [globalStore, setGlobalStore] = useState(new Map());
+  const [globalStore, setGlobalStore] = useState({});
 
   const addPropToStore = (key, data) => {
     const store = globalStore;
-    store.set(key, data);
+    store[key] = data;
     setGlobalStore(store);
   };
 
   const removePropFromStore = (key) => {
     const store = globalStore;
-    store.delete(key);
+    delete store[key];
     setGlobalStore(store);
   };
 
@@ -22,6 +22,7 @@ export function AppWrapper({ children }) {
     contextManagment: {
       addPropToStore,
       removePropFromStore,
+      store: globalStore,
     },
   };
 
