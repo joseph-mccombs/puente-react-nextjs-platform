@@ -9,6 +9,7 @@ import CreateIcon from '@material-ui/icons/Create';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import PieChartIcon from '@material-ui/icons/PieChart';
 import StoreIcon from '@material-ui/icons/Store';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -51,10 +52,13 @@ export default function Header({ children }) {
           <HeaderItem link="/forms/form-creator" text="Creator">
             <CreateIcon />
           </HeaderItem>
+          <HeaderItem link="/data/data-exporter" text="Exporter">
+            <GetAppIcon />
+          </HeaderItem>
         </List>
         <Divider />
         <List>
-          <HeaderItem link="/data-visualization" text="Visualization">
+          <HeaderItem link="/data/data-visualization" text="Visualization">
             <PieChartIcon />
           </HeaderItem>
         </List>

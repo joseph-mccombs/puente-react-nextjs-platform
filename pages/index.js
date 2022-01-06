@@ -38,12 +38,12 @@ export default function Home() {
           <Card
             title="Data Visualization"
             description="Visualize Data from Puente Collect"
-            nextLink="/data-visualization"
+            nextLink="/data/data-visualization"
           />
           <Card
             title="Data Exporter"
             description="Download data"
-            nextLink="/data"
+            nextLink="/data/data-exporter"
           />
         </div>
       </main>
