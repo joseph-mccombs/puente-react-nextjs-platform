@@ -1,9 +1,9 @@
 import {
-    retrieveCleanedData, 
-    getDataFromS3
-} from './crud'
+  getDataFromS3,
+  retrieveCleanedData,
+} from './crud';
 
 export {
-    retrieveCleanedData, 
-    getDataFromS3
-}
+  getDataFromS3,
+  retrieveCleanedData,
+};

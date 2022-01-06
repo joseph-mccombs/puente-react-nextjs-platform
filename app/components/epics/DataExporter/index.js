@@ -1,58 +1,56 @@
-import React, { useEffect, useState } from "react";
-import Table from "@material-ui/core/Table";
-import TableBody from "@material-ui/core/TableBody";
-import DataExporterTableRow from "./DataExporterTableRow";
-import TableContainer from "@material-ui/core/TableContainer";
-import TablePagination from "@material-ui/core/TablePagination";
-import Paper from "@material-ui/core/Paper";
-import TableRow from "@material-ui/core/TableRow";
-import TableCell from "@material-ui/core/TableCell";
-import FormMenu from "./FormMenu";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
-import retrieveAllFormResults from './_data';
-import { useStyles, EnhancedTableToolbar, EnhancedTableHead, stableSort, getComparator } from './_utils'
-import SubmitButton from "./SubmitButton";
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Paper from '@material-ui/core/Paper';
+import Switch from '@material-ui/core/Switch';
+import Table from '@material-ui/core/Table';
+import TableBody from '@material-ui/core/TableBody';
+import TableContainer from '@material-ui/core/TableContainer';
+import TablePagination from '@material-ui/core/TablePagination';
+import React, { useEffect, useState } from 'react';
 
-const DataExporter = ({}) => {
+import retrieveAllFormResults from './_data';
+import {
+  EnhancedTableHead, EnhancedTableToolbar, getComparator, stableSort, useStyles,
+} from './_utils';
+import DataExporterTableRow from './DataExporterTableRow';
+import FormMenu from './FormMenu';
+import SubmitButton from './SubmitButton';
+
+const DataExporter = () => {
   const classes = useStyles();
-  const [order, setOrder] = useState("asc");
-  const [orderBy, setOrderBy] = useState("surveyingOrganization");
+  const [order, setOrder] = useState('asc');
+  const [orderBy, setOrderBy] = useState('surveyingOrganization');
   const [selected, setSelected] = useState([]);
   const [page, setPage] = useState(0);
   const [dense, setDense] = useState(false);
   const [rowsPerPage, setRowsPerPage] = useState(10);
   const [rows, setRows] = useState([]);
   const [cellLabels, setCellLabels] = useState([]);
-  const [formType, setFormType] = useState('SurveyData')
-  const [formValue, setFormValue] = useState('Survey Data')
-  const [organization, setOrganization] = useState('Puente')
-  const [params, setParams] = useState({ surveyingOrganization: organization })
-  const [selectedCellLabels, setSelectedCellLabels] = useState([])
-  const [cellLabelMax, setCellLabelMax] = useState(10)
+  const [formType, setFormType] = useState('SurveyData');
+  const [formValue, setFormValue] = useState('Survey Data');
+  const [organization] = useState('Puente');
+  const [params, setParams] = useState({ surveyingOrganization: organization });
+  const [selectedCellLabels, setSelectedCellLabels] = useState([]);
+  const [cellLabelMax, setCellLabelMax] = useState(10);
   const [csvData, setCsvData] = useState([]);
 
   const refreshDataExporter = () => {
-    console.log(params)
-    retrieveAllFormResults(formType, params).then(records =>  {
-    console.log("RECRDS:",records)
-    setCellLabelMax(10)
-    if (records.length < 1 || records === undefined){
-      setCellLabels([])
-      setSelectedCellLabels([])
-      setRows([])
-    }
-    else {
-      setCellLabels(Object.keys(records[0]))
-      setSelectedCellLabels(Object.keys(records[0]).slice(0, cellLabelMax))
-      setRows(records)
-    }
-  });
-} 
+    retrieveAllFormResults(formType, params).then((records) => {
+      setCellLabelMax(10);
+      if (records.length < 1 || records === undefined) {
+        setCellLabels([]);
+        setSelectedCellLabels([]);
+        setRows([]);
+      } else {
+        setCellLabels(Object.keys(records[0]));
+        setSelectedCellLabels(Object.keys(records[0]).slice(0, cellLabelMax));
+        setRows(records);
+      }
+    });
+  };
 
   const handleSubmit = () => {
     refreshDataExporter();
-  }
+  };
 
   useEffect(() => {
     // setFormType(formType)
@@ -72,16 +70,15 @@ const DataExporter = ({}) => {
     } else if (selectedIndex > 0) {
       newSelected = newSelected.concat(
         selected.slice(0, selectedIndex),
-        selected.slice(selectedIndex + 1)
+        selected.slice(selectedIndex + 1),
       );
     }
     setSelected(newSelected);
   };
 
-
   const handleRequestSort = (event, property) => {
-    const isAsc = orderBy === property && order === "asc";
-    setOrder(isAsc ? "desc" : "asc");
+    const isAsc = orderBy === property && order === 'asc';
+    setOrder(isAsc ? 'desc' : 'asc');
     setOrderBy(property);
   };
 
@@ -107,14 +104,9 @@ const DataExporter = ({}) => {
     setDense(event.target.checked);
   };
 
-  
-
-  const emptyRows =
-    rowsPerPage - Math.min(rowsPerPage, rows.length - page * rowsPerPage);
-
   return (
     <div className={classes.root}>
-      <FormMenu 
+      <FormMenu
         setFormType={setFormType}
         formType={formType}
         setFormValue={setFormValue}
@@ -133,7 +125,7 @@ const DataExporter = ({}) => {
 
       />
       <Paper className={classes.paper}>
-        <EnhancedTableToolbar 
+        <EnhancedTableToolbar
           numSelected={selected.length}
           formValue={formValue}
           cellLabels={cellLabels}
@@ -141,12 +133,12 @@ const DataExporter = ({}) => {
           setSelectedCellLabels={setSelectedCellLabels}
           cellLabelMax={cellLabelMax}
           setCellLabelMax={setCellLabelMax}
-         />
+        />
         <TableContainer>
           <Table
             className={classes.table}
             aria-labelledby="tableTitle"
-            size={dense ? "small" : "medium"}
+            size={dense ? 'small' : 'medium'}
             aria-label="enhanced table"
           >
             <EnhancedTableHead
@@ -171,11 +163,19 @@ const DataExporter = ({}) => {
                     handleClick={handleClick}
                     selected={selected}
                   />
-                  
+
                 ))}
               {rows.length === 0 && (
-                <h5>You have no data for {formValue} form in the {organization} organization. If you believe this is an error,
-                please contact your point of contact.</h5>
+                <h5>
+                  You have no data for
+                  {formValue}
+                  {' '}
+                  form in the
+                  {organization}
+                  {' '}
+                  organization. If you believe this is an error,
+                  please contact your point of contact.
+                </h5>
               )}
             </TableBody>
           </Table>

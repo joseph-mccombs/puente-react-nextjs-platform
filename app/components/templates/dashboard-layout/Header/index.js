@@ -7,9 +7,9 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import CreateIcon from '@material-ui/icons/Create';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import PieChartIcon from '@material-ui/icons/PieChart';
 import StoreIcon from '@material-ui/icons/Store';
-import GetAppIcon from '@material-ui/icons/GetApp';
 import clsx from 'clsx';
 import React from 'react';
 

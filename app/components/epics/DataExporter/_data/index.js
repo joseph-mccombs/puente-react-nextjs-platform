@@ -3,7 +3,6 @@ import { customMultiParamQueryService } from 'app/services/parse';
 // Puente Forms
 // SurveyData, Vitals, Assets, EvaluationMedical, HistoryEnvironmentalHealth
 
-
 const retrieveAllFormResults = async (parseForm, parseParams) => {
   try {
     const records = await customMultiParamQueryService(5000, parseForm, parseParams);

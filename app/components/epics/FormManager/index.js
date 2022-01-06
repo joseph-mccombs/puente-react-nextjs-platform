@@ -29,7 +29,6 @@ const FormManager = ({ context, router }) => {
   useEffect(() => {
     retrieveCustomData(organization).then((records) => {
       const tableDataByCategory = {};
-      console.log(records)
       records.forEach((record) => {
         if (record.active !== 'false') {
           if (!isArray(record.workflows) || record.workflows.length < 1) {
