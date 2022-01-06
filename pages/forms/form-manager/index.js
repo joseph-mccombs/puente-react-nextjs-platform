@@ -1,13 +1,23 @@
-import Footer from 'app/components/Footer';
-import FormManager from 'app/components/FormManager';
-import Layout from 'app/components/Layout';
+import FormManager from 'app/components/epics/FormManager';
+import Page from 'app/components/templates/dashboard-layout';
+import { useGlobalState } from 'app/store';
+import { useRouter } from 'next/router';
 
-export default function Forms() {
+export default function Manager() {
+  const { contextManagment } = useGlobalState();
+  const router = useRouter();
+
   return (
-    <Layout>
+    <Page
+      header
+      footer
+    >
       <main className="container">
         <div>Form Manager</div>
-        <FormManager />
+        <FormManager
+          router={router}
+          context={contextManagment}
+        />
         <style jsx>
           {`
 
@@ -75,7 +85,6 @@ export default function Forms() {
       `}
         </style>
       </main>
-      <Footer />
-    </Layout>
+    </Page>
   );
 }

@@ -1,8 +1,11 @@
-import Layout from 'app/components/Layout';
+import Page from 'app/components/templates/dashboard-layout';
 
 export default function Forms() {
   return (
-    <Layout>
+    <Page
+      header
+      footer
+    >
       <div className="container">
         <main>
           <h1 className="title">
@@ -158,6 +161,6 @@ export default function Forms() {
         </style>
 
       </div>
-    </Layout>
+    </Page>
   );
 }
