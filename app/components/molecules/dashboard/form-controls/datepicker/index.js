@@ -7,7 +7,7 @@ const MuiDatePicker = (props) => {
   const { name, required, errorobj } = props;
   let isError = false;
   let errorMessage = '';
-  if (errorobj && errorobj.hasOwnProperty(name)) {
+  if (errorobj && Object.prototype.hasOwnProperty.call(errorobj, name)) {
     isError = true;
     errorMessage = errorobj[name].message;
   }

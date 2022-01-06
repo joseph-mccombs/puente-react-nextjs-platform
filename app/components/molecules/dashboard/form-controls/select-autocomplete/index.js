@@ -7,15 +7,15 @@ import { StyledAutoSelectInputLabel, StyledFormControl } from '../_styles';
 import styles from './index.module.scss';
 
 const stylesReactSelect = {
-  clearIndicator: (provided, state) => ({
+  clearIndicator: (provided) => ({
     ...provided,
     cursor: 'pointer',
   }),
-  indicatorSeparator: (provided, state) => ({
+  indicatorSeparator: (provided) => ({
     ...provided,
     margin: 0,
   }),
-  dropdownIndicator: (provided, state) => ({
+  dropdownIndicator: (provided) => ({
     ...provided,
     cursor: 'pointer',
   }),
@@ -37,24 +37,25 @@ const stylesReactSelect = {
       boxShadow: state.selectProps.error ? '1px solid #f44336' : 'none',
     },
   }),
-  valueContainer: (provided, state) => ({
+  valueContainer: (provided) => ({
     ...provided,
     paddingLeft: 0,
   }),
 };
 
-const components = {
-  Option,
-};
-
 function Option(props) {
-  const { onMouseMove, onMouseOver, ...newInnerProps } = props.innerProps;
+  const { children } = props;
+  const { onMouseMove, onMouseOver, ...newInnerProps } = props.innerProps; //eslint-disable-line
   return (
-    <div {...newInnerProps} className="autoselect-options">
-      {props.children}
+    <div {...newInnerProps} className={styles['autoselect-options']}>
+      {children}
     </div>
   );
 }
+
+const components = {
+  Option,
+};
 
 const ReactSelect = (props) => {
   const {
@@ -62,7 +63,7 @@ const ReactSelect = (props) => {
   } = props;
   let isError = false;
   let errorMessage = '';
-  if (errorobj && errorobj.hasOwnProperty(name)) {
+  if (errorobj && Object.prototype.hasOwnProperty.call(errorobj, name)) {
     isError = true;
     errorMessage = errorobj[name].message;
   }
@@ -70,10 +71,10 @@ const ReactSelect = (props) => {
     <>
       <StyledFormControl>
         <StyledAutoSelectInputLabel>
-          <span className={isError ? 'req-label' : ''}>
+          <span className={isError ? styles['req-label'] : ''}>
             {label}
             {' '}
-            {required ? <span className="req-label">*</span> : null}
+            {required ? <span className={styles['req-label']}>*</span> : null}
           </span>
         </StyledAutoSelectInputLabel>
         <Select
@@ -103,7 +104,7 @@ function FormSelectAutoComplete(props) {
   const [newData, setNewData] = useState([]);
 
   useEffect(() => {
-    const newOptions = options.map((data, index) => ({
+    const newOptions = options.map((data) => ({
       label: data.label,
       value: data.id,
     }));

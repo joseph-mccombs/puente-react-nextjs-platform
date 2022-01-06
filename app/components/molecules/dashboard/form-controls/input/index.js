@@ -3,7 +3,6 @@ import React from 'react';
 import { Controller, useFormContext } from 'react-hook-form';
 
 import styles from './index.module.scss';
-// import "./index.scss";
 
 function FormInput(props) {
   const { control } = useFormContext();
@@ -12,7 +11,7 @@ function FormInput(props) {
   } = props;
   let isError = false;
   let errorMessage = '';
-  if (errorobj && errorobj.hasOwnProperty(name)) {
+  if (errorobj && Object.prototype.hasOwnProperty.call(errorobj, name)) {
     isError = true;
     errorMessage = errorobj[name].message;
   }
@@ -26,7 +25,7 @@ function FormInput(props) {
       label={label}
       fullWidth
       InputLabelProps={{
-        className: required ? 'required-label' : '',
+        className: required ? styles['required-label'] : '',
         required: required || false,
       }}
       error={isError}

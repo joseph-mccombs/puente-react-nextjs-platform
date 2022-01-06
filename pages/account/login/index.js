@@ -25,7 +25,7 @@ const Login = () => {
   const { handleSubmit, errors } = methods;
 
   const onSubmit = (data) => {
-    console.log(data);
+    console.log(data); //eslint-disable-line
     router.push('/quick-start');
   };
 
@@ -33,7 +33,7 @@ const Login = () => {
     padding: 20, height: '70vh', width: '50vw', margin: '20px auto',
   };
 
-  const avatarStyle = { backgroundColor: '#1bbd7e' };
+  const avatarStyle = { backgroundColor: 'black' };
   return (
     <Page>
       <Grid>
@@ -69,14 +69,14 @@ const Login = () => {
           >
             Login
           </Button>
-          {/* <Link href="/account/register">
+          <Link href="/account/register">
             <Button
               variant="contained"
               color="primary"
             >
               Register
             </Button>
-          </Link> */}
+          </Link>
         </Paper>
       </Grid>
     </Page>

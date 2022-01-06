@@ -1,5 +1,5 @@
 import Link from './Link';
 
 export {
-  Link,
+  Link, //eslint-disable-line
 };
