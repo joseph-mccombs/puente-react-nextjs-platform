@@ -20,17 +20,20 @@ const FormMenu = ({
 
   const getCustomFormNames = (records) => {
       records.forEach((record) => {
-        console.log("record:", record)
-        let customForm = {}
-        let tempMenuItems = menuItems
-        console.log(record.typeOfForm)
-        if (record.typeOfForm.includes("Assets")){
-          customForm = {key: record.objectId.toString(), value: record.name.toString() + ' - Asset', isCustomForm: true, isAssetForm: true};
-        } else {
-          customForm = {key: record.objectId.toString(), value: record.name.toString() + ' - Custom', isCustomForm: true, isAssetForm: false};
+        console.log(record.active)
+        if (record.active !== 'false') {
+          console.log("record:", record)
+          let customForm = {}
+          let tempMenuItems = menuItems
+          console.log(record.typeOfForm)
+          if (record.typeOfForm.includes("Assets")){
+            customForm = {key: record.objectId.toString(), value: record.name.toString() + ' - Asset', isCustomForm: true, isAssetForm: true};
+          } else {
+            customForm = {key: record.objectId.toString(), value: record.name.toString() + ' - Custom', isCustomForm: true, isAssetForm: false};
+          }
+          tempMenuItems.push(customForm)
+          setMenuItems(tempMenuItems)
         }
-        tempMenuItems.push(customForm)
-        setMenuItems(tempMenuItems)
       })
   }
 

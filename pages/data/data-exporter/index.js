@@ -1,4 +1,4 @@
-import DataExporter from 'app/components/organisms/DataExporter';
+import DataExporter from 'app/components/epics/DataExporter';
 import Page from 'app/components/templates/dashboard-layout';
 
 export default function Forms() {
