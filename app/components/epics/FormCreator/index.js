@@ -5,7 +5,7 @@ import {
   TextField,
 } from '@material-ui/core';
 import { Alert } from '@material-ui/lab';
-import { retrieveUniqueListOfOrganizations } from 'app/modules/parse';
+import { retrieveUniqueListOfOrganizations } from 'app/modules/cloud-code';
 import { postObjectsToClass, updateObject } from 'app/services/parse';
 import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
