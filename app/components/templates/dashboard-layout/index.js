@@ -1,4 +1,4 @@
-import { initialize } from 'app/modules/cloud-code';
+import initialize from 'app/services/parse';
 
 import Footer from './Footer';
 import Header from './Header';

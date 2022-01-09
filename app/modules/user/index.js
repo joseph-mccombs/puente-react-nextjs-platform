@@ -3,12 +3,6 @@ import { BehaviorSubject } from 'rxjs';
 
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
-const initialize = () => {
-  Parse.initialize(process.env.NEXT_PUBLIC_parseAppId, process.env.NEXT_PUBLIC_parseJavascriptKey);
-  Parse.serverURL = process.env.NEXT_PUBLIC_parseServerUrl;
-  console.log(`Initialize Parse with App ID: ${process.env.NEXT_PUBLIC_parseAppId}, Javascript Key: ${process.env.NEXT_PUBLIC_parseJavascriptKey}`); // eslint-disable-line
-};
-
 const retrieveSignUpFunction = (params) => new Promise((resolve, reject) => {
   Parse.Cloud.run('signup', params).then((result) => {
     resolve(result);
@@ -69,7 +63,6 @@ const parseUser = () => userSubject.asObservable();
 const parseUserValue = () => userSubject.value;
 
 export {
-  initialize,
   parseUser,
   parseUserValue,
   retrieveCurrentUserAsyncFunction,
