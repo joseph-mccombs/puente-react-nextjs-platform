@@ -1,4 +1,5 @@
 import { Parse } from 'parse';
+import { BehaviorSubject } from 'rxjs';
 
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 

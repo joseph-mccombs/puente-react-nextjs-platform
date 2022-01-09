@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { fade } from '@material-ui/core/styles/colorManipulator';
+import { alpha } from '@material-ui/core/styles/colorManipulator';
 
 const cardsStyles = makeStyles((theme) => ({
   pricing: {
@@ -51,7 +51,7 @@ const cardsStyles = makeStyles((theme) => ({
   btnArea: {
     color: theme.palette.text.secondary,
     padding: theme.spacing(2),
-    background: fade(theme.palette.divider, 0.04),
+    background: alpha(theme.palette.divider, 0.04),
     '& $button': {
       marginTop: theme.spacing(2),
     },
@@ -64,7 +64,7 @@ const cardsStyles = makeStyles((theme) => ({
       color: theme.palette.type === 'dark' ? theme.palette.secondary.light : theme.palette.secondary.dark,
     },
     '& $btnArea': {
-      background: fade(theme.palette.secondary.main, 0.3),
+      background: alpha(theme.palette.secondary.main, 0.3),
     },
     '&:hover': {
       borderColor: theme.palette.secondary.main,

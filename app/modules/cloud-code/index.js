@@ -1,4 +1,5 @@
 import {
+  countObject,
   customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
@@ -7,11 +8,11 @@ import {
   removeQueryService,
   residentIDQuery,
   updateObject,
-  countObject
 } from './crud';
 import { retrieveCustomData, retrieveUniqueListOfOrganizations } from './custom-data-retrieval';
 
 export {
+  countObject,
   customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
@@ -22,5 +23,4 @@ export {
   retrieveCustomData,
   retrieveUniqueListOfOrganizations,
   updateObject,
-  countObject
 };

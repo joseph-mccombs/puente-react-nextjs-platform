@@ -1,4 +1,4 @@
-import { customQueryService } from 'app/services/parse';
+import { customQueryService } from 'app/modules/cloud-code';
 import _ from 'underscore';
 
 const retrieveCustomData = async (organization) => {
