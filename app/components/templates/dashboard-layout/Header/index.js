@@ -37,7 +37,7 @@ export default function Header({ children }) {
         }}
       >
         <div className={classes.toolbar}>
-        {open && <h1>Puente</h1>}
+          {open && <h1>Puente</h1>}
           <IconButton onClick={() => setDrawerOpen(!open)}>
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>

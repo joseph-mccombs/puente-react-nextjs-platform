@@ -56,7 +56,7 @@ const Login = () => {
                 <Grid item>
                   <FormInput
                     name="usernameV"
-                    label="Username"
+                    label="Phone Number or Email Address"
                     required
                     errorobj={errors}
                   />
@@ -66,7 +66,7 @@ const Login = () => {
                     required
                     errorobj={errors}
                   />
-                  </Grid>
+                </Grid>
               </Grid>
             </form>
           </FormProvider>
