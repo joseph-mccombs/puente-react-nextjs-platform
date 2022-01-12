@@ -4,8 +4,11 @@ import { BehaviorSubject } from 'rxjs';
 const userSubject = new BehaviorSubject(process.browser && JSON.parse(localStorage.getItem('user')));
 
 const retrieveSignUpFunction = (params) => new Promise((resolve, reject) => {
-  Parse.Cloud.run('signup', params).then((result) => {
-    resolve(result);
+  Parse.Cloud.run('signup', params).then((user) => {
+    console.log(`User registered successful ${user}`); // eslint-disable-line
+    userSubject.next(user);
+    localStorage.setItem('user', JSON.stringify(user));
+    resolve(user);
   }, (error) => {
     reject(error);
   });
@@ -14,7 +17,7 @@ const retrieveSignUpFunction = (params) => new Promise((resolve, reject) => {
 const retrieveSignInFunction = (username, password) => new Promise((resolve, reject) => {
   // sign in with either phonenumber (username) or email handled with logIn
   Parse.User.logIn(String(username), String(password)).then((user) => {
-      console.log(`User logged in successful with username: ${user.get('username')}`); // eslint-disable-line
+    console.log(`User logged in successful with username: ${user.get('username')}`); // eslint-disable-line
     userSubject.next(user);
     localStorage.setItem('user', JSON.stringify(user));
     resolve(user);

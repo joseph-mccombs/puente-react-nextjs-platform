@@ -13,7 +13,7 @@ import { FormProvider, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 
 const validationSchema = yup.object().shape({
-  usernameV: yup.string().required('Username is Required'),
+  usernameV: yup.string().required('Username or Phone Number is Required'),
   passwordV: yup.string().required('Password is Required'),
 });
 
@@ -52,8 +52,8 @@ const Login = () => {
           </Grid>
           <FormProvider {...methods}>
             <form>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid>
+                <Grid item>
                   <FormInput
                     name="usernameV"
                     label="Username"
@@ -66,7 +66,7 @@ const Login = () => {
                     required
                     errorobj={errors}
                   />
-                </Grid>
+                  </Grid>
               </Grid>
             </form>
           </FormProvider>

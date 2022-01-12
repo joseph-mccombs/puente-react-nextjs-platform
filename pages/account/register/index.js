@@ -1,10 +1,10 @@
 import { yupResolver } from '@hookform/resolvers';
 import {
-  Avatar, Button, Grid, Paper,
+  Avatar, Button, Grid, Paper
 } from '@material-ui/core';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from 'app/components/elements';
-import FormDatePicker from 'app/components/molecules/dashboard/form-controls/datepicker';
+import { retrieveSignUpFunction } from 'app/modules/user';
 import FormInput from 'app/components/molecules/dashboard/form-controls/input';
 import Page from 'app/components/templates/dashboard-layout';
 import { useRouter } from 'next/router';
@@ -12,13 +12,14 @@ import { FormProvider, useForm } from 'react-hook-form';
 // import { alertService, userService } from 'services';
 import * as yup from 'yup';
 
+const phoneRegExp = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/
+
 const validationSchema = yup.object().shape({
-  firstname: yup.string().required('Username is Required'),
-  lastname: yup.string().required('Password is Required'),
-  dateOfBirth: yup
-    .date()
-    .typeError('Mui Date field must be a date')
-    .required('Mui Date field is required'),
+  firstname: yup.string().required('First Name is Required'),
+  lastname: yup.string().required('Last Name is Required'),
+  organization: yup.string().required('Organization Name is Required'),
+  email: yup.string().required('Email Address is Required'),
+  phonenumber: yup.string().matches(phoneRegExp,'Password is Required'),
   username: yup.string().required('Username is Required'),
   password: yup.string().required('Password is Required'),
 });
@@ -31,9 +32,13 @@ const Register = () => {
 
   const { handleSubmit, errors } = methods;
 
-  const onSubmit = (data) => {
-    console.log(data); //eslint-disable-line
-    router.push('/quick-start');
+  const onSubmit = (user) => {
+    console.log(user); //eslint-disable-line
+    return retrieveSignUpFunction(user)
+      .then((result) => {
+        console.log(result);
+        router.push('/quick-start');
+      });
   };
 
   const paperStyle = {
@@ -52,8 +57,8 @@ const Register = () => {
           </Grid>
           <FormProvider {...methods}>
             <form>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid container spacing={4}>
+                <Grid item>
                   <FormInput
                     name="firstname"
                     label="First Name"
@@ -66,11 +71,26 @@ const Register = () => {
                     required
                     errorobj={errors}
                   />
-                  <Grid item xs={6}>
-                    <FormDatePicker name="dateOfBirth" label="Date of Birth" />
-                  </Grid>
+                  <FormInput
+                    name="organization"
+                    label="Organization Name"
+                    required
+                    errorobj={errors}
+                  />
+                <FormInput
+                    name="email"
+                    label="Email Address"
+                    required
+                    errorobj={errors}
+                  />
+                  <FormInput
+                    name="phonenumber"
+                    label="Phone Number"
+                    required
+                    errorobj={errors}
+                  />
                 </Grid>
-                <Grid item xs={6}>
+                <Grid item>
                   <FormInput
                     name="username"
                     label="Username"
