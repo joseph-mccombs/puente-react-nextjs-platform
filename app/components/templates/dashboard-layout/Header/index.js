@@ -54,12 +54,12 @@ export default function Header({ children }) {
             <CreateIcon />
           </HeaderItem>
         </List>
-        <Divider />
+        {/* <Divider />
         <List>
           <HeaderItem link="/data-visualization" text="Visualization">
             <PieChartIcon />
           </HeaderItem>
-        </List>
+        </List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
