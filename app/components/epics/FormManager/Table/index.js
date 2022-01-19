@@ -8,7 +8,7 @@ import TableContainer from '@material-ui/core/TableContainer';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { Modal } from 'app/components/molecules/dashboard';
-import { updateObject } from 'app/services/parse';
+import { updateObject } from 'app/modules/cloud-code';
 import React, { useState } from 'react';
 
 const useStyles = makeStyles({

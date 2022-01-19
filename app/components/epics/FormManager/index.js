@@ -7,7 +7,7 @@ import {
 import IconButton from '@material-ui/core/IconButton';
 import AppsIcon from '@material-ui/icons/Apps';
 import MenuIcon from '@material-ui/icons/Menu';
-import { retrieveCustomData, retrieveUniqueListOfOrganizations } from 'app/modules/parse';
+import { retrieveCustomData, retrieveUniqueListOfOrganizations } from 'app/modules/cloud-code';
 import React, { useEffect, useState } from 'react';
 import { isArray } from 'underscore';
 

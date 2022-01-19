@@ -100,7 +100,7 @@ function Testimonials() {
     autoplay: true,
     autoplaySpeed: 3000,
     slidesToShow: 1,
-    fade: true,
+    alpha: true,
     arrows: false,
     pauseOnHover: false,
     afterChange: (curSlide) => {

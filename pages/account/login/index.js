@@ -6,13 +6,14 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import { Link } from 'app/components/elements';
 import FormInput from 'app/components/molecules/dashboard/form-controls/input';
 import Page from 'app/components/templates/dashboard-layout';
+import { retrieveSignInFunction } from 'app/modules/user';
 import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 // import { alertService, userService } from 'services';
 import * as yup from 'yup';
 
 const validationSchema = yup.object().shape({
-  usernameV: yup.string().required('Username is Required'),
+  usernameV: yup.string().required('Username or Phone Number is Required'),
   passwordV: yup.string().required('Password is Required'),
 });
 
@@ -25,8 +26,15 @@ const Login = () => {
   const { handleSubmit, errors } = methods;
 
   const onSubmit = (data) => {
-    console.log(data); //eslint-disable-line
-    router.push('/quick-start');
+    const { usernameV, passwordV } = data;
+    return retrieveSignInFunction(usernameV, passwordV)
+      .then((result) => {
+        console.log(result);
+        // get return url from query parameters or default to '/'
+        const returnUrl = router.query.returnUrl || '/quick-start';
+        router.push(returnUrl);
+      });
+    // .catch(alertService.error);
   };
 
   const paperStyle = {
@@ -44,11 +52,11 @@ const Login = () => {
           </Grid>
           <FormProvider {...methods}>
             <form>
-              <Grid container spacing={2}>
-                <Grid item xs={6}>
+              <Grid>
+                <Grid item>
                   <FormInput
                     name="usernameV"
-                    label="Username"
+                    label="Phone Number or Email Address"
                     required
                     errorobj={errors}
                   />

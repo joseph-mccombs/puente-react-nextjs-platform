@@ -10,6 +10,7 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import GetAppIcon from '@material-ui/icons/GetApp';
 import PieChartIcon from '@material-ui/icons/PieChart';
 import StoreIcon from '@material-ui/icons/Store';
+import { retrieveSignOutFunction } from 'app/modules/user';
 import clsx from 'clsx';
 import React from 'react';
 
@@ -37,6 +38,7 @@ export default function Header({ children }) {
         }}
       >
         <div className={classes.toolbar}>
+          {open && <h1>Puente</h1>}
           <IconButton onClick={() => setDrawerOpen(!open)}>
             {open ? <ChevronLeftIcon /> : <ChevronRightIcon />}
           </IconButton>
@@ -56,12 +58,12 @@ export default function Header({ children }) {
             <GetAppIcon />
           </HeaderItem>
         </List>
-        <Divider />
+        {/* <Divider />
         <List>
           <HeaderItem link="/data/data-visualization" text="Visualization">
             <PieChartIcon />
           </HeaderItem>
-        </List>
+        </List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />
