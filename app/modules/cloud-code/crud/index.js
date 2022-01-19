@@ -2,9 +2,6 @@ import { Parse } from 'parse';
 
 import { customMultiParamQueryService, customQueryService, removeQueryService } from './custom-queries';
 
-function retrieveHelloFunction() {
-  Parse.Cloud.run('hello').then((result) => result);
-}
 function residentIDQuery(params) {
   return new Promise((resolve, reject) => {
     Parse.Cloud.run('basicQuery', params).then((result) => {
@@ -55,7 +52,37 @@ function updateObject(params) {
   });
 }
 
+/**
+  * Performs a query based on the parameter defined in a column
+  *
+  * @example
+  * countService(SurveyData,surveyingUser,Jeff)
+  *
+  * @param {string} parseModel Name of Backend Model
+  * @param {string} parseColumn Name of Column in Backend Model
+  * @param {string} parseParam Name of Parameter in Column
+  * @returns Count of Query
+  */
+function countObject(parseModel, parseColumn, parseParam) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      const Model = Parse.Object.extend(parseModel);
+
+      const query = new Parse.Query(Model);
+
+      query.equalTo(parseColumn, parseParam);
+
+      query.count().then((count) => {
+        resolve(count);
+      }, (error) => {
+        reject(error);
+      });
+    }, 1500);
+  });
+}
+
 export {
+  countObject,
   customMultiParamQueryService,
   customQueryService,
   getObjectsByGeolocation,
@@ -63,6 +90,5 @@ export {
   postObjectsToClassWithRelation,
   removeQueryService,
   residentIDQuery,
-  retrieveHelloFunction,
   updateObject,
 };

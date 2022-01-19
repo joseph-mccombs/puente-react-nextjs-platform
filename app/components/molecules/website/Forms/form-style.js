@@ -1,5 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
-import { darken, fade } from '@material-ui/core/styles/colorManipulator';
+import { alpha, darken } from '@material-ui/core/styles/colorManipulator';
 
 const contactStyles = makeStyles((theme) => ({
   title: {},
@@ -65,16 +65,16 @@ const contactStyles = makeStyles((theme) => ({
       left: theme.spacing(0.5),
     },
     '& > div': {
-      border: `1px solid ${fade(theme.palette.text.primary, 0.25)}`,
+      border: `1px solid ${alpha(theme.palette.text.primary, 0.25)}`,
       background: 'none',
       overflow: 'hidden',
       '& input': {
         paddingLeft: theme.spacing(2),
         '&:focus': {
-          background: fade(theme.palette.background.paper, 0.7),
+          background: alpha(theme.palette.background.paper, 0.7),
         },
         '&:hover': {
-          background: fade(theme.palette.background.paper, 0.7),
+          background: alpha(theme.palette.background.paper, 0.7),
         },
       },
     },
@@ -83,14 +83,14 @@ const contactStyles = makeStyles((theme) => ({
         color: theme.palette.common.white,
       },
       '& > div': {
-        border: `1px solid ${fade(theme.palette.primary.light, 0.5)}`,
+        border: `1px solid ${alpha(theme.palette.primary.light, 0.5)}`,
         '& input': {
           color: theme.palette.common.white,
           '&:focus': {
-            background: fade(theme.palette.text.hint, 0.2),
+            background: alpha(theme.palette.text.hint, 0.2),
           },
           '&:hover': {
-            background: fade(theme.palette.text.hint, 0.2),
+            background: alpha(theme.palette.text.hint, 0.2),
           },
         },
       },
@@ -226,7 +226,7 @@ const contactStyles = makeStyles((theme) => ({
     },
     '& i': {
       fontSize: 32,
-      color: fade(theme.palette.background.paper, 0.54),
+      color: alpha(theme.palette.background.paper, 0.54),
     },
     '& > span i:first-child': {
       opacity: 1,

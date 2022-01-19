@@ -8,7 +8,7 @@ import {
   Modal,
   TextField,
 } from '@material-ui/core';
-import { updateObject } from 'app/services/parse';
+import { updateObject } from 'app/modules/cloud-code';
 import React, { useEffect, useState } from 'react';
 
 import styles from './index.module.scss';

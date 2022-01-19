@@ -31,7 +31,7 @@ function Counter() {
         <ReactWOW animation="fadeIn" offset={-100} callback={handlePlay}>
           <Grid
             container
-            justify="center"
+            justifyContent="center"
             alignItems="center"
             className={classes.counterInner}
             spacing={6}

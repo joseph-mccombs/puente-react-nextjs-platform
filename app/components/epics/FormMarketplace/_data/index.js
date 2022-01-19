@@ -1,4 +1,4 @@
-import { customMultiParamQueryService } from 'app/services/parse';
+import { customMultiParamQueryService } from 'app/modules/cloud-code';
 // import _ from 'underscore';
 
 const retrieveAllFormSpecs = async (parseParams) => {
