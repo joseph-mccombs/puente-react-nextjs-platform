@@ -45,7 +45,7 @@ function retrieveCleanedData(specifier, customFormId, surveyingOrganization) {
 }
 
 function getDataFromS3(key) {
-  return new Promise( (resolve, reject) => {
+  return new Promise((resolve, reject) => {
     const s3Client = new S3Client({
       region: 'us-east-1',
       credentials: {
