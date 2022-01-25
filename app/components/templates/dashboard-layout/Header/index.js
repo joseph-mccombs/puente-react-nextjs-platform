@@ -7,6 +7,7 @@ import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import CreateIcon from '@material-ui/icons/Create';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
+import GetAppIcon from '@material-ui/icons/GetApp';
 import PieChartIcon from '@material-ui/icons/PieChart';
 import StoreIcon from '@material-ui/icons/Store';
 import { retrieveSignOutFunction } from 'app/modules/user';
@@ -53,10 +54,13 @@ export default function Header({ children }) {
           <HeaderItem link="/forms/form-creator" text="Creator">
             <CreateIcon />
           </HeaderItem>
+          <HeaderItem link="/data/data-exporter" text="Exporter">
+            <GetAppIcon />
+          </HeaderItem>
         </List>
         {/* <Divider />
         <List>
-          <HeaderItem link="/data-visualization" text="Visualization">
+          <HeaderItem link="/data/data-visualization" text="Visualization">
             <PieChartIcon />
           </HeaderItem>
         </List> */}

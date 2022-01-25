@@ -25,10 +25,6 @@ function customMultiParamQueryService(limit = 5000, parseModel, parseParams) {
 
       query.descending('createdAt');
 
-      // for (const property in parseParams) {
-      //   query.equalTo(property, parseParams[property]);
-      // }
-
       Object.entries(parseParams).forEach((e) => query.equalTo(e[0], e[1]));
 
       query.find().then((records) => {

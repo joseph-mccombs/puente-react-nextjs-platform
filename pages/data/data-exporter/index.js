@@ -1,3 +1,4 @@
+import DataExporter from 'app/components/epics/DataExporter';
 import Page from 'app/components/templates/dashboard-layout';
 
 export default function Forms() {
@@ -11,7 +12,7 @@ export default function Forms() {
           <h1 className="title">
             Data Exporter
             {' '}
-            <a href="https://nextjs.org">Next.js!</a>
+            <DataExporter />
           </h1>
         </main>
 
