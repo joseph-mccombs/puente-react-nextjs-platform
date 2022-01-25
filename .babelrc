@@ -1,6 +1,6 @@
 {
     "plugins": [
-      ["styled-components", { "ssr": true, "displayName": true, "preprocess": false } ],
+      ["styled-components", { "ssr": true, "displayName": true, "preprocess": false }, "react-native-web"],
     ],
     "presets": ["next/babel"]
   }

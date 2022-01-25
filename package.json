@@ -44,9 +44,10 @@
     "react-anchor-link-smooth-scroll": "^1.0.12",
     "react-beautiful-dnd": "^13.0.0",
     "react-countup": "^6.1.0",
-    "react-dom": "16.13.1",
+    "react-dom": "^16.13.1",
     "react-hook-form": "^6.6.0",
     "react-image-lightbox": "^5.1.4",
+    "react-native-web": "^0.17.5",
     "react-scroll-parallax": "^2.4.0",
     "react-scrollspy": "^3.4.3",
     "react-select": "^3.1.0",
@@ -62,6 +63,7 @@
     "yup": "^0.29.3"
   },
   "devDependencies": {
+    "babel-plugin-react-native-web": "^0.17.5",
     "babel-plugin-styled-components": "1.11.1",
     "eslint": "7.12.1",
     "eslint-config-airbnb": "18.2.0",

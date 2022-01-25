@@ -15,6 +15,8 @@ import FormBlocks from './FormBlocks';
 import FormTemplate from './FormTemplate';
 import styles from './index.module.scss';
 
+import NativeApplicationDrawer from "../NativeApplcationDrawer";
+
 const COLLECTION = [
   { id: uuid(), text: 'Input - Number', fieldType: 'numberInput' },
   { id: uuid(), text: 'Input - Text', fieldType: 'input' },
@@ -48,6 +50,7 @@ function FormCreator({ context }) {
   const [disabledTotal, setDisabledTotal] = useState(0);
   const [submissionType, setSubmissionType] = useState('');
   const [submission, setSubmission] = useState(false);
+  const [showPreview, setShowPreview] = useState(false)
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
@@ -168,6 +171,10 @@ function FormCreator({ context }) {
     [setFormItems],
   );
 
+  const showForm = () => {
+    setShowPreview(!showPreview)
+  }
+
   return (
     <div className={styles.formCreator}>
       <NoSsr>
@@ -176,6 +183,9 @@ function FormCreator({ context }) {
             Success!
           </Alert>
         </Snackbar>
+        <NativeApplicationDrawer 
+          formItems={formItems}
+        />
         <DragDropContext onDragEnd={onDragEnd}>
           <Grid container>
             <Grid item xs={9}>
