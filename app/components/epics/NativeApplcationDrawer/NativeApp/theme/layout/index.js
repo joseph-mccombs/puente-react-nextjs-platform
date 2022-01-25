@@ -1,5 +1,5 @@
 import {
-  StyleSheet
+  StyleSheet,
 } from 'react-native-web';
 
 const layout = StyleSheet.create({
@@ -41,7 +41,7 @@ const layout = StyleSheet.create({
     marginHorizontal: 20,
     marginBottom: 20,
     justifyContent: 'center',
-    alignItems: 'stretch'
+    alignItems: 'stretch',
   },
   /**
   * Container for a Formik Form
@@ -52,7 +52,7 @@ const layout = StyleSheet.create({
     // alignItems: 'stretch',
     // justifyContent: 'center',
     marginHorizontal: 10,
-    marginVertical: 10
+    marginVertical: 10,
   },
   /**
    * Container for a Formik Form
@@ -62,7 +62,7 @@ const layout = StyleSheet.create({
     backgroundColor: '#F5F5F5',
     alignItems: 'stretch',
     justifyContent: 'center',
-    marginHorizontal: 10
+    marginHorizontal: 10,
   },
   /**
    * Container for a Button Group
@@ -105,20 +105,20 @@ const layout = StyleSheet.create({
   },
   selectLabel: {
     marginTop: 5,
-    marginBottom: 10
+    marginBottom: 10,
   },
   // Style for Search Cards
   resCardContainer: {
     margin: 15,
     borderRadius: 15,
     borderWidth: 1,
-    borderColor: '#3d80fc'
+    borderColor: '#3d80fc',
   },
   resCardNameContainer: {
     backgroundColor: '#3d80fc',
     marginTop: 15,
     height: 30,
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   resCardName: {
     color: '#FFFFFF',
@@ -126,25 +126,25 @@ const layout = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 15,
     marginTop: 'auto',
-    marginBottom: 'auto'
+    marginBottom: 'auto',
   },
   resCardNickname: {
     marginLeft: 15,
     marginTop: 5,
     color: '#606060',
-    fontSize: 15
+    fontSize: 15,
   },
   resCardProfPic: {
     height: 70,
     width: 70,
     position: 'absolute',
     right: 15,
-    top: 20
+    top: 20,
   },
   resCardCityLicenseContainer: {
     flexDirection: 'row',
     marginTop: 40,
-    marginBottom: 15
+    marginBottom: 15,
   },
   resCardCityContainer: {
     flexDirection: 'column',
@@ -159,11 +159,11 @@ const layout = StyleSheet.create({
   resCardLicense: {
     marginLeft: 'auto',
     color: '#606060',
-    fontSize: 15
+    fontSize: 15,
   },
   resCardFont: {
     color: '#606060',
-    fontSize: 15
+    fontSize: 15,
   },
   resCardRedCircle: {
     backgroundColor: '#f8380e',
@@ -172,8 +172,8 @@ const layout = StyleSheet.create({
     marginLeft: 10,
     marginTop: 'auto',
     marginBottom: 'auto',
-    borderRadius: 20
-  }
+    borderRadius: 20,
+  },
 });
 
 export default layout;

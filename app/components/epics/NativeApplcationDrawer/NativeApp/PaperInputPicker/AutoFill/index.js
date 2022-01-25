@@ -1,32 +1,10 @@
-import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
+import React from 'react';
 import {
-  StyleSheet, View
+  StyleSheet, View,
 } from 'react-native-web';
 
-import { theme } from '../../theme';
 import { stylesDefault, stylesPaper } from '../index.style';
-
-export default class AutoFill extends Component {
-
-  render() {
-    const {
-      translatedLabel,
-    } = this.props;
-
-
-    return (
-      <View style={styles.container}>
-        {/* handle issues where autofil does not populate any data */}
-          <TextInput
-            label={translatedLabel}
-            mode="outlined"
-            theme={stylesPaper}
-            style={stylesDefault.label}
-          />
-      </View>
-    );
-  }
-}
 
 const styles = StyleSheet.create({
   container: {
@@ -35,5 +13,24 @@ const styles = StyleSheet.create({
     paddingRight: 15,
     paddingTop: 10,
     marginBottom: 75,
-  }
+  },
 });
+
+const AutoFill = (props) => {
+  const {
+    translatedLabel,
+  } = props;
+
+  return (
+    <View style={styles.container}>
+      <TextField
+        label={translatedLabel}
+        mode="outlined"
+        theme={stylesPaper}
+        style={stylesDefault.label}
+      />
+    </View>
+  );
+};
+
+export default AutoFill;

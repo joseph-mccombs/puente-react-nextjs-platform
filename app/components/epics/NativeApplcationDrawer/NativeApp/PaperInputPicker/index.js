@@ -1,41 +1,26 @@
+import TextField from '@material-ui/core/TextField';
 import * as React from 'react';
 import {
-  Image, Text, TouchableWithoutFeedback, View
+  Text, TouchableWithoutFeedback, View,
 } from 'react-native-web';
-// import {
-//   Button, Headline,
-//   TextInput,
-// } from 'react-native-paper';
-import TextField from '@material-ui/core/TextField';
 
-// import I18n from '../../../modules/i18n';
-import { layout, theme } from '../theme';
-// import UseCameraRoll from '../../Multimedia/CameraRoll';
-// import UseCamera from '../../Multimedia/UseCamera';
+import { layout } from '../theme';
 import AutoFill from './AutoFill';
-import AutoFillMS from './AutoFillMS';
 import Geolocation from './Geolocation';
-import HouseholdManager from './HouseholdManager';
 import {
-  styleButton, styles, stylesDefault, stylesPaper, styleX
+  styleButton, stylesDefault, stylesPaper, styleX,
 } from './index.style';
 import Looper from './Looper';
-import { ThemeProvider } from '@material-ui/styles';
 
 const PaperInputPicker = ({
-  data, scrollViewScroll, setScrollViewScroll,
-  customForm
+  data,
 }) => {
   const {
-    label, formikKey, fieldType, sideLabel
+    label, formikKey, fieldType, sideLabel,
   } = data;
 
-  const translatedLabel =  label || '';
+  const translatedLabel = label || '';
   const translatedLabelSide = sideLabel || '';
-
-  // const [cameraVisible, setCameraVisible] = React.useState(false);
-  // const [pictureUris, setPictureUris] = React.useState({});
-  // const [image, setImage] = React.useState(null);
 
   return (
     <>
@@ -46,8 +31,6 @@ const PaperInputPicker = ({
           <TextField
             label={translatedLabel}
             variant="outlined"
-            // theme={stylesPaper}
-            // style={stylesDefault.label}
             color="primary"
           />
         </View>
@@ -57,7 +40,7 @@ const PaperInputPicker = ({
           {translatedLabel.length > 30
             && (
               <Text style={[stylesDefault.label, {
-                bottom: -15, zIndex: 1, left: 5, padding: 5
+                bottom: -15, zIndex: 1, left: 5, padding: 5,
               }]}
               >
                 {translatedLabel}
@@ -78,7 +61,7 @@ const PaperInputPicker = ({
             <TextField
               label={translatedLabel}
               variant="outlined"
-              theme={{ colors: { placeholder: "primary" }, text: 'black' }}
+              theme={{ colors: { placeholder: 'primary' }, text: 'black' }}
               color="primary"
             />
             <Text style={styleX.sideLabel}>{translatedLabelSide}</Text>
@@ -106,7 +89,7 @@ const PaperInputPicker = ({
             <TextField
               variant="outlined"
               keyboardType="numeric"
-              theme={{ colors: { placeholder: "primary" }, text: 'black' }}
+              theme={{ colors: { placeholder: 'primary' }, text: 'black' }}
               color="primary"
             />
             <Text style={styleX.sideLabel}>{translatedLabelSide}</Text>
@@ -119,14 +102,14 @@ const PaperInputPicker = ({
             <TextField
               label={translatedLabel}
               variant="outlined"
-              theme={{ colors: { placeholder: "primary" }, text: 'black' }}
+              theme={{ colors: { placeholder: 'primary' }, text: 'black' }}
               color="primary"
             />
             <Text style={styleX.sideLabel}>{translatedLabelSide}</Text>
             <TextField
               label={translatedLabel}
               variant="outlined"
-              theme={{ colors: { placeholder: "primary" }, text: 'black' }}
+              theme={{ colors: { placeholder: 'primary' }, text: 'black' }}
               color="primary"
             />
           </View>
@@ -139,13 +122,13 @@ const PaperInputPicker = ({
             {data.options && data.options.map((result) => (
               <View key={result.value}>
                 {/* non-selected value */}
-                  <TouchableWithoutFeedback>
-                    <View style={styleButton.unselected} color="primary">
-                      <Text style={{ color: "primary" }} color="primary">
-                        {result.label}
-                      </Text>
-                    </View>
-                  </TouchableWithoutFeedback>
+                <TouchableWithoutFeedback>
+                  <View style={styleButton.unselected} color="primary">
+                    <Text style={{ color: 'primary' }} color="primary">
+                      {result.label}
+                    </Text>
+                  </View>
+                </TouchableWithoutFeedback>
               </View>
             ))}
           </View>
@@ -158,30 +141,23 @@ const PaperInputPicker = ({
             {data.options && data.options.map((result) => (
               <View key={result.value}>
                 {/* non-selected value */}
-                  <View style={stylesDefault}>
-                    <TouchableWithoutFeedback>
-                      <View style={styleButton.unselected}>
-                        <Text style={{ color: "primary" }}>
-                          {result.label}
-                        </Text>
-                      </View>
-                    </TouchableWithoutFeedback>
-                  </View>
+                <View style={stylesDefault}>
+                  <TouchableWithoutFeedback>
+                    <View style={styleButton.unselected}>
+                      <Text style={{ color: 'primary' }}>
+                        {result.label}
+                      </Text>
+                    </View>
+                  </TouchableWithoutFeedback>
+                </View>
               </View>
             ))}
           </View>
         </View>
       )}
-      {fieldType === 'autofill' && (
+      {(fieldType === 'autofill' || fieldType === 'autofillms') && (
         <View key={formikKey}>
           <AutoFill
-            translatedLabel={translatedLabel}
-          />
-        </View>
-      )}
-      {fieldType === 'autofillms' && (
-        <View key={formikKey}>
-          <AutoFillMS
             translatedLabel={translatedLabel}
           />
         </View>
@@ -190,11 +166,6 @@ const PaperInputPicker = ({
         <Geolocation
           formikKey={formikKey}
         />
-      )}
-      {fieldType === 'household' && (
-        <View key={formikKey}>
-          <HouseholdManager />
-        </View>
       )}
       {fieldType === 'header' && (
         <View key={translatedLabel} style={stylesDefault.container}>
@@ -217,7 +188,7 @@ const PaperInputPicker = ({
                 <TextField
                   label={result.label}
                   variant="outlined"
-                  theme={{ colors: { placeholder: "primary" }, text: 'black' }}
+                  theme={{ colors: { placeholder: 'primary' }, text: 'black' }}
                 />
               </View>
             )))}
@@ -237,64 +208,13 @@ const PaperInputPicker = ({
               <TextField
                 label={result.label}
                 variant="outlined"
-                theme={{ colors: { placeholder: "primary" }, text: 'black' }}
+                theme={{ colors: { placeholder: 'primary' }, text: 'black' }}
               />
             </View>
           )))}
         </View>
       </View>
       )}
-      {/* photo not implemented yet */}
-      {/* {fieldType === 'photo' && (
-        <View style={stylesDefault.container}>
-          {!cameraVisible && image === null && (
-            <View>
-              <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
-              <Button onPress={() => setCameraVisible(true)}>{'Take Photo'}</Button>
-              <UseCameraRoll
-                pictureUris={pictureUris}
-                setPictureUris={setPictureUris}
-                formikKey={formikKey}
-                image={image}
-                setImage={setImage}
-              />
-            </View>
-          )}
-          {!cameraVisible && image !== null && (
-            <View>
-              <Text style={stylesDefault.labelImage}>{translatedLabel}</Text>
-              <Image source={{ uri: image }} style={{ width: 'auto', height: 400 }} />
-              <Button onPress={() => {
-                setCameraVisible(true);
-              }}
-              >
-                {I18n.t('paperButton.takePhoto')}
-              </Button>
-              <UseCameraRoll
-                pictureUris={pictureUris}
-                setPictureUris={setPictureUris}
-                formikKey={formikKey}
-                image={image}
-                setImage={setImage}
-              />
-            </View>
-          )}
-          {cameraVisible && (
-            <View>
-              <Text style={stylesDefault.labelImage}>{label}</Text>
-              <UseCamera
-                cameraVisible={cameraVisible}
-                setCameraVisible={setCameraVisible}
-                pictureUris={pictureUris}
-                setPictureUris={setPictureUris}
-                formikKey={formikKey}
-                image={image}
-                setImage={setImage}
-              />
-            </View>
-          )}
-        </View>
-      )} */}
       {fieldType === 'loop' && (
       <View key={formikKey}>
         <Looper

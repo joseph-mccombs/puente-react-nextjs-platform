@@ -4,12 +4,10 @@ import layout from './layout';
 
 const theme = {
   colors: {
-    primary: "primary",
-    accent: "secondary",
-    // primary: '#FFE680',
-    // accent: '#3d80fc',
+    primary: 'primary',
+    accent: 'secondary',
     background: '#F5F5F5',
-    black: '#333'
+    black: '#333',
   },
 };
 

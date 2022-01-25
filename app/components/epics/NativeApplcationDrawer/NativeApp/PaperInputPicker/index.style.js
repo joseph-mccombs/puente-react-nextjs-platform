@@ -1,5 +1,5 @@
 import {
-  StyleSheet
+  StyleSheet,
 } from 'react-native-web';
 
 import { theme } from '../theme';
@@ -14,10 +14,10 @@ const stylesDefault = StyleSheet.create({
   },
   inputItem: {
     flex: 7,
-    marginHorizontal: 5
+    marginHorizontal: 5,
   },
   multiInputContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
   },
   container: {
     flex: 1,
@@ -26,25 +26,25 @@ const stylesDefault = StyleSheet.create({
   },
   header: {
     fontWeight: 'bold',
-    marginTop: 10
+    marginTop: 10,
   },
   label: {
     fontWeight: 'bold',
     color: theme.colors.black,
-    backgroundColor: theme.colors.background
+    backgroundColor: theme.colors.background,
   },
   labelImage: {
     fontWeight: 'bold',
     color: theme.colors.black,
     backgroundColor: theme.colors.background,
-    paddingBottom: 10
-  }
+    paddingBottom: 10,
+  },
 
 });
 
 const stylesPaper = {
   colors: {
-    placeholder: theme.colors.black
+    placeholder: theme.colors.black,
   },
   text: theme.colors.priary,
 };
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     paddingHorizontal: 10,
-  }
+  },
 });
 
 const styleX = StyleSheet.create({
@@ -63,7 +63,7 @@ const styleX = StyleSheet.create({
     marginTop: 'auto',
     marginBottom: 'auto',
     padding: 10,
-    fontSize: 15
+    fontSize: 15,
   },
   textSplit: {
     fontSize: 35,
@@ -71,31 +71,31 @@ const styleX = StyleSheet.create({
     marginRight: 'auto',
     marginTop: 'auto',
     marginBottom: 25,
-  }
+  },
 });
 
 const styleButton = StyleSheet.create({
   selected: {
-    backgroundColor: "primary",
-    borderColor: "primary",
+    backgroundColor: 'primary',
+    borderColor: 'primary',
     borderWidth: 1,
     borderRadius: 5,
     alignItems: 'center',
-    color: "primary",
+    color: 'primary',
     paddingHorizontal: 15,
     paddingVertical: 5,
-    margin: 5
+    margin: 5,
   },
   unselected: {
     borderWidth: 1,
-    borderColor: "primary",
+    borderColor: 'primary',
     borderRadius: 5,
     paddingHorizontal: 15,
     paddingVertical: 5,
-    margin: 5
-  }
+    margin: 5,
+  },
 });
 
 export {
-  styleButton, styles, stylesDefault, stylesPaper, styleX
+  styleButton, styles, stylesDefault, stylesPaper, styleX,
 };

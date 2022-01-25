@@ -33,13 +33,11 @@ const Register = () => {
 
   const { handleSubmit, errors } = methods;
 
-  const onSubmit = (user) => {
-    return retrieveSignUpFunction(user)
-      .then((result) => {
-        console.log(result);
-        router.push('/quick-start');
-      });
-  };
+  const onSubmit = (user) => retrieveSignUpFunction(user)
+    .then((result) => {
+      console.log(result);
+      router.push('/quick-start');
+    });
 
   const paperStyle = {
     padding: 20, height: '70vh', width: '50vw', margin: '20px auto',
