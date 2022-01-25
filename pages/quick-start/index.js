@@ -28,15 +28,10 @@ export default function QuickStart() {
             nextLink="/forms/form-marketplace"
           />
           <Card
-            title="Data Visualization"
-            description="Visualize Data from Puente Collect"
-            nextLink="/data-visualization"
-          />
-          {/* <Card
             title="Data Exporter"
             description="Download data"
-            nextLink="/data"
-          /> */}
+            nextLink="/data/data-exporter"
+          />
         </div>
       </main>
       <style jsx global>
