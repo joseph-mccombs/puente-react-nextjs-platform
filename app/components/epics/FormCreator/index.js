@@ -52,12 +52,9 @@ function FormCreator({ context }) {
   const [submission, setSubmission] = useState(false);
 
   const compareOrganizations = (currentOrgs) => {
-    if (currentOrgs[0] === "Shared") {
-      return true;
-    } else {
-      return false;
-    }
-  }
+    if (currentOrgs[0] === 'Shared') return true;
+    return false;
+  };
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
@@ -140,7 +137,6 @@ function FormCreator({ context }) {
       });
     } else if (submissionType === 'edit puente form') {
       postParams.parseClass = 'PuenteFormModifications';
-      console.log(compareOrganizations(organizationNames))
       if (compareOrganizations(organizationNames) === true) {
         postObjectsToClass(postParams).then(() => {
           setSubmission(true);

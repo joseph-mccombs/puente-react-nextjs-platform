@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 const FormManagerTable = ({
   data,
   retrieveCustomData, passDataToFormCreator,
-  organization, puenteForm
+  organization,
 }) => {
   const [open, setOpen] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
@@ -31,19 +31,15 @@ const FormManagerTable = ({
   };
 
   const compareOrganizations = (currentOrgs) => {
-    const sharedOrgs = ["Shared"]
-    currentOrgs.forEach((element, index) => {
-      if (element !== sharedOrgs[index]) return false
-    });
-    return true
-  }
+    if (currentOrgs[0] === 'Shared') return true;
+    return false;
+  };
 
   const handleEdit = (object) => {
     if (compareOrganizations(object.organizations)) {
-      object["organizations"] = [organization]
-      passDataToFormCreator('edit puente form', object)
-    }
-    else {
+      object.organizations = [organization]; //eslint-disable-line
+      passDataToFormCreator('edit puente form', object);
+    } else {
       passDataToFormCreator('edit', object);
     }
   };

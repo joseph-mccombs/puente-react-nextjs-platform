@@ -1,6 +1,7 @@
 import { Button } from '@material-ui/core';
 import { useEffect, useState } from 'react';
 
+import ActiveInput from '../Utils';
 import styles from './index.module.scss';
 
 const Loop = (props) => {
@@ -15,7 +16,7 @@ const Loop = (props) => {
   const [questionsToRepeat, setQuestionsToRepeat] = useState([]);
   const [doubleLoop, setDoubleLoop] = useState(false);
   const [loopCount, setLoopCount] = useState(0);
-  const [activeInput, setActiveInput] = useState(true);
+  const [activeInput, setActiveInput] = useState(item.active !== undefined ? item.active : true);
 
   useEffect(() => {
     const loopFields = formItems.filter((element) => element.fieldType === 'loop');
@@ -124,9 +125,9 @@ const Loop = (props) => {
           </div>
           )}
           <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-            />
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
         </div>
       )}
     </div>

@@ -14,7 +14,7 @@ const Select = (props) => {
     id: uuid(), label: '', value: '', text: false, textQuestion: '', textKey: '',
   }]);
 
-  const [activeInput, setActiveInput] = useState(true);
+  const [activeInput, setActiveInput] = useState(item.active !== undefined ? item.active : true);
 
   useEffect(() => {
     const elementsIndex = formItems.findIndex((element) => element.id === item.id);
@@ -160,10 +160,10 @@ const Select = (props) => {
 
           </div>
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-            />
+          <ActiveInput
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
         </div>
       )}
       {item?.fieldType === 'selectMulti' && (
@@ -195,10 +195,10 @@ const Select = (props) => {
             ))}
           </div>
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-            />
+          <ActiveInput
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
         </div>
       )}
     </div>

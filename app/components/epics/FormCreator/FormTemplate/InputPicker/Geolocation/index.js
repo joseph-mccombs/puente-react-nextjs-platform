@@ -8,12 +8,11 @@ const Input = (props) => {
   const {
     item,
     formItems, setFormItems,
-    removeValue, disabledTotal,
-    setDisabledTotal,
+    removeValue,
   } = props;
 
   const [geolocationCount, setGeolocationCount] = useState(0);
-  const [activeInput, setActiveInput] = useState(true);
+  const [activeInput, setActiveInput] = useState(item.active !== undefined ? item.active : true);
 
   useEffect(() => {
     const elementsIndex = formItems.findIndex((element) => element.id === item.id);

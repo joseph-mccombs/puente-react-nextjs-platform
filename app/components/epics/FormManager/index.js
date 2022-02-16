@@ -7,7 +7,7 @@ import {
 import IconButton from '@material-ui/core/IconButton';
 import AppsIcon from '@material-ui/icons/Apps';
 import MenuIcon from '@material-ui/icons/Menu';
-import { retrieveCustomData, retrieveUniqueListOfOrganizations, retrievePuenteFormModifications } from 'app/modules/cloud-code';
+import { retrieveCustomData, retrievePuenteFormModifications, retrieveUniqueListOfOrganizations } from 'app/modules/cloud-code';
 import React, { useEffect, useState } from 'react';
 import { isArray } from 'underscore';
 
@@ -30,8 +30,8 @@ const FormManager = ({ context, router }) => {
     EnvironmentHealth: null,
     Vitals: null,
     Perscriptions: null,
-    HistoryMedical: null
-  })
+    HistoryMedical: null,
+  });
 
   useEffect(() => {
     retrieveCustomData(organization).then((records) => {
@@ -67,63 +67,57 @@ const FormManager = ({ context, router }) => {
   }, [organization]);
 
   const updatePuenteForms = (record) => {
-    switch(record.name) {
-      case "SurveyData":
-        setPuenteForms({...puenteForms, SurveyData: record})    
+    switch (record.name) {
+      case 'SurveyData':
+        setPuenteForms({ ...puenteForms, SurveyData: record });
         break;
-      case "EnvironmentHealth":
-        setPuenteForms({...puenteForms, EnvironmentHealth: record})    
+      case 'EnvironmentHealth':
+        setPuenteForms({ ...puenteForms, EnvironmentHealth: record });
         break;
-      case "Vitals":
-        setPuenteForms({...puenteForms, Vitals: record})    
+      case 'Vitals':
+        setPuenteForms({ ...puenteForms, Vitals: record });
         break;
-      case "Perscriptions":
-        setPuenteForms({...puenteForms, Perscriptions: record})    
+      case 'Perscriptions':
+        setPuenteForms({ ...puenteForms, Perscriptions: record });
         break;
-      case "HistoryMedical":
-        setPuenteForms({...puenteForms, HistoryMedical: record})    
+      case 'HistoryMedical':
+        setPuenteForms({ ...puenteForms, HistoryMedical: record });
         break;
       default:
         break;
     }
-  }
+  };
 
   useEffect(() => {
-    retrieveCustomData("Shared").then((records) => {
-      console.log(records);
-      // let puenteForms = [];
+    retrieveCustomData('Shared').then((records) => {
       records.forEach((record) => {
         if (isArray(record.workflows)) {
           record.workflows.forEach((workflow) => {
-            if (workflow === "Puente") {
-              console.log(puenteData === undefined ? [record] : puenteData.concat([record]));
-              // setPuenteData(puenteData === undefined ? [record] : puenteData.concat([record]));
-              // puenteForms = puenteForms === undefined ? [record] : puenteForms.concat([record])
+            if (workflow === 'Puente') {
               updatePuenteForms(record);
             }
-          })
+          });
         }
-      })
+      });
     }).then(retrievePuenteFormModifications(organization).then((results) => {
-      console.log("puente mods",results)
       results.forEach((record) => {
         updatePuenteForms(record);
-      })
+      });
     }, (error) => {
-      console.log(error);
-    }))
-  }, [organization])
-
+      console.log(error); //eslint-disable-line
+    }));
+  }, [organization]);
 
   useEffect(() => {
-    let combinedPuenteForms = []
-    Object.entries(puenteForms).forEach(([key,value]) => {
+    let combinedPuenteForms = [];
+    Object.entries(puenteForms).forEach(([, value]) => {
       if (value !== null) {
-        combinedPuenteForms = combinedPuenteForms === undefined ? [value] : combinedPuenteForms.concat([value])
+        combinedPuenteForms = combinedPuenteForms === undefined ? [value]
+          : combinedPuenteForms.concat([value]);
       }
-    })
+    });
     setPuenteData(combinedPuenteForms);
-  }, [puenteForms])
+  }, [puenteForms]);
 
   const handleOrganization = (event) => {
     setOrganization(event.target.value);
@@ -201,7 +195,7 @@ const FormManager = ({ context, router }) => {
             retrieveCustomData={retrieveCustomData}
             passDataToFormCreator={passDataToFormCreator}
             organization={organization}
-            puenteForm={true}
+            puenteForm
           />
         ) : (
           <GridTable

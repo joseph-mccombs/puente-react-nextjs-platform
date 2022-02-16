@@ -21,13 +21,13 @@ const ActiveInput = ({
 
   return (
     <div>
-        <FormControlLabel
-          control={(
-            <Checkbox onChange={() => handleChange()} />
+      <FormControlLabel
+        control={(
+          <Checkbox onChange={() => handleChange()} />
           )}
-          label="Disable Input"
-          checked={!activeInput}
-        />
+        label="Disable Input"
+        checked={!activeInput}
+      />
     </div>
   );
 };
