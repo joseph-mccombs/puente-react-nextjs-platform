@@ -15,6 +15,7 @@ const Loop = (props) => {
   const [questionsToRepeat, setQuestionsToRepeat] = useState([]);
   const [doubleLoop, setDoubleLoop] = useState(false);
   const [loopCount, setLoopCount] = useState(0);
+  const [activeInput, setActiveInput] = useState(true);
 
   useEffect(() => {
     const loopFields = formItems.filter((element) => element.fieldType === 'loop');
@@ -122,6 +123,10 @@ const Loop = (props) => {
             ))}
           </div>
           )}
+          <ActiveInput
+              activeInput={activeInput}
+              setActiveInput={setActiveInput}
+            />
         </div>
       )}
     </div>

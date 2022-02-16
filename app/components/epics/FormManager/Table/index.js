@@ -20,7 +20,7 @@ const useStyles = makeStyles({
 const FormManagerTable = ({
   data,
   retrieveCustomData, passDataToFormCreator,
-  organization,
+  organization, puenteForm
 }) => {
   const [open, setOpen] = useState(false);
   const [selectedForm, setSelectedForm] = useState();
@@ -30,8 +30,22 @@ const FormManagerTable = ({
     passDataToFormCreator('duplicate', object);
   };
 
+  const compareOrganizations = (currentOrgs) => {
+    const sharedOrgs = ["Shared"]
+    currentOrgs.forEach((element, index) => {
+      if (element !== sharedOrgs[index]) return false
+    });
+    return true
+  }
+
   const handleEdit = (object) => {
-    passDataToFormCreator('edit', object);
+    if (compareOrganizations(object.organizations)) {
+      object["organizations"] = [organization]
+      passDataToFormCreator('edit puente form', object)
+    }
+    else {
+      passDataToFormCreator('edit', object);
+    }
   };
 
   const handleModal = (row) => {

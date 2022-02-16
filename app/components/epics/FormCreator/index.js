@@ -46,9 +46,18 @@ function FormCreator({ context }) {
   const [workflowNames, setWorkflowNames] = useState([]);
   const [newWorkflowValue, setNewWorkflowValue] = useState('');
 
-  const [disabledTotal, setDisabledTotal] = useState(0);
+  // removed for now see note in utils/ActiveInput
+  // const [disabledTotal, setDisabledTotal] = useState(0);
   const [submissionType, setSubmissionType] = useState('');
   const [submission, setSubmission] = useState(false);
+
+  const compareOrganizations = (currentOrgs) => {
+    if (currentOrgs[0] === "Shared") {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
@@ -129,6 +138,27 @@ function FormCreator({ context }) {
       }).catch((err) => {
         console.log(err); //eslint-disable-line
       });
+    } else if (submissionType === 'edit puente form') {
+      postParams.parseClass = 'PuenteFormModifications';
+      console.log(compareOrganizations(organizationNames))
+      if (compareOrganizations(organizationNames) === true) {
+        postObjectsToClass(postParams).then(() => {
+          setSubmission(true);
+          setTimeout(() => setSubmission(false), 3000);
+          console.log(postParams); //eslint-disable-line
+        }).catch((err) => {
+          console.log(err); //eslint-disable-line
+        });
+      } else {
+        postParams.parseClassID = formId;
+        updateObject(postParams).then((response) => {
+          console.log(response); //eslint-disable-line
+          setSubmission(true);
+          setTimeout(() => setSubmission(false), 3000);
+        }).catch((err) => {
+          console.log(err); //eslint-disable-line
+        });
+      }
     } else {
       postObjectsToClass(postParams).then(() => {
         setSubmission(true);
@@ -294,8 +324,6 @@ function FormCreator({ context }) {
                 formItems={formItems}
                 setFormItems={setFormItems}
                 removeValue={removeValue}
-                disabledTotal={disabledTotal}
-                setDisabledTotal={setDisabledTotal}
               />
             </Grid>
             <Grid item xs={3} className={styles.formBlock}>

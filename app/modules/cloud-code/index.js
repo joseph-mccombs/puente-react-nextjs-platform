@@ -8,8 +8,13 @@ import {
   removeQueryService,
   residentIDQuery,
   updateObject,
+  genericQuery
 } from './crud';
-import { retrieveCustomData, retrieveUniqueListOfOrganizations } from './custom-data-retrieval';
+import { 
+  retrieveCustomData,
+  retrieveUniqueListOfOrganizations,
+  retrievePuenteFormModifications,
+ } from './custom-data-retrieval';
 
 export {
   countObject,
@@ -23,4 +28,5 @@ export {
   retrieveCustomData,
   retrieveUniqueListOfOrganizations,
   updateObject,
+  retrievePuenteFormModifications,
 };
