@@ -36,7 +36,7 @@ const FormManagerTable = ({
   };
 
   const handleEdit = (object) => {
-    if (compareOrganizations(object.organizations)) {
+    if (compareOrganizations(object.organizations) || object.class ==="PuenteFormModifications") {
       object.organizations = [organization]; //eslint-disable-line
       passDataToFormCreator('edit puente form', object);
     } else {

@@ -137,7 +137,13 @@ function FormCreator({ context }) {
       });
     } else if (submissionType === 'edit puente form') {
       postParams.parseClass = 'PuenteFormModifications';
-      if (compareOrganizations(organizationNames) === true) {
+      postParams.parseClassID = formId;
+      postParams.localObject.class = "PuenteFormModifications"
+      updateObject(postParams).then((response) => {
+        console.log(response); //eslint-disable-line
+        setSubmission(true);
+        setTimeout(() => setSubmission(false), 3000);
+      }).catch((err) => {
         postObjectsToClass(postParams).then(() => {
           setSubmission(true);
           setTimeout(() => setSubmission(false), 3000);
@@ -145,16 +151,8 @@ function FormCreator({ context }) {
         }).catch((err) => {
           console.log(err); //eslint-disable-line
         });
-      } else {
-        postParams.parseClassID = formId;
-        updateObject(postParams).then((response) => {
-          console.log(response); //eslint-disable-line
-          setSubmission(true);
-          setTimeout(() => setSubmission(false), 3000);
-        }).catch((err) => {
-          console.log(err); //eslint-disable-line
-        });
-      }
+        console.log(err); //eslint-disable-line
+      });
     } else {
       postObjectsToClass(postParams).then(() => {
         setSubmission(true);
