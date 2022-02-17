@@ -51,11 +51,6 @@ function FormCreator({ context }) {
   const [submissionType, setSubmissionType] = useState('');
   const [submission, setSubmission] = useState(false);
 
-  const compareOrganizations = (currentOrgs) => {
-    if (currentOrgs[0] === 'Shared') return true;
-    return false;
-  };
-
   useEffect(() => {
     retrieveUniqueListOfOrganizations().then((results) => {
       setOrganizations(results);
@@ -138,7 +133,7 @@ function FormCreator({ context }) {
     } else if (submissionType === 'edit puente form') {
       postParams.parseClass = 'PuenteFormModifications';
       postParams.parseClassID = formId;
-      postParams.localObject.class = "PuenteFormModifications"
+      postParams.localObject.class = 'PuenteFormModifications';
       updateObject(postParams).then((response) => {
         console.log(response); //eslint-disable-line
         setSubmission(true);
@@ -148,8 +143,8 @@ function FormCreator({ context }) {
           setSubmission(true);
           setTimeout(() => setSubmission(false), 3000);
           console.log(postParams); //eslint-disable-line
-        }).catch((err) => {
-          console.log(err); //eslint-disable-line
+        }).catch((error) => {
+          console.log(error); //eslint-disable-line
         });
         console.log(err); //eslint-disable-line
       });
