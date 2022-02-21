@@ -10,9 +10,8 @@ import Link from 'next/link';
 import { useTranslation } from 'next-i18next';
 import PropTypes from 'prop-types';
 import logo from 'public/images/saas-logo.svg';
-import brand from 'public/text/brand';
 import link from 'public/text/link';
-import React, { Fragment, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AnchorLink from 'react-anchor-link-smooth-scroll';
 import Scrollspy from 'react-scrollspy';
 
@@ -59,8 +58,8 @@ function Header(props) {
   const [menuList] = useState([
     createData(navMenu[0], `#${navMenu[0]}`),
     createData(navMenu[1], `#${navMenu[1]}`),
-    createData(navMenu[2], `#${navMenu[2]}`),
-    createData(navMenu[3], `#${navMenu[3]}`, -40),
+    // createData(navMenu[2], `#${navMenu[2]}`),
+    // createData(navMenu[3], `#${navMenu[3]}`, -40),
   ]);
   const [openDrawer, setOpenDrawer] = useState(false);
   const handleOpenDrawer = () => {
@@ -98,13 +97,15 @@ function Header(props) {
                   <Link href={link.saas.home}>
                     <a>
                       <img src={logo} alt="logo" />
-                      {!isMobile && "Puente"}
+                      {!isMobile && 'Puente'}
                     </a>
                   </Link>
                 ) : (
                   <AnchorLink href="#home">
                     <img src={logo} alt="logo" />
-                    {!isMobile && ""} {/**THIS IS WHERE PUENTE TECHNOLOGY SHOULD GO */}
+                    {!isMobile && ''}
+                    {' '}
+                    {/** THIS IS WHERE PUENTE TECHNOLOGY SHOULD GO */}
                   </AnchorLink>
                 )}
               </div>

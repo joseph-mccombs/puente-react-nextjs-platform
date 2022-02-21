@@ -17,7 +17,6 @@ import {
 } from 'app/components/molecules/website';
 // import clsx from 'clsx';
 import Head from 'next/head';
-import brand from 'public/text/brand';
 import React from 'react';
 
 const sectionMargin = (margin) => (margin * 20);
@@ -65,7 +64,7 @@ function Landing() {
     <>
       <Head>
         <title>
-          {"Puente Technology"}
+          Puente Technology
           &nbsp; - Home Page
         </title>
       </Head>

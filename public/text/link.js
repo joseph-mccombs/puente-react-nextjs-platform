@@ -1,7 +1,7 @@
 const link = {
   saas: {
     home: '/',
-    contact: '/contact',
+    contact: 'mailto:info@puente-dr.org',
     login: '/account/login',
     register: '/account/register',
     quickstart: '/quick-start',
