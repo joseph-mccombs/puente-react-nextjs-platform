@@ -65,7 +65,7 @@ function Landing() {
     <>
       <Head>
         <title>
-          { brand.saas.name }
+          {"Puente Technology"}
           &nbsp; - Home Page
         </title>
       </Head>

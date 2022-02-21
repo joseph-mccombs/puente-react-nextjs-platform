@@ -98,13 +98,13 @@ function Header(props) {
                   <Link href={link.saas.home}>
                     <a>
                       <img src={logo} alt="logo" />
-                      {!isMobile && brand.saas.name}
+                      {!isMobile && "Puente"}
                     </a>
                   </Link>
                 ) : (
                   <AnchorLink href="#home">
                     <img src={logo} alt="logo" />
-                    {!isMobile && brand.saas.name}
+                    {!isMobile && ""} {/**THIS IS WHERE PUENTE TECHNOLOGY SHOULD GO */}
                   </AnchorLink>
                 )}
               </div>
