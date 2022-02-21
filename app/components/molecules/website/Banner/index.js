@@ -13,7 +13,6 @@ import Zoom from '@material-ui/core/Zoom';
 import CloseIcon from '@material-ui/icons/Close';
 import { useText } from 'app/modules/theme/common';
 import clsx from 'clsx';
-import { useTranslation } from 'next-i18next';
 import imgAPI from 'public/images/imgAPI';
 import React, { useEffect, useRef, useState } from 'react';
 import YouTube from 'react-youtube';
@@ -97,7 +96,7 @@ function Banner() {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle id="alert-dialog-slide-title">
-          {"Puente"}
+          Puente
           <IconButton onClick={handleClose} className={classes.closeBtn}>
             <CloseIcon className={classes.icon} />
           </IconButton>
@@ -128,18 +127,18 @@ function Banner() {
         <div className={classes.sliderWrap}>
           <div className={classes.text}>
             <Typography variant="h3" className={text.title}>
-              {"Puente Manage"}
+              Puente Manage
               &nbsp;
             </Typography>
             <Typography component="p" className={text.subtitle}>
-              {"Management platform for your data collection needs"}
+              Management platform for your data collection needs
             </Typography>
             <div className={classes.btnArea}>
               <ButtonBase className={classes.playBtn} onClick={handleClickOpen}>
                 <span className={classes.icon}>
                   <i className="ion-ios-play-outline" />
                 </span>
-                {"Learn about our work!"}
+                Learn about our work!
               </ButtonBase>
               <Button
                 variant="contained"
@@ -147,7 +146,7 @@ function Banner() {
                 size="large"
                 href="/login"
               >
-                {"Get Started!"}
+                Get Started!
               </Button>
             </div>
           </div>

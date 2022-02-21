@@ -138,10 +138,10 @@ function Header(props) {
             <nav className={classes.navMenu}>
               <Hidden xsDown>
                 <Button href={link.saas.login} className={classes.textBtn}>
-                  {"Login"}
+                  Login
                 </Button>
                 <Button href={link.saas.register} variant="contained" color="secondary" className={classes.button}>
-                  {"Register"}
+                  Register
                 </Button>
               </Hidden>
             </nav>

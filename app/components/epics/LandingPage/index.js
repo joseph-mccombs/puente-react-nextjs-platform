@@ -1,21 +1,21 @@
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Hidden from '@material-ui/core/Hidden';
+// import Hidden from '@material-ui/core/Hidden';
 import { makeStyles } from '@material-ui/core/styles';
 import {
   Banner,
-  CompanyLogo,
-  Counter,
+  // CompanyLogo,
+  // Counter,
   Faq,
-  Feature,
+  // Feature,
   FooterWithDeco,
   Header,
-  NewsEvent,
-  Notification,
-  PageNav,
+  // NewsEvent,
+  // Notification,
+  // PageNav,
   PricingPlan,
-  Testimonials,
+  // Testimonials,
 } from 'app/components/molecules/website';
-import clsx from 'clsx';
+// import clsx from 'clsx';
 import Head from 'next/head';
 import brand from 'public/text/brand';
 import React from 'react';
@@ -77,37 +77,37 @@ function Landing() {
           <section id="home">
             <Banner />
           </section>
-          <section>
+          {/* <section>
             <CompanyLogo />
           </section>
           <section>
             <Counter />
-          </section>
-          <section id="feature" className={classes.spaceTop}>
+          </section> */}
+          {/* <section id="feature" className={classes.spaceTop}>
             <Feature />
-          </section>
-          <section id="testimonials" className={classes.spaceBottomTesti}>
+          </section> */}
+          {/* <section id="testimonials" className={classes.spaceBottomTesti}>
             <Testimonials />
-          </section>
+          </section> */}
           <section id="pricing" className={classes.spaceTop}>
             <PricingPlan />
           </section>
           <section id="faq" className={classes.spaceTopShort}>
             <Faq />
           </section>
-          <div className={clsx(classes.spaceTopShort, classes.spaceBottomShort)}>
+          {/* <div className={clsx(classes.spaceTopShort, classes.spaceBottomShort)}>
             <NewsEvent />
-          </div>
+          </div> */}
         </main>
         <section id="footer">
           <FooterWithDeco />
         </section>
-        <Hidden mdDown>
+        {/* <Hidden mdDown>
           <Notification />
         </Hidden>
         <Hidden mdDown>
           <PageNav />
-        </Hidden>
+        </Hidden> */}
       </div>
     </>
   );
