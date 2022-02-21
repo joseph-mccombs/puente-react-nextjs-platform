@@ -1,4 +1,5 @@
 import parseService from 'app/services/parse';
+import React from 'react';
 
 import Footer from './Footer';
 import Header from './Header';
