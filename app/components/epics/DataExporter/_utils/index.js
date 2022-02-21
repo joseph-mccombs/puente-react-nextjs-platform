@@ -36,7 +36,7 @@ function stableSort(array, comparator) {
   return stabilizedThis.map((el) => el[0]);
 }
 
-function EnhancedTableHead(props) {
+const EnhancedTableHead = (props) => {
   const {
     classes,
     order,
@@ -84,7 +84,7 @@ function EnhancedTableHead(props) {
       </TableRow>
     </TableHead>
   );
-}
+};
 
 const useToolbarStyles = makeStyles((theme) => ({
   root: {
