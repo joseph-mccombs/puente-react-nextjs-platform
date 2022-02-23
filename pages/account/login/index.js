@@ -29,12 +29,10 @@ const Login = () => {
     const { usernameV, passwordV } = data;
     return retrieveSignInFunction(usernameV, passwordV)
       .then((result) => {
-        console.log(result);
         // get return url from query parameters or default to '/'
         const returnUrl = router.query.returnUrl || '/quick-start';
         router.push(returnUrl);
       });
-    // .catch(alertService.error);
   };
 
   const paperStyle = {
