@@ -5,16 +5,16 @@ import { createTheme } from '@material-ui/core/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#556cd6',
+      main: '#3D80FC',
     },
     secondary: {
-      main: '#19857b',
+      main: '#FFE680',
     },
     error: {
       main: red.A400,
     },
     background: {
-      default: '#fff',
+      default: '#F7F7F7',
     },
   },
 });

@@ -1,5 +1,5 @@
-import FormMarketplace from 'app/components/organisms/FormMarketplace';
-import Page from 'app/components/templates/page-layout';
+import FormMarketplace from 'app/components/epics/FormMarketplace';
+import Page from 'app/components/templates/dashboard-layout';
 import { useGlobalState } from 'app/store';
 import { useRouter } from 'next/router';
 
@@ -10,7 +10,10 @@ export default function Marketplace() {
   const router = useRouter();
 
   return (
-    <Page>
+    <Page
+      header
+      footer
+    >
       <main className={styles.formMarketplace}>
         <div className={styles.container}>
           <FormMarketplace
