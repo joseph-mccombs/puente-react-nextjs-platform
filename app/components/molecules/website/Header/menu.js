@@ -1,6 +1,6 @@
 const menu = [
-  'feature',
-  'testimonials',
+  // 'feature',
+  // 'testimonials',
   'pricing',
   'faq',
 ];

@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react';
 import { DragDropContext } from 'react-beautiful-dnd';
 import { v4 as uuid } from 'uuid';
 
+import NativeApplicationDrawer from '../NativeApplcationDrawer';
 import { copy, reorder } from './_utils';
 import FormBlocks from './FormBlocks';
 import FormTemplate from './FormTemplate';
@@ -201,6 +202,9 @@ function FormCreator({ context }) {
             Success!
           </Alert>
         </Snackbar>
+        <NativeApplicationDrawer
+          formItems={formItems}
+        />
         <DragDropContext onDragEnd={onDragEnd}>
           <Grid container>
             <Grid item xs={9}>

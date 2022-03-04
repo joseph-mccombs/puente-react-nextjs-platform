@@ -58,12 +58,6 @@ export default function Header({ children }) {
             <GetAppIcon />
           </HeaderItem>
         </List>
-        {/* <Divider />
-        <List>
-          <HeaderItem link="/data/data-visualization" text="Visualization">
-            <PieChartIcon />
-          </HeaderItem>
-        </List> */}
       </Drawer>
       <main className={classes.content}>
         <div className={classes.toolbar} />

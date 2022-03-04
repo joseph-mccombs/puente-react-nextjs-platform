@@ -18,7 +18,7 @@ import clsx from 'clsx';
 import { i18n } from 'next-i18next';
 import PropTypes from 'prop-types';
 import logo from 'public/images/saas-logo.svg';
-import brand from 'public/text/brand';
+// import brand from 'public/text/brand';
 import React, { useEffect, useState } from 'react';
 
 import useStyles from './footer-style';
@@ -27,26 +27,34 @@ function Copyright() {
   return (
     <Typography variant="body2" display="block" align="center" color="textSecondary">
       &copy;&nbsp;
-      {brand.saas.footerText}
+      Puente Tech 2022
     </Typography>
   );
 }
 
+// const footers = [
+//   {
+//     title: 'Company',
+//     description: ['Team', 'History', 'Contact us', 'Locations'],
+//     link: ['#team', '#history', '#contact-us', '#locations'],
+//   },
+//   {
+//     title: 'Resources',
+//     description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
+//     link: ['#resource', '#resource-name', '#another-resource', '#final-resource'],
+//   },
+//   {
+//     title: 'Legal',
+//     description: ['Privacy policy', 'Terms of use', 'Terms Condition'],
+//     link: ['#privacy-policy', '#terms-of-use'],
+//   },
+// ];
+
 const footers = [
   {
-    title: 'Company',
-    description: ['Team', 'History', 'Contact us', 'Locations'],
-    link: ['#team', '#history', '#contact-us', '#locations'],
-  },
-  {
-    title: 'Resources',
-    description: ['Resource', 'Resource name', 'Another resource', 'Final resource'],
-    link: ['#resource', '#resource-name', '#another-resource', '#final-resource'],
-  },
-  {
-    title: 'Legal',
-    description: ['Privacy policy', 'Terms of use', 'Terms Condition'],
-    link: ['#privacy-policy', '#terms-of-use'],
+    title: '',
+    description: [''],
+    link: [''],
   },
 ];
 
@@ -91,7 +99,7 @@ function Footer(props) {
           <div className={classes.logo}>
             <img src={logo} alt="logo" />
             <Typography variant="h6" color="textPrimary">
-              {brand.saas.projectName}
+              Puente
             </Typography>
           </div>
           <Copyright />

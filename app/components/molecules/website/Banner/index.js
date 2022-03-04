@@ -13,7 +13,6 @@ import Zoom from '@material-ui/core/Zoom';
 import CloseIcon from '@material-ui/icons/Close';
 import { useText } from 'app/modules/theme/common';
 import clsx from 'clsx';
-import { useTranslation } from 'next-i18next';
 import imgAPI from 'public/images/imgAPI';
 import React, { useEffect, useRef, useState } from 'react';
 import YouTube from 'react-youtube';
@@ -33,8 +32,6 @@ function Banner() {
 
   const elem = useRef(null);
   const [hide, setHide] = useState(false);
-
-  const { t } = useTranslation('saas-landing');
 
   const [player, setPlayer] = useState([]);
   const [openPopup, setOpenPopup] = useState(false);
@@ -99,7 +96,7 @@ function Banner() {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle id="alert-dialog-slide-title">
-          {t('common:saas-landing.banner_title')}
+          Puente
           <IconButton onClick={handleClose} className={classes.closeBtn}>
             <CloseIcon className={classes.icon} />
           </IconButton>
@@ -130,21 +127,18 @@ function Banner() {
         <div className={classes.sliderWrap}>
           <div className={classes.text}>
             <Typography variant="h3" className={text.title}>
-              {t('common:saas-landing.banner_title')}
+              Puente Manage
               &nbsp;
-              <strong>
-                {t('common:saas-landing.banner_titlestrong')}
-              </strong>
             </Typography>
             <Typography component="p" className={text.subtitle}>
-              {t('common:saas-landing.banner_subtitle')}
+              Management platform for your data collection needs
             </Typography>
             <div className={classes.btnArea}>
               <ButtonBase className={classes.playBtn} onClick={handleClickOpen}>
                 <span className={classes.icon}>
                   <i className="ion-ios-play-outline" />
                 </span>
-                {t('common:saas-landing.banner_watchvideo')}
+                Learn about our work!
               </ButtonBase>
               <Button
                 variant="contained"
@@ -152,7 +146,7 @@ function Banner() {
                 size="large"
                 href="/login"
               >
-                {t('common:saas-landing.getstarted')}
+                Get Started!
               </Button>
             </div>
           </div>

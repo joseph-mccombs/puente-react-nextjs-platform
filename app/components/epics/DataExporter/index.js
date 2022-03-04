@@ -53,8 +53,6 @@ const DataExporter = () => {
   };
 
   useEffect(() => {
-    // setFormType(formType)
-    // setFormValue(formValue)
     refreshDataExporter();
   }, []);
 

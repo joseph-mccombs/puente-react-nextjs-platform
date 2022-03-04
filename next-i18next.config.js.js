@@ -4,7 +4,6 @@ module.exports = {
   i18n: {
     defaultLocale: 'eng',
     locales: ['eng'],
-    fallbackLng: 'eng',
     initImmediate: false,
     localePath: path.resolve('./public/locales'),
     react: {
