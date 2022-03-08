@@ -135,11 +135,11 @@ function FormCreator({ context }) {
       postParams.parseClass = 'PuenteFormModifications';
       postParams.parseClassID = formId;
       postParams.localObject.class = 'PuenteFormModifications';
-      const activeFields = {}
+      const activeFields = {};
       formItems.forEach((item) => {
-        activeFields[item.formikKey] = item.active
-      })
-      postParams.localObject.activeFields = activeFields
+        activeFields[item.formikKey] = item.active;
+      });
+      postParams.localObject.activeFields = activeFields;
       updateObject(postParams).then((response) => {
         console.log(response); //eslint-disable-line
         setSubmission(true);
