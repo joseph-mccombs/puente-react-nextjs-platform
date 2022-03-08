@@ -27,10 +27,9 @@ const FormManager = ({ context, router }) => {
   const [workflows, setWorkflows] = useState(null);
   const [puenteForms, setPuenteForms] = useState({
     SurveyData: null,
-    EnvironmentHealth: null,
+    EnvironmentalHealth: null,
     Vitals: null,
-    Perscriptions: null,
-    HistoryMedical: null,
+    MedicalEvaluation: null,
   });
 
   useEffect(() => {
@@ -69,19 +68,16 @@ const FormManager = ({ context, router }) => {
   const updatePuenteForms = (record) => {
     switch (record.name) {
       case 'SurveyData':
-        setPuenteForms({ ...puenteForms, SurveyData: record });
+        setPuenteForms((prevForms) => ({ ...prevForms, SurveyData: record }));
         break;
-      case 'EnvironmentHealth':
-        setPuenteForms({ ...puenteForms, EnvironmentHealth: record });
+      case 'EnvironmentalHealth':
+        setPuenteForms((prevForms) => ({ ...prevForms, EnvironmentalHealth: record }));
         break;
       case 'Vitals':
-        setPuenteForms({ ...puenteForms, Vitals: record });
+        setPuenteForms((prevForms) => ({ ...prevForms, Vitals: record }));
         break;
-      case 'Perscriptions':
-        setPuenteForms({ ...puenteForms, Perscriptions: record });
-        break;
-      case 'HistoryMedical':
-        setPuenteForms({ ...puenteForms, HistoryMedical: record });
+      case 'MedicalEvaluation':
+        setPuenteForms((prevForms) => ({ ...prevForms, MedicalEvaluationo: record }));
         break;
       default:
         break;
