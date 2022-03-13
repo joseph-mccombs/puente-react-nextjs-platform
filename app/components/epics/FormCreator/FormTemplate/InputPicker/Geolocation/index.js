@@ -8,12 +8,11 @@ const Input = (props) => {
   const {
     item,
     formItems, setFormItems,
-    removeValue, disabledTotal,
-    setDisabledTotal,
+    removeValue,
   } = props;
 
   const [geolocationCount, setGeolocationCount] = useState(0);
-  const [activeInput, setActiveInput] = useState(true);
+  const [activeInput, setActiveInput] = useState(item.active !== undefined ? item.active : true);
 
   useEffect(() => {
     const elementsIndex = formItems.findIndex((element) => element.id === item.id);
@@ -37,16 +36,10 @@ const Input = (props) => {
         <div key={item.id}>
           <h3>Geolocation</h3>
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-          {/* Active/Disabled component, remove false when needed again
-          Currently not in use. Left in to avoid removing other pieces for linting */}
-          {false && (
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-              disabledTotal={disabledTotal}
-              setDisabledTotal={setDisabledTotal}
-            />
-          )}
+          <ActiveInput
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
           {geolocationCount > 1 && (
             <h5>
               There should be only one geolocation field per form.

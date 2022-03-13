@@ -8,10 +8,9 @@ const Input = (props) => {
   const {
     item,
     formItems, setFormItems,
-    removeValue, disabledTotal,
-    setDisabledTotal,
+    removeValue,
   } = props;
-  const [activeInput, setActiveInput] = useState(true);
+  const [activeInput, setActiveInput] = useState(item.active !== undefined ? item.active : true);
 
   useEffect(() => {
     const elementsIndex = formItems.findIndex((element) => element.id === item.id);
@@ -51,16 +50,10 @@ const Input = (props) => {
           <h3>Text Input Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-          {/* Active/Disabled component, remove false when needed again
-          Currently not in use. Left in to avoid removing other pieces for linting */}
-          {false && (
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-              disabledTotal={disabledTotal}
-              setDisabledTotal={setDisabledTotal}
-            />
-          )}
+          <ActiveInput
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
         </div>
       )}
       {item.fieldType === 'numberInput' && (
@@ -68,16 +61,10 @@ const Input = (props) => {
           <h3>Number Input Element</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <Button role="button" variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-          {/* Active/Disabled component, remove false when needed again
-          Currently not in use. Left in to avoid removing other pieces for linting */}
-          {false && (
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-              disabledTotal={disabledTotal}
-              setDisabledTotal={setDisabledTotal}
-            />
-          )}
+          <ActiveInput
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
         </div>
       )}
       {item.fieldType === 'inputSideLabel' && (
@@ -86,16 +73,10 @@ const Input = (props) => {
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Question" />
           <input className={styles.input} type="text" value={item.sideLabel || ''} id={item.id} onChange={(e) => setValue(e, 'sideLabel')} placeholder="Side Label" />
           <Button role="button" variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-          {/* Active/Disabled component, remove false when needed again
-          Currently not in use. Left in to avoid removing other pieces for linting */}
-          {false && (
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-              disabledTotal={disabledTotal}
-              setDisabledTotal={setDisabledTotal}
-            />
-          )}
+          <ActiveInput
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
         </div>
       )}
     </div>

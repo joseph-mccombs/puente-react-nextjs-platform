@@ -30,8 +30,18 @@ const FormManagerTable = ({
     passDataToFormCreator('duplicate', object);
   };
 
+  const compareOrganizations = (currentOrgs) => {
+    if (currentOrgs[0] === 'Shared') return true;
+    return false;
+  };
+
   const handleEdit = (object) => {
-    passDataToFormCreator('edit', object);
+    if (compareOrganizations(object.organizations) || object.class === 'PuenteFormModifications') {
+      object.organizations = [organization]; //eslint-disable-line
+      passDataToFormCreator('edit puente form', object);
+    } else {
+      passDataToFormCreator('edit', object);
+    }
   };
 
   const handleModal = (row) => {

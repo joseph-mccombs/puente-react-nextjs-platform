@@ -8,14 +8,13 @@ import styles from './index.module.scss';
 const Select = (props) => {
   const {
     item, formItems, setFormItems, removeValue,
-    disabledTotal, setDisabledTotal,
   } = props;
 
   const [options, setOptions] = React.useState([{
     id: uuid(), label: '', value: '', text: false, textQuestion: '', textKey: '',
   }]);
 
-  const [activeInput, setActiveInput] = useState(true);
+  const [activeInput, setActiveInput] = useState(item.active !== undefined ? item.active : true);
 
   useEffect(() => {
     const elementsIndex = formItems.findIndex((element) => element.id === item.id);
@@ -161,16 +160,10 @@ const Select = (props) => {
 
           </div>
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-          {/* Active/Disabled component, remove false when needed again
-          Currently not in use. Left in to avoid removing other pieces for linting */}
-          {false && (
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-              disabledTotal={disabledTotal}
-              setDisabledTotal={setDisabledTotal}
-            />
-          )}
+          <ActiveInput
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
         </div>
       )}
       {item?.fieldType === 'selectMulti' && (
@@ -202,16 +195,10 @@ const Select = (props) => {
             ))}
           </div>
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Question</Button>
-          {/* Active/Disabled component, remove false when needed again
-          Currently not in use. Left in to avoid removing other pieces for linting */}
-          {false && (
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-              disabledTotal={disabledTotal}
-              setDisabledTotal={setDisabledTotal}
-            />
-          )}
+          <ActiveInput
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
         </div>
       )}
     </div>

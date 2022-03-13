@@ -7,7 +7,7 @@ import {
 import IconButton from '@material-ui/core/IconButton';
 import AppsIcon from '@material-ui/icons/Apps';
 import MenuIcon from '@material-ui/icons/Menu';
-import { retrieveCustomData, retrieveUniqueListOfOrganizations } from 'app/modules/cloud-code';
+import { retrieveCustomData, retrievePuenteFormModifications, retrieveUniqueListOfOrganizations } from 'app/modules/cloud-code';
 import React, { useEffect, useState } from 'react';
 import { isArray } from 'underscore';
 
@@ -25,6 +25,12 @@ const FormManager = ({ context, router }) => {
   const [workflowModal, setWorkflowModal] = useState(false);
   const [listView, setListView] = useState(true);
   const [workflows, setWorkflows] = useState(null);
+  const [puenteForms, setPuenteForms] = useState({
+    SurveyData: null,
+    EnvironmentalHealth: null,
+    Vitals: null,
+    MedicalEvaluation: null,
+  });
 
   useEffect(() => {
     retrieveCustomData(organization).then((records) => {
@@ -48,7 +54,6 @@ const FormManager = ({ context, router }) => {
           }
         }
       });
-      setPuenteData(tableDataByCategory.Puente);
       setNoWorkflowData(tableDataByCategory['No Workflow Assigned']);
       delete tableDataByCategory['No Workflow Assigned'];
       setWorkflows(Object.keys(tableDataByCategory));
@@ -59,6 +64,56 @@ const FormManager = ({ context, router }) => {
       setOrganizationList(results);
     });
   }, [organization]);
+
+  const updatePuenteForms = (record) => {
+    switch (record.name) {
+      case 'SurveyData':
+        setPuenteForms((prevForms) => ({ ...prevForms, SurveyData: record }));
+        break;
+      case 'EnvironmentalHealth':
+        setPuenteForms((prevForms) => ({ ...prevForms, EnvironmentalHealth: record }));
+        break;
+      case 'Vitals':
+        setPuenteForms((prevForms) => ({ ...prevForms, Vitals: record }));
+        break;
+      case 'MedicalEvaluation':
+        setPuenteForms((prevForms) => ({ ...prevForms, MedicalEvaluationo: record }));
+        break;
+      default:
+        break;
+    }
+  };
+
+  useEffect(() => {
+    retrieveCustomData('Shared').then((records) => {
+      records.forEach((record) => {
+        if (isArray(record.workflows)) {
+          record.workflows.forEach((workflow) => {
+            if (workflow === 'Puente') {
+              updatePuenteForms(record);
+            }
+          });
+        }
+      });
+    }).then(retrievePuenteFormModifications(organization).then((results) => {
+      results.forEach((record) => {
+        updatePuenteForms(record);
+      });
+    }, (error) => {
+      console.log(error); //eslint-disable-line
+    }));
+  }, [organization]);
+
+  useEffect(() => {
+    let combinedPuenteForms = [];
+    Object.entries(puenteForms).forEach(([, value]) => {
+      if (value !== null) {
+        combinedPuenteForms = combinedPuenteForms === undefined ? [value]
+          : combinedPuenteForms.concat([value]);
+      }
+    });
+    setPuenteData(combinedPuenteForms);
+  }, [puenteForms]);
 
   const handleOrganization = (event) => {
     setOrganization(event.target.value);
@@ -136,6 +191,7 @@ const FormManager = ({ context, router }) => {
             retrieveCustomData={retrieveCustomData}
             passDataToFormCreator={passDataToFormCreator}
             organization={organization}
+            puenteForm
           />
         ) : (
           <GridTable
