@@ -1,7 +1,9 @@
 import DataExporter from 'app/components/epics/DataExporter';
 import Page from 'app/components/templates/dashboard-layout';
+import { parseUserValue } from 'app/modules/user';
 
 export default function Forms() {
+  const user = parseUserValue();
   return (
     <Page
       header
@@ -12,7 +14,9 @@ export default function Forms() {
           <h1 className="title">
             Data Exporter
             {' '}
-            <DataExporter />
+            <DataExporter
+              user={user}
+            />
           </h1>
         </main>
 

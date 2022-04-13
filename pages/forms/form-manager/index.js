@@ -1,11 +1,13 @@
 import FormManager from 'app/components/epics/FormManager';
 import Page from 'app/components/templates/dashboard-layout';
+import { parseUserValue } from 'app/modules/user';
 import { useGlobalState } from 'app/store';
 import { useRouter } from 'next/router';
 
 export default function Manager() {
   const { contextManagment } = useGlobalState();
   const router = useRouter();
+  const user = parseUserValue();
 
   return (
     <Page
@@ -17,6 +19,7 @@ export default function Manager() {
         <FormManager
           router={router}
           context={contextManagment}
+          user={user}
         />
         <style jsx>
           {`
