@@ -7,7 +7,7 @@ import styles from './index.module.scss';
 
 export default function Forms() {
   const { contextManagment } = useGlobalState();
-  const user = parseUserValue;
+  const user = parseUserValue();
   return (
     <Page
       header
