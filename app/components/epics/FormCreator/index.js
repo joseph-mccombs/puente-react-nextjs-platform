@@ -47,7 +47,8 @@ function FormCreator({ context }) {
   const [workflowNames, setWorkflowNames] = useState([]);
   const [newWorkflowValue, setNewWorkflowValue] = useState('');
 
-  const [disabledTotal, setDisabledTotal] = useState(0);
+  // removed for now see note in utils/ActiveInput
+  // const [disabledTotal, setDisabledTotal] = useState(0);
   const [submissionType, setSubmissionType] = useState('');
   const [submission, setSubmission] = useState(false);
 
@@ -128,6 +129,29 @@ function FormCreator({ context }) {
         setSubmission(true);
         setTimeout(() => setSubmission(false), 3000);
       }).catch((err) => {
+        console.log(err); //eslint-disable-line
+      });
+    } else if (submissionType === 'edit puente form') {
+      postParams.parseClass = 'PuenteFormModifications';
+      postParams.parseClassID = formId;
+      postParams.localObject.class = 'PuenteFormModifications';
+      const activeFields = {};
+      formItems.forEach((item) => {
+        activeFields[item.formikKey] = item.active;
+      });
+      postParams.localObject.activeFields = activeFields;
+      updateObject(postParams).then((response) => {
+        console.log(response); //eslint-disable-line
+        setSubmission(true);
+        setTimeout(() => setSubmission(false), 3000);
+      }).catch((err) => {
+        postObjectsToClass(postParams).then(() => {
+          setSubmission(true);
+          setTimeout(() => setSubmission(false), 3000);
+          console.log(postParams); //eslint-disable-line
+        }).catch((error) => {
+          console.log(error); //eslint-disable-line
+        });
         console.log(err); //eslint-disable-line
       });
     } else {
@@ -298,8 +322,6 @@ function FormCreator({ context }) {
                 formItems={formItems}
                 setFormItems={setFormItems}
                 removeValue={removeValue}
-                disabledTotal={disabledTotal}
-                setDisabledTotal={setDisabledTotal}
               />
             </Grid>
             <Grid item xs={3} className={styles.formBlock}>

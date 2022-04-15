@@ -8,10 +8,9 @@ const Header = (props) => {
   const {
     item,
     formItems, setFormItems,
-    removeValue, disabledTotal,
-    setDisabledTotal,
+    removeValue,
   } = props;
-  const [activeInput, setActiveInput] = useState(true);
+  const [activeInput, setActiveInput] = useState(item.active !== undefined ? item.active : true);
 
   useEffect(() => {
     const elementsIndex = formItems.findIndex((element) => element.id === item.id);
@@ -45,16 +44,10 @@ const Header = (props) => {
           <h3>Header</h3>
           <input className={styles.input} type="text" value={item.label || ''} id={item.id} onChange={setValue} placeholder="Untitled Header" />
           <Button variant="contained" className={styles.remove} onClick={() => removeValue(item.id)}>Remove Header</Button>
-          {/* Active/Disabled component, remove false when needed again
-          Currently not in use. Left in to avoid removing other pieces for linting */}
-          {false && (
-            <ActiveInput
-              activeInput={activeInput}
-              setActiveInput={setActiveInput}
-              disabledTotal={disabledTotal}
-              setDisabledTotal={setDisabledTotal}
-            />
-          )}
+          <ActiveInput
+            activeInput={activeInput}
+            setActiveInput={setActiveInput}
+          />
         </div>
       )}
     </div>

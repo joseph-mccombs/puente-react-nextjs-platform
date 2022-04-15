@@ -23,4 +23,14 @@ const retrieveUniqueListOfOrganizations = async () => {
   }
 };
 
-export { retrieveCustomData, retrieveUniqueListOfOrganizations };
+const retrievePuenteFormModifications = async (organization) => {
+  try {
+    const records = await customQueryService(0, 5000, 'PuenteFormModifications', 'organizations', organization);
+    const parsedRecords = JSON.parse(JSON.stringify(records));
+    return parsedRecords;
+  } catch (e) {
+    return e;
+  }
+};
+
+export { retrieveCustomData, retrievePuenteFormModifications, retrieveUniqueListOfOrganizations };
