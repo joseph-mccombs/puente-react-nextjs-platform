@@ -2,6 +2,33 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.2](https://github.com/hopetambala/puente-react-nextjs-platform/compare/v0.1.1...v0.1.2) (2022-04-13)
+
+
+### Features
+
+* add aditional menaingful field to puenteform mods ([e6bc541](https://github.com/hopetambala/puente-react-nextjs-platform/commit/e6bc541537dd755b4f12cc662a6a8384dfdc9e93))
+* add data exporter to side menu and reorg data domain: ([aa4f541](https://github.com/hopetambala/puente-react-nextjs-platform/commit/aa4f54108011afe7597319a3fffff000f18823ac))
+* add in currentUserValue into all epics ([b3d0de9](https://github.com/hopetambala/puente-react-nextjs-platform/commit/b3d0de9a9fdc1a7e5393ebc0a664c1fc2c6fab49))
+* add lambda and s3 requests, able to download data ([fefb8ca](https://github.com/hopetambala/puente-react-nextjs-platform/commit/fefb8ca36e24ac2279ac0462e3e9c36b9c00578a))
+* add loop same form input to form creator ([bd59620](https://github.com/hopetambala/puente-react-nextjs-platform/commit/bd5962043ec5d283efb829ce7ee7ac3f6f4e1483))
+* celanup data exporter and get to working state ([e4f4a10](https://github.com/hopetambala/puente-react-nextjs-platform/commit/e4f4a10cffbb64d755427fa2c268b25948c996fb))
+* create landing page architecture ([071f3d5](https://github.com/hopetambala/puente-react-nextjs-platform/commit/071f3d5873ed6156643b115b49347a5ea31a0ff6))
+* form viewer ([9addbcb](https://github.com/hopetambala/puente-react-nextjs-platform/commit/9addbcb1599fd4f4c90e5d5dcc7db380f216994e))
+* initial landing page ([8b67b0b](https://github.com/hopetambala/puente-react-nextjs-platform/commit/8b67b0b91c0e17a46870b5bd86602f73d413193d))
+* login ([d50bc9b](https://github.com/hopetambala/puente-react-nextjs-platform/commit/d50bc9bd416f072c2c9eafe2d21f8bcec723daf9))
+* login screen with a ton of components! ([926bcf3](https://github.com/hopetambala/puente-react-nextjs-platform/commit/926bcf30ebb8674f6620b482a1c8f66173ff3702))
+* power the table with real data, add menu with submit button ([e42ff1d](https://github.com/hopetambala/puente-react-nextjs-platform/commit/e42ff1d92cf9d43f2a61d6c7997ec0039d40bc1a))
+* **puente forms:** ability to edit puente forms and disable questions ([35161d4](https://github.com/hopetambala/puente-react-nextjs-platform/commit/35161d4b6aa5b0248a09dbdc2dcab45be53ed030))
+* register ([34f8335](https://github.com/hopetambala/puente-react-nextjs-platform/commit/34f8335a9f119a3a1ec81713d6a6cc51a40f233b))
+
+
+### Bug Fixes
+
+* dependencies for react-native ([951b61a](https://github.com/hopetambala/puente-react-nextjs-platform/commit/951b61aff63e8d08e4fe8c6da4319333d650c484))
+* **edit:** ability to update object fixed ([9774eb5](https://github.com/hopetambala/puente-react-nextjs-platform/commit/9774eb5ce3b00a0aa3b050d45cb8768d64a9d132))
+* make custom forms selectable ([029e8f9](https://github.com/hopetambala/puente-react-nextjs-platform/commit/029e8f917f5d3a996a7e9776b6b5fa4b1b87d8eb))
+
 ### [0.1.1](https://github.com/hopetambala/puente-react-nextjs-platform/compare/v0.1.0...v0.1.1) (2021-10-08)
 
 

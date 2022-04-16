@@ -28,7 +28,7 @@ const Login = () => {
   const onSubmit = (data) => {
     const { usernameV, passwordV } = data;
     return retrieveSignInFunction(usernameV, passwordV)
-      .then((result) => {
+      .then(() => {
         // get return url from query parameters or default to '/'
         const returnUrl = router.query.returnUrl || '/quick-start';
         router.push(returnUrl);
