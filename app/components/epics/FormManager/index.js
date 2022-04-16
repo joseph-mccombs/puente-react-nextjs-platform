@@ -92,7 +92,6 @@ const FormManager = ({ context, router, user }) => {
   };
 
   useEffect(() => {
-    // retrieveCustomData('Shared').then((records) => {
     retrieveCustomData('Shared').then((records) => {
       records.forEach((record) => {
         if (isArray(record.workflows)) {
