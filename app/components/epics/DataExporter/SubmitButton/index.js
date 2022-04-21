@@ -78,7 +78,6 @@ const SubmitButton = ({
         <CSVLink
           data={csvData}
           filename={customFormId !== undefined ? `${specifier}-${customFormId}.csv` : `${specifier}.csv`}
-          separator={'\t'}
         >
           <Button
             variant="contained"
