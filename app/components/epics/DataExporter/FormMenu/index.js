@@ -2,63 +2,30 @@ import Button from '@material-ui/core/Button';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import React, { useEffect, useState } from 'react';
-
-import retrieveAllFormResults from '../_data';
+import { PuenteForms, getCustomFormTypes, getSetDenormalizedResults } from "./Utils"
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const FormMenu = ({
-  setFormType, formType, formValue, setFormValue, setParams, organization, setCsvData,
+  setFormType, formType, formValue, setFormValue, setParams, organization, setCsvData, denormalized, setS3Url
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
-  const [menuItems, setMenuItems] = useState([
-    {
-      key: 'SurveyData', value: 'Survey Data', isCustomForm: false, isAssetForm: false,
-    },
-    {
-      key: 'Vitals', value: 'Vitals', isCustomForm: false, isAssetForm: false,
-    },
-    {
-      key: 'Assets', value: 'Assets', isCustomForm: false, isAssetForm: false,
-    },
-    {
-      key: 'EvaluationMedical', value: 'Medical Evaluation', isCustomForm: false, isAssetForm: false,
-    },
-    {
-      key: 'HistoryEnvironmentalHealth', value: 'History Environmental Health', isCustomForm: false, isAssetForm: false,
-    },
-  ]);
-
-  const getCustomFormNames = (records) => {
-    records.forEach((record) => {
-      if (record.active !== 'false') {
-        let customForm = {};
-        const tempMenuItems = menuItems;
-        if (record.typeOfForm.includes('Assets')) {
-          customForm = {
-            key: record.objectId.toString(), value: `${record.name.toString()} - Asset`, isCustomForm: true, isAssetForm: true,
-          };
-        } else {
-          customForm = {
-            key: record.objectId.toString(), value: `${record.name.toString()} - Custom`, isCustomForm: true, isAssetForm: false,
-          };
-        }
-        tempMenuItems.push(customForm);
-        setMenuItems(tempMenuItems);
-      }
-    });
-  };
-
-  const getCustomFormTypes = () => retrieveAllFormResults('FormSpecificationsV2', {
-    organizations: organization,
-  }).then((records) => {
-    getCustomFormNames(records);
-  }, (error) => {
-    console.log(`Error: ${error}`); //eslint-disable-line
-  });
+  const [menuItems, setMenuItems] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    getCustomFormTypes();
-  }, [organization]);
+    setLoading(true);
+    if (!denormalized) {
+      getCustomFormTypes(organization, menuItems, setMenuItems);
+    } else {
+      getSetDenormalizedResults(organization, setMenuItems)
+    }
+  }, [organization, denormalized]);
+
+  useEffect(() => {
+    setLoading(false);
+    console.log("MENU ITEMSSSSS",menuItems)
+  }, [menuItems])
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -73,10 +40,12 @@ const FormMenu = ({
       }
       setFormValue(menuItem.value);
       setParams({ formSpecificationsId: menuItem.key, surveyingOrganization: organization });
+      setS3Url(menuItem.s3Key)
     } else if (menuItem.isCustomForm === false) {
       setFormType(menuItem.key);
       setFormValue(menuItem.value);
       setParams({ surveyingOrganization: organization });
+      setS3Url(menuItem.s3Key)
     }
     setCsvData([]);
     setAnchorEl(null);
@@ -84,8 +53,11 @@ const FormMenu = ({
 
   return (
     <div>
-
-      <Button
+      {loading ? (
+        <CircularProgress />
+      ) : (
+        <div>
+        <Button
         id="demo-positioned-button"
         aria-controls="demo-positioned-menu"
         aria-haspopup="true"
@@ -99,6 +71,7 @@ const FormMenu = ({
         aria-labelledby="demo-positioned-button"
         anchorEl={anchorEl}
         open={open}
+        onClose={() => setAnchorEl(null)}
         anchorOrigin={{
           vertical: 'top',
           horizontal: 'left',
@@ -112,12 +85,14 @@ const FormMenu = ({
 
           <MenuItem
             onClick={() => handleClose(item)}
-            key={item.key}
+            key={`${item.key}-${item.value}`}
           >
             {item && (<div>{item.value}</div>)}
           </MenuItem>
         ))}
       </Menu>
+      </div>
+      )}
     </div>
   );
 };

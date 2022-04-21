@@ -11,7 +11,7 @@ import { CSVLink } from 'react-csv';
 import { getDataFromS3, retrieveCleanedData } from '../../../../services/awsApiGateway';
 
 const SubmitButton = ({
-  handleSubmit, surveyingOrganization, specifier, customFormId, csvData, setCsvData,
+  handleSubmit, surveyingOrganization, specifier, customFormId, csvData, setCsvData, s3Url,
 }) => {
   const [open, setOpen] = useState(false);
   const [progress, setProgress] = useState(0);
@@ -35,28 +35,37 @@ const SubmitButton = ({
     };
   };
 
+  const getS3Data = (s3Key, bucketIncluded) => {
+    getDataFromS3(s3Key, bucketIncluded).then((response) => {
+      setCsvData(response);
+      setDownloading(false);
+      setProgress(100);
+    }, () => {
+      setDownloading(false);
+      setProgress(100);
+    });
+  }
+
   const handleClick = () => {
     setDownloading(true);
     startProgressBar();
     handleSubmit();
-    retrieveCleanedData(specifier, customFormId, surveyingOrganization).then((results) => {
-      // there was an error during the request
-      if (results.error !== undefined) throw new Error('Request Failed, ensure paramaters for request are correct and try again.');
-      return results.s3_url;
-    }).then((s3Url) => {
-      getDataFromS3(s3Url).then((response) => {
-        setCsvData(response);
-        setDownloading(false);
-        setProgress(100);
+    console.log(s3Url)
+    if (!s3Url) {
+      console.log("running cleaned data")
+      retrieveCleanedData(specifier, customFormId, surveyingOrganization).then((results) => {
+        // there was an error during the request
+        if (results.error !== undefined) throw new Error('Request Failed, ensure paramaters for request are correct and try again.');
+        getS3Data(results.s3_url, true);
       }, () => {
+        setOpen(true);
         setDownloading(false);
         setProgress(100);
       });
-    }, () => {
-      setOpen(true);
-      setDownloading(false);
-      setProgress(100);
-    });
+    } else {
+      console.log("running normal shit.")
+      getS3Data(s3Url, false);
+    }
   };
 
   return (
@@ -72,6 +81,7 @@ const SubmitButton = ({
         <CSVLink
           data={csvData}
           filename={customFormId !== undefined ? `${specifier}-${customFormId}.csv` : `${specifier}.csv`}
+          separator={"\t"}
         >
           <Button
             variant="contained"

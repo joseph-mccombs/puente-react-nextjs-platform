@@ -1,4 +1,4 @@
-import { GetObjectCommand, S3Client } from '@aws-sdk/client-s3';
+import { GetObjectCommand, S3Client, ListObjectsCommand } from '@aws-sdk/client-s3';
 import https from 'https';
 
 function retrieveCleanedData(specifier, customFormId, surveyingOrganization) {
@@ -44,7 +44,7 @@ function retrieveCleanedData(specifier, customFormId, surveyingOrganization) {
   });
 }
 
-function getDataFromS3(key) {
+function getDataFromS3(key, bucketIncluded) {
   return new Promise((resolve, reject) => {
     const s3Client = new S3Client({
       region: 'us-east-1',
@@ -53,15 +53,15 @@ function getDataFromS3(key) {
         secretAccessKey: process.env.NEXT_PUBLIC_awsSecretAccessKey,
       },
     });
-    const objectKey = key.split(`${process.env.NEXT_PUBLIC_s3Bucket}/`)[1];
-
+    const objectKey = bucketIncluded ? key.split(`${process.env.NEXT_PUBLIC_s3Bucket}/`)[1] : key;
+    
     const getObjectCommand = new GetObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_s3Bucket,
       Key: objectKey,
     });
 
     s3Client.send(getObjectCommand)
-    // code for readStream from mozilla: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
+      // code for readStream from mozilla: https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream
       .then((data) => data.Body)
       .then((dataBody) => {
         const reader = dataBody.getReader();
@@ -98,7 +98,33 @@ function getDataFromS3(key) {
   });
 }
 
+function listBucketObjects(bucketKey) {
+  return new Promise((resolve, reject) => {
+    const s3Client = new S3Client({
+      region: 'us-east-1',
+      credentials: {
+        accessKeyId: process.env.NEXT_PUBLIC_awsAccessKeyId,
+        secretAccessKey: process.env.NEXT_PUBLIC_awsSecretAccessKey,
+      },
+    })
+
+    const listObjectsCommand = new ListObjectsCommand({
+      Bucket: process.env.NEXT_PUBLIC_s3Bucket,
+      Prefix: bucketKey
+    })
+
+    s3Client.send(listObjectsCommand).then((response) => {
+      console.log("response", response);
+      console.log("body",response.Contents);
+      resolve(response.Contents);
+    }, (error) => {
+      console.log(error);
+    })
+  })
+}
+
 export {
   getDataFromS3,
   retrieveCleanedData,
+  listBucketObjects
 };
