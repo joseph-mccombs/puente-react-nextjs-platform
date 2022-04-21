@@ -1,12 +1,21 @@
 import Button from '@material-ui/core/Button';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import Menu from '@material-ui/core/Menu';
 import MenuItem from '@material-ui/core/MenuItem';
 import React, { useEffect, useState } from 'react';
-import { PuenteForms, getCustomFormTypes, getSetDenormalizedResults } from "./Utils"
-import CircularProgress from '@material-ui/core/CircularProgress';
+
+import { getCustomFormTypes, getSetDenormalizedResults } from './Utils';
 
 const FormMenu = ({
-  setFormType, formType, formValue, setFormValue, setParams, organization, setCsvData, denormalized, setS3Url
+  setFormType,
+  formType,
+  formValue,
+  setFormValue,
+  setParams,
+  organization,
+  setCsvData,
+  denormalized,
+  setS3Url,
 }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -18,14 +27,13 @@ const FormMenu = ({
     if (!denormalized) {
       getCustomFormTypes(organization, menuItems, setMenuItems);
     } else {
-      getSetDenormalizedResults(organization, setMenuItems)
+      getSetDenormalizedResults(organization, setMenuItems);
     }
   }, [organization, denormalized]);
 
   useEffect(() => {
     setLoading(false);
-    console.log("MENU ITEMSSSSS",menuItems)
-  }, [menuItems])
+  }, [menuItems]);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -40,12 +48,12 @@ const FormMenu = ({
       }
       setFormValue(menuItem.value);
       setParams({ formSpecificationsId: menuItem.key, surveyingOrganization: organization });
-      setS3Url(menuItem.s3Key)
+      setS3Url(menuItem.s3Key);
     } else if (menuItem.isCustomForm === false) {
       setFormType(menuItem.key);
       setFormValue(menuItem.value);
       setParams({ surveyingOrganization: organization });
-      setS3Url(menuItem.s3Key)
+      setS3Url(menuItem.s3Key);
     }
     setCsvData([]);
     setAnchorEl(null);
@@ -57,41 +65,41 @@ const FormMenu = ({
         <CircularProgress />
       ) : (
         <div>
-        <Button
-        id="demo-positioned-button"
-        aria-controls="demo-positioned-menu"
-        aria-haspopup="true"
-        aria-expanded={open ? 'true' : undefined}
-        onClick={handleClick}
-      >
-        <div>{formType && (<div>{formValue}</div>)}</div>
-      </Button>
-      <Menu
-        id="demo-positioned-menu"
-        aria-labelledby="demo-positioned-button"
-        anchorEl={anchorEl}
-        open={open}
-        onClose={() => setAnchorEl(null)}
-        anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
-        }}
-      >
-        {menuItems.length > 0 && menuItems.map((item) => (
-
-          <MenuItem
-            onClick={() => handleClose(item)}
-            key={`${item.key}-${item.value}`}
+          <Button
+            id="demo-positioned-button"
+            aria-controls="demo-positioned-menu"
+            aria-haspopup="true"
+            aria-expanded={open ? 'true' : undefined}
+            onClick={handleClick}
           >
-            {item && (<div>{item.value}</div>)}
-          </MenuItem>
-        ))}
-      </Menu>
-      </div>
+            <div>{formType && (<div>{formValue}</div>)}</div>
+          </Button>
+          <Menu
+            id="demo-positioned-menu"
+            aria-labelledby="demo-positioned-button"
+            anchorEl={anchorEl}
+            open={open}
+            onClose={() => setAnchorEl(null)}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'left',
+            }}
+          >
+            {menuItems.length > 0 && menuItems.map((item) => (
+
+              <MenuItem
+                onClick={() => handleClose(item)}
+                key={`${item.key}-${item.value}`}
+              >
+                {item && (<div>{item.value}</div>)}
+              </MenuItem>
+            ))}
+          </Menu>
+        </div>
       )}
     </div>
   );

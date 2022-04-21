@@ -1,3 +1,4 @@
+import { Typography } from '@material-ui/core';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Paper from '@material-ui/core/Paper';
 import Switch from '@material-ui/core/Switch';
@@ -6,6 +7,7 @@ import TableBody from '@material-ui/core/TableBody';
 import TableContainer from '@material-ui/core/TableContainer';
 import TablePagination from '@material-ui/core/TablePagination';
 import React, { useEffect, useState } from 'react';
+
 import retrieveAllFormResults from './_data';
 import {
   EnhancedTableHead, EnhancedTableToolbar, getComparator, stableSort, useStyles,
@@ -13,7 +15,6 @@ import {
 import DataExporterTableRow from './DataExporterTableRow';
 import FormMenu from './FormMenu';
 import SubmitButton from './SubmitButton';
-import { Typography } from '@material-ui/core';
 
 const DataExporter = () => {
   const classes = useStyles();
@@ -104,9 +105,9 @@ const DataExporter = () => {
     setDense(event.target.checked);
   };
 
-  const handleSwitchChange = (event) => {
-    setDenormalized(!denormalized)
-  }
+  const handleSwitchChange = () => {
+    setDenormalized(!denormalized);
+  };
 
   return (
     <div className={classes.root}>
@@ -121,13 +122,16 @@ const DataExporter = () => {
         denormalized={denormalized}
         setS3Url={setS3Url}
       />
-      <div style={{display: "flex", flexDirection: "row", justifyContent:"center",alignItems:"center"}}>
-      <Switch
-        checked={denormalized}
-        onChange={handleSwitchChange}
-        inputProps={{ "aria-label": "controlled" }}
-      />
-      <Typography>Denormalized</Typography>
+      <div style={{
+        display: 'flex', flexDirection: 'row', justifyContent: 'center', alignItems: 'center',
+      }}
+      >
+        <Switch
+          checked={denormalized}
+          onChange={handleSwitchChange}
+          inputProps={{ 'aria-label': 'controlled' }}
+        />
+        <Typography>Denormalized</Typography>
       </div>
       <SubmitButton
         handleSubmit={handleSubmit}

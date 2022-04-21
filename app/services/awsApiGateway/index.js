@@ -1,11 +1,11 @@
 import {
   getDataFromS3,
+  listBucketObjects,
   retrieveCleanedData,
-  listBucketObjects
 } from './crud';
 
 export {
   getDataFromS3,
+  listBucketObjects,
   retrieveCleanedData,
-  listBucketObjects
 };

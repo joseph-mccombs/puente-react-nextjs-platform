@@ -1,4 +1,4 @@
-import { GetObjectCommand, S3Client, ListObjectsCommand } from '@aws-sdk/client-s3';
+import { GetObjectCommand, ListObjectsCommand, S3Client } from '@aws-sdk/client-s3';
 import https from 'https';
 
 function retrieveCleanedData(specifier, customFormId, surveyingOrganization) {
@@ -54,7 +54,7 @@ function getDataFromS3(key, bucketIncluded) {
       },
     });
     const objectKey = bucketIncluded ? key.split(`${process.env.NEXT_PUBLIC_s3Bucket}/`)[1] : key;
-    
+
     const getObjectCommand = new GetObjectCommand({
       Bucket: process.env.NEXT_PUBLIC_s3Bucket,
       Key: objectKey,
@@ -106,25 +106,25 @@ function listBucketObjects(bucketKey) {
         accessKeyId: process.env.NEXT_PUBLIC_awsAccessKeyId,
         secretAccessKey: process.env.NEXT_PUBLIC_awsSecretAccessKey,
       },
-    })
+    });
 
     const listObjectsCommand = new ListObjectsCommand({
       Bucket: process.env.NEXT_PUBLIC_s3Bucket,
-      Prefix: bucketKey
-    })
+      Prefix: bucketKey,
+    });
 
     s3Client.send(listObjectsCommand).then((response) => {
-      console.log("response", response);
-      console.log("body",response.Contents);
+      console.log('response', response);
+      console.log('body', response.Contents);
       resolve(response.Contents);
     }, (error) => {
       console.log(error);
-    })
-  })
+    });
+  });
 }
 
 export {
   getDataFromS3,
+  listBucketObjects,
   retrieveCleanedData,
-  listBucketObjects
 };

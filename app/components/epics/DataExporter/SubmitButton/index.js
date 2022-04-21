@@ -44,15 +44,13 @@ const SubmitButton = ({
       setDownloading(false);
       setProgress(100);
     });
-  }
+  };
 
   const handleClick = () => {
     setDownloading(true);
     startProgressBar();
     handleSubmit();
-    console.log(s3Url)
     if (!s3Url) {
-      console.log("running cleaned data")
       retrieveCleanedData(specifier, customFormId, surveyingOrganization).then((results) => {
         // there was an error during the request
         if (results.error !== undefined) throw new Error('Request Failed, ensure paramaters for request are correct and try again.');
@@ -63,7 +61,6 @@ const SubmitButton = ({
         setProgress(100);
       });
     } else {
-      console.log("running normal shit.")
       getS3Data(s3Url, false);
     }
   };
@@ -81,7 +78,7 @@ const SubmitButton = ({
         <CSVLink
           data={csvData}
           filename={customFormId !== undefined ? `${specifier}-${customFormId}.csv` : `${specifier}.csv`}
-          separator={"\t"}
+          separator={'\t'}
         >
           <Button
             variant="contained"

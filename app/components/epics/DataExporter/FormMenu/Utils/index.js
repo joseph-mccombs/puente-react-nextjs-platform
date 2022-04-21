@@ -1,13 +1,13 @@
 import {
-    PuenteForms,
-    getCustomFormTypes
-} from "./traditionalResults";
+  getSetDenormalizedResults,
+} from './denormalizedResults';
 import {
-    getSetDenormalizedResults
-} from "./denormalizedResults";
+  getCustomFormTypes,
+  PuenteForms,
+} from './traditionalResults';
 
 export {
-    PuenteForms,
-    getCustomFormTypes,
-    getSetDenormalizedResults,
-}
+  getCustomFormTypes,
+  getSetDenormalizedResults,
+  PuenteForms,
+};
