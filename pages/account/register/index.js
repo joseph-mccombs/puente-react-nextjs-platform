@@ -34,8 +34,7 @@ const Register = () => {
   const { handleSubmit, errors } = methods;
 
   const onSubmit = (user) => retrieveSignUpFunction(user)
-    .then((result) => {
-      console.log(result);
+    .then(() => {
       router.push('/quick-start');
     });
 
